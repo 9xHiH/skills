@@ -1,0 +1,57 @@
+PASS IDs: 20000 generated IDs are unique and valid
+PASS IDs: check character detects single-character typos
+PASS IDs: normalizeId maps O→0 and I/L→1 and uppercases
+PASS IDs: ISO week computed
+PASS Import: invalid JSON rejected
+PASS Import: unknown structure rejected
+PASS Import: checksum mismatch rejected
+PASS Import: __proto__ key rejected
+PASS Import: bad record ID rejected
+PASS Import: dangling trainee reference rejected
+PASS Import: newer schema version rejected
+PASS Import: valid round trip & merge (keep-local on conflict)
+PASS Import: v4 backup migrates people, keeps v4 plans read-only, requires re-screening
+PASS Screen: all NO → cleared
+PASS Screen: incomplete answers → more_info
+PASS Screen: chest pain → refer
+PASS Screen: unsure about symptom → more_info
+PASS Screen: medication → more_info; documented clearance → cleared
+PASS Screen: clearance can NOT resolve red-flag refer
+PASS Screen: supervised-only → refer even with clearance
+PASS Screen: age < 18 → refer
+PASS Screen: known CV disease + inactive → more_info; active → cleared with max level 2 & no impact
+PASS Screen: prior refer requires documented clearance
+PASS Screen: pregnancy questions hidden for male, shown otherwise (not sex-based ability)
+PASS Screen: pregnancy without provider approval → more_info
+PASS Screen: pregnancy warning sign → refer
+PASS Screen: pregnancy absolute contraindication → refer
+PASS Screen: pregnancy 24 wk approved → cleared, excludes supine/prone/impact
+PASS Screen: pregnancy 10 wk → supine NOT excluded
+PASS Screen: postpartum 8 wk + pelvic symptoms → cleared with referral & impact/iap excluded
+PASS Screen: postpartum without postnatal check → more_info
+PASS Engine: no screening → blocked
+PASS Engine: red flag screening → blocked with no exercises
+PASS Engine: cleared but no baseline → blocked (no maximal test before screening)
+PASS Engine: baseline pain ≥7 → blocked
+PASS Engine: weekly plan has exactly 7 dated days and ≥1 rest day
+PASS Engine: training days spread (no back-to-back when 3 of 7 available)
+PASS Engine: different abilities → explainably different plans
+PASS Engine: equipment respected (no bar → no bar exercises)
+PASS Engine: pregnancy 24 wk plan contains no supine/prone/impact/iap exercises
+PASS Engine: knee limitation excludes knee-flagged exercises
+PASS Engine: age ≥65 → balance exercise each training day, no impact
+PASS Adapt: full completion, good technique, effort 5, no pain → progress (≤3 items) and next plan steps up
+PASS Adapt: "plan felt easy" without performance data does NOT progress
+PASS Adapt: pain 8/10 → refer and next plan blocked
+PASS Adapt: refer resolved only by newer screening WITH documented clearance
+PASS Adapt: pain 5/10 on an exercise → substitute; next week not the same exercise in that slot
+PASS Adapt: low completion → reduce
+PASS Adapt: illness → global reduce
+PASS Adapt: <50% sessions completed → no progression
+PASS Review questions: 10–14 core + adaptive, safety mandatory, pregnancy branch
+PASS Override: out-of-range dose rejected; unsafe exercise rejected; reason required; blocked plan locked
+PASS Data: every exercise referenced by baseline tests exists
+PASS Data: every exercise has original animation passing geometry validation
+PASS Data: exercise IDs unique; Arabic names unique
+
+UNIT: 55 passed, 0 failed (151 exercises loaded) — node v22.23.4

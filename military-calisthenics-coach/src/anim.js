@@ -9,7 +9,7 @@
  *                           or {p:[x,y], b:+1|-1} (two-bone inverse kinematics, wrist target, bend side)
  *   l : [legNear, legFar]   same, for thigh/shin; IK target is the ankle
  *   f : [footNear, footFar] absolute foot angles (ankle -> toes), default 0 (side) / -90 (front)
- * Exercise animation spec: {view:'side'|'front', props:[...], keys:[{p:pose, d:ms, lab:'..'}], hang:bool, air:[keyIdx]}
+ * Exercise animation spec: {view:'side'|'front', top:bool (seen from above: no floor line, no floor checks), props:[...], keys:[{p:pose, d:ms, lab:'..'}], hang:bool, air:[keyIdx]}
  */
 (function (root) {
   'use strict';
@@ -133,6 +133,14 @@
         case 'barx': /* bar seen end-on (side view of a pull-up bar) */
           el('line', { x1: pr.x, y1: 2, x2: pr.x, y2: pr.y, 'class': 'mc-prop mc-post' }, g);
           el('circle', { cx: pr.x, cy: pr.y, r: 3.5, 'class': 'mc-prop-fill' }, g); break;
+        case 'hands': /* inset: top view of hand placement relative to shoulders (r = hand width / shoulder width) */
+          var gx = 6, gy = 6, cx = gx + 30;
+          el('rect', { x: gx, y: gy, width: 60, height: 44, rx: 6, 'class': 'mc-inset' }, g);
+          el('circle', { cx: cx, cy: gy + 9, r: 4.5, 'class': 'mc-inset-body' }, g);
+          el('rect', { x: cx - 8, y: gy + 15, width: 16, height: 24, rx: 4, 'class': 'mc-inset-body' }, g);
+          el('line', { x1: cx - 12, y1: gy + 17, x2: cx + 12, y2: gy + 17, 'class': 'mc-inset-sh' }, g);
+          [-1, 1].forEach(function (sgn) { var hx = cx + sgn * 12 * pr.r; el('rect', { x: hx - 3, y: gy + 18, width: 6, height: 9, rx: 2, 'class': 'mc-inset-hand' }, g); el('line', { x1: cx + sgn * 12, y1: gy + 17, x2: hx, y2: gy + 22, 'class': 'mc-inset-sh' }, g); });
+          break;
         case 'mat': el('rect', { x: pr.x1, y: FLOOR - 2, width: pr.x2 - pr.x1, height: 3, rx: 1, 'class': 'mc-mat' }, g); break;
         case 'step': el('rect', { x: pr.x, y: FLOOR - pr.h, width: pr.w, height: pr.h, rx: 1, 'class': 'mc-prop-fill' }, g); break;
         default: break;
@@ -147,7 +155,7 @@
     this.onLabel = opts.onLabel || null;
     var svg = el('svg', { viewBox: '0 0 240 160', role: 'img', 'class': 'mc-fig' + (spec.mirror ? ' mc-mirror' : '') });
     if (opts.title) { var ti = el('title', {}, svg); ti.textContent = opts.title; }
-    var floor = spec.hang && spec.floor === false ? null : el('line', { x1: 4, y1: FLOOR + 1.5, x2: 236, y2: FLOOR + 1.5, 'class': 'mc-floor' }, svg);
+    var floor = spec.top || (spec.hang && spec.floor === false) ? null : el('line', { x1: 4, y1: FLOOR + 1.5, x2: 236, y2: FLOOR + 1.5, 'class': 'mc-floor' }, svg);
     drawProps(el('g', {}, svg), spec.props);
     this.ghost = el('g', { 'class': 'mc-ghost' }, svg);
     this.trace = el('path', { 'class': 'mc-trace', d: '' }, svg);
@@ -225,9 +233,9 @@
       if (s.err > 2.5) issues.push('IK reach error ' + s.err.toFixed(1) + 'px at ' + (i / 60).toFixed(2));
       var ys = [s.head[1] + L.head, s.hip[1], s.neck[1], s.elN[1], s.wrN[1], s.elF[1], s.wrF[1], s.knN[1], s.anN[1], s.knF[1], s.anF[1], s.toeN[1], s.toeF[1]];
       var low = Math.max.apply(null, ys);
-      if (spec.floor !== false && low > FLOOR + 3) issues.push('body below floor by ' + (low - FLOOR).toFixed(1) + 'px at ' + (i / 60).toFixed(2));
+      if (!spec.top && spec.floor !== false && low > FLOOR + 3) issues.push('body below floor by ' + (low - FLOOR).toFixed(1) + 'px at ' + (i / 60).toFixed(2));
       var nxt = (r.idx + 1) % spec.keys.length;
-      var inAir = spec.hang || (spec.air && (spec.air.indexOf(r.idx) >= 0 || spec.air.indexOf(nxt) >= 0));
+      var inAir = spec.hang || spec.top || (spec.air && (spec.air.indexOf(r.idx) >= 0 || spec.air.indexOf(nxt) >= 0));
       var support = (spec.props || []).some(function (p) { return ['box', 'chair', 'table', 'step'].indexOf(p.k) >= 0; });
       if (!inAir && !support && low < FLOOR - 4) issues.push('figure floating ' + (FLOOR - low).toFixed(1) + 'px at ' + (i / 60).toFixed(2));
     }

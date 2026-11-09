@@ -1,0 +1,28 @@
+PASS T1 offline load: no console errors at start, title & version
+PASS T2 register trainee A (male, 3 days, chair) — TR5-PYXKA-FJX2K
+PASS T3 screening A all-no → cleared
+PASS T4 baseline A (no maximal test, capped inputs) → levels — {"push":2,"squat":2,"core":2,"pull":1,"aerobic":2,"balance":2}
+PASS T5 weekly plan A generated with unique week ID, 7 days, explanations — PL5-2026W46-6T5RY-TS1M4
+PASS T6 register trainee B (female, pregnant 24 wk, provider approved) → pregnancy pathway; plan has no supine/prone/impact — PL5-2026W46-7ZQF9-PAWPA
+PASS T7 trainee C with chest pain → refer; plan blocked; no override possible
+PASS T8 isolation: A, B, C plans differ and records never cross trainees
+PASS T9 live session A: per-set autosave, rep counter, rest timer, post-session check — 11 items logged
+PASS T10 rest timer counts down in real time — rest 01:10 → 01:08 (partial session saved)
+PASS T11 weekly review A: mandatory safety Qs, adaptive per-exercise Qs, decision saved — decision=maintain, questions=16
+PASS T12 next week plan A uses review, new unique ID, history preserved — PL5-2026W47-MR9RZ-4AMH1 decision maintain
+PASS T13 painful symptom (8/10) in review of B blocks next plan
+PASS T14 coach override within bounds logged; out-of-range rejected in UI
+PASS T15 plan lookup by ID (typo-tolerant normalisation, local only)
+PASS T16 JSON export (full) produces checksummed file — export_full.json 106KB
+PASS T17 print weekly plan: Arabic RTL A4 PDF via Chromium print engine — 9 A4 pages, 433KB
+PASS T18 library: per-exercise animation actually moves; dialog; rep counter; interval timer — timer at 00:03
+PASS T19 every exercise in the library renders a distinct original figure — 151 distinct drawings
+PASS T20 import round-trip into a fresh browser profile restores all records
+PASS T21 malformed / tampered imports rejected without changing data
+PASS T22 HTML injection via names is escaped (no script execution)
+PASS T23 v4 regression/migration: v4 localStorage data detected and migrated read-only — v4 key unchanged after migration
+PASS T24 mobile layout (iPhone-size viewport) renders library and plan without overflow — simulated viewport only (not a real device)
+PASS T26 multi-tab safety: a stale tab cannot overwrite newer data written by another tab — stale write refused; reload shows newer data
+PASS T25 zero external network requests and zero console errors during the whole run
+
+E2E: 26 passed, 0 failed — Chromium headless via Playwright, file:// URL, network offline

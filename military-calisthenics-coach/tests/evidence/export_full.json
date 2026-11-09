@@ -1,0 +1,3560 @@
+{
+  "format": "MCC-EXPORT",
+  "formatVersion": 1,
+  "appVersion": "5.0.0-dev",
+  "schemaVersion": 5,
+  "exportedAt": "2026-11-09T11:56:03.876Z",
+  "scope": "full",
+  "traineeIds": [],
+  "checksum": "5be31436",
+  "data": {
+    "schema": "MCC",
+    "schemaVersion": 5,
+    "appVersion": "5.0.0-dev",
+    "createdAt": "2026-11-09T11:55:52.523Z",
+    "updatedAt": "2026-11-09T11:56:03.627Z",
+    "settings": {
+      "coachName": "",
+      "emergencyNumber": "999",
+      "weekStartDay": 0
+    },
+    "trainees": [
+      {
+        "id": "TR5-PYXKA-FJX2K",
+        "createdAt": "2026-11-09T11:55:53.127Z",
+        "archived": false,
+        "avoid": [],
+        "revisions": [],
+        "displayName": "سالم التجريبي",
+        "internalId": "",
+        "coachName": "",
+        "age": 30,
+        "sex": "male",
+        "goal": "general",
+        "experience": "intermediate",
+        "minutes": 30,
+        "days": [
+          0,
+          2,
+          4
+        ],
+        "equipment": [
+          "chair"
+        ],
+        "limitations": [],
+        "bodyMetricsConsent": false,
+        "heightCm": null,
+        "weightKg": null,
+        "accessibility": "",
+        "notes": "",
+        "updatedAt": "2026-11-09T11:55:53.127Z",
+        "consent": {
+          "at": "2026-11-09T11:55:53.127Z",
+          "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
+          "version": "CONSENT-5.0"
+        }
+      },
+      {
+        "id": "TR5-WSNDW-VTXF7",
+        "createdAt": "2026-11-09T11:55:54.112Z",
+        "archived": false,
+        "avoid": [],
+        "revisions": [],
+        "displayName": "مريم التجريبية",
+        "internalId": "",
+        "coachName": "",
+        "age": 29,
+        "sex": "female",
+        "goal": "general",
+        "experience": "beginner",
+        "minutes": 45,
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "equipment": [],
+        "limitations": [],
+        "bodyMetricsConsent": false,
+        "heightCm": null,
+        "weightKg": null,
+        "accessibility": "",
+        "notes": "",
+        "updatedAt": "2026-11-09T11:55:54.112Z",
+        "consent": {
+          "at": "2026-11-09T11:55:54.112Z",
+          "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
+          "version": "CONSENT-5.0"
+        }
+      },
+      {
+        "id": "TR5-G6GS1-9DG6F",
+        "createdAt": "2026-11-09T11:55:55.393Z",
+        "archived": false,
+        "avoid": [],
+        "revisions": [],
+        "displayName": "خالد التجريبي",
+        "internalId": "",
+        "coachName": "",
+        "age": 45,
+        "sex": "male",
+        "goal": "general",
+        "experience": "beginner",
+        "minutes": 30,
+        "days": [
+          0,
+          3
+        ],
+        "equipment": [],
+        "limitations": [],
+        "bodyMetricsConsent": false,
+        "heightCm": null,
+        "weightKg": null,
+        "accessibility": "",
+        "notes": "",
+        "updatedAt": "2026-11-09T11:55:55.393Z",
+        "consent": {
+          "at": "2026-11-09T11:55:55.393Z",
+          "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
+          "version": "CONSENT-5.0"
+        }
+      }
+    ],
+    "screenings": [
+      {
+        "id": "SC5-6HVRF-QS805",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "at": "2026-11-09T11:55:53.377Z",
+        "version": "SCR-5.0.0",
+        "answers": {
+          "cv_dx": "no",
+          "chest": "no",
+          "dizzy": "no",
+          "breath": "no",
+          "palp": "no",
+          "legs": "no",
+          "chronic": "no",
+          "meds": "no",
+          "msk": "no",
+          "supervised": "no",
+          "acute_ill": "no",
+          "active": "no"
+        },
+        "shown": [
+          "cv_dx",
+          "chest",
+          "dizzy",
+          "breath",
+          "palp",
+          "legs",
+          "chronic",
+          "meds",
+          "msk",
+          "supervised",
+          "acute_ill",
+          "active"
+        ],
+        "ageAtScreening": 30,
+        "sexAtScreening": "male",
+        "priorId": null,
+        "clearance": null,
+        "outcome": {
+          "status": "cleared",
+          "reasons": [
+            {
+              "level": "cleared",
+              "code": "all_no",
+              "text": "لا توجد إجابات إيجابية: مسموح ببرنامج تحفظي تدريجي يبدأ بشدة خفيفة إلى متوسطة.",
+              "src": [
+                "PARQ",
+                "RIEBE2015"
+              ]
+            }
+          ],
+          "referrals": [],
+          "pathway": "general",
+          "exclusions": {
+            "flags": [],
+            "maxLevel": 3
+          },
+          "version": "SCR-5.0.0"
+        }
+      },
+      {
+        "id": "SC5-5XC0A-C5WGZ",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "at": "2026-11-09T11:55:54.711Z",
+        "version": "SCR-5.0.0",
+        "answers": {
+          "cv_dx": "no",
+          "chest": "no",
+          "dizzy": "no",
+          "breath": "no",
+          "palp": "no",
+          "legs": "no",
+          "chronic": "no",
+          "meds": "no",
+          "msk": "no",
+          "supervised": "no",
+          "acute_ill": "no",
+          "active": "no",
+          "pp_status": "pregnant",
+          "preg_weeks": 24,
+          "preg_provider": "yes",
+          "preg_abs": [],
+          "preg_rel": [],
+          "preg_warn": []
+        },
+        "shown": [
+          "cv_dx",
+          "chest",
+          "dizzy",
+          "breath",
+          "palp",
+          "legs",
+          "chronic",
+          "meds",
+          "msk",
+          "supervised",
+          "acute_ill",
+          "active",
+          "pp_status",
+          "preg_weeks",
+          "preg_provider",
+          "preg_abs",
+          "preg_rel",
+          "preg_warn"
+        ],
+        "ageAtScreening": 29,
+        "sexAtScreening": "female",
+        "priorId": null,
+        "clearance": null,
+        "outcome": {
+          "status": "cleared",
+          "reasons": [
+            {
+              "level": "cleared_limited",
+              "code": "preg_rules",
+              "text": "مسار الحمل: لا قفز، لا انقلاب، لا ثبات طويل أو ضغط بطني مرتفع، لا تمارين توازن عالية الخطورة، ولا استلقاء على الظهر (≥ 20 أسبوعاً)، ولا انبطاح على البطن (قاعدة محلية ≥ 12 أسبوعاً). الشدة: يمكن التحدث أثناء الجهد.",
+              "src": [
+                "ACOG804",
+                "LOCAL"
+              ]
+            }
+          ],
+          "referrals": [],
+          "pathway": "pregnancy",
+          "exclusions": {
+            "flags": [
+              "impact",
+              "inversion",
+              "iap",
+              "isometric_long",
+              "balance",
+              "supine",
+              "prone"
+            ],
+            "maxLevel": 2
+          },
+          "version": "SCR-5.0.0"
+        }
+      },
+      {
+        "id": "SC5-BC0HC-PEEN9",
+        "traineeId": "TR5-G6GS1-9DG6F",
+        "at": "2026-11-09T11:55:55.661Z",
+        "version": "SCR-5.0.0",
+        "answers": {
+          "cv_dx": "no",
+          "chest": "yes",
+          "dizzy": "no",
+          "breath": "no",
+          "palp": "no",
+          "legs": "no",
+          "chronic": "no",
+          "meds": "no",
+          "msk": "no",
+          "supervised": "no",
+          "acute_ill": "no",
+          "active": "no"
+        },
+        "shown": [
+          "cv_dx",
+          "chest",
+          "dizzy",
+          "breath",
+          "palp",
+          "legs",
+          "chronic",
+          "meds",
+          "msk",
+          "supervised",
+          "acute_ill",
+          "active"
+        ],
+        "ageAtScreening": 45,
+        "sexAtScreening": "male",
+        "priorId": null,
+        "clearance": null,
+        "outcome": {
+          "status": "refer",
+          "reasons": [
+            {
+              "level": "refer",
+              "code": "sym_chest",
+              "text": "عرض إنذار: ألم أو انزعاج في الصدر. لا تُصدر خطة تلقائية؛ يلزم تقييم طبي قبل أي جهد.",
+              "src": [
+                "RIEBE2015",
+                "PARQ",
+                "AHA-WARN"
+              ]
+            }
+          ],
+          "referrals": [
+            "تقييم طبي عاجل/قريب حسب شدة العرض. عند ألم الصدر المستمر أو الإغماء: اتصل بالطوارئ."
+          ],
+          "pathway": "general",
+          "exclusions": {
+            "flags": [],
+            "maxLevel": 3
+          },
+          "version": "SCR-5.0.0"
+        }
+      }
+    ],
+    "baselines": [
+      {
+        "id": "BL5-JQG85-59PJ4",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "at": "2026-11-09T11:55:53.545Z",
+        "version": "BL-5.0.0",
+        "screeningId": "SC5-6HVRF-QS805",
+        "tests": {
+          "push": {
+            "variant": "PU-KNEE",
+            "value": 12,
+            "technique": "good",
+            "effort": null,
+            "pain": 0,
+            "painArea": "",
+            "symptom": "no"
+          },
+          "squat": {
+            "variant": "SQ-BW",
+            "value": 15,
+            "technique": "good",
+            "effort": null,
+            "pain": 0,
+            "painArea": "",
+            "symptom": "no"
+          },
+          "core": {
+            "variant": "PL-FA",
+            "value": 30,
+            "technique": "good",
+            "effort": null,
+            "pain": 0,
+            "painArea": "",
+            "symptom": "no"
+          },
+          "pull": {
+            "skipped": true
+          },
+          "aerobic": {
+            "variant": "CA-MARCH",
+            "value": 20,
+            "technique": "good",
+            "effort": null,
+            "pain": 0,
+            "painArea": "",
+            "symptom": "no",
+            "talk": "yes"
+          },
+          "balance": {
+            "variant": "BA-SLSTAND",
+            "value": 30,
+            "technique": "good",
+            "effort": null,
+            "pain": 0,
+            "painArea": "",
+            "symptom": "no"
+          }
+        },
+        "result": {
+          "levels": {
+            "push": 2,
+            "squat": 2,
+            "core": 2,
+            "pull": 1,
+            "aerobic": 2,
+            "balance": 2
+          },
+          "notes": {
+            "push": "",
+            "squat": "",
+            "core": "",
+            "pull": "لم يُجرَ — المستوى الافتراضي 1",
+            "aerobic": "",
+            "balance": ""
+          },
+          "flags": [],
+          "status": "ok",
+          "messages": [],
+          "version": "BL-5.0.0"
+        },
+        "notes": []
+      },
+      {
+        "id": "BL5-E5VYY-MC4BH",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "at": "2026-11-09T11:55:54.878Z",
+        "version": "BL-5.0.0",
+        "screeningId": "SC5-5XC0A-C5WGZ",
+        "tests": {
+          "push": {
+            "skipped": true
+          },
+          "squat": {
+            "skipped": true
+          },
+          "core": {
+            "skipped": true
+          },
+          "pull": {
+            "skipped": true
+          },
+          "aerobic": {
+            "variant": "CA-MARCH",
+            "value": 15,
+            "technique": "good",
+            "effort": null,
+            "pain": 0,
+            "painArea": "",
+            "symptom": "no",
+            "talk": "yes"
+          },
+          "balance": {
+            "skipped": true
+          }
+        },
+        "result": {
+          "levels": {
+            "push": 1,
+            "squat": 1,
+            "core": 1,
+            "pull": 1,
+            "aerobic": 1,
+            "balance": 1
+          },
+          "notes": {
+            "push": "لم يُجرَ — المستوى الافتراضي 1",
+            "squat": "لم يُجرَ — المستوى الافتراضي 1",
+            "core": "لم يُجرَ — المستوى الافتراضي 1",
+            "pull": "لم يُجرَ — المستوى الافتراضي 1",
+            "aerobic": "",
+            "balance": "لم يُجرَ — المستوى الافتراضي 1"
+          },
+          "flags": [],
+          "status": "ok",
+          "messages": [],
+          "version": "BL-5.0.0"
+        },
+        "notes": [
+          "اختبار الدفع لم يُجرَ — سيُعتمد المستوى 1",
+          "اختبار الساقان لم يُجرَ — سيُعتمد المستوى 1",
+          "اختبار الجذع لم يُجرَ — سيُعتمد المستوى 1"
+        ]
+      }
+    ],
+    "plans": [
+      {
+        "id": "PL5-2026W46-6T5RY-TS1M4",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "weekStart": "2026-11-15",
+        "weekEnd": "2026-11-21",
+        "createdAt": "2026-11-09T11:55:53.644Z",
+        "ruleVersion": "RULES-5.0.0",
+        "screeningId": "SC5-6HVRF-QS805",
+        "baselineId": "BL5-JQG85-59PJ4",
+        "prevPlanId": null,
+        "decisionFrom": null,
+        "status": "reviewed",
+        "blockers": [],
+        "notes": [
+          "أيام التدريب: 3 من 3 أيام متاحة (حد 4 للمستوى العام 2)، موزعة لتعظيم أيام الراحة بينها. [ACSM-RT, NIA]",
+          "مدة الحصة المتاحة 30 دقيقة ⇒ 5 تمارين رئيسية."
+        ],
+        "days": [
+          {
+            "index": 0,
+            "date": "2026-11-15",
+            "dow": 0,
+            "dowAr": "الأحد",
+            "type": "train",
+            "template": "A",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "MO-9090",
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "BT-DIAPH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "MO-CATCAMEL",
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "main": [
+              {
+                "slot": "A1",
+                "exId": "SQ-PAUSE",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 6,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «قرفصاء» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A2",
+                "exId": "PU-HR",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «دفع أفقي» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A3",
+                "exId": "PU-SCAP",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 45,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «تحكم لوح الكتف» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A4",
+                "exId": "CR-BENTLEG",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 6,
+                "rest": 55,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «مقاومة تقوس الجذع» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A5",
+                "exId": "LU-TURN",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 4,
+                "rest": 70,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «اندفاع/ساق واحدة» ضمن المعدات وقيود السلامة."
+                ]
+              }
+            ],
+            "estMinutes": 22
+          },
+          {
+            "index": 1,
+            "date": "2026-11-16",
+            "dow": 1,
+            "dowAr": "الاثنين",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 2,
+            "date": "2026-11-17",
+            "dow": 2,
+            "dowAr": "الثلاثاء",
+            "type": "train",
+            "template": "B",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CR-BIRDDOG",
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 0,
+                "side": true
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "BT-DIAPH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "MO-SHCIRCLE",
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "MO-CATCAMEL",
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "main": [
+              {
+                "slot": "B1",
+                "exId": "BR-SL",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 70,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «جسر/مد الورك» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "B2",
+                "exId": "PU-STD",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «دفع أفقي» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "B3",
+                "exId": "BE-SWIMMER",
+                "step": 0,
+                "u": "time",
+                "sets": 2,
+                "target": 15,
+                "rest": 45,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «مد الظهر» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "B4",
+                "exId": "CR-BICYCLE",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 6,
+                "rest": 55,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «مقاومة الدوران/دوران» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "B5",
+                "exId": "LU-LAT",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 70,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «اندفاع/ساق واحدة» ضمن المعدات وقيود السلامة."
+                ]
+              }
+            ],
+            "estMinutes": 22
+          },
+          {
+            "index": 3,
+            "date": "2026-11-18",
+            "dow": 3,
+            "dowAr": "الأربعاء",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 4,
+            "date": "2026-11-19",
+            "dow": 4,
+            "dowAr": "الخميس",
+            "type": "train",
+            "template": "A",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "HG-HIPHINGE",
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "BT-DIAPH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-SIDE",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "ST-EXTFLEX",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "main": [
+              {
+                "slot": "A1",
+                "exId": "SQ-PAUSE",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 6,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «قرفصاء» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A2",
+                "exId": "PU-HR",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «دفع أفقي» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A3",
+                "exId": "PU-SCAP",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 45,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «تحكم لوح الكتف» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A4",
+                "exId": "CR-BENTLEG",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 6,
+                "rest": 55,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «مقاومة تقوس الجذع» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A5",
+                "exId": "LU-TURN",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 4,
+                "rest": 70,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «اندفاع/ساق واحدة» ضمن المعدات وقيود السلامة."
+                ]
+              }
+            ],
+            "estMinutes": 22
+          },
+          {
+            "index": 5,
+            "date": "2026-11-20",
+            "dow": 5,
+            "dowAr": "الجمعة",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 6,
+            "date": "2026-11-21",
+            "dow": 6,
+            "dowAr": "السبت",
+            "type": "rest",
+            "main": []
+          }
+        ],
+        "overrides": [],
+        "revisions": [],
+        "pathway": "general",
+        "coachName": "",
+        "traineeName": "سالم التجريبي",
+        "tempFlagsIn": [],
+        "decision": null
+      },
+      {
+        "id": "PL5-2026W46-7ZQF9-PAWPA",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "weekStart": "2026-11-15",
+        "weekEnd": "2026-11-21",
+        "createdAt": "2026-11-09T11:55:54.961Z",
+        "ruleVersion": "RULES-5.0.0",
+        "screeningId": "SC5-5XC0A-C5WGZ",
+        "baselineId": "BL5-E5VYY-MC4BH",
+        "prevPlanId": null,
+        "decisionFrom": null,
+        "status": "reviewed",
+        "blockers": [],
+        "notes": [
+          "أيام التدريب: 3 من 3 أيام متاحة (حد 3 للمستوى العام 1)، موزعة لتعظيم أيام الراحة بينها. [ACSM-RT, NIA]",
+          "مدة الحصة المتاحة 45 دقيقة ⇒ 6 تمارين رئيسية.",
+          "مسار الحمل: تُطبَّق استبعادات الفحص. [ACOG804, GOOM2019]",
+          "الخانة B2 (دفع رأسي/دفع أفقي): لا يوجد تمرين آمن مناسب — حُذفت.",
+          "الخانة B4 (ثني الجذع/مقاومة الدوران/دوران/مد الظهر): لا يوجد تمرين آمن مناسب — حُذفت.",
+          "الخانة B6 (مقاومة تقوس الجذع/ثبات جانبي): لا يوجد تمرين آمن مناسب — حُذفت."
+        ],
+        "days": [
+          {
+            "index": 0,
+            "date": "2026-11-15",
+            "dow": 0,
+            "dowAr": "الأحد",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 1,
+            "date": "2026-11-16",
+            "dow": 1,
+            "dowAr": "الاثنين",
+            "type": "train",
+            "template": "A",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "MO-ARMCIRCLE",
+                "u": "reps",
+                "sets": 1,
+                "target": 10,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "MO-CATCAMEL",
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-CHILD",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-SIDE",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              }
+            ],
+            "main": [
+              {
+                "slot": "A1",
+                "exId": "SQ-HALF",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 10,
+                "rest": 60,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «قرفصاء» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A2",
+                "exId": "PU-KNEE",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 90,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «دفع أفقي» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A3",
+                "exId": "PU-SCAP",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 60,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «تحكم لوح الكتف» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A4",
+                "exId": "CR-STANDBRACE",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 45,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «مقاومة تقوس الجذع» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A5",
+                "exId": "CF-RAISE",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 10,
+                "rest": 60,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «الكاحل والساق» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A6",
+                "exId": "CR-BIRDDOG",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 5,
+                "rest": 60,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «مقاومة الدوران/دوران» ضمن المعدات وقيود السلامة."
+                ]
+              }
+            ],
+            "estMinutes": 23
+          },
+          {
+            "index": 2,
+            "date": "2026-11-17",
+            "dow": 2,
+            "dowAr": "الثلاثاء",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 3,
+            "date": "2026-11-18",
+            "dow": 3,
+            "dowAr": "الأربعاء",
+            "type": "train",
+            "template": "B",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "SC-RETRACT",
+                "u": "reps",
+                "sets": 1,
+                "target": 10,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "ST-HAM",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "MO-SHCIRCLE",
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "main": [
+              {
+                "slot": "B1",
+                "exId": "HA-QUADEXT",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 60,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «جسر/مد الورك» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "B3",
+                "exId": "SC-RETRACT",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 10,
+                "rest": 40,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «تحكم لوح الكتف» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "B5",
+                "exId": "HA-MEDIAL",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 60,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «إبعاد الورك» ضمن المعدات وقيود السلامة."
+                ]
+              }
+            ],
+            "estMinutes": 16
+          },
+          {
+            "index": 4,
+            "date": "2026-11-19",
+            "dow": 4,
+            "dowAr": "الخميس",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 5,
+            "date": "2026-11-20",
+            "dow": 5,
+            "dowAr": "الجمعة",
+            "type": "train",
+            "template": "A",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "MO-CATCAMEL",
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "ST-HIPFLEX",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "ST-SIDE",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "ST-HAM",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              }
+            ],
+            "main": [
+              {
+                "slot": "A1",
+                "exId": "SQ-HALF",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 10,
+                "rest": 60,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «قرفصاء» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A2",
+                "exId": "PU-KNEE",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 90,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «دفع أفقي» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A3",
+                "exId": "PU-SCAP",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 60,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «تحكم لوح الكتف» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A4",
+                "exId": "CR-STANDBRACE",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 45,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «مقاومة تقوس الجذع» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A5",
+                "exId": "CF-RAISE",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 10,
+                "rest": 60,
+                "side": false,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «الكاحل والساق» ضمن المعدات وقيود السلامة."
+                ]
+              },
+              {
+                "slot": "A6",
+                "exId": "CR-BIRDDOG",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 5,
+                "rest": 60,
+                "side": true,
+                "why": [
+                  "اختير لأنه أعلى مستوى مسموح (مبتدئ) لنمط «مقاومة الدوران/دوران» ضمن المعدات وقيود السلامة."
+                ]
+              }
+            ],
+            "estMinutes": 23
+          },
+          {
+            "index": 6,
+            "date": "2026-11-21",
+            "dow": 6,
+            "dowAr": "السبت",
+            "type": "rest",
+            "main": []
+          }
+        ],
+        "overrides": [],
+        "revisions": [],
+        "pathway": "pregnancy",
+        "coachName": "",
+        "traineeName": "مريم التجريبية",
+        "tempFlagsIn": [],
+        "decision": null
+      },
+      {
+        "id": "PL5-2026W46-D4ED9-HW5D9",
+        "traineeId": "TR5-G6GS1-9DG6F",
+        "weekStart": "2026-11-15",
+        "weekEnd": "2026-11-21",
+        "createdAt": "2026-11-09T11:55:55.744Z",
+        "ruleVersion": "RULES-5.0.0",
+        "screeningId": "SC5-BC0HC-PEEN9",
+        "baselineId": null,
+        "prevPlanId": null,
+        "decisionFrom": null,
+        "status": "blocked",
+        "blockers": [
+          "نتيجة الفحص: إحالة — لا تُصدر خطة تلقائية حتى تقييم مختص وفحص جديد.",
+          "لا يوجد تقييم أساسي للقدرات. أجرِ التقييم الأساسي (دون اختبار أقصى) بعد السماح بالفحص."
+        ],
+        "notes": [],
+        "days": [],
+        "overrides": [],
+        "revisions": [],
+        "pathway": "general",
+        "coachName": "",
+        "traineeName": "خالد التجريبي",
+        "decision": null
+      },
+      {
+        "id": "PL5-2026W47-MR9RZ-4AMH1",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "weekStart": "2026-11-22",
+        "weekEnd": "2026-11-28",
+        "createdAt": "2026-11-09T11:56:03.010Z",
+        "ruleVersion": "RULES-5.0.0",
+        "screeningId": "SC5-6HVRF-QS805",
+        "baselineId": "BL5-JQG85-59PJ4",
+        "prevPlanId": "PL5-2026W46-6T5RY-TS1M4",
+        "decisionFrom": "RV5-F1D44-3KCP5",
+        "status": "active",
+        "blockers": [],
+        "notes": [
+          "أيام التدريب: 3 من 3 أيام متاحة (حد 4 للمستوى العام 2)، موزعة لتعظيم أيام الراحة بينها. [ACSM-RT, NIA]",
+          "مدة الحصة المتاحة 30 دقيقة ⇒ 5 تمارين رئيسية.",
+          "قرار المراجعة السابقة: تثبيت."
+        ],
+        "days": [
+          {
+            "index": 0,
+            "date": "2026-11-22",
+            "dow": 0,
+            "dowAr": "الأحد",
+            "type": "train",
+            "template": "A",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CR-BLTWIST",
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 0,
+                "side": true
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "BT-DIAPH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-SLOVER",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "ST-EXTFLEX",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "main": [
+              {
+                "slot": "A1",
+                "exId": "SQ-PAUSE",
+                "step": 0,
+                "u": "reps",
+                "sets": 3,
+                "target": 6,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "تعديل يدوي من المدرب ضمن الحدود الآمنة: اختبار حدود"
+                ],
+                "override": true
+              },
+              {
+                "slot": "A2",
+                "exId": "PU-HR",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "تثبيت: إنجاز 100%، جهد 5.0"
+                ]
+              },
+              {
+                "slot": "A3",
+                "exId": "PU-SCAP",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 45,
+                "side": false,
+                "why": [
+                  "تثبيت: إنجاز 100%، جهد 5.0"
+                ]
+              },
+              {
+                "slot": "A4",
+                "exId": "CR-BENTLEG",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 6,
+                "rest": 55,
+                "side": false,
+                "why": [
+                  "تثبيت: إنجاز 100%، جهد 5.0"
+                ]
+              },
+              {
+                "slot": "A5",
+                "exId": "LU-TURN",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 4,
+                "rest": 70,
+                "side": true,
+                "why": [
+                  "تثبيت: إنجاز 100%، جهد 5.0"
+                ]
+              }
+            ],
+            "estMinutes": 22
+          },
+          {
+            "index": 1,
+            "date": "2026-11-23",
+            "dow": 1,
+            "dowAr": "الاثنين",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 2,
+            "date": "2026-11-24",
+            "dow": 2,
+            "dowAr": "الثلاثاء",
+            "type": "train",
+            "template": "B",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "SC-PRONE-T",
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "BT-DIAPH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-HIPFLEX",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "ST-GLUTE",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              }
+            ],
+            "main": [
+              {
+                "slot": "B1",
+                "exId": "BR-SL",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 70,
+                "side": true,
+                "why": [
+                  "تثبيت: إنجاز 100%"
+                ]
+              },
+              {
+                "slot": "B2",
+                "exId": "PU-STD",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "تثبيت: لا توجد بيانات أداء مسجلة"
+                ]
+              },
+              {
+                "slot": "B3",
+                "exId": "BE-SWIMMER",
+                "step": 0,
+                "u": "time",
+                "sets": 2,
+                "target": 15,
+                "rest": 45,
+                "side": false,
+                "why": [
+                  "تثبيت: لا توجد بيانات أداء مسجلة"
+                ]
+              },
+              {
+                "slot": "B4",
+                "exId": "CR-BICYCLE",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 6,
+                "rest": 55,
+                "side": true,
+                "why": [
+                  "تثبيت: لا توجد بيانات أداء مسجلة"
+                ]
+              },
+              {
+                "slot": "B5",
+                "exId": "LU-LAT",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 70,
+                "side": true,
+                "why": [
+                  "تثبيت: لا توجد بيانات أداء مسجلة"
+                ]
+              }
+            ],
+            "estMinutes": 22
+          },
+          {
+            "index": 3,
+            "date": "2026-11-25",
+            "dow": 3,
+            "dowAr": "الأربعاء",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 4,
+            "date": "2026-11-26",
+            "dow": 4,
+            "dowAr": "الخميس",
+            "type": "train",
+            "template": "A",
+            "warmup": [
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "CA-STEPJACK",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "LU-FWD",
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 0,
+                "side": true
+              }
+            ],
+            "cooldown": [
+              {
+                "exId": "BT-DIAPH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-GLUTE",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "ST-CHILD",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": false
+              }
+            ],
+            "main": [
+              {
+                "slot": "A1",
+                "exId": "SQ-PAUSE",
+                "step": 0,
+                "u": "reps",
+                "sets": 3,
+                "target": 6,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "تعديل يدوي من المدرب ضمن الحدود الآمنة: اختبار حدود"
+                ],
+                "override": true
+              },
+              {
+                "slot": "A2",
+                "exId": "PU-HR",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 5,
+                "rest": 75,
+                "side": false,
+                "why": [
+                  "تثبيت: إنجاز 100%، جهد 5.0"
+                ]
+              },
+              {
+                "slot": "A3",
+                "exId": "PU-SCAP",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
+                "rest": 45,
+                "side": false,
+                "why": [
+                  "تثبيت: إنجاز 100%، جهد 5.0"
+                ]
+              },
+              {
+                "slot": "A4",
+                "exId": "CR-BENTLEG",
+                "step": 0,
+                "u": "reps",
+                "sets": 2,
+                "target": 6,
+                "rest": 55,
+                "side": false,
+                "why": [
+                  "تثبيت: إنجاز 100%، جهد 5.0"
+                ]
+              },
+              {
+                "slot": "A5",
+                "exId": "LU-TURN",
+                "step": 0,
+                "u": "reps",
+                "sets": 1,
+                "target": 4,
+                "rest": 70,
+                "side": true,
+                "why": [
+                  "تثبيت: إنجاز 100%، جهد 5.0"
+                ]
+              }
+            ],
+            "estMinutes": 22
+          },
+          {
+            "index": 5,
+            "date": "2026-11-27",
+            "dow": 5,
+            "dowAr": "الجمعة",
+            "type": "rest",
+            "main": []
+          },
+          {
+            "index": 6,
+            "date": "2026-11-28",
+            "dow": 6,
+            "dowAr": "السبت",
+            "type": "rest",
+            "main": []
+          }
+        ],
+        "overrides": [
+          {
+            "at": "2026-11-09T11:56:03.626Z",
+            "dayIndex": 0,
+            "slot": "A1",
+            "from": {
+              "exId": "SQ-PAUSE",
+              "sets": 2,
+              "target": 6
+            },
+            "to": {
+              "exId": "SQ-PAUSE",
+              "sets": 3,
+              "target": 6
+            },
+            "reason": "اختبار حدود"
+          }
+        ],
+        "revisions": [
+          {
+            "at": "2026-11-09T11:56:03.626Z",
+            "reason": "تعديل المدرب: اختبار حدود",
+            "ruleVersion": "RULES-5.0.0",
+            "days": [
+              {
+                "index": 0,
+                "date": "2026-11-22",
+                "dow": 0,
+                "dowAr": "الأحد",
+                "type": "train",
+                "template": "A",
+                "warmup": [
+                  {
+                    "exId": "CA-MARCH",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 60,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "CA-STEPJACK",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "CR-BLTWIST",
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 5,
+                    "rest": 0,
+                    "side": true
+                  }
+                ],
+                "cooldown": [
+                  {
+                    "exId": "BT-DIAPH",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 60,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "ST-SLOVER",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": true
+                  },
+                  {
+                    "exId": "ST-EXTFLEX",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": false
+                  }
+                ],
+                "main": [
+                  {
+                    "slot": "A1",
+                    "exId": "SQ-PAUSE",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 2,
+                    "target": 6,
+                    "rest": 75,
+                    "side": false,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  },
+                  {
+                    "slot": "A2",
+                    "exId": "PU-HR",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 5,
+                    "rest": 75,
+                    "side": false,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  },
+                  {
+                    "slot": "A3",
+                    "exId": "PU-SCAP",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 8,
+                    "rest": 45,
+                    "side": false,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  },
+                  {
+                    "slot": "A4",
+                    "exId": "CR-BENTLEG",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 2,
+                    "target": 6,
+                    "rest": 55,
+                    "side": false,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  },
+                  {
+                    "slot": "A5",
+                    "exId": "LU-TURN",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 4,
+                    "rest": 70,
+                    "side": true,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  }
+                ],
+                "estMinutes": 22
+              },
+              {
+                "index": 1,
+                "date": "2026-11-23",
+                "dow": 1,
+                "dowAr": "الاثنين",
+                "type": "rest",
+                "main": []
+              },
+              {
+                "index": 2,
+                "date": "2026-11-24",
+                "dow": 2,
+                "dowAr": "الثلاثاء",
+                "type": "train",
+                "template": "B",
+                "warmup": [
+                  {
+                    "exId": "CA-MARCH",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 60,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "CA-STEPJACK",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "SC-PRONE-T",
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 8,
+                    "rest": 0,
+                    "side": false
+                  }
+                ],
+                "cooldown": [
+                  {
+                    "exId": "BT-DIAPH",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 60,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "ST-HIPFLEX",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": true
+                  },
+                  {
+                    "exId": "ST-GLUTE",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": true
+                  }
+                ],
+                "main": [
+                  {
+                    "slot": "B1",
+                    "exId": "BR-SL",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 6,
+                    "rest": 70,
+                    "side": true,
+                    "why": [
+                      "تثبيت: إنجاز 100%"
+                    ]
+                  },
+                  {
+                    "slot": "B2",
+                    "exId": "PU-STD",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 5,
+                    "rest": 75,
+                    "side": false,
+                    "why": [
+                      "تثبيت: لا توجد بيانات أداء مسجلة"
+                    ]
+                  },
+                  {
+                    "slot": "B3",
+                    "exId": "BE-SWIMMER",
+                    "step": 0,
+                    "u": "time",
+                    "sets": 2,
+                    "target": 15,
+                    "rest": 45,
+                    "side": false,
+                    "why": [
+                      "تثبيت: لا توجد بيانات أداء مسجلة"
+                    ]
+                  },
+                  {
+                    "slot": "B4",
+                    "exId": "CR-BICYCLE",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 2,
+                    "target": 6,
+                    "rest": 55,
+                    "side": true,
+                    "why": [
+                      "تثبيت: لا توجد بيانات أداء مسجلة"
+                    ]
+                  },
+                  {
+                    "slot": "B5",
+                    "exId": "LU-LAT",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 5,
+                    "rest": 70,
+                    "side": true,
+                    "why": [
+                      "تثبيت: لا توجد بيانات أداء مسجلة"
+                    ]
+                  }
+                ],
+                "estMinutes": 22
+              },
+              {
+                "index": 3,
+                "date": "2026-11-25",
+                "dow": 3,
+                "dowAr": "الأربعاء",
+                "type": "rest",
+                "main": []
+              },
+              {
+                "index": 4,
+                "date": "2026-11-26",
+                "dow": 4,
+                "dowAr": "الخميس",
+                "type": "train",
+                "template": "A",
+                "warmup": [
+                  {
+                    "exId": "CA-MARCH",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 60,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "CA-STEPJACK",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "LU-FWD",
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 5,
+                    "rest": 0,
+                    "side": true
+                  }
+                ],
+                "cooldown": [
+                  {
+                    "exId": "BT-DIAPH",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 60,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "ST-GLUTE",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": true
+                  },
+                  {
+                    "exId": "ST-CHILD",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": false
+                  }
+                ],
+                "main": [
+                  {
+                    "slot": "A1",
+                    "exId": "SQ-PAUSE",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 2,
+                    "target": 6,
+                    "rest": 75,
+                    "side": false,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  },
+                  {
+                    "slot": "A2",
+                    "exId": "PU-HR",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 5,
+                    "rest": 75,
+                    "side": false,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  },
+                  {
+                    "slot": "A3",
+                    "exId": "PU-SCAP",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 8,
+                    "rest": 45,
+                    "side": false,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  },
+                  {
+                    "slot": "A4",
+                    "exId": "CR-BENTLEG",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 2,
+                    "target": 6,
+                    "rest": 55,
+                    "side": false,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  },
+                  {
+                    "slot": "A5",
+                    "exId": "LU-TURN",
+                    "step": 0,
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 4,
+                    "rest": 70,
+                    "side": true,
+                    "why": [
+                      "تثبيت: إنجاز 100%، جهد 5.0"
+                    ]
+                  }
+                ],
+                "estMinutes": 22
+              },
+              {
+                "index": 5,
+                "date": "2026-11-27",
+                "dow": 5,
+                "dowAr": "الجمعة",
+                "type": "rest",
+                "main": []
+              },
+              {
+                "index": 6,
+                "date": "2026-11-28",
+                "dow": 6,
+                "dowAr": "السبت",
+                "type": "rest",
+                "main": []
+              }
+            ]
+          }
+        ],
+        "pathway": "general",
+        "coachName": "",
+        "traineeName": "سالم التجريبي",
+        "tempFlagsIn": [],
+        "decision": {
+          "reviewId": "RV5-F1D44-3KCP5",
+          "at": "2026-11-09T11:56:02.859Z",
+          "overall": "maintain",
+          "reasons": [],
+          "items": {
+            "A1|SQ-PAUSE": {
+              "slot": "A1",
+              "exId": "SQ-PAUSE",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "A2|PU-HR": {
+              "slot": "A2",
+              "exId": "PU-HR",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "A3|PU-SCAP": {
+              "slot": "A3",
+              "exId": "PU-SCAP",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "A4|CR-BENTLEG": {
+              "slot": "A4",
+              "exId": "CR-BENTLEG",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "A5|LU-TURN": {
+              "slot": "A5",
+              "exId": "LU-TURN",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "B1|BR-SL": {
+              "slot": "B1",
+              "exId": "BR-SL",
+              "action": "maintain",
+              "why": "إنجاز 100%",
+              "completion": 1,
+              "effort": null,
+              "sessions": 1
+            },
+            "B2|PU-STD": {
+              "slot": "B2",
+              "exId": "PU-STD",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B3|BE-SWIMMER": {
+              "slot": "B3",
+              "exId": "BE-SWIMMER",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B4|CR-BICYCLE": {
+              "slot": "B4",
+              "exId": "CR-BICYCLE",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B5|LU-LAT": {
+              "slot": "B5",
+              "exId": "LU-LAT",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            }
+          },
+          "tempFlags": [],
+          "completed": 1,
+          "partial": 1,
+          "planned": 3,
+          "ruleVersion": "RULES-5.0.0"
+        },
+        "updatedAt": "2026-11-09T11:56:03.626Z"
+      },
+      {
+        "id": "PL5-2026W47-B3V0H-ZRG5G",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "weekStart": "2026-11-22",
+        "weekEnd": "2026-11-28",
+        "createdAt": "2026-11-09T11:56:03.392Z",
+        "ruleVersion": "RULES-5.0.0",
+        "screeningId": "SC5-5XC0A-C5WGZ",
+        "baselineId": "BL5-E5VYY-MC4BH",
+        "prevPlanId": "PL5-2026W46-7ZQF9-PAWPA",
+        "decisionFrom": "RV5-NRH2S-67S4D",
+        "status": "blocked",
+        "blockers": [
+          "مراجعة الأسبوع السابق انتهت بإحالة: ألم شديد (8/10): ليس ألماً عضلياً عادياً — إيقاف وتقييم مختص. — يلزم فحص جديد بعد المراجعة مع تصريح مختص موثق."
+        ],
+        "notes": [],
+        "days": [],
+        "overrides": [],
+        "revisions": [],
+        "pathway": "general",
+        "coachName": "",
+        "traineeName": "مريم التجريبية",
+        "decision": {
+          "reviewId": "RV5-NRH2S-67S4D",
+          "at": "2026-11-09T11:56:03.243Z",
+          "overall": "refer",
+          "reasons": [
+            {
+              "level": "refer",
+              "text": "ألم شديد (8/10): ليس ألماً عضلياً عادياً — إيقاف وتقييم مختص.",
+              "src": [
+                "NPRS",
+                "LOCAL"
+              ]
+            },
+            {
+              "level": "substitute",
+              "text": "ألم 8/10 في أسفل الظهر: تُستبعد التمارين المحمِّلة لها الأسبوع القادم.",
+              "src": [
+                "NPRS",
+                "LOCAL"
+              ]
+            },
+            {
+              "level": "maintain",
+              "text": "أُنجز أقل من نصف الحصص المخططة (0 كاملة، 0 جزئية من 3): لا تقدم.",
+              "src": [
+                "LOCAL"
+              ]
+            }
+          ],
+          "items": {
+            "A1|SQ-HALF": {
+              "slot": "A1",
+              "exId": "SQ-HALF",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A2|PU-KNEE": {
+              "slot": "A2",
+              "exId": "PU-KNEE",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A3|PU-SCAP": {
+              "slot": "A3",
+              "exId": "PU-SCAP",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A4|CR-STANDBRACE": {
+              "slot": "A4",
+              "exId": "CR-STANDBRACE",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A5|CF-RAISE": {
+              "slot": "A5",
+              "exId": "CF-RAISE",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A6|CR-BIRDDOG": {
+              "slot": "A6",
+              "exId": "CR-BIRDDOG",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B1|HA-QUADEXT": {
+              "slot": "B1",
+              "exId": "HA-QUADEXT",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B3|SC-RETRACT": {
+              "slot": "B3",
+              "exId": "SC-RETRACT",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B5|HA-MEDIAL": {
+              "slot": "B5",
+              "exId": "HA-MEDIAL",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            }
+          },
+          "tempFlags": [
+            "lowback"
+          ],
+          "completed": 0,
+          "partial": 0,
+          "planned": 3,
+          "ruleVersion": "RULES-5.0.0"
+        }
+      }
+    ],
+    "sessions": [
+      {
+        "id": "SS5-1Y4PH-H4N8S",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "planId": "PL5-2026W46-6T5RY-TS1M4",
+        "dayIndex": 0,
+        "date": "2026-11-15",
+        "kind": "train",
+        "status": "complete",
+        "startedAt": "2026-11-09T11:55:55.944Z",
+        "updatedAt": "2026-11-09T11:55:59.827Z",
+        "cursor": 11,
+        "redFlag": false,
+        "items": [
+          {
+            "block": "warmup",
+            "slot": null,
+            "exId": "CA-MARCH",
+            "prescribed": {
+              "sets": 1,
+              "target": 60,
+              "u": "time",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [
+              {
+                "value": 60,
+                "at": "2026-11-09T11:55:56.011Z"
+              }
+            ],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "warmup",
+            "slot": null,
+            "exId": "CA-STEPJACK",
+            "prescribed": {
+              "sets": 1,
+              "target": 20,
+              "u": "time",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [
+              {
+                "value": 20,
+                "at": "2026-11-09T11:55:56.160Z"
+              }
+            ],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "warmup",
+            "slot": null,
+            "exId": "MO-9090",
+            "prescribed": {
+              "sets": 1,
+              "target": 6,
+              "u": "reps",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [
+              {
+                "value": 6,
+                "at": "2026-11-09T11:55:56.543Z"
+              }
+            ],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "A1",
+            "exId": "SQ-PAUSE",
+            "prescribed": {
+              "sets": 2,
+              "target": 6,
+              "u": "reps",
+              "side": false,
+              "rest": 75
+            },
+            "sets": [
+              {
+                "value": 6,
+                "at": "2026-11-09T11:55:56.877Z"
+              },
+              {
+                "value": 6,
+                "at": "2026-11-09T11:55:57.161Z"
+              }
+            ],
+            "effort": 5,
+            "technique": "good",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "A2",
+            "exId": "PU-HR",
+            "prescribed": {
+              "sets": 1,
+              "target": 5,
+              "u": "reps",
+              "side": false,
+              "rest": 75
+            },
+            "sets": [
+              {
+                "value": 5,
+                "at": "2026-11-09T11:55:57.544Z"
+              }
+            ],
+            "effort": 5,
+            "technique": "good",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "A3",
+            "exId": "PU-SCAP",
+            "prescribed": {
+              "sets": 1,
+              "target": 8,
+              "u": "reps",
+              "side": false,
+              "rest": 45
+            },
+            "sets": [
+              {
+                "value": 8,
+                "at": "2026-11-09T11:55:58.043Z"
+              }
+            ],
+            "effort": 5,
+            "technique": "good",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "A4",
+            "exId": "CR-BENTLEG",
+            "prescribed": {
+              "sets": 2,
+              "target": 6,
+              "u": "reps",
+              "side": false,
+              "rest": 55
+            },
+            "sets": [
+              {
+                "value": 6,
+                "at": "2026-11-09T11:55:58.495Z"
+              },
+              {
+                "value": 6,
+                "at": "2026-11-09T11:55:58.777Z"
+              }
+            ],
+            "effort": 5,
+            "technique": "good",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "A5",
+            "exId": "LU-TURN",
+            "prescribed": {
+              "sets": 1,
+              "target": 4,
+              "u": "reps",
+              "side": true,
+              "rest": 70
+            },
+            "sets": [
+              {
+                "value": 4,
+                "at": "2026-11-09T11:55:59.144Z"
+              }
+            ],
+            "effort": 5,
+            "technique": "good",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "cooldown",
+            "slot": null,
+            "exId": "BT-DIAPH",
+            "prescribed": {
+              "sets": 1,
+              "target": 60,
+              "u": "time",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [
+              {
+                "value": 60,
+                "at": "2026-11-09T11:55:59.376Z"
+              }
+            ],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "cooldown",
+            "slot": null,
+            "exId": "CA-MARCH",
+            "prescribed": {
+              "sets": 1,
+              "target": 60,
+              "u": "time",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [
+              {
+                "value": 60,
+                "at": "2026-11-09T11:55:59.494Z"
+              }
+            ],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "cooldown",
+            "slot": null,
+            "exId": "MO-CATCAMEL",
+            "prescribed": {
+              "sets": 1,
+              "target": 6,
+              "u": "reps",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [
+              {
+                "value": 6,
+                "at": "2026-11-09T11:55:59.827Z"
+              }
+            ],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          }
+        ],
+        "check": {
+          "effort": 5,
+          "technique": "good",
+          "pain": 0,
+          "symptoms": "no"
+        },
+        "endedAt": "2026-11-09T11:55:59.976Z",
+        "minutes": 1,
+        "load": 5
+      },
+      {
+        "id": "SS5-DN141-9MWAA",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "planId": "PL5-2026W46-6T5RY-TS1M4",
+        "dayIndex": 2,
+        "date": "2026-11-17",
+        "kind": "train",
+        "status": "partial",
+        "startedAt": "2026-11-09T11:56:00.077Z",
+        "updatedAt": "2026-11-09T11:56:00.245Z",
+        "cursor": 3,
+        "redFlag": false,
+        "items": [
+          {
+            "block": "warmup",
+            "slot": null,
+            "exId": "CA-MARCH",
+            "prescribed": {
+              "sets": 1,
+              "target": 60,
+              "u": "time",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "warmup",
+            "slot": null,
+            "exId": "CA-STEPJACK",
+            "prescribed": {
+              "sets": 1,
+              "target": 20,
+              "u": "time",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "warmup",
+            "slot": null,
+            "exId": "CR-BIRDDOG",
+            "prescribed": {
+              "sets": 1,
+              "target": 5,
+              "u": "reps",
+              "side": true,
+              "rest": 0
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "B1",
+            "exId": "BR-SL",
+            "prescribed": {
+              "sets": 1,
+              "target": 6,
+              "u": "reps",
+              "side": true,
+              "rest": 70
+            },
+            "sets": [
+              {
+                "value": 6,
+                "at": "2026-11-09T11:56:00.245Z"
+              }
+            ],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "B2",
+            "exId": "PU-STD",
+            "prescribed": {
+              "sets": 1,
+              "target": 5,
+              "u": "reps",
+              "side": false,
+              "rest": 75
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "B3",
+            "exId": "BE-SWIMMER",
+            "prescribed": {
+              "sets": 2,
+              "target": 15,
+              "u": "time",
+              "side": false,
+              "rest": 45
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "B4",
+            "exId": "CR-BICYCLE",
+            "prescribed": {
+              "sets": 2,
+              "target": 6,
+              "u": "reps",
+              "side": true,
+              "rest": 55
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "main",
+            "slot": "B5",
+            "exId": "LU-LAT",
+            "prescribed": {
+              "sets": 1,
+              "target": 5,
+              "u": "reps",
+              "side": true,
+              "rest": 70
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "cooldown",
+            "slot": null,
+            "exId": "BT-DIAPH",
+            "prescribed": {
+              "sets": 1,
+              "target": 60,
+              "u": "time",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "cooldown",
+            "slot": null,
+            "exId": "MO-SHCIRCLE",
+            "prescribed": {
+              "sets": 1,
+              "target": 8,
+              "u": "reps",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "cooldown",
+            "slot": null,
+            "exId": "MO-CATCAMEL",
+            "prescribed": {
+              "sets": 1,
+              "target": 6,
+              "u": "reps",
+              "side": false,
+              "rest": 0
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          }
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "id": "RV5-F1D44-3KCP5",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "planId": "PL5-2026W46-6T5RY-TS1M4",
+        "at": "2026-11-09T11:56:02.859Z",
+        "version": "RULES-5.0.0",
+        "questions": [
+          {
+            "id": "safety",
+            "text": "خلال هذا الأسبوع، هل حدث ألم/ضغط في الصدر، دوخة شديدة أو إغماء، ضيق نفس غير معتاد، أو خفقان غير طبيعي؟"
+          },
+          {
+            "id": "pain_nrs",
+            "text": "أعلى ألم جديد أو متزايد (غير الإرهاق العضلي المعتاد) خلال الأسبوع، 0–10:"
+          },
+          {
+            "id": "illness",
+            "text": "هل أصبت بمرض مؤقت (حمى، عدوى) هذا الأسبوع؟"
+          },
+          {
+            "id": "sleep",
+            "text": "جودة النوم هذا الأسبوع:"
+          },
+          {
+            "id": "fatigue",
+            "text": "الإرهاق العام (0 = نشيط جداً، 10 = منهك):"
+          },
+          {
+            "id": "soreness72",
+            "text": "هل استمر ألم العضلات بعد التمرين أكثر من 72 ساعة؟"
+          },
+          {
+            "id": "missed_reason",
+            "text": "سبب الحصص الفائتة (إن وجد):"
+          },
+          {
+            "id": "schedule_ok",
+            "text": "هل كانت أيام ومدة التدريب مناسبة؟"
+          },
+          {
+            "id": "easy",
+            "text": "هل شعرت أن الخطة كانت سهلة بشكل عام؟"
+          },
+          {
+            "id": "motivation",
+            "text": "الرغبة في الاستمرار (0–10):"
+          },
+          {
+            "id": "perEx.BE-SWIMMER.technique",
+            "text": "تقنية «السباح» في آخر أداء:"
+          },
+          {
+            "id": "perEx.BE-SWIMMER.difficulty",
+            "text": "صعوبة «السباح» (0–10):"
+          },
+          {
+            "id": "perEx.BR-SL.technique",
+            "text": "تقنية «جسر الحوض بساق واحدة» في آخر أداء:"
+          },
+          {
+            "id": "perEx.BR-SL.difficulty",
+            "text": "صعوبة «جسر الحوض بساق واحدة» (0–10):"
+          },
+          {
+            "id": "perEx.CR-BENTLEG.technique",
+            "text": "تقنية «رفع الساقين المثنيتين» في آخر أداء:"
+          },
+          {
+            "id": "perEx.CR-BENTLEG.difficulty",
+            "text": "صعوبة «رفع الساقين المثنيتين» (0–10):"
+          }
+        ],
+        "answers": {
+          "perEx": {
+            "BE-SWIMMER": {},
+            "BR-SL": {},
+            "CR-BENTLEG": {}
+          },
+          "safety": "no",
+          "pain_nrs": 0,
+          "illness": "no",
+          "sleep": "good",
+          "fatigue": 3,
+          "soreness72": "no"
+        },
+        "decision": {
+          "overall": "maintain",
+          "reasons": [],
+          "items": {
+            "A1|SQ-PAUSE": {
+              "slot": "A1",
+              "exId": "SQ-PAUSE",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "A2|PU-HR": {
+              "slot": "A2",
+              "exId": "PU-HR",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "A3|PU-SCAP": {
+              "slot": "A3",
+              "exId": "PU-SCAP",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "A4|CR-BENTLEG": {
+              "slot": "A4",
+              "exId": "CR-BENTLEG",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "A5|LU-TURN": {
+              "slot": "A5",
+              "exId": "LU-TURN",
+              "action": "maintain",
+              "why": "إنجاز 100%، جهد 5.0",
+              "completion": 1,
+              "effort": 5,
+              "sessions": 1
+            },
+            "B1|BR-SL": {
+              "slot": "B1",
+              "exId": "BR-SL",
+              "action": "maintain",
+              "why": "إنجاز 100%",
+              "completion": 1,
+              "effort": null,
+              "sessions": 1
+            },
+            "B2|PU-STD": {
+              "slot": "B2",
+              "exId": "PU-STD",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B3|BE-SWIMMER": {
+              "slot": "B3",
+              "exId": "BE-SWIMMER",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B4|CR-BICYCLE": {
+              "slot": "B4",
+              "exId": "CR-BICYCLE",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B5|LU-LAT": {
+              "slot": "B5",
+              "exId": "LU-LAT",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            }
+          },
+          "tempFlags": [],
+          "completed": 1,
+          "partial": 1,
+          "planned": 3,
+          "ruleVersion": "RULES-5.0.0",
+          "at": "2026-11-09T11:56:02.859Z"
+        }
+      },
+      {
+        "id": "RV5-NRH2S-67S4D",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "planId": "PL5-2026W46-7ZQF9-PAWPA",
+        "at": "2026-11-09T11:56:03.243Z",
+        "version": "RULES-5.0.0",
+        "questions": [
+          {
+            "id": "safety",
+            "text": "خلال هذا الأسبوع، هل حدث ألم/ضغط في الصدر، دوخة شديدة أو إغماء، ضيق نفس غير معتاد، أو خفقان غير طبيعي؟"
+          },
+          {
+            "id": "pain_nrs",
+            "text": "أعلى ألم جديد أو متزايد (غير الإرهاق العضلي المعتاد) خلال الأسبوع، 0–10:"
+          },
+          {
+            "id": "pain_area",
+            "text": "أين كان الألم؟"
+          },
+          {
+            "id": "illness",
+            "text": "هل أصبت بمرض مؤقت (حمى، عدوى) هذا الأسبوع؟"
+          },
+          {
+            "id": "sleep",
+            "text": "جودة النوم هذا الأسبوع:"
+          },
+          {
+            "id": "fatigue",
+            "text": "الإرهاق العام (0 = نشيط جداً، 10 = منهك):"
+          },
+          {
+            "id": "soreness72",
+            "text": "هل استمر ألم العضلات بعد التمرين أكثر من 72 ساعة؟"
+          },
+          {
+            "id": "missed_reason",
+            "text": "سبب الحصص الفائتة (إن وجد):"
+          },
+          {
+            "id": "schedule_ok",
+            "text": "هل كانت أيام ومدة التدريب مناسبة؟"
+          },
+          {
+            "id": "easy",
+            "text": "هل شعرت أن الخطة كانت سهلة بشكل عام؟"
+          },
+          {
+            "id": "motivation",
+            "text": "الرغبة في الاستمرار (0–10):"
+          },
+          {
+            "id": "preg_warn",
+            "text": "هل ظهرت أي علامة إنذار للحمل (نزيف، تسرب سوائل، انقباضات منتظمة، صداع شديد، ألم/تورم الساق، ضعف يؤثر على التوازن)؟"
+          },
+          {
+            "id": "perEx.CF-RAISE.technique",
+            "text": "تقنية «رفع الكعبين» في آخر أداء:"
+          },
+          {
+            "id": "perEx.CF-RAISE.difficulty",
+            "text": "صعوبة «رفع الكعبين» (0–10):"
+          },
+          {
+            "id": "perEx.CR-BIRDDOG.technique",
+            "text": "تقنية «طائر-كلب» في آخر أداء:"
+          },
+          {
+            "id": "perEx.CR-BIRDDOG.difficulty",
+            "text": "صعوبة «طائر-كلب» (0–10):"
+          },
+          {
+            "id": "perEx.CR-STANDBRACE.technique",
+            "text": "تقنية «رفع الركبة واقفاً مع شد الجذع» في آخر أداء:"
+          },
+          {
+            "id": "perEx.CR-STANDBRACE.difficulty",
+            "text": "صعوبة «رفع الركبة واقفاً مع شد الجذع» (0–10):"
+          }
+        ],
+        "answers": {
+          "perEx": {
+            "CF-RAISE": {},
+            "CR-BIRDDOG": {},
+            "CR-STANDBRACE": {}
+          },
+          "safety": "no",
+          "pain_nrs": 8,
+          "pain_area": "lowback",
+          "illness": "no",
+          "preg_warn": "no"
+        },
+        "decision": {
+          "overall": "refer",
+          "reasons": [
+            {
+              "level": "refer",
+              "text": "ألم شديد (8/10): ليس ألماً عضلياً عادياً — إيقاف وتقييم مختص.",
+              "src": [
+                "NPRS",
+                "LOCAL"
+              ]
+            },
+            {
+              "level": "substitute",
+              "text": "ألم 8/10 في أسفل الظهر: تُستبعد التمارين المحمِّلة لها الأسبوع القادم.",
+              "src": [
+                "NPRS",
+                "LOCAL"
+              ]
+            },
+            {
+              "level": "maintain",
+              "text": "أُنجز أقل من نصف الحصص المخططة (0 كاملة، 0 جزئية من 3): لا تقدم.",
+              "src": [
+                "LOCAL"
+              ]
+            }
+          ],
+          "items": {
+            "A1|SQ-HALF": {
+              "slot": "A1",
+              "exId": "SQ-HALF",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A2|PU-KNEE": {
+              "slot": "A2",
+              "exId": "PU-KNEE",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A3|PU-SCAP": {
+              "slot": "A3",
+              "exId": "PU-SCAP",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A4|CR-STANDBRACE": {
+              "slot": "A4",
+              "exId": "CR-STANDBRACE",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A5|CF-RAISE": {
+              "slot": "A5",
+              "exId": "CF-RAISE",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "A6|CR-BIRDDOG": {
+              "slot": "A6",
+              "exId": "CR-BIRDDOG",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B1|HA-QUADEXT": {
+              "slot": "B1",
+              "exId": "HA-QUADEXT",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B3|SC-RETRACT": {
+              "slot": "B3",
+              "exId": "SC-RETRACT",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            },
+            "B5|HA-MEDIAL": {
+              "slot": "B5",
+              "exId": "HA-MEDIAL",
+              "action": "maintain",
+              "why": "لا توجد بيانات أداء مسجلة",
+              "completion": null,
+              "effort": null,
+              "sessions": 0
+            }
+          },
+          "tempFlags": [
+            "lowback"
+          ],
+          "completed": 0,
+          "partial": 0,
+          "planned": 3,
+          "ruleVersion": "RULES-5.0.0",
+          "at": "2026-11-09T11:56:03.243Z"
+        }
+      }
+    ],
+    "audit": [
+      {
+        "id": "AU5-X84SP-BHQNM",
+        "at": "2026-11-09T11:55:53.127Z",
+        "type": "trainee.create",
+        "msg": "إنشاء سالم التجريبي",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": null
+      },
+      {
+        "id": "AU5-ESBSS-SYPK0",
+        "at": "2026-11-09T11:55:53.378Z",
+        "type": "screening",
+        "msg": "فحص SC5-6HVRF-QS805 ⇒ cleared",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "SC5-6HVRF-QS805"
+      },
+      {
+        "id": "AU5-R28EH-WN2YG",
+        "at": "2026-11-09T11:55:53.545Z",
+        "type": "baseline",
+        "msg": "تقييم أساسي BL5-JQG85-59PJ4 ⇒ {\"push\":2,\"squat\":2,\"core\":2,\"pull\":1,\"aerobic\":2,\"balance\":2}",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "BL5-JQG85-59PJ4"
+      },
+      {
+        "id": "AU5-SSJNW-DZBSX",
+        "at": "2026-11-09T11:55:53.646Z",
+        "type": "plan.create",
+        "msg": "خطة PL5-2026W46-6T5RY-TS1M4 (active)",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "PL5-2026W46-6T5RY-TS1M4"
+      },
+      {
+        "id": "AU5-YP8ZY-YHS0N",
+        "at": "2026-11-09T11:55:54.112Z",
+        "type": "trainee.create",
+        "msg": "إنشاء مريم التجريبية",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "ref": null
+      },
+      {
+        "id": "AU5-HNA5G-F8WHZ",
+        "at": "2026-11-09T11:55:54.711Z",
+        "type": "screening",
+        "msg": "فحص SC5-5XC0A-C5WGZ ⇒ cleared",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "ref": "SC5-5XC0A-C5WGZ"
+      },
+      {
+        "id": "AU5-89PDB-FNBZ9",
+        "at": "2026-11-09T11:55:54.878Z",
+        "type": "baseline",
+        "msg": "تقييم أساسي BL5-E5VYY-MC4BH ⇒ {\"push\":1,\"squat\":1,\"core\":1,\"pull\":1,\"aerobic\":1,\"balance\":1}",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "ref": "BL5-E5VYY-MC4BH"
+      },
+      {
+        "id": "AU5-B53R5-DH6MA",
+        "at": "2026-11-09T11:55:54.961Z",
+        "type": "plan.create",
+        "msg": "خطة PL5-2026W46-7ZQF9-PAWPA (active)",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "ref": "PL5-2026W46-7ZQF9-PAWPA"
+      },
+      {
+        "id": "AU5-W0JQJ-EZK4B",
+        "at": "2026-11-09T11:55:55.393Z",
+        "type": "trainee.create",
+        "msg": "إنشاء خالد التجريبي",
+        "traineeId": "TR5-G6GS1-9DG6F",
+        "ref": null
+      },
+      {
+        "id": "AU5-3MJ6N-XBAP4",
+        "at": "2026-11-09T11:55:55.661Z",
+        "type": "screening",
+        "msg": "فحص SC5-BC0HC-PEEN9 ⇒ refer",
+        "traineeId": "TR5-G6GS1-9DG6F",
+        "ref": "SC5-BC0HC-PEEN9"
+      },
+      {
+        "id": "AU5-5NF8Y-23G5F",
+        "at": "2026-11-09T11:55:55.744Z",
+        "type": "plan.create",
+        "msg": "خطة PL5-2026W46-D4ED9-HW5D9 (blocked)",
+        "traineeId": "TR5-G6GS1-9DG6F",
+        "ref": "PL5-2026W46-D4ED9-HW5D9"
+      },
+      {
+        "id": "AU5-RARNF-1PG4X",
+        "at": "2026-11-09T11:55:55.944Z",
+        "type": "session.start",
+        "msg": "بدء حصة SS5-1Y4PH-H4N8S",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "SS5-1Y4PH-H4N8S"
+      },
+      {
+        "id": "AU5-DBKHN-W0C9G",
+        "at": "2026-11-09T11:55:59.976Z",
+        "type": "session.complete",
+        "msg": "إنهاء SS5-1Y4PH-H4N8S جهد 5 ألم 0",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "SS5-1Y4PH-H4N8S"
+      },
+      {
+        "id": "AU5-3Y57W-D7629",
+        "at": "2026-11-09T11:56:00.077Z",
+        "type": "session.start",
+        "msg": "بدء حصة SS5-DN141-9MWAA",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "SS5-DN141-9MWAA"
+      },
+      {
+        "id": "AU5-2Q8FZ-QYFVM",
+        "at": "2026-11-09T11:56:02.859Z",
+        "type": "review",
+        "msg": "مراجعة PL5-2026W46-6T5RY-TS1M4 ⇒ maintain",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "RV5-F1D44-3KCP5"
+      },
+      {
+        "id": "AU5-RZTGX-HNQC9",
+        "at": "2026-11-09T11:56:03.010Z",
+        "type": "plan.create",
+        "msg": "خطة PL5-2026W47-MR9RZ-4AMH1 (active)",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "PL5-2026W47-MR9RZ-4AMH1"
+      },
+      {
+        "id": "AU5-XRSGP-0BH79",
+        "at": "2026-11-09T11:56:03.243Z",
+        "type": "review",
+        "msg": "مراجعة PL5-2026W46-7ZQF9-PAWPA ⇒ refer",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "ref": "RV5-NRH2S-67S4D"
+      },
+      {
+        "id": "AU5-F2BQ7-4JN7Y",
+        "at": "2026-11-09T11:56:03.392Z",
+        "type": "plan.create",
+        "msg": "خطة PL5-2026W47-B3V0H-ZRG5G (blocked)",
+        "traineeId": "TR5-WSNDW-VTXF7",
+        "ref": "PL5-2026W47-B3V0H-ZRG5G"
+      },
+      {
+        "id": "AU5-0X5K2-N6BBE",
+        "at": "2026-11-09T11:56:03.626Z",
+        "type": "plan.override",
+        "msg": "PL5-2026W47-MR9RZ-4AMH1: اختبار حدود",
+        "traineeId": "TR5-PYXKA-FJX2K",
+        "ref": "PL5-2026W47-MR9RZ-4AMH1"
+      }
+    ],
+    "legacy": null
+  }
+}

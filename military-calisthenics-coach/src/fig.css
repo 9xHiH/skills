@@ -15,3 +15,7 @@
 .mc-ghost circle{fill:var(--fig-ghost,#7fa3c0);fill-opacity:.3}
 .mc-trace{fill:none;stroke:var(--fig-trace,#5ee0c1);stroke-width:1.6;stroke-dasharray:3 3}
 .mc-mirror{transform:scaleX(-1)}
+.mc-inset{fill:var(--fig-bg,#0f2232);stroke:var(--fig-prop,#8aa0b4);stroke-width:1}
+.mc-inset-body{fill:var(--fig-ghost,#7fa3c0);fill-opacity:.55}
+.mc-inset-sh{stroke:var(--fig-ghost,#7fa3c0);stroke-width:2}
+.mc-inset-hand{fill:var(--fig,#ffd166)}
