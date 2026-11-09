@@ -11,15 +11,15 @@ const DATA = process.argv[2];
   const src = fs.readFileSync(AXE, 'utf8'); const all = {}; let total = 0;
   for (const theme of ['dark', 'light']) {
     await p.evaluate(t => { document.documentElement.dataset.theme = t; }, theme);
-    for (const pg of ['dash', 'trainees', 'screen', 'library', 'plan', 'session', 'review', 'history', 'data', 'sources']) {
-      await p.click(`nav.side button[data-page=${pg}]`); await p.waitForTimeout(150);
+    for (const pg of ['dash', 'setup', 'plan', 'session', 'review', 'library', 'more', 'trainees', 'screen', 'history', 'data', 'sources']) {
+      await p.evaluate(x => App.go(x), pg); await p.waitForTimeout(150);
       await p.addScriptTag({ content: src });
       const r = await p.evaluate(async () => { const res = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } }); return res.violations.map(v => ({ id: v.id, impact: v.impact, n: v.nodes.length, help: v.help, sample: v.nodes[0] && v.nodes[0].target.join(' ') })); });
       r.forEach(v => { const k = theme + ' ' + v.id; all[k] = all[k] || { ...v, pages: [] }; all[k].pages.push(pg); total += v.n; });
     }
   }
   await p.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
-  await p.click('nav.side button[data-page=library]'); await p.click('.excard'); await p.addScriptTag({ content: src });
+  await p.evaluate(() => App.go('library')); await p.click('.excard'); await p.addScriptTag({ content: src });
   const d = await p.evaluate(async () => (await axe.run(document.querySelector('#exDialog'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v => ({ id: v.id, impact: v.impact, n: v.nodes.length, help: v.help, sample: v.nodes[0].target.join(' ') })));
   d.forEach(v => { all['dialog ' + v.id] = { ...v, pages: ['exercise dialog'] }; total += v.n; });
   const keys = Object.keys(all);

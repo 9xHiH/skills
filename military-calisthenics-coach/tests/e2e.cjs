@@ -22,7 +22,8 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
   page.on('dialog', d => d.accept(d.type() === 'prompt' ? (page.__promptAnswer || 'سبب اختبار آلي') : undefined));
   await page.goto('file://' + FILE);
   const db = () => page.evaluate(() => JSON.parse(JSON.stringify(App.db)));
-  const nav = p => page.click(`nav.side button[data-page=${p}]`);
+  const go = (pg, p) => pg.evaluate(x => App.go(x), p);
+  const nav = p => go(page, p);
 
   async function createTrainee(o) {
     await nav('trainees'); await page.click('[data-act=tNew]');
@@ -58,17 +59,22 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
     await page.click('form[data-form=baseline] button[type=submit]');
     const d = await db(); return d.baselines[d.baselines.length - 1];
   }
-  async function genPlan() { await nav('plan'); await page.click('[data-act=genPlan]'); const d = await db(); return d.plans[d.plans.length - 1]; }
+  async function genPlan() {
+    await nav('plan');
+    if (await page.$('[data-act=genFirst]')) await page.click('[data-act=genFirst]');
+    else { await page.evaluate(() => document.querySelectorAll('#view details').forEach(x => { x.open = true; })); await page.click('[data-act=genPlan]'); }
+    const d = await db(); return d.plans[d.plans.length - 1];
+  }
 
   let A, B, C, planA, planB;
   await step('T1 offline load: no console errors at start, title & version', async () => { const t = await page.title(); ok(/v5/.test(t), t); ok(!errors.length, errors.join()); });
   await step('T2 register trainee A (male, 3 days, chair)', async () => { A = await createTrainee({ name: 'سالم التجريبي', age: 30, sex: 'male', days: [0, 2, 4], eq: ['chair'], exp: 'intermediate' }); ok(/^TR5-/.test(A.id) && A.consent); return A.id; });
   await step('T3 screening A all-no → cleared', async () => { const s = await screen({}); ok(s.outcome.status === 'cleared', s.outcome.status); ok(await page.isVisible('text=cleared-for-conservative-program')); });
   await step('T4 baseline A (no maximal test, capped inputs) → levels', async () => { const b = await baseline({ push: { variant: 'PU-KNEE', value: 12 }, squat: { variant: 'SQ-BW', value: 15 }, core: { variant: 'PL-FA', value: 30 }, aerobic: { variant: 'CA-MARCH', value: 20 }, balance: { variant: 'BA-SLSTAND', value: 30 } }); return JSON.stringify(b.result.levels); });
-  await step('T5 weekly plan A generated with unique week ID, 7 days, explanations', async () => { planA = await genPlan(); ok(planA.status === 'active', planA.blockers.join()); ok(/^PL5-\d{4}W\d{2}-/.test(planA.id)); ok(planA.days.length === 7, 'days'); ok((await page.textContent('#view h3')).includes(planA.id), 'plan id not shown'); ok((await page.$$('#view .why')).length > 0, 'no explanations'); return planA.id; });
+  await step('T5 weekly plan A generated with unique week ID, 7 days, explanations', async () => { planA = await genPlan(); ok(planA.status === 'active', planA.blockers.join()); ok(/^PL5-\d{4}W\d{2}-/.test(planA.id)); ok(planA.days.length === 7, 'days'); ok((await page.textContent('#view')).includes(planA.id), 'plan id not shown'); ok((await page.$$('#view .why')).length > 0, 'no explanations'); return planA.id; });
   await step('T6 register trainee B (female, pregnant 24 wk, provider approved) → pregnancy pathway; plan has no supine/prone/impact', async () => {
     B = await createTrainee({ name: 'مريم التجريبية', age: 29, sex: 'female', days: [1, 3, 5], minutes: 45, exp: 'beginner' });
-    const s = await screen({ pp_status: 'pregnant', preg_weeks: 24, preg_provider: 'yes', preg_abs: [], preg_rel: [], preg_warn: [] });
+    const s = await screen({ pp_status: 'pregnant', preg_weeks: 24, preg_provider: 'yes', preg_risk: 'no', preg_warn: 'no' });
     ok(s.outcome.status === 'cleared' && s.outcome.pathway === 'pregnancy', JSON.stringify(s.outcome.status));
     await baseline({ push: { variant: 'PU-WALL', value: 15 }, squat: { variant: 'SQ-CHAIR', value: 10 }, core: { variant: 'PL-INCL', value: 30 }, aerobic: { variant: 'CA-MARCH', value: 15 } });
     planB = await genPlan(); ok(planB.status === 'active');
@@ -78,12 +84,12 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
   await step('T7 trainee C with chest pain → refer; plan blocked; no override possible', async () => {
     C = await createTrainee({ name: 'خالد التجريبي', age: 45, sex: 'male', days: [0, 3] });
     const s = await screen({ chest: 'yes' }); ok(s.outcome.status === 'refer');
-    const p = await genPlan(); ok(p.status === 'blocked' && p.days.length === 0); ok(await page.isVisible('text=لم تُصدر خطة تمارين تلقائية')); ok(!(await page.$('[data-act=ovOpen]')), 'override button must not exist');
+    await nav('plan'); ok(await page.isVisible('text=لا يوجد جدول تمارين حالياً'), 'refer message not shown'); ok(!(await page.$('[data-act=genFirst]')) && !(await page.$('[data-act=ovOpen]')), 'plan creation/override must not be offered'); ok((await db()).plans.filter(x => x.traineeId === C.id).length === 0);
     const bl = await page.$('[data-act=blStart]'); ok(!bl, 'baseline must not be offered for refer');
   });
   await step('T8 isolation: A, B, C plans differ and records never cross trainees', async () => {
     const d = await db(); const ids = t => d.plans.filter(p => p.traineeId === t).map(p => p.id);
-    ok(ids(A.id).length === 1 && ids(B.id).length === 1 && ids(C.id).length === 1);
+    ok(ids(A.id).length === 1 && ids(B.id).length === 1 && ids(C.id).length === 0);
     const ex = p => JSON.stringify(p.days.map(x => (x.main || []).map(i => i.exId)));
     ok(ex(planA) !== ex(planB), 'plans should differ');
     ok(d.screenings.every(s => [A.id, B.id, C.id].includes(s.traineeId)));
@@ -102,15 +108,15 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
         if (k === 0) { const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('MCC_V5_DB')).sessions.slice(-1)[0].items[App.ui.run.idx].sets.length); ok(saved === 1, 'set not autosaved'); }
         await page.click('[data-act=restSkip]');
       }
-      if (it.block === 'main') { await page.fill('#runEffort', '5'); await page.selectOption('#runTech', 'good'); await page.fill('#runPain', '0'); await page.dispatchEvent('#runPain', 'change'); }
+      if (it.block === 'main') { await page.click('[data-act=runRate][data-v=ok]'); }
       await page.click('[data-act=runNext]');
     }
-    await page.fill('[name=p_effort]', '5'); await page.selectOption('[name=p_technique]', 'good'); await page.fill('[name=p_pain]', '0'); await page.selectOption('[name=p_symptoms]', 'no');
+    await page.fill('[name=p_effort]', '5'); await page.fill('[name=p_pain]', '0'); await page.selectOption('[name=p_symptoms]', 'no');
     await page.click('form[data-form=post] button[type=submit]');
     const s = (await db()).sessions.slice(-1)[0]; ok(s.status === 'complete'); ok(s.items.filter(i => i.block === 'main').every(i => i.sets.length === i.prescribed.sets)); return n + ' items logged';
   });
   await step('T10 rest timer counts down in real time', async () => {
-    await nav('plan'); const btns = await page.$$('[data-act=startSession]'); await btns[1].click();
+    await nav('plan'); await page.evaluate(() => document.querySelectorAll('#view details.day').forEach(x => { x.open = true; })); const btns = await page.$$('[data-act=startSession]'); await btns[1].click();
     for (let g = 0; g < 10 && (await page.evaluate(() => App.db.sessions.slice(-1)[0].items[App.ui.run.idx].block)) !== 'main'; g++) await page.click('[data-act=runNext]');
     const it = await page.evaluate(() => App.db.sessions.slice(-1)[0].items[App.ui.run.idx]);
     await page.fill('#runInput', String(it.prescribed.target || 1)); await page.click('[data-act=runSet]');
@@ -120,7 +126,7 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
   await step('T11 weekly review A: mandatory safety Qs, adaptive per-exercise Qs, decision saved', async () => {
     await nav('review');
     await page.selectOption('[name=r_safety]', 'no'); await page.fill('[name=r_pain_nrs]', '0'); await page.dispatchEvent('[name=r_pain_nrs]', 'change');
-    await page.selectOption('[name=r_illness]', 'no'); await page.selectOption('[name=r_sleep]', 'good'); await page.fill('[name=r_fatigue]', '3'); await page.dispatchEvent('[name=r_fatigue]', 'change'); await page.selectOption('[name=r_soreness72]', 'no');
+    await page.selectOption('[name=r_illness]', 'no'); await page.selectOption('[name=r_sleep]', 'good'); await page.fill('[name=r_fatigue]', '3'); await page.dispatchEvent('[name=r_fatigue]', 'change');
     const adaptive = await page.$$('[name^="r_perEx."]'); ok(adaptive.length >= 2, 'adaptive questions ' + adaptive.length);
     await page.click('form[data-form=review] button[type=submit]');
     const r = (await db()).reviews.slice(-1)[0]; ok(r && r.planId === planA.id); return 'decision=' + r.decision.overall + ', questions=' + r.questions.length;
@@ -162,7 +168,7 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
     await page.screenshot({ path: path.join(OUT, 'print_view.png'), fullPage: true });
     await page.emulateMedia({ media: 'screen' });
     const txt = await page.textContent('#print'); const p = (await db()).plans.filter(x => x.traineeId === A.id).slice(-1)[0];
-    ok(txt.includes(p.id) && txt.includes('سالم التجريبي') && txt.includes(A.id), 'identity/IDs missing from print');
+    ok(txt.includes(p.id) && txt.includes('سالم التجريبي'), 'identity/IDs missing from print'); ok(/Weekly Training Plan/.test(txt) && /youtube\.com\/results/.test(await page.innerHTML('#print')), 'no bilingual title or video links');
     const buf = fs.readFileSync(pdf); const pages = (buf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) || []).length; ok(pages >= 2, 'pages ' + pages); return pages + ' A4 pages, ' + Math.round(buf.length / 1024) + 'KB';
   });
   await step('T18 library: per-exercise animation actually moves; dialog; rep counter; interval timer', async () => {
@@ -180,12 +186,12 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
   });
   await step('T20 import round-trip into a fresh browser profile restores all records', async () => {
     const c2 = await browser.newContext(); await c2.setOffline(true); const p2 = await c2.newPage(); const e2 = []; p2.on('pageerror', e => e2.push(e.message));
-    await p2.goto('file://' + FILE); await p2.click('nav.side button[data-page=data]'); await p2.setInputFiles('#impFile', exportPath); await p2.waitForSelector('[data-act=impConfirm]'); await p2.click('[data-act=impConfirm]');
+    await p2.goto('file://' + FILE); await go(p2, 'data'); await p2.setInputFiles('#impFile', exportPath); await p2.waitForSelector('[data-act=impConfirm]'); await p2.click('[data-act=impConfirm]');
     const a = JSON.parse(fs.readFileSync(exportPath, 'utf8')).data; const b = await p2.evaluate(() => App.db);
     for (const c of ['trainees', 'screenings', 'baselines', 'plans', 'sessions', 'reviews']) ok(a[c].length === b[c].length, c + ' ' + a[c].length + '≠' + b[c].length);
     ok(JSON.stringify(a.plans) === JSON.stringify(b.plans), 'plans differ after import');
     // re-import the same file → no duplicates
-    await p2.click('nav.side button[data-page=data]'); await p2.setInputFiles('#impFile', exportPath); await p2.waitForSelector('[data-act=impConfirm]'); await p2.click('[data-act=impConfirm]'); ok((await p2.evaluate(() => App.db.plans.length)) === a.plans.length, 'duplicates after re-import');
+    await go(p2, 'data'); await p2.setInputFiles('#impFile', exportPath); await p2.waitForSelector('[data-act=impConfirm]'); await p2.click('[data-act=impConfirm]'); ok((await p2.evaluate(() => App.db.plans.length)) === a.plans.length, 'duplicates after re-import');
     ok(!e2.length, e2.join()); await c2.close();
   });
   await step('T21 malformed / tampered imports rejected without changing data', async () => {
@@ -206,13 +212,13 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
     await p3.click('text=تقييم جديد'); await p3.fill('#fields [name=name]', 'متدرب من v4'); await p3.fill('#fields [name=age]', '35'); await p3.click('#form button[type=submit]');
     const v4raw = await p3.evaluate(() => localStorage.getItem('MC_V3')); ok(v4raw && JSON.parse(v4raw).people.length === 1, 'v4 did not save');
     await p3.goto('file://' + FILE); ok(await p3.isVisible('text=وُجدت بيانات من النسخة v4'));
-    await p3.click('nav.side button[data-page=data]'); await p3.click('[data-act=migrateLocal]'); await p3.waitForSelector('[data-act=impConfirm]'); await p3.click('[data-act=impConfirm]');
+    await go(p3, 'data'); await p3.click('[data-act=migrateLocal]'); await p3.waitForSelector('[data-act=impConfirm]'); await p3.click('[data-act=impConfirm]');
     const r = await p3.evaluate(() => [App.db.trainees.map(t => t.displayName), App.db.legacy && App.db.legacy.v4.plans.length, localStorage.getItem('MC_V3')]);
     ok(r[0].includes('متدرب من v4') && r[1] === 1 && r[2] === v4raw, 'migration failed or v4 data modified'); await c3.close(); return 'v4 key unchanged after migration';
   });
   await step('T24 mobile layout (iPhone-size viewport) renders library and plan without overflow', async () => {
     const c4 = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true }); await c4.setOffline(true); const p4 = await c4.newPage(); await p4.goto('file://' + FILE);
-    await p4.click('nav.side button[data-page=library]'); const ov = await p4.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); await p4.screenshot({ path: path.join(OUT, 'mobile_library.png') }); await c4.close(); ok(ov <= 2, 'horizontal overflow ' + ov); return 'simulated viewport only (not a real device)';
+    await go(p4, 'library'); const ov = await p4.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); await p4.screenshot({ path: path.join(OUT, 'mobile_library.png') }); await c4.close(); ok(ov <= 2, 'horizontal overflow ' + ov); return 'simulated viewport only (not a real device)';
   });
   await step('T26 multi-tab safety: a stale tab cannot overwrite newer data written by another tab', async () => {
     const other = await ctx.newPage(); await other.goto('file://' + FILE);
@@ -227,16 +233,16 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
     const c5 = await browser.newContext({ acceptDownloads: true }); await c5.setOffline(true); const p5 = await c5.newPage(); const e5 = [];
     p5.on('pageerror', e => e5.push(e.message)); p5.on('dialog', d => d.accept());
     await p5.goto('file://' + FILE);
-    await p5.click('nav.side button[data-page=trainees]'); await p5.click('[data-act=tNew]');
+    await go(p5, 'trainees'); await p5.click('[data-act=tNew]');
     await p5.fill('form[data-form=trainee] [name=displayName]', 'سرّي جداً'); await p5.fill('form[data-form=trainee] [name=age]', '31'); await p5.check('form[data-form=trainee] [name=consent]'); await p5.click('form[data-form=trainee] button[type=submit]');
-    await p5.click('nav.side button[data-page=data]');
+    await go(p5, 'data');
     await p5.fill('form[data-form=encOn] [name=p1]', 'كلمة-سر-قوية-1'); await p5.fill('form[data-form=encOn] [name=p2]', 'كلمة-سر-قوية-1'); await p5.check('form[data-form=encOn] [name=ack]'); await p5.click('form[data-form=encOn] button[type=submit]');
     await p5.waitForFunction(() => { const r = localStorage.getItem('MCC_V5_DB'); return r && JSON.parse(r).schema === 'MCC-ENC'; }, null, { timeout: 20000 });
     await p5.evaluate(() => MCStore.flush());
     const raw = await p5.evaluate(() => localStorage.getItem('MCC_V5_DB') + (localStorage.getItem('MCC_V5_RESTORE') || ''));
     ok(!raw.includes('سرّي') && !raw.includes('TR5-'), 'plaintext found in storage');
     // encrypted export while unlocked
-    await p5.click('nav.side button[data-page=data]'); await p5.check('#expEnc'); await p5.fill('#expPass', 'ملف-سر-2026'); await p5.fill('#expPass2', 'ملف-سر-2026');
+    await go(p5, 'data'); await p5.check('#expEnc'); await p5.fill('#expPass', 'ملف-سر-2026'); await p5.fill('#expPass2', 'ملف-سر-2026');
     const [dl] = await Promise.all([p5.waitForEvent('download'), p5.click('[data-act=expAll]')]); const encPath = path.join(OUT, 'export_encrypted.json'); await dl.saveAs(encPath);
     const encText = fs.readFileSync(encPath, 'utf8'); ok(JSON.parse(encText).format === 'MCC-EXPORT-ENC' && !encText.includes('سرّي'), 'export not encrypted');
     await p5.reload(); ok(await p5.isVisible('text=البيانات مشفّرة'), 'no lock screen');
@@ -245,11 +251,60 @@ const ok = (c, m) => { if (!c) throw new Error(m || 'assertion failed'); };
     ok((await p5.evaluate(() => App.db.trainees.map(t => t.displayName))).includes('سرّي جداً'), 'data lost after unlock');
     await c5.close();
     const c6 = await browser.newContext(); await c6.setOffline(true); const p6 = await c6.newPage(); await p6.goto('file://' + FILE);
-    await p6.click('nav.side button[data-page=data]'); await p6.setInputFiles('#impFile', encPath); await p6.waitForSelector('#impPass');
+    await go(p6, 'data'); await p6.setInputFiles('#impFile', encPath); await p6.waitForSelector('#impPass');
     await p6.fill('#impPass', 'خطأ'); await p6.click('[data-act=impDecrypt]'); await p6.waitForSelector('#impPreview .alert.danger', { timeout: 20000 });
     await p6.fill('#impPass', 'ملف-سر-2026'); await p6.click('[data-act=impDecrypt]'); await p6.waitForSelector('[data-act=impConfirm]', { timeout: 20000 }); await p6.click('[data-act=impConfirm]');
     ok((await p6.evaluate(() => App.db.trainees.map(t => t.displayName))).includes('سرّي جداً'), 'encrypted import failed');
     await c6.close(); ok(!e5.length, e5.join()); return 'PBKDF2 ' + 310000 + ' iterations, AES-GCM-256';
+  });
+  await step('T28 simple setup (for myself): short bilingual form → weekly plan with home/outdoor days, weak-side work, English names, video links, reading copy', async () => {
+    const c7 = await browser.newContext({ acceptDownloads: true, viewport: { width: 1280, height: 900 } }); await c7.setOffline(true); const p7 = await c7.newPage(); const e7 = [];
+    p7.on('pageerror', e => e7.push(e.message)); p7.on('console', m => { if (m.type() === 'error') e7.push(m.text()); });
+    await p7.goto('file://' + FILE);
+    await p7.click('[data-act=setupNew][data-for=self]');
+    const radio = async (n, v) => { await p7.check(`[name="${n}"][value="${v}"]`); };
+    await p7.fill('[name=name]', 'أنا'); await p7.fill('[name=age]', '34'); await p7.fill('[name=heightCm]', '176'); await p7.fill('[name=weightKg]', '82');
+    await radio('sex', 'male'); await radio('goal', 'general'); await radio('place', 'both'); await radio('minutes', '30');
+    for (const d of ['1', '3', '5', '6']) await p7.check(`[name=days][value="${d}"]`);
+    const healthQs = await p7.evaluate(() => MCScreen.visible(App.ui.wz.answers, { sex: 'male' }).filter(q => q.sec === 'health' && !q.when).map(q => q.id));
+    ok(healthQs.length <= 10, 'too many health questions: ' + healthQs.length);
+    for (const id of healthQs) await radio('h_' + id, 'no');
+    await radio('f_push', '6-15'); await radio('f_squat', '10-20'); await radio('f_plank', '20-45'); await radio('f_walk', '10-30'); await radio('h_active', 'no');
+    await radio('weakArm', 'left'); await p7.check('[name=focus][value=lowback]'); await p7.check('[name=consent]');
+    const formText = await p7.textContent('#wzForm'); ok(/Your health/.test(formText) && /Yes/.test(formText) && /نعم/.test(formText), 'form not bilingual');
+    const nQ = await p7.$$eval('#wzForm .q', x => x.length);
+    await p7.click('#wzForm button[type=submit]'); await p7.waitForFunction(() => App.ui.page === 'plan', null, { timeout: 10000 });
+    const plan = await p7.evaluate(() => App.plansOf(App.ui.traineeId).slice(-1)[0]);
+    ok(plan.status === 'active', 'plan not active: ' + plan.blockers.join());
+    const tr = plan.days.filter(d => d.type === 'train'), walks = plan.days.filter(d => d.type === 'recovery');
+    ok(tr.length >= 2 && tr.every(d => d.place === 'home'), 'home workouts');
+    ok(walks.length >= 1 && walks.every(d => d.place === 'outdoor' && d.recovery[0].exId === 'CA-WALK'), 'outdoor walks');
+    ok(tr.every(d => d.main.some(i => i.weak && i.weak.side === 'left')), 'weak-side work missing');
+    ok(tr.every(d => d.main.some(i => i.focus === 'lowback')), 'focus work missing');
+    ok(plan.notes.some(n => /كتلة/.test(n)), 'BMI note missing');
+    const view = await p7.textContent('#view'); ok(/Home workout/.test(view) && /Outdoor walk/.test(view) && /الجانب الأضعف/.test(view), 'plan view labels');
+    const [dl] = await Promise.all([p7.waitForEvent('download'), p7.click('[data-act=readCopy]')]); const rc = path.join(OUT, 'reading_copy.html'); await dl.saveAs(rc);
+    const html = fs.readFileSync(rc, 'utf8'); const en = await p7.evaluate(p => MCEX.byId(p.days.find(d => d.type === 'train').main[0].exId).en, plan);
+    ok(html.includes(en) && /youtube\.com\/results\?search_query=/.test(html) && !/<script/i.test(html) && /<svg/.test(html), 'reading copy content');
+    const r7 = await c7.newPage(); await r7.goto('file://' + rc); await r7.screenshot({ path: path.join(OUT, 'reading_copy.png'), fullPage: false }); await r7.close();
+    await p7.evaluate(() => { window.print = () => {}; }); await p7.click('[data-act=printPlan]'); await p7.emulateMedia({ media: 'print' });
+    const pdf = path.join(OUT, 'simple_plan_print.pdf'); await p7.pdf({ path: pdf, format: 'A4', printBackground: true, preferCSSPageSize: true }); await p7.emulateMedia({ media: 'screen' });
+    ok(fs.statSync(pdf).size > 20000, 'pdf too small');
+    await p7.screenshot({ path: path.join(OUT, 'simple_plan.png'), fullPage: false });
+    await c7.close(); ok(!e7.length, e7.join(' | ')); return nQ + ' questions on the setup page (incl. profile & fitness), ' + healthQs.length + ' health questions';
+  });
+  await step('T29 simple setup: a red-flag answer pauses the plan and explains why', async () => {
+    const c8 = await browser.newContext(); await c8.setOffline(true); const p8 = await c8.newPage(); await p8.goto('file://' + FILE);
+    await p8.click('[data-act=setupNew][data-for=trainee]');
+    const radio = async (n, v) => { await p8.check(`[name="${n}"][value="${v}"]`); };
+    await p8.fill('[name=name]', 'متدرب'); await p8.fill('[name=age]', '50'); await p8.fill('[name=heightCm]', '170'); await p8.fill('[name=weightKg]', '75');
+    await radio('sex', 'male'); await radio('place', 'home');
+    const qs = await p8.evaluate(() => MCScreen.visible(App.ui.wz.answers, { sex: 'male' }).filter(q => q.sec === 'health' && !q.when).map(q => q.id));
+    for (const id of qs) await radio('h_' + id, id === 'chest' ? 'yes' : 'no');
+    await radio('f_push', '1-5'); await radio('f_squat', '<10'); await radio('f_plank', '<20'); await radio('f_walk', '<10'); await radio('h_active', 'no'); await p8.check('[name=consent]');
+    await p8.click('#wzForm button[type=submit]'); await p8.waitForFunction(() => App.ui.page === 'screen', null, { timeout: 10000 });
+    ok(await p8.isVisible('text=do-not-auto-prescribe'), 'refer explanation not shown');
+    ok((await p8.evaluate(() => App.db.plans.length)) === 0, 'plan must not be created'); await c8.close();
   });
   await page.screenshot({ path: path.join(OUT, 'final.png') });
   await step('T25 zero external network requests and zero console errors during the whole run', async () => { ok(!external.length, 'external: ' + external.join()); ok(!errors.length, errors.slice(0, 3).join(' | ')); });

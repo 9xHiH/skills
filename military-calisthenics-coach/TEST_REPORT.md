@@ -23,10 +23,10 @@ Evidence in `tests/evidence/`:
 ## Results (final run)
 | Suite | Result |
 |---|---|
-| Exercise data + animation geometry (`check.mjs`) | 197 records, **0 errors**, 6 warnings (intentional: planks and mountain climbers marked prone-position without the "lying prone" flag, because the weight is on the hands) |
-| Unit (`unit.mjs`, DOM-free modules) | **55 passed, 0 failed** |
-| End-to-end (`e2e.cjs`, real UI in Chromium) | **27 passed, 0 failed** (T27 = encryption) |
-| Accessibility (`a11y.cjs`, axe-core 4.10.2, WCAG 2.0/2.1 A+AA rules) | **0 violations** on 10 pages × dark/light + exercise dialog (`tests/results_a11y.txt`). axe covers only part of WCAG; no screen-reader test. |
+| Exercise data + animation geometry (`check.mjs`) | 199 records, **0 errors**, 6 warnings (intentional: planks and mountain climbers marked prone-position without the "lying prone" flag, because the weight is on the hands) |
+| Unit (`unit.mjs`, DOM-free modules) | **63 passed, 0 failed** (incl. weak side, focus areas, home/outdoor walking, walking progression, BMI, bilingual questions) |
+| End-to-end (`e2e.cjs`, real UI in Chromium) | **29 passed, 0 failed** (T27 encryption; T28 simple bilingual setup → plan, reading copy, PDF; T29 red flag in simple setup) |
+| Accessibility (`a11y.cjs`, axe-core 4.10.2, WCAG 2.0/2.1 A+AA rules) | **0 violations** on 12 pages × dark/light + exercise dialog (`tests/results_a11y.txt`). axe covers only part of WCAG; no screen-reader test. |
 
 Defects that earlier test runs caught and that were fixed before this run:
 - The check character missed about 6% of typos. Odd weights now make every single-character substitution detectable.
@@ -45,7 +45,7 @@ Defects that earlier test runs caught and that were fixed before this run:
 | 5 | Logs + review change next plan; pain blocks progression | Unit adapt tests (progress, reduce, substitute, illness, <50% attendance, "felt easy" alone does not progress, pain 8 → refer → blocked); T9, T11–T13 | **Pass** |
 | 6 | Unique plan IDs, lookup, JSON round trip, malformed import, history | Unit (20,000 IDs unique; typo detection 500/500); T12, T15, T16, T20 (fresh profile restores identical records; re-import adds no duplicates), T21 (syntax error and tampered file rejected, data unchanged) | **Pass** |
 | 7 | Arabic RTL weekly PDF, pagination, names, IDs, details, no clipped tables | T17 generated a real A4 PDF (9 pages). I inspected rendered pages: RTL Arabic is correct, the table header repeats on page 2, exercise cards have start/end figures. `pdftotext` finds the trainee name, trainee ID and plan ID. | **Pass in Chromium print engine; not tested on Windows print dialog or a physical printer** |
-| 8 | Images match movements; counters/timers work | T19: 197 distinct drawings. T18: animation moves, pause works, rep counter = 3 after 3 clicks, interval timer counts down. T10: rest timer 01:10 → 01:08. Visual review of every contact sheet by the authors, plus my spot checks. | **Pass with caveats** (some schematic drawings — see risks) |
+| 8 | Images match movements; counters/timers work | T19: 199 distinct drawings. T18: animation moves, pause works, rep counter = 3 after 3 clicks, interval timer counts down. T10: rest timer 01:10 → 01:08. Visual review of every contact sheet by the authors, plus my spot checks. | **Pass with caveats** (some schematic drawings — see risks) |
 | 9 | Regression vs v4 inventory | See table below; T23 runs the real v4 file, creates a trainee there, then migrates it into v5 with the v4 key unchanged | **Pass** |
 | 10 | Windows Chrome/Edge; iOS limitations documented | Windows: **not tested on a real machine** (Chromium engine only). iOS: documented in README; **not tested** | **Partially met** |
 
@@ -65,7 +65,10 @@ Defects that earlier test runs caught and that were fixed before this run:
 
 ## Unfinished requirements and risks (truthful gap list)
 
-1. **Exercise count: 197 of the 200 target.**
+0. **Spec deviation by user request (round 3).** Question counts are below the spec's budgets: 8 general health questions (+4 conditional), a 4-question post-workout check and a 6-question weekly base. The baseline is now self-reported ranges by default (the detailed sub-maximal test remains under More).
+   - New local, unvalidated rules: BMI ≥ 30 → no jumping; weak side +1 set; walking +5 min/week. They are labelled LOCAL in the app.
+   - YouTube search links are external and their results are not reviewed.
+1. **Exercise count: 199 of the 200 target.**
    - 200 IDs were planned. Three were drawn twice, the second time with the new foreshortening support, and were still removed in final review because the drawings would mislead:
      - `PU-ARCHER` looked like a headstand;
      - `HA-FIRE` looked like a standing leg lift;

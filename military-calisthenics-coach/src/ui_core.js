@@ -25,9 +25,9 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
   };
   App.field = function (q, val, prefix) {
-    var name = esc((prefix || '') + q.id), h = '<label for="f_' + name + '">' + esc(q.text) + (q.must ? '<span class="must">إلزامي</span>' : '') + (q.hint ? '<span class="hint">' + esc(q.hint) + '</span>' : '');
-    if (q.type === 'yn') h += '<select id="f_' + name + '" name="' + name + '"><option value="">— اختر —</option>' + SC.YN.map(function (o) { return '<option value="' + o[0] + '"' + (val === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>';
-    else if (q.type === 'select') h += '<select id="f_' + name + '" name="' + name + '"><option value="">— اختر —</option>' + q.opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (val === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select>';
+    var name = esc((prefix || '') + q.id), h = '<label for="f_' + name + '">' + esc(q.text) + (q.en ? ' <span class="en" dir="ltr">' + esc(q.en) + '</span>' : '') + (q.must ? '<span class="must">إلزامي</span>' : '') + (q.hint ? '<span class="hint">' + esc(q.hint) + '</span>' : '');
+    if (q.type === 'yn') h += '<select id="f_' + name + '" name="' + name + '"><option value="">— اختر —</option>' + SC.YN.map(function (o) { return '<option value="' + o[0] + '"' + (val === o[0] ? ' selected' : '') + '>' + o[1] + (o[2] ? ' · ' + o[2] : '') + '</option>'; }).join('') + '</select>';
+    else if (q.type === 'select') h += '<select id="f_' + name + '" name="' + name + '"><option value="">— اختر —</option>' + q.opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (val === o[0] ? ' selected' : '') + '>' + esc(o[1]) + (o[2] ? ' · ' + esc(o[2]) : '') + '</option>'; }).join('') + '</select>';
     else if (q.type === 'num') h += '<input id="f_' + name + '" name="' + name + '" type="number" inputmode="numeric" min="' + q.min + '" max="' + q.max + '" value="' + esc(val == null ? '' : val) + '">';
     else if (q.type === 'multi') { h += '</label><div class="checks" role="group" aria-label="' + esc(q.text) + '">' + q.opts.map(function (o) { return '<label><input type="checkbox" name="' + name + '" value="' + esc(o[0]) + '"' + (Array.isArray(val) && val.indexOf(o[0]) >= 0 ? ' checked' : '') + '> ' + esc(o[1]) + '</label>'; }).join('') + '<label><input type="checkbox" name="' + name + '" value="__none"' + (Array.isArray(val) && !val.length ? ' checked' : '') + '> لا شيء مما سبق</label></div>'; return '<div class="q">' + h + '</div>'; }
     else h += '<input id="f_' + name + '" name="' + name + '" value="' + esc(val || '') + '">';
@@ -45,7 +45,8 @@
   };
 
   /* ---------- shell ---------- */
-  var NAV = [['dash', '◎', 'لوحة القيادة'], ['trainees', '👥', 'المتدربون'], ['screen', '🩺', 'الفحص والتقييم'], ['library', '📚', 'مكتبة التمارين'], ['plan', '🗓', 'الخطة الأسبوعية'], ['session', '⏱', 'الحصة المباشرة'], ['review', '✅', 'المراجعة الأسبوعية'], ['history', '📈', 'السجل والتقدم'], ['data', '💾', 'التصدير والاستيراد'], ['sources', '⚖', 'المصادر والسلامة']];
+  var NAV = [['dash', '', 'الرئيسية'], ['setup', '', 'الإعداد'], ['plan', '', 'الجدول'], ['session', '', 'التمرين'], ['review', '', 'المراجعة'], ['library', '', 'التمارين'], ['more', '', 'المزيد'], ['trainees', '', 'إدارة الملفات'], ['screen', '', 'الفحص الصحي'], ['history', '', 'السجل'], ['data', '', 'النسخ الاحتياطي'], ['sources', '', 'المصادر والسلامة']];
+  var IN_NAV = { dash: 1, plan: 1, session: 1, review: 1, library: 1, more: 1 };
   App.go = function (page, opts) { App.ui.page = page; Object.assign(App.ui, opts || {}); App.render(); var m = App.$('main'); if (m) { m.focus({ preventScroll: true }); window.scrollTo(0, 0); } };
   App.renderStatus = function () {
     var el = App.$('#storeStatus'); if (!el) return; var st = S.status;
@@ -59,7 +60,8 @@
     sel.innerHTML = '<option value="">— اختر المتدرب النشط —</option>' + list.map(function (t) { return '<option value="' + esc(t.id) + '"' + (t.id === App.ui.traineeId ? ' selected' : '') + '>' + esc(t.displayName) + ' · ' + esc(t.id) + '</option>'; }).join('');
   };
   App.render = function () {
-    App.$$('nav.side button').forEach(function (b) { if (b.dataset.page === App.ui.page) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    var navPage = IN_NAV[App.ui.page] ? App.ui.page : App.ui.page === 'setup' ? 'dash' : 'more';
+    App.$$('nav.side button').forEach(function (b) { if (b.dataset.page === navPage) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     App.renderTraineeSelect(); App.renderStatus();
     var v = App.$('#view');
     if (S.status.locked) { App.$$('nav.side button').forEach(function (b) { b.disabled = true; }); v.innerHTML = lockScreen(); var pi = App.$('#unlockPass'); if (pi) pi.focus(); return; }
@@ -67,7 +69,7 @@
     var fn = App.pages[App.ui.page] || App.pages.dash;
     try { v.innerHTML = fn(); } catch (e) { console.error(e); v.innerHTML = '<div class="alert danger"><b>خطأ في عرض الصفحة</b>' + esc(e.message) + '</div>'; }
     if (App.after[App.ui.page]) App.after[App.ui.page]();
-    var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'المدرب العسكري للياقة البدنية v5';
+    var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'مدرب اللياقة البدنية v5';
   };
   App.after = {};
   function lockScreen() {

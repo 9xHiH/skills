@@ -203,3 +203,6 @@ ST-COBRA|mobility2|إطالة الكوبرا|Cobra stretch (prone press-up)|lvl1
 ST-KNEECHEST|mobility2|ضم الركبتين إلى الصدر|Knees-to-chest stretch|lvl1; supine
 ST-SUPTWIST|mobility2|التواء الجذع مستلقياً|Supine spinal twist|lvl1; supine
 ST-NECKSIDE|mobility2|إطالة جانب الرقبة|Side-neck stretch|lvl1; neck
+# ---- Unilateral batch (weak-side training) ----
+PU-SA-WALL|unilateral|ضغط الحائط بذراع واحدة|Single-arm wall push-up|lvl2; eq wall; side
+PH-DOOR-SA|unilateral|سحب إطار الباب بذراع واحدة|Single-arm door-frame row|lvl2; eq wall; side

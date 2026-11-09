@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; connect-src 'none'; font-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
 <title>المدرب العسكري للياقة البدنية v5</title>
-<style>.mc-fig{width:100%;height:auto;display:block;background:var(--fig-bg,#0f2232);border-radius:10px}
+<style id="figcss">.mc-fig{width:100%;height:auto;display:block;background:var(--fig-bg,#0f2232);border-radius:10px}
 .mc-floor{stroke:var(--fig-floor,#5f7a8f);stroke-width:2}
 .mc-prop{stroke:var(--fig-prop,#8aa0b4);stroke-width:3;fill:none;stroke-linecap:round}
 .mc-prop-fill{fill:var(--fig-prop-fill,#3a5166);stroke:var(--fig-prop,#8aa0b4);stroke-width:1.5}
@@ -27,8 +27,8 @@
 .mc-inset-body{fill:var(--fig-ghost,#7fa3c0);fill-opacity:.55}
 .mc-inset-sh{stroke:var(--fig-ghost,#7fa3c0);stroke-width:2}
 .mc-inset-hand{fill:var(--fig,#ffd166)}
-
-:root{
+</style>
+<style>:root{
   --bg:#0a121b;--bg2:#0f1b27;--panel:#132233;--panel2:#18293c;--line:#2a3f55;--text:#e9f0f6;--muted:#a3b4c5;
   --acc:#d6b25e;--acc2:#2bb39b;--acc-ink:#1a1405;--acc2-ink:#04201a;--danger:#ff8a7a;--danger-bg:#3a1d1a;--warn:#f0c264;--warn-bg:#352a16;--ok:#7ddbb6;--ok-bg:#15322a;--info-bg:#162c40;
   --fig:#ffd166;--fig-far:#b48a2c;--fig-bg:#0d1d2b;--fig-floor:#58738a;--fig-prop:#8aa0b4;--fig-prop-fill:#2f465b;--fig-ghost:#7fa3c0;--fig-trace:#5ee0c1;--fig-mat:#2f6e63;
@@ -154,6 +154,43 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
   #print .meta{font-size:8.5pt}
   #print .fb td{height:9mm}
 }
+/* ---------- simple mode (v5.1) ---------- */
+.en{color:var(--muted);font-size:.82em;font-weight:400;unicode-bidi:isolate}
+nav.side small.en{display:block;line-height:1.1}
+.center{text-align:center}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:10px 0 18px}
+button.big{min-height:64px;font-size:1.15rem;padding:14px 18px;border-radius:14px;width:100%}
+form[data-form=setup]>button.big{max-width:420px}
+.q .qt{font-weight:700;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;margin:0;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--bg2);cursor:pointer;font-weight:600;color:var(--text);min-height:44px}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip:has(input:checked),.chip.on{border-color:var(--acc);background:var(--panel2);box-shadow:inset 0 0 0 1px var(--acc)}
+.chip:has(input:focus-visible){outline:3px solid var(--acc2);outline-offset:2px}
+.chip:has(input:disabled){opacity:.45;cursor:not-allowed}
+button.chip{font:inherit}
+.linkbtn{background:none;border:0;color:var(--acc2);padding:0;min-height:0;font-weight:600;text-decoration:underline;cursor:pointer}
+.dico{font-size:1.3rem}
+.day.today{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.pill.wk{border-color:var(--warn);color:var(--warn)}
+.vid a{font-weight:700}
+details.why summary{cursor:pointer;color:var(--muted);font-size:.82rem}
+@media print{
+  #print .p-head{display:flex;justify-content:space-between}
+  #print .pname{font-size:14pt;font-weight:700}
+  #print .en{color:#444!important}
+  #print .exs{display:grid;grid-template-columns:70mm 1fr;gap:8px}
+  #print .pics{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+  #print .pics small{display:block;text-align:center;font-size:8pt}
+  #print .enname{font-weight:700;font-size:11pt}
+  #print .dose{border:1px solid #999;border-radius:4px;padding:2px 6px;margin:3px 0;font-weight:700}
+  #print .exs ol{margin:2px 18px 2px 0;padding:0}
+  #print .vid a{color:#0645ad!important;text-decoration:underline}
+  #print .foot{margin-top:8px;border-top:1px solid #999;padding-top:4px}
+}
+.qt .en,legend .en,h2 .en,.alert .en,label>.en{display:block;margin-top:1px}
+.lead{margin:0 0 10px}.lead .en{display:block}
+button .en,.badge .en{color:inherit}
 </style>
 </head>
 <body>
@@ -3527,6 +3564,55 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
 })();
 
 ;
+/* ==== src/data/ex_unilateral.js ==== */
+/* Single-arm (unilateral) exercises used to train a weaker side. Geometry reuses the PU-WALL / PH-DOOR calibration. */
+(function () {
+  var RAD = Math.PI / 180;
+  function r1(v) { return Math.round(v * 10) / 10; }
+  function D(a) { return [Math.cos(a * RAD), -Math.sin(a * RAD)]; }
+  function body(ax, ay, th, a, f) {
+    var d = D(th), lg = r1(th + 180);
+    return { h: [r1(ax + 66 * d[0]), r1(ay + 66 * d[1])], t: r1(th), a: a, l: [[lg, lg], [lg, lg]], f: f || [-75, -75] };
+  }
+  MCEX.add(
+    {
+      id: 'PU-SA-WALL', ar: 'ضغط الحائط بذراع واحدة', en: 'Single-arm wall push-up', fam: 'push-up', pat: 'push_h', cat: 'upper', role: ['main'], lvl: 2,
+      prim: ['chest', 'triceps'], sec: ['delts_front', 'core', 'obliques'], eq: ['wall'], space: '1×1.5 م أمام حائط', impact: 'none', pos: 'standing', flags: ['wrist', 'shoulder'],
+      dose: { u: 'reps', sets: [1, 3], reps: [5, 12], rest: [30, 60], tempo: '2-0-2', side: true },
+      setup: 'قف مواجهاً للحائط أقرب قليلاً من الضغط العادي على الحائط، وضع كفاً واحدة على الحائط أمام الكتف، واليد الأخرى على الخصر.',
+      steps: ['ابدأ بالذراع الأضعف.', 'شد البطن والألوية حتى يبقى الجسم مستقيماً ولا يدور الجذع.', 'اثنِ المرفق وقرّب الصدر من الحائط ببطء.', 'ادفع بالذراع نفسها حتى تمتد، ثم أكمل العدد وبدّل الذراع.'],
+      breath: 'شهيق أثناء الاقتراب، زفير أثناء الدفع.',
+      errors: ['دوران الجذع نحو الحائط', 'رفع الكتف نحو الأذن', 'الوقوف بعيداً جداً فتصعب الحركة'],
+      stop: ['ألم في الرسغ أو الكتف أو المرفق', 'انزلاق القدمين'],
+      prereq: 'إتقان الضغط على الحائط بالذراعين 3×15 دون ألم.',
+      easier: ['PU-WALL'], harder: ['PU-STAGGER'], subs: ['PU-WALL'], src: ['ACSM-RT', 'NIA'],
+      desc: 'رسم جانبي: الشخص مائل نحو حائط على يمينه، كف واحدة على الحائط والذراع الأخرى على الخصر، يثني المرفق فيقترب الصدر من الحائط ثم يدفع.',
+      anim: { view: 'side', props: [{ k: 'wall', x: 206 }], trace: 'neck', keys: [
+        { p: body(132, 147, 74, [{ p: [206, 52], b: -1 }, [-110, -20]], [-20, -20]), d: 1500, hold: 300, lab: 'اقترب بذراع واحدة — شهيق' },
+        { p: body(132, 147, 65, [{ p: [206, 52], b: -1 }, [-110, -20]], [-20, -20]), d: 1300, hold: 200, lab: 'ادفع — زفير' }
+      ] }
+    },
+    {
+      id: 'PH-DOOR-SA', ar: 'سحب إطار الباب بذراع واحدة', en: 'Single-arm door-frame row', fam: 'row', pat: 'pull_h', cat: 'upper', role: ['main'], lvl: 2,
+      prim: ['upper_back', 'lats'], sec: ['biceps', 'forearms', 'obliques'], eq: ['wall'], space: 'مدخل باب متين', impact: 'none', pos: 'standing', flags: ['grip', 'shoulder', 'elbow'],
+      dose: { u: 'reps', sets: [1, 3], reps: [6, 12], rest: [45, 90], tempo: '2-1-2', side: true },
+      setup: 'قف أمام إطار باب متين (حائط خرساني لا الباب نفسه)، أمسك حافة الإطار بيد واحدة بمستوى الصدر، والقدمان قريبتان من أسفل الإطار.',
+      steps: ['ابدأ بالذراع الأضعف وتأكد أن القبضة لا تنزلق.', 'مل للخلف بجسم مستقيم حتى تمتد الذراع.', 'اسحب الصدر نحو الإطار بثني المرفق دون أن يدور الجذع.', 'عد ببطء، أكمل العدد ثم بدّل اليد.'],
+      breath: 'زفير أثناء السحب، شهيق أثناء الرجوع.',
+      errors: ['السحب من باب مفتوح أو مقبض', 'دوران الجذع بدل السحب بالظهر', 'الميل أكثر من القدرة على التحكم'],
+      stop: ['أي حركة من الإطار أو انزلاق اليد — توقف فوراً', 'ألم في المرفق أو الكتف'],
+      prereq: 'إتقان سحب إطار الباب بالذراعين 3×12 بتحكم.',
+      easier: ['PH-DOOR'], harder: ['PH-TABLE'], subs: ['PH-TOWEL'], src: ['ACSM-RT'],
+      desc: 'رسم جانبي: الشخص يمسك إطار الباب بيد واحدة والأخرى بجانب الجسم، يميل للخلف بجسم مستقيم ثم يسحب صدره نحو الإطار.',
+      anim: { view: 'side', props: [{ k: 'wall', x: 190 }], trace: 'neck', keys: [
+        { p: body(178, 149, 106, [{ p: [190, 62], b: -1 }, [-95, -85]], [0, 0]), d: 1300, hold: 300, lab: 'اسحب بيد واحدة — زفير' },
+        { p: body(178, 149, 92, [{ p: [190, 62], b: -1 }, [-80, -80]], [0, 0]), d: 1600, hold: 500, lab: 'عد ببطء — شهيق' }
+      ] }
+    }
+  );
+})();
+
+;
 /* ==== src/data/ex_upper.js ==== */
 /* Upper-body exercises: push-up variations, dips, rows, scapular work, hangs and pull-up progressions.
  * Poses face RIGHT (x grows forward). Small geometry helpers below build straight-body poses
@@ -4697,42 +4783,36 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
  * 'refer' (do-not-auto-prescribe / refer). DOM-free. */
 (function (root) {
   'use strict';
-  var VERSION = 'SCR-5.0.0';
-  var YN = [['no', 'لا'], ['yes', 'نعم'], ['unsure', 'غير متأكد']];
-  var AREAS = [['shoulder', 'الكتف'], ['elbow', 'المرفق'], ['wrist', 'الرسغ/اليد'], ['neck', 'الرقبة'], ['lowback', 'أسفل الظهر'], ['hip', 'الورك'], ['knee', 'الركبة'], ['ankle', 'الكاحل/القدم']];
+  var VERSION = 'SCR-5.1.0';
+  /* Bilingual answer labels: [value, Arabic, English] */
+  var YN = [['no', 'لا', 'No'], ['yes', 'نعم', 'Yes'], ['unsure', 'لست متأكداً', 'Not sure']];
+  var AREAS = [['shoulder', 'الكتف', 'Shoulder'], ['elbow', 'المرفق', 'Elbow'], ['wrist', 'الرسغ/اليد', 'Wrist/hand'], ['neck', 'الرقبة', 'Neck'], ['lowback', 'أسفل الظهر', 'Lower back'], ['hip', 'الورك', 'Hip'], ['knee', 'الركبة', 'Knee'], ['ankle', 'الكاحل/القدم', 'Ankle/foot']];
   var notMale = function (a, t) { return t && t.sex !== 'male'; };
   var preg = function (a) { return a.pp_status === 'pregnant'; };
   var post = function (a) { return a.pp_status === 'postpartum'; };
 
-  /* topic: maps the question to its source topic; custom: wording written for this app */
+  /* Short, plain, bilingual questions (custom wording — NOT the PAR-Q+). Topic = source topic each question covers. */
   var Q = [
-    { id: 'cv_dx', sec: 'عام', type: 'yn', text: 'هل أخبرك طبيب أو مختص صحي بأن لديك مرضاً في القلب أو ارتفاعاً في ضغط الدم؟', topic: 'PAR-Q+ محور 1؛ ACSM مرض قلبي وعائي معروف', src: ['PARQ', 'RIEBE2015'] },
-    { id: 'chest', sec: 'عام', type: 'yn', text: 'هل تشعر بألم أو ضغط أو انزعاج في الصدر أثناء الراحة أو الأنشطة اليومية أو الجهد البدني؟', topic: 'PAR-Q+ محور 2؛ أعراض ACSM', src: ['PARQ', 'RIEBE2015', 'AHA-WARN'], red: true },
-    { id: 'dizzy', sec: 'عام', type: 'yn', text: 'خلال آخر 12 شهراً، هل فقدت توازنك بسبب دوخة أو فقدت الوعي؟ (لا تُحتسب الدوخة الناتجة عن التنفس السريع أثناء جهد شديد)', topic: 'PAR-Q+ محور 3؛ أعراض ACSM', src: ['PARQ', 'RIEBE2015'], red: true },
-    { id: 'breath', sec: 'عام', type: 'yn', text: 'هل تعاني من ضيق نفس غير معتاد وأنت مرتاح أو مع جهد خفيف (مثل المشي الهادئ أو صعود بضع درجات)؟', topic: 'أعراض ACSM', src: ['RIEBE2015'], red: true },
-    { id: 'palp', sec: 'عام', type: 'yn', text: 'هل تشعر بخفقان أو تسارع غير طبيعي في ضربات القلب دون سبب واضح؟', topic: 'أعراض ACSM', src: ['RIEBE2015'], red: true },
-    { id: 'legs', sec: 'عام', type: 'yn', text: 'هل لديك تورم غير مفسَّر في الكاحلين، أو ألم في الساق عند المشي يزول بالراحة؟', topic: 'أعراض ACSM', src: ['RIEBE2015'], red: true },
-    { id: 'chronic', sec: 'عام', type: 'yn', text: 'هل لديك حالة مزمنة أخرى مشخّصة (مثل السكري، مرض الكلى، الربو أو مرض رئوي، الصرع، السرطان)؟', topic: 'PAR-Q+ محور 4؛ ACSM مرض استقلابي/كلوي', src: ['PARQ', 'RIEBE2015'] },
-    { id: 'chronic_type', sec: 'عام', type: 'multi', when: function (a) { return a.chronic === 'yes'; }, text: 'حدّد نوع الحالة (لأغراض القاعدة فقط، دون تفاصيل طبية):', opts: [['metabolic', 'سكري أو حالة استقلابية'], ['renal', 'مرض كلوي'], ['resp', 'ربو أو مرض رئوي'], ['neuro', 'صرع أو حالة عصبية'], ['cancer', 'سرطان حالي أو حديث'], ['other', 'أخرى']], src: ['RIEBE2015'] },
-    { id: 'meds', sec: 'عام', type: 'yn', text: 'هل تتناول حالياً أدوية موصوفة لحالة مزمنة؟', topic: 'PAR-Q+ محور 5', src: ['PARQ'] },
-    { id: 'msk', sec: 'عام', type: 'yn', text: 'هل لديك حالياً أو خلال آخر 12 شهراً مشكلة في العظام أو المفاصل أو العضلات قد تتفاقم بالنشاط البدني؟', topic: 'PAR-Q+ محور 6', src: ['PARQ'] },
-    { id: 'msk_areas', sec: 'عام', type: 'multi', when: function (a) { return a.msk === 'yes'; }, text: 'أين؟', opts: AREAS },
-    { id: 'msk_acute', sec: 'عام', type: 'yn', when: function (a) { return a.msk === 'yes'; }, text: 'هل هي إصابة حادة حديثة (أقل من 6 أسابيع)، أو جراحة خلال آخر 6 أشهر، أو ألم يزداد سوءاً؟', src: ['LOCAL'] },
-    { id: 'msk_pain', sec: 'عام', type: 'num', min: 0, max: 10, when: function (a) { return a.msk === 'yes'; }, text: 'شدة الألم الآن أثناء الراحة (0 = لا ألم، 10 = أسوأ ألم يمكن تخيله):', src: ['NPRS'] },
-    { id: 'supervised', sec: 'عام', type: 'yn', text: 'هل أخبرك طبيب بأن تمارس النشاط البدني تحت إشراف طبي فقط؟', topic: 'PAR-Q+ محور 7', src: ['PARQ'] },
-    { id: 'acute_ill', sec: 'عام', type: 'yn', text: 'هل أنت مريض حالياً بمرض مؤقت (حمى، عدوى، إنفلونزا) أو تتعافى منه؟', src: ['LOCAL'] },
-    { id: 'active', sec: 'عام', type: 'yn', text: 'هل تمارس نشاطاً بدنياً مخططاً بشدة متوسطة على الأقل 30 دقيقة، 3 أيام أسبوعياً، منذ 3 أشهر أو أكثر؟', topic: 'ACSM: المشاركة الحالية في التمرين', src: ['RIEBE2015'] },
-    /* pregnancy / postpartum gate: asked of anyone not recorded as male; never assumed from sex */
-    { id: 'pp_status', sec: 'الحمل وما بعد الولادة', type: 'select', when: notMale, text: 'هل ينطبق عليك أحد الآتي؟', opts: [['none', 'لا ينطبق'], ['pregnant', 'حمل حالي'], ['postpartum', 'ولادة خلال آخر 12 شهراً'], ['decline', 'أفضّل عدم الإجابة']], src: ['ACOG804'] },
-    { id: 'preg_weeks', sec: 'الحمل', type: 'num', min: 1, max: 42, when: preg, text: 'عمر الحمل التقريبي بالأسابيع:', src: ['ACOG804'] },
-    { id: 'preg_provider', sec: 'الحمل', type: 'yn', when: preg, text: 'هل راجعت مقدم رعاية الحمل وأقرّ ممارسة التمرين في هذا الحمل؟', src: ['ACOG804'] },
-    { id: 'preg_abs', sec: 'الحمل', type: 'multi', when: preg, text: 'هل أخبرك مقدم الرعاية بأي من الآتي؟ (اختر ما ينطبق)', opts: [['heart_lung', 'مرض قلبي مؤثر أو مرض رئوي تقييدي'], ['cervix', 'قصور عنق الرحم أو ربط عنق الرحم'], ['multiple', 'حمل متعدد مع خطر ولادة مبكرة'], ['bleeding', 'نزيف مستمر في الثلث الثاني أو الثالث'], ['previa', 'مشيمة منزاحة بعد 26 أسبوعاً'], ['preterm', 'مخاض مبكر في هذا الحمل'], ['rupture', 'تمزق الأغشية'], ['preeclampsia', 'تسمم الحمل أو ارتفاع ضغط الحمل'], ['anemia', 'فقر دم شديد']], src: ['ACOG804'] },
-    { id: 'preg_rel', sec: 'الحمل', type: 'multi', when: preg, text: 'هل لديك أي من الآتي؟ (اختر ما ينطبق)', opts: [['diabetes', 'سكري غير مضبوط'], ['htn', 'ارتفاع ضغط غير مضبوط'], ['seizure', 'صرع غير مضبوط'], ['thyroid', 'فرط نشاط الغدة الدرقية'], ['growth', 'تأخر نمو الجنين في هذا الحمل'], ['ortho', 'قيود عظمية/مفصلية'], ['smoker', 'تدخين شديد'], ['sedentary', 'خمول شديد قبل الحمل']], src: ['ACOG804'] },
-    { id: 'preg_warn', sec: 'الحمل', type: 'multi', when: preg, text: 'هل تعانين حالياً من أي من علامات الإنذار؟', opts: [['bleed', 'نزيف مهبلي'], ['fluid', 'تسرب سوائل'], ['contractions', 'انقباضات منتظمة مؤلمة'], ['dyspnea', 'ضيق نفس قبل الجهد'], ['dizzy', 'دوخة'], ['headache', 'صداع شديد'], ['chest', 'ألم صدر'], ['weak', 'ضعف عضلي يؤثر على التوازن'], ['calf', 'ألم أو تورم في ربلة الساق']], src: ['ACOG804'] },
-    { id: 'pp_weeks', sec: 'ما بعد الولادة', type: 'num', min: 0, max: 60, when: post, text: 'كم أسبوعاً مضى على الولادة؟', src: ['GOOM2019'] },
-    { id: 'pp_check', sec: 'ما بعد الولادة', type: 'yn', when: post, text: 'هل أجريتِ فحص ما بعد الولادة وأقرّ مقدم الرعاية العودة التدريجية للتمرين؟', src: ['ACOG804'] },
-    { id: 'pp_pelvic', sec: 'ما بعد الولادة', type: 'multi', when: post, text: 'هل تلاحظين أياً من الآتي؟', opts: [['leak', 'تسرب بول أو غازات أو براز'], ['urgency', 'إلحاح بولي يصعب تأجيله'], ['heavy', 'ثقل أو ضغط أو بروز في منطقة الحوض'], ['pain', 'ألم في الحوض أو أسفل الظهر'], ['doming', 'بروز/تقبب في خط منتصف البطن عند الجهد']], src: ['GOOM2019', 'NICE-NG210'] },
-    { id: 'pp_warn', sec: 'ما بعد الولادة', type: 'yn', when: post, text: 'هل يوجد نزيف يزداد، أو ألم في الصدر، أو ألم/تورم في ربلة الساق، أو ضيق نفس مفاجئ؟', src: ['ACOG804'], red: true }
+    { id: 'cv_dx', sec: 'health', type: 'yn', text: 'هل قال لك طبيب إن لديك مرضاً في القلب أو ضغطاً مرتفعاً؟', en: 'Has a doctor said you have heart disease or high blood pressure?', topic: 'PAR-Q+ 1; ACSM known CV disease', src: ['PARQ', 'RIEBE2015'] },
+    { id: 'chest', sec: 'health', type: 'yn', text: 'هل تشعر بألم أو ضغط في الصدر وقت الراحة أو عند الجهد؟', en: 'Do you get chest pain or pressure at rest or during effort?', topic: 'PAR-Q+ 2; ACSM symptoms', src: ['PARQ', 'RIEBE2015', 'AHA-WARN'], red: true },
+    { id: 'dizzy', sec: 'health', type: 'yn', text: 'هل أصابتك دوخة شديدة أفقدتك التوازن، أو أُغمي عليك خلال السنة الماضية؟', en: 'In the past year, have you had severe dizziness causing loss of balance, or fainted?', topic: 'PAR-Q+ 3; ACSM symptoms', src: ['PARQ', 'RIEBE2015'], red: true },
+    { id: 'breath', sec: 'health', type: 'yn', text: 'مع جهد خفيف: هل يضيق نفسك بشكل غير طبيعي، أو يخفق قلبك بقوة، أو تتورم كاحلاك؟', en: 'With light effort: unusual shortness of breath, a pounding/irregular heartbeat, or swollen ankles?', topic: 'ACSM symptoms', src: ['RIEBE2015'], red: true },
+    { id: 'chronic', sec: 'health', type: 'yn', text: 'هل لديك مرض مزمن (سكري، ربو، كلى…) أو تأخذ دواءً يومياً بوصفة طبية؟', en: 'Do you have a chronic illness (diabetes, asthma, kidney…) or take a daily prescription medicine?', topic: 'PAR-Q+ 4–5; ACSM metabolic/renal', src: ['PARQ', 'RIEBE2015'] },
+    { id: 'msk', sec: 'health', type: 'yn', text: 'هل لديك إصابة أو ألم حالي في مفصل أو عضلة أو في الظهر؟', en: 'Do you have a current injury or pain in a joint, muscle or your back?', topic: 'PAR-Q+ 6', src: ['PARQ'] },
+    { id: 'msk_areas', sec: 'health', type: 'multi', opts: AREAS, when: function (a) { return a.msk === 'yes'; }, text: 'أين؟', en: 'Where?' },
+    { id: 'msk_acute', sec: 'health', type: 'yn', when: function (a) { return a.msk === 'yes'; }, text: 'هل الألم شديد، أو الإصابة حديثة (أقل من 6 أسابيع)، أو أجريت عملية خلال 6 أشهر؟', en: 'Is the pain severe, the injury recent (under 6 weeks), or did you have surgery in the last 6 months?', src: ['LOCAL'] },
+    { id: 'supervised', sec: 'health', type: 'yn', text: 'هل منعك طبيب من الرياضة، أو طلب أن تتمرن تحت إشراف طبي فقط؟', en: 'Has a doctor told you not to exercise, or only under medical supervision?', topic: 'PAR-Q+ 7', src: ['PARQ'] },
+    { id: 'acute_ill', sec: 'health', type: 'yn', text: 'هل أنت مريض الآن (حمى، إنفلونزا، التهاب)؟', en: 'Are you sick right now (fever, flu, infection)?', src: ['LOCAL'] },
+    { id: 'active', sec: 'fitness', type: 'yn', text: 'هل تتمرن بانتظام: 30 دقيقة، 3 أيام في الأسبوع، منذ 3 أشهر أو أكثر؟', en: 'Do you exercise regularly: 30 min, 3 days a week, for 3+ months?', topic: 'ACSM current exercise participation', src: ['RIEBE2015'] },
+    { id: 'pp_status', sec: 'women', type: 'select', when: notMale, text: 'هل أنتِ حامل الآن أو ولدتِ خلال آخر 12 شهراً؟', en: 'Are you pregnant now, or gave birth in the last 12 months?', opts: [['none', 'لا', 'No'], ['pregnant', 'حامل', 'Pregnant'], ['postpartum', 'ولادة خلال 12 شهراً', 'Gave birth (last 12 months)']], src: ['ACOG804'] },
+    { id: 'preg_weeks', sec: 'women', type: 'num', min: 1, max: 42, when: preg, text: 'كم أسبوعاً عمر الحمل؟', en: 'How many weeks pregnant?', src: ['ACOG804'] },
+    { id: 'preg_provider', sec: 'women', type: 'yn', when: preg, text: 'هل وافق طبيب الحمل على ممارستك للرياضة؟', en: 'Has your pregnancy doctor approved exercise?', src: ['ACOG804'] },
+    { id: 'preg_risk', sec: 'women', type: 'yn', when: preg, text: 'هل أخبرك الطبيب بمشكلة في الحمل تمنع الرياضة أو تحتاج حذراً خاصاً؟', en: 'Has your doctor mentioned a pregnancy problem that limits exercise?', src: ['ACOG804'] },
+    { id: 'preg_warn', sec: 'women', type: 'yn', when: preg, text: 'هل لديك الآن نزيف، أو تسرب سوائل، أو انقباضات منتظمة، أو صداع شديد، أو ألم وتورم في الساق؟', en: 'Right now: bleeding, fluid leak, regular contractions, severe headache, or calf pain/swelling?', src: ['ACOG804'], red: true },
+    { id: 'pp_weeks', sec: 'women', type: 'num', min: 0, max: 60, when: post, text: 'كم أسبوعاً مضى على الولادة؟', en: 'How many weeks since giving birth?', src: ['GOOM2019'] },
+    { id: 'pp_check', sec: 'women', type: 'yn', when: post, text: 'هل أجريتِ فحص ما بعد الولادة ووافق الطبيب على العودة للرياضة؟', en: 'Did you have your postnatal check and get approval to return to exercise?', src: ['ACOG804'] },
+    { id: 'pp_pelvic', sec: 'women', type: 'yn', when: post, text: 'هل يحدث تسرب بول، أو ثقل في الحوض، أو بروز في وسط البطن عند الجهد؟', en: 'Any urine leakage, pelvic heaviness, or a bulge in the middle of the tummy with effort?', src: ['GOOM2019', 'NICE-NG210'] },
+    { id: 'pp_warn', sec: 'women', type: 'yn', when: post, text: 'هل لديك نزيف يزداد، أو ألم في الصدر، أو ألم وتورم في الساق، أو ضيق نفس مفاجئ؟', en: 'Increasing bleeding, chest pain, calf pain/swelling, or sudden breathlessness?', src: ['ACOG804'], red: true }
   ];
 
   function visible(answers, trainee) { return Q.filter(function (q) { return !q.when || q.when(answers, trainee); }); }
@@ -4752,7 +4832,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     if (!isFinite(age) || !t.age) R('more_info', 'age_missing', 'العمر غير مسجل في ملف المتدرب.', ['LOCAL']);
     else if (age < 18) R('refer', 'minor', 'العمر أقل من 18 عاماً: هذا التطبيق مصمم للبالغين ولا يُصدر خططاً تلقائية للقاصرين.', ['LOCAL']);
 
-    var symptomMap = { chest: 'ألم أو انزعاج في الصدر', dizzy: 'دوخة مع فقدان توازن أو فقدان وعي', breath: 'ضيق نفس غير معتاد', palp: 'خفقان غير طبيعي', legs: 'تورم الكاحلين أو ألم الساق عند المشي' };
+    var symptomMap = { chest: 'ألم أو انزعاج في الصدر', dizzy: 'دوخة مع فقدان توازن أو فقدان وعي', breath: 'ضيق نفس غير معتاد أو خفقان أو تورم الكاحلين مع جهد خفيف' };
     var symptoms = Object.keys(symptomMap).filter(function (k) { return answers[k] === 'yes'; });
     var unsureSym = Object.keys(symptomMap).filter(function (k) { return answers[k] === 'unsure'; });
     symptoms.forEach(function (k) { R('refer', 'sym_' + k, 'عرض إنذار: ' + symptomMap[k] + '. لا تُصدر خطة تلقائية؛ يلزم تقييم طبي قبل أي جهد.', ['RIEBE2015', 'PARQ', 'AHA-WARN']); });
@@ -4762,14 +4842,13 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     if (answers.supervised === 'yes') { R('refer', 'supervised', 'طُلب إشراف طبي على النشاط: لا يمكن للتطبيق توفير ذلك، لذا لا تُصدر خطة تلقائية.', ['PARQ']); refs.push('برنامج تحت إشراف طبي/تأهيلي.'); }
     else if (answers.supervised === 'unsure') R('more_info', 'supervised_unsure', 'غير مؤكد إن كان مطلوباً إشراف طبي.', ['PARQ']);
 
-    var knownDisease = answers.cv_dx === 'yes' || (Array.isArray(answers.chronic_type) && (answers.chronic_type.indexOf('metabolic') >= 0 || answers.chronic_type.indexOf('renal') >= 0));
+    var knownDisease = answers.cv_dx === 'yes';
     if (knownDisease) {
       if (answers.active === 'yes' && !symptoms.length) { R('cleared_limited', 'dx_active', 'مرض قلبي/استقلابي/كلوي معروف دون أعراض مع نشاط منتظم: يُسمح بشدة متوسطة فقط، ويلزم تصريح قبل الشدة العالية.', ['RIEBE2015']); maxLevel = Math.min(maxLevel, 2); flags.impact = 1; }
       else R('more_info', 'dx_inactive', 'مرض قلبي/استقلابي/كلوي معروف مع عدم انتظام النشاط: يوصى بتصريح طبي قبل البدء.', ['RIEBE2015']);
     }
-    ['cv_dx', 'chronic', 'meds', 'msk', 'active', 'acute_ill'].forEach(function (k) { if (answers[k] === 'unsure') R('more_info', 'unsure_' + k, 'إجابة "غير متأكد" تحتاج توضيحاً.', ['LOCAL']); });
-    if (answers.chronic === 'yes' && !knownDisease) R('more_info', 'chronic', 'حالة مزمنة أخرى: تحتاج متابعة (يقابل صفحات المتابعة في PAR-Q+) أو تصريح مختص.', ['PARQ', 'EPARMEDX']);
-    if (answers.meds === 'yes') R('more_info', 'meds', 'أدوية لحالة مزمنة: تحتاج متابعة أو تصريح مختص.', ['PARQ', 'EPARMEDX']);
+    ['cv_dx', 'chronic', 'msk', 'active', 'acute_ill', 'msk_acute'].forEach(function (k) { if (answers[k] === 'unsure') R('more_info', 'unsure_' + k, 'إجابة "غير متأكد" تحتاج توضيحاً.', ['LOCAL']); });
+    if (answers.chronic === 'yes') R('more_info', 'chronic', 'مرض مزمن أو دواء يومي: يلزم رأي الطبيب (تصريح موثق) قبل البدء.', ['PARQ', 'EPARMEDX', 'RIEBE2015']);
     if (answers.acute_ill === 'yes') R('more_info', 'acute_ill', 'مرض مؤقت حالي: أجّل البدء حتى التعافي ثم أعد الفحص.', ['LOCAL']);
 
     if (answers.msk === 'yes') {
@@ -4777,9 +4856,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
       areas.forEach(function (a) { flags[a] = 1; });
       if (areas.indexOf('shoulder') >= 0) flags.overhead = 1;
       if (areas.indexOf('wrist') >= 0) flags.grip = 1;
-      var pain = Number(answers.msk_pain);
       if (answers.msk_acute === 'yes') R('more_info', 'msk_acute', 'إصابة حادة/جراحة حديثة/ألم متزايد: يلزم تصريح مختص (طبيب أو أخصائي علاج طبيعي) مع تحديد القيود.', ['PARQ', 'LOCAL']);
-      else if (isFinite(pain) && pain >= 4) R('more_info', 'msk_pain', 'ألم أثناء الراحة بدرجة ' + pain + '/10: يلزم تقييم مختص قبل التمرين.', ['NPRS', 'LOCAL']);
       else R('cleared_limited', 'msk_limits', 'مشكلة عضلية هيكلية مستقرة: تُستبعد التمارين التي تحمّل المنطقة/المناطق المحددة.', ['PARQ', 'LOCAL']);
     }
 
@@ -4787,12 +4864,9 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     if (answers.pp_status === 'pregnant') {
       pathway = 'pregnancy';
       var wk = Number(answers.preg_weeks);
-      var warn = Array.isArray(answers.preg_warn) ? answers.preg_warn : [];
-      var abs = Array.isArray(answers.preg_abs) ? answers.preg_abs : [];
-      var rel = Array.isArray(answers.preg_rel) ? answers.preg_rel : [];
-      if (warn.length) { R('refer', 'preg_warn', 'علامة إنذار في الحمل: أوقفي التمرين وتواصلي مع مقدم رعاية الحمل.', ['ACOG804']); refs.push('مقدم رعاية الحمل فوراً.'); }
-      if (abs.length) { R('refer', 'preg_abs', 'مانع مطلق للتمرين الهوائي في الحمل حسب ACOG: لا تُصدر خطة.', ['ACOG804']); refs.push('مقدم رعاية الحمل.'); }
-      if (rel.length) R('more_info', 'preg_rel', 'مانع نسبي: يلزم تصريح موثق من مقدم رعاية الحمل يحدد المسموح.', ['ACOG804']);
+      if (answers.preg_warn === 'yes') { R('refer', 'preg_warn', 'علامة إنذار في الحمل: أوقفي التمرين وتواصلي مع طبيب الحمل فوراً.', ['ACOG804']); refs.push('طبيب الحمل فوراً.'); }
+      if (answers.preg_risk === 'yes') R('more_info', 'preg_risk', 'مشكلة في الحمل ذكرها الطبيب: يلزم تصريح موثق من طبيب الحمل يحدد المسموح.', ['ACOG804']);
+      if (answers.preg_risk === 'unsure' || answers.preg_warn === 'unsure') R('more_info', 'preg_unsure', 'إجابة غير مؤكدة عن الحمل: راجعي الطبيب.', ['ACOG804']);
       if (answers.preg_provider !== 'yes') R('more_info', 'preg_provider', 'يلزم إقرار مقدم رعاية الحمل بممارسة التمرين قبل إصدار خطة.', ['ACOG804']);
       flags.impact = 1; flags.inversion = 1; flags.iap = 1; flags.isometric_long = 1; flags.balance = 1;
       if (wk >= 20) flags.supine = 1;
@@ -4801,7 +4875,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
       R('cleared_limited', 'preg_rules', 'مسار الحمل: لا قفز، لا انقلاب، لا ثبات طويل أو ضغط بطني مرتفع، لا تمارين توازن عالية الخطورة' + (wk >= 20 ? '، ولا استلقاء على الظهر (≥ 20 أسبوعاً)' : '') + (wk >= 12 ? '، ولا انبطاح على البطن (قاعدة محلية ≥ 12 أسبوعاً)' : '') + '. الشدة: يمكن التحدث أثناء الجهد.', ['ACOG804', 'LOCAL']);
     } else if (answers.pp_status === 'postpartum') {
       pathway = 'postpartum';
-      var w = Number(answers.pp_weeks), pel = Array.isArray(answers.pp_pelvic) ? answers.pp_pelvic : [];
+      var w = Number(answers.pp_weeks), pel = answers.pp_pelvic === 'yes' ? ['yes'] : [];
       if (answers.pp_warn === 'yes') { R('refer', 'pp_warn', 'علامة إنذار بعد الولادة: تواصلي مع مقدم الرعاية فوراً.', ['ACOG804']); refs.push('مقدم الرعاية فوراً.'); }
       if (answers.pp_check !== 'yes') R('more_info', 'pp_check', 'يلزم فحص ما بعد الولادة وإقرار مقدم الرعاية بالعودة التدريجية.', ['ACOG804']);
       if (pel.length) { R('cleared_limited', 'pp_pelvic', 'أعراض قاع الحوض: يوصى بالإحالة لأخصائي/ة علاج طبيعي لصحة الحوض؛ يُمنع القفز والضغط البطني المرتفع.', ['GOOM2019', 'NICE-NG210']); refs.push('أخصائي/ة علاج طبيعي لصحة الحوض.'); flags.impact = 1; flags.iap = 1; }
@@ -4883,6 +4957,19 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     return { levels: levels, notes: notes, flags: flags, status: status, messages: msgs, version: BASELINE_VERSION };
   }
 
+  /* Quick self-reported fitness (ranges chosen by the trainee — not a test) → level per movement pattern. */
+  var QUICK = {
+    push: { '0': 1, '1-5': 1, '6-15': 2, '16+': 3 }, squat: { '<10': 1, '10-20': 2, '20+': 3 }, plank: { '<20': 1, '20-45': 2, '45+': 3 },
+    pull: { 'none': 1, '0': 1, '1-3': 2, '4+': 3 }, walk: { '<10': 1, '10-30': 2, '30+': 2 }
+  };
+  var WALK_MIN = { '<10': 10, '10-30': 20, '30+': 30 };
+  function quickLevels(f, t) {
+    var L = { push: QUICK.push[f.push] || 1, squat: QUICK.squat[f.squat] || 1, core: QUICK.plank[f.plank] || 1, pull: QUICK.pull[f.pull] || 1, aerobic: QUICK.walk[f.walk] || 1, balance: 2 };
+    if (f.active !== 'yes') Object.keys(L).forEach(function (k) { L[k] = Math.min(L[k], 2); });
+    if (Number(t && t.age) >= 65) L.balance = 1;
+    return L;
+  }
+
   /* ---------- helpers ---------- */
   function hash(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h; }
   function addDays(iso, n) { var d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
@@ -4899,9 +4986,11 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     (extraFlags || []).forEach(function (f) { flags[f] = 1; });
     var age = Number(trainee.age);
     if (age >= 65) flags.impact = 1; /* local conservative rule */
+    var hcm = Number(trainee.heightCm), wkg = Number(trainee.weightKg), bmi = hcm > 0 && wkg > 0 ? wkg / Math.pow(hcm / 100, 2) : null;
+    if (bmi && bmi >= 30) flags.impact = 1; /* local conservative rule: protect joints, favour walking and low-impact work */
     var maxLevel = (screening && screening.outcome && screening.outcome.exclusions && screening.outcome.exclusions.maxLevel) || 3;
     var eq = {}; (trainee.equipment || []).forEach(function (e) { eq[e] = 1; });
-    return { flags: flags, maxLevel: maxLevel, eq: eq, levels: (baseline && baseline.result && baseline.result.levels) || {}, avoid: trainee.avoid || [], pathway: screening && screening.outcome && screening.outcome.pathway };
+    return { flags: flags, maxLevel: maxLevel, eq: eq, levels: (baseline && baseline.result && baseline.result.levels) || {}, avoid: trainee.avoid || [], pathway: screening && screening.outcome && screening.outcome.pathway, bmi: bmi };
   }
   /* Is exercise allowed? returns '' if allowed, or the Arabic reason it is excluded. */
   function excludedBy(ex, ctx, opts) {
@@ -4932,6 +5021,34 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     A: [{ k: 'A1', p: ['squat'] }, { k: 'A2', p: ['push_h'] }, { k: 'A3', p: ['pull_h', 'pull_v', 'scap'] }, { k: 'A4', p: ['core_ext'] }, { k: 'A5', p: ['lunge', 'calf'] }, { k: 'A6', p: ['core_lat', 'core_rot'] }, { k: 'A7', p: ['cardio', 'locomotion', 'plyo'], cond: 1 }],
     B: [{ k: 'B1', p: ['hinge', 'bridge'] }, { k: 'B2', p: ['push_v', 'push_h'] }, { k: 'B3', p: ['pull_h', 'pull_v', 'scap', 'back_ext'] }, { k: 'B4', p: ['core_flex', 'core_rot', 'back_ext'] }, { k: 'B5', p: ['lunge', 'hip_abd'] }, { k: 'B6', p: ['core_ext', 'core_lat'] }, { k: 'B7', p: ['cardio', 'locomotion', 'plyo'], cond: 1 }]
   };
+  /* Weak-side (unilateral) and focus-area extras. ids are in priority order; only allowed ones are used. */
+  var WEAK = { arm: ['PU-SA-WALL', 'PH-DOOR-SA', 'PU-STAGGER'], leg: ['LU-REV-AS', 'LU-SPLIT', 'ST-LOW', 'BR-SL', 'CF-SL', 'LU-REV', 'LU-FWD', 'HG-SLDL', 'ST-HIGH', 'LU-BULG', 'SQ-PISTOL-BOX'] };
+  var FOCUS = {
+    core: { ar: 'البطن والجذع', en: 'Core', p: ['core_ext', 'core_lat', 'core_rot'] },
+    lowback: { ar: 'أسفل الظهر', en: 'Lower back', ids: ['CR-BIRDDOG', 'BR-GLUTE', 'BE-SUPERMAN', 'HG-HIPHINGE', 'CR-BIRDDOG-ELB', 'BR-HOLD'] },
+    shoulders: { ar: 'الكتفان وأعلى الظهر', en: 'Shoulders & upper back', ids: ['SC-WALLANGEL', 'SC-PRONE-Y', 'SC-PRONE-T', 'SC-PRONE-W', 'PH-PRONE-ROW', 'SC-RETRACT', 'PU-SCAP-W'] },
+    arms: { ar: 'الذراعان', en: 'Arms', ids: ['PU-INCL-CLOSE', 'PU-KNEE-CLOSE', 'PU-CLOSE', 'DP-CHAIR', 'PV-CHIN', 'PH-TOWEL'] },
+    legs: { ar: 'الساقان والأرداف', en: 'Legs & glutes', p: ['squat', 'lunge', 'bridge', 'calf'] },
+    grip: { ar: 'قوة القبضة', en: 'Grip', ids: ['PV-DEADHANG', 'PV-FLEXHANG', 'PH-TOWEL'] },
+    balance: { ar: 'التوازن', en: 'Balance', p: ['balance'] }
+  };
+  function extrasFor(type, trainee) {
+    var out = [], wa = trainee.weakArm && trainee.weakArm !== 'none', wl = trainee.weakLeg && trainee.weakLeg !== 'none';
+    if (wa && (!wl || type === 'A')) out.push({ k: 'WKA', ids: WEAK.arm, side: 1, weak: { limb: 'arm', side: trainee.weakArm } });
+    if (wl && (!wa || type === 'B')) out.push({ k: 'WKL', ids: WEAK.leg, side: 1, weak: { limb: 'leg', side: trainee.weakLeg } });
+    (trainee.focus || []).slice(0, 2).forEach(function (a) { var f = FOCUS[a]; if (f) out.push({ k: 'F-' + a, ids: f.ids, p: f.p, anyRole: 1, focus: a }); });
+    return out;
+  }
+  function slotLabel(sl) { return sl.weak ? 'الجانب الأضعف' : sl.focus ? FOCUS[sl.focus].ar : sl.p.map(function (x) { return EX().PATTERN[x]; }).join('/'); }
+  function slotAccepts(sl, e) { return sl.ids ? sl.ids.indexOf(e.id) >= 0 && (!sl.side || e.dose.side) : sl.p.indexOf(e.pat) >= 0; }
+  function walkMinutesFor(t, prevPlan, dec) {
+    var prev = null;
+    if (prevPlan && prevPlan.days) prevPlan.days.forEach(function (d) { (d.recovery || []).forEach(function (r) { if (r.walk) prev = r.target / 60; }); });
+    var m = prev || Math.max(10, Math.min(40, Math.round((WALK_MIN[t.walkRange] || 20) * 0.8 / 5) * 5));
+    if (prev && dec && dec.walk === 'up') m = Math.min(45, m + 5);
+    if (prev && dec && dec.walk === 'down') m = Math.max(10, m - 5);
+    return m;
+  }
   function slotsFor(type, trainee, minutes) {
     var n = minutes <= 20 ? 4 : minutes <= 30 ? 5 : minutes <= 45 ? 6 : 7, goal = trainee.goal;
     if (goal === 'mobility') n = Math.max(4, n - 1);
@@ -4997,7 +5114,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     var assign = {};
     function pick(slot) {
       if (assign[slot.k]) return assign[slot.k];
-      var cands = allowedList(ctx, function (e) { return e.role.indexOf('main') >= 0 && slot.p.indexOf(e.pat) >= 0; });
+      var cands = allowedList(ctx, function (e) { return (slot.anyRole || slot.ids || e.role.indexOf('main') >= 0) && slotAccepts(slot, e); });
       var prev = prevBySlot[slot.k], act = prev ? actions[slot.k + '|' + prev.exId] : null, out = null, reason = [];
       var inC = function (id) { return cands.filter(function (c) { return c.id === id; })[0]; };
       if (prev && inC(prev.exId)) {
@@ -5010,7 +5127,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
           if (step > 0) { step--; reason.push('تخفيف خطوة جرعة: ' + act.why); }
           else { var ez = (ex.easier || []).map(function (id) { return EX().byId(id); }).filter(function (e) { return e && !excludedBy(e, ctx, { ignoreLevel: true }); })[0]; if (ez) { ex = ez; step = 2; reason.push('الانتقال لبديل أسهل: ' + act.why); } else reason.push('أدنى جرعة: تثبيت مع مراقبة. ' + act.why); }
         } else if (a === 'substitute') {
-          var sb = (ex.easier || []).concat(ex.subs || []).map(function (id) { return EX().byId(id); }).filter(function (e) { return e && e.id !== ex.id && !excludedBy(e, ctx, { ignoreLevel: true }) && slot.p.indexOf(e.pat) >= 0; })[0];
+          var sb = (ex.easier || []).concat(ex.subs || []).map(function (id) { return EX().byId(id); }).filter(function (e) { return e && e.id !== ex.id && !excludedBy(e, ctx, { ignoreLevel: true }) && slotAccepts(slot, e); })[0];
           if (sb) { ex = sb; step = 0; reason.push('استبدال: ' + act.why); } else { ex = null; reason.push('لا بديل آمن للاستبدال: ' + act.why); }
         } else reason.push(act ? 'تثبيت: ' + act.why : 'استمرار التمرين نفسه للمقارنة الأسبوعية.');
         if (ex) out = { ex: ex, step: step, reason: reason };
@@ -5019,15 +5136,16 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
       }
       if (!out) {
         var banned = prev && act && (act.action === 'substitute') ? prev.exId : null;
-        var pool = cands.filter(function (c) { return !used[c.id] && c.id !== banned; });
+        var pool = cands.filter(function (c) { return (slot.weak || !used[c.id]) && c.id !== banned; }); /* weak-side work repeats on every strength day */
         if (!pool.length) return null;
         var top = Math.max.apply(null, pool.map(function (c) { return c.lvl; }));
         var best = pool.filter(function (c) { return c.lvl === top; });
+        if (slot.ids) best = [pool.filter(function (c) { return c.lvl === top; }).sort(function (x, y) { return slot.ids.indexOf(x.id) - slot.ids.indexOf(y.id); })[0]];
         var ch = best[hash(t.id + slot.k) % best.length];
         var tr = bl && bl.tests ? Object.keys(bl.tests).map(function (k) { return bl.tests[k]; }).filter(function (r) { return r && r.variant === ch.id && !r.skipped; })[0] : null;
         var st = 0;
         if (tr) { for (var s = 4; s >= 0; s--) { if (doseFor(ch, s).target <= 0.6 * Number(tr.value)) { st = s; break; } } reason.push('الجرعة الأولى ≈ 60% أو أقل من نتيجة التقييم الأساسي (' + tr.value + ').'); }
-        reason.push('اختير لأنه أعلى مستوى مسموح (' + EX().LEVEL[top] + ') لنمط «' + EX().PATTERN[ch.pat] + '» ضمن المعدات وقيود السلامة.');
+        reason.push('اختير لأنه أعلى مستوى مسموح (' + EX().LEVEL[top] + ') لـ«' + slotLabel(slot) + '» ضمن المعدات وقيود السلامة.');
         out = { ex: ch, step: st, reason: reason };
       }
       used[out.ex.id] = 1;
@@ -5041,28 +5159,46 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
       if (trainDows.indexOf(dw) >= 0) {
         var type = trainIdx % 2 === 0 ? 'A' : 'B'; trainIdx++;
         day.type = 'train'; day.template = type;
+        day.place = 'home';
         var slots = slotsFor(type, t, minutes), items = [];
-        slots.forEach(function (sl) {
-          var p = pick(sl); if (!p) { why.push('الخانة ' + sl.k + ' (' + sl.p.map(function (x) { return EX().PATTERN[x]; }).join('/') + '): لا يوجد تمرين آمن مناسب — حُذفت.'); return; }
+        slots.concat(extrasFor(type, t)).forEach(function (sl) {
+          if (sl.weak) { /* reuse a unilateral exercise already in today's session instead of duplicating it */
+            var have = items.filter(function (x) { return sl.ids.indexOf(x.exId) >= 0 && x.side && !x.weak; })[0];
+            if (have) { have.weak = sl.weak; have.why.unshift('تقوية الجانب الأضعف: ابدأ بالجهة ' + (sl.weak.side === 'left' ? 'اليسرى' : 'اليمنى') + ' ونفّذ لها مجموعة إضافية (' + (have.sets + 1) + ' مقابل ' + have.sets + ' للجهة الأقوى). [ACSM-RT مبدأ، LOCAL]'); return; }
+          }
+          var p = pick(sl); if (!p) { why.push('الخانة ' + sl.k + ' (' + slotLabel(sl) + '): لا يوجد تمرين آمن مناسب — حُذفت.'); return; }
           var d = doseFor(p.ex, p.step, t.goal, plan.pathway);
-          items.push({ slot: sl.k, exId: p.ex.id, step: d.step, u: d.u, sets: d.sets, target: d.target, rest: d.rest, side: d.side, why: p.reason.slice() });
+          var it = { slot: sl.k, exId: p.ex.id, step: d.step, u: d.u, sets: d.sets, target: d.target, rest: d.rest, side: d.side, why: p.reason.slice() };
+          if (sl.weak) { it.weak = sl.weak; it.extra = 1; it.why.unshift('تقوية الجانب الأضعف: ابدأ بالجهة ' + (sl.weak.side === 'left' ? 'اليسرى' : 'اليمنى') + ' ونفّذ لها مجموعة إضافية (' + (d.sets + 1) + ' مقابل ' + d.sets + ' للجهة الأقوى). [ACSM-RT مبدأ، LOCAL]'); }
+          if (sl.focus) { it.focus = sl.focus; it.extra = 1; it.why.unshift('تقوية منطقة اخترتها: ' + FOCUS[sl.focus].ar + '.'); }
+          items.push(it);
         });
         day.warmup = pickBlock(ctx, 'warmup', t.id + date, 3, ['CA-MARCH', 'CA-STEPJACK']);
         day.cooldown = pickBlock(ctx, 'cooldown', t.id + date, t.goal === 'mobility' ? 5 : 3, ['BT-DIAPH']);
         var budget = (minutes - 11) * 60, total = items.reduce(function (s, it) { return s + itemSeconds(it); }, 0);
         if (total > budget) { items.forEach(function (it) { var ex = EX().byId(it.exId); if (it.sets > ex.dose.sets[0]) { it.sets = ex.dose.sets[0]; it.why.push('خُفضت المجموعات لتناسب مدة الحصة.'); } }); total = items.reduce(function (s, it) { return s + itemSeconds(it); }, 0); }
-        while (total > budget && items.length > 3) { var rm = items.pop(); why.push('حُذف ' + rm.exId + ' من يوم ' + DOW_AR[dw] + ' لتجاوز المدة.'); total = items.reduce(function (s, it) { return s + itemSeconds(it); }, 0); }
+        var regular = function () { return items.filter(function (x) { return !x.extra; }); };
+        while (total > budget && regular().length > 3) { var last2 = regular().pop(); items.splice(items.indexOf(last2), 1); why.push('حُذف ' + last2.exId + ' من يوم ' + DOW_AR[dw] + ' لتجاوز المدة (تمارين الجانب الأضعف والمناطق المختارة تبقى).'); total = items.reduce(function (s, it) { return s + itemSeconds(it); }, 0); }
         day.main = items; day.estMinutes = Math.round(total / 60) + 11;
       } else if (avail.indexOf(dw) >= 0) {
         day.type = 'recovery'; day.main = [];
-        var walk = allowedList(ctx, function (e) { return e.id === 'CA-WALK' || e.id === 'CA-MARCH'; }, { ignoreLevel: true })[0];
-        day.recovery = walk ? [{ exId: walk.id, u: 'time', sets: 1, target: Math.min(20, Math.max(10, Math.round(minutes / 2))) * 60, rest: 0, why: ['نشاط استشفائي خفيف يسمح بالكلام.'] }] : [];
+        var outdoor = t.place === 'both';
+        day.place = outdoor ? 'outdoor' : 'home';
+        var prefer = outdoor ? ['CA-WALK', 'CA-MARCH'] : ['CA-MARCH', 'CA-STEPTOUCH'];
+        var walk = prefer.map(function (id) { var e = EX().byId(id); return e && !excludedBy(e, ctx, { ignoreLevel: true }) ? e : null; }).filter(Boolean)[0];
+        var wm = walkMinutesFor(t, input.prevPlan, dec);
+        day.recovery = walk ? [{ exId: walk.id, u: 'time', sets: 1, target: wm * 60, rest: 0, walk: 1, why: [(outdoor ? 'مشي خارج المنزل' : 'مشي في المكان داخل المنزل') + ' ' + wm + ' دقيقة بإيقاع تستطيع معه الكلام بجمل قصيرة' + (input.prevPlan && dec && dec.walk === 'up' ? ' (+5 دقائق لأنك التزمت بالمشي الأسبوع الماضي)' : '') + '. [PAG2018]'] }] : [];
         day.cooldown = pickBlock(ctx, 'cooldown', t.id + date + 'r', 3, []);
         day.estMinutes = walk ? Math.round(day.recovery[0].target / 60) + 5 : 5;
       } else { day.type = 'rest'; day.main = []; }
       plan.days.push(day);
     }
+    var walkTotal = plan.days.reduce(function (s, d) { return s + (d.recovery || []).reduce(function (x, r) { return x + r.target / 60; }, 0); }, 0);
     if (!plan.days.some(function (d) { return d.type === 'rest'; })) { var last = plan.days.filter(function (d) { return d.type === 'recovery'; }).pop(); if (last) { last.type = 'rest'; last.recovery = []; last.cooldown = []; why.push('حُوِّل يوم استشفاء إلى راحة تامة لضمان يوم راحة واحد على الأقل.'); } }
+    walkTotal = plan.days.reduce(function (s, d) { return s + (d.recovery || []).reduce(function (x, r) { return x + r.target / 60; }, 0); }, 0);
+    why.push('المشي والنشاط الهوائي هذا الأسبوع ≈ ' + Math.round(walkTotal) + ' دقيقة' + (t.place === 'both' ? ' خارج المنزل' : ' داخل المنزل') + '. الهدف التدريجي 150 دقيقة أسبوعياً من كل الأنشطة. [PAG2018]');
+    if (ctx.bmi) why.push('مؤشر كتلة الجسم ≈ ' + ctx.bmi.toFixed(1) + (ctx.bmi >= 30 ? ' (30 أو أكثر): لا قفز، وتركيز على المشي والتمارين منخفضة التأثير لحماية المفاصل (قاعدة محلية تحفظية).' : '.') + ' هو مؤشر تقريبي لا يقيس اللياقة.');
+    if (t.weakArm && t.weakArm !== 'none' || t.weakLeg && t.weakLeg !== 'none') why.push('أُضيف تمرين بطرف واحد للجانب الأضعف في أيام التمرين؛ ابدأ دائماً بالجهة الأضعف.');
     return plan;
   }
   function pickBlock(ctx, role, seed, n, prefer) {
@@ -5130,36 +5266,35 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     var acts = Object.keys(items).map(function (k) { return items[k].action; });
     var overall = reasons.some(function (r) { return r.level === 'refer'; }) ? 'refer' : global === 'reduce' || acts.indexOf('reduce') >= 0 ? 'reduce' : acts.indexOf('substitute') >= 0 || reasons.some(function (r) { return r.level === 'substitute'; }) ? 'substitute' : acts.indexOf('progress') >= 0 ? 'progress' : 'maintain';
     if (a.easy === 'yes' && overall !== 'progress') R('maintain', 'الشعور بالسهولة وحده لا يرفع الشدة تلقائياً؛ التقدم يعتمد على الإنجاز الفعلي والتقنية وغياب الألم.', ['LOCAL']);
-    return { overall: overall, reasons: reasons, items: items, tempFlags: tempFlags, completed: done, partial: partial, planned: planned, ruleVersion: RULES };
+    var recPlanned = plan.days.filter(function (d) { return d.type === 'recovery' && (d.recovery || []).length; }).length;
+    var recDone = sessions.filter(function (s) { return s.kind === 'recovery' && s.status === 'complete'; }).length;
+    var walk = global === 'reduce' || overall === 'refer' ? 'down' : recPlanned && recDone >= Math.ceil(recPlanned * 0.75) && global === 'normal' && maxPain < 4 ? 'up' : 'same';
+    if (walk === 'up') R('progress', 'المشي: أُنجز ' + recDone + ' من ' + recPlanned + ' — زيادة 5 دقائق لكل مشية الأسبوع القادم.', ['PAG2018', 'LOCAL']);
+    return { overall: overall, reasons: reasons, items: items, tempFlags: tempFlags, completed: done, partial: partial, planned: planned, walk: walk, ruleVersion: RULES };
   }
   function areaAr(k) { var m = {}; (root.MCScreen ? root.MCScreen.AREAS : []).forEach(function (x) { m[x[0]] = x[1]; }); return m[k] || k; }
 
   /* Weekly review questions: mandatory safety items + branches + adaptive per-exercise questions (max 3). */
   function reviewQuestions(plan, sessions, trainee, screening) {
     var q = [
-      { id: 'safety', type: 'yn', must: 1, text: 'خلال هذا الأسبوع، هل حدث ألم/ضغط في الصدر، دوخة شديدة أو إغماء، ضيق نفس غير معتاد، أو خفقان غير طبيعي؟' },
-      { id: 'pain_nrs', type: 'num', min: 0, max: 10, must: 1, text: 'أعلى ألم جديد أو متزايد (غير الإرهاق العضلي المعتاد) خلال الأسبوع، 0–10:' },
-      { id: 'pain_area', type: 'select', when: function (a) { return Number(a.pain_nrs) >= 1; }, opts: [['', '—']].concat(root.MCScreen.AREAS).concat([['other', 'أخرى']]), text: 'أين كان الألم؟' },
-      { id: 'illness', type: 'yn', must: 1, text: 'هل أصبت بمرض مؤقت (حمى، عدوى) هذا الأسبوع؟' },
-      { id: 'sleep', type: 'select', opts: [['good', 'جيد'], ['fair', 'متوسط'], ['poor', 'ضعيف']], text: 'جودة النوم هذا الأسبوع:' },
-      { id: 'fatigue', type: 'num', min: 0, max: 10, text: 'الإرهاق العام (0 = نشيط جداً، 10 = منهك):' },
-      { id: 'soreness72', type: 'yn', text: 'هل استمر ألم العضلات بعد التمرين أكثر من 72 ساعة؟' },
-      { id: 'missed_reason', type: 'select', opts: [['none', 'لم تفُت حصص'], ['time', 'ضيق الوقت'], ['fatigue', 'إرهاق'], ['pain', 'ألم'], ['ill', 'مرض'], ['other', 'سبب آخر']], text: 'سبب الحصص الفائتة (إن وجد):' },
-      { id: 'schedule_ok', type: 'yn', text: 'هل كانت أيام ومدة التدريب مناسبة؟' },
-      { id: 'easy', type: 'yn', text: 'هل شعرت أن الخطة كانت سهلة بشكل عام؟' },
-      { id: 'motivation', type: 'num', min: 0, max: 10, text: 'الرغبة في الاستمرار (0–10):' }
+      { id: 'safety', type: 'yn', must: 1, text: 'هذا الأسبوع: هل حدث ألم في الصدر، أو دوخة شديدة أو إغماء، أو ضيق نفس غير طبيعي، أو خفقان؟', en: 'This week: chest pain, severe dizziness/fainting, unusual breathlessness or palpitations?' },
+      { id: 'pain_nrs', type: 'num', min: 0, max: 10, must: 1, text: 'أعلى ألم جديد أو متزايد (ليس تعب العضلات العادي)، من 0 إلى 10:', en: 'Highest new or worsening pain (not normal muscle soreness), 0–10:' },
+      { id: 'pain_area', type: 'select', when: function (a) { return Number(a.pain_nrs) >= 1; }, opts: root.MCScreen.AREAS.concat([['other', 'أخرى', 'Other']]), text: 'أين الألم؟', en: 'Where?' },
+      { id: 'illness', type: 'yn', must: 1, text: 'هل مرضت هذا الأسبوع (حمى، إنفلونزا)؟', en: 'Were you sick this week (fever, flu)?' },
+      { id: 'sleep', type: 'select', opts: [['good', 'جيد', 'Good'], ['fair', 'متوسط', 'Fair'], ['poor', 'ضعيف', 'Poor']], text: 'النوم هذا الأسبوع:', en: 'Sleep this week:' },
+      { id: 'fatigue', type: 'num', min: 0, max: 10, text: 'التعب العام (0 = نشيط، 10 = منهك):', en: 'Overall tiredness (0 = fresh, 10 = exhausted):' }
     ];
     var pw = screening && screening.outcome ? screening.outcome.pathway : 'general';
-    if (pw === 'pregnancy') q.push({ id: 'preg_warn', type: 'yn', must: 1, text: 'هل ظهرت أي علامة إنذار للحمل (نزيف، تسرب سوائل، انقباضات منتظمة، صداع شديد، ألم/تورم الساق، ضعف يؤثر على التوازن)؟' });
-    if (pw === 'postpartum') { q.push({ id: 'pp_warn', type: 'yn', must: 1, text: 'هل ظهر نزيف متزايد أو ألم صدر أو تورم/ألم في الساق؟' }); q.push({ id: 'pelvic_new', type: 'yn', must: 1, text: 'هل ظهرت أو زادت أعراض قاع الحوض (تسرب، ثقل، ألم، بروز البطن عند الجهد)؟' }); }
-    /* adaptive: pick up to 3 exercises with the weakest data */
+    if (pw === 'pregnancy') q.push({ id: 'preg_warn', type: 'yn', must: 1, text: 'هل ظهرت علامة إنذار للحمل (نزيف، تسرب سوائل، انقباضات منتظمة، صداع شديد، ألم أو تورم في الساق)؟', en: 'Any pregnancy warning sign (bleeding, fluid leak, contractions, severe headache, calf pain/swelling)?' });
+    if (pw === 'postpartum') { q.push({ id: 'pp_warn', type: 'yn', must: 1, text: 'هل ظهر نزيف متزايد أو ألم صدر أو ألم وتورم في الساق؟', en: 'Increasing bleeding, chest pain or calf pain/swelling?' }); q.push({ id: 'pelvic_new', type: 'yn', must: 1, text: 'هل ظهر أو زاد تسرب البول أو ثقل الحوض أو بروز البطن عند الجهد؟', en: 'New or worse leakage, pelvic heaviness or tummy bulge with effort?' }); }
+    /* adaptive: pick up to 2 exercises with the weakest data */
     var stats = {};
     plan.days.forEach(function (d) { (d.main || []).forEach(function (it) { stats[it.exId] = stats[it.exId] || { exId: it.exId, score: 0 }; }); });
     sessions.forEach(function (s) { (s.items || []).forEach(function (it) { var st = stats[it.exId]; if (!st) return; if (it.technique && it.technique !== 'good') st.score += 2; if (Number(it.effort) >= 8) st.score += 2; if (Number(it.pain) > 0) st.score += 3; st.logged = 1; }); });
-    var pickEx = Object.keys(stats).map(function (k) { var s = stats[k]; if (!s.logged) s.score += 1; return s; }).sort(function (a, b) { return b.score - a.score || (a.exId < b.exId ? -1 : 1); }).slice(0, 3);
+    var pickEx = Object.keys(stats).map(function (k) { var s = stats[k]; if (!s.logged) s.score += 1; return s; }).sort(function (a, b) { return b.score - a.score || (a.exId < b.exId ? -1 : 1); }).slice(0, 2);
     pickEx.forEach(function (s) { var ex = root.MCEX.byId(s.exId); if (!ex) return;
-      q.push({ id: 'perEx.' + s.exId + '.technique', ex: s.exId, type: 'select', opts: [['good', 'جيدة'], ['fair', 'متوسطة'], ['poor', 'ضعيفة']], text: 'تقنية «' + ex.ar + '» في آخر أداء:' });
-      q.push({ id: 'perEx.' + s.exId + '.difficulty', ex: s.exId, type: 'num', min: 0, max: 10, text: 'صعوبة «' + ex.ar + '» (0–10):' }); });
+      q.push({ id: 'perEx.' + s.exId + '.technique', ex: s.exId, type: 'select', opts: [['good', 'جيدة', 'Good'], ['fair', 'متوسطة', 'Fair'], ['poor', 'ضعيفة', 'Poor']], text: 'أداء «' + ex.ar + '»:', en: 'Form on “' + ex.en + '”:' });
+      q.push({ id: 'perEx.' + s.exId + '.difficulty', ex: s.exId, type: 'num', min: 0, max: 10, text: 'صعوبة «' + ex.ar + '» من 0 إلى 10:', en: 'Difficulty of “' + ex.en + '” (0–10):' }); });
     return q;
   }
 
@@ -5194,13 +5329,15 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
   function sameSlotPattern(slotKey, pat) { var all = SLOTS.A.concat(SLOTS.B); var s = all.filter(function (x) { return x.k === slotKey; })[0]; return s ? s.p.indexOf(pat) >= 0 : pat === 'balance'; }
   function candidatesFor(plan, dayIndex, itemIndex, ctxInput) {
     var it = plan.days[dayIndex].main[itemIndex]; var all = SLOTS.A.concat(SLOTS.B); var s = all.filter(function (x) { return x.k === it.slot; })[0];
+    if (!s && it.weak) return allowedList(safetyContext(ctxInput.trainee, ctxInput.screening, ctxInput.baseline, plan.tempFlagsIn || []), function (e) { return WEAK[it.weak.limb].indexOf(e.id) >= 0 && e.dose.side; });
+    if (!s && it.focus) { var fo = FOCUS[it.focus]; return allowedList(safetyContext(ctxInput.trainee, ctxInput.screening, ctxInput.baseline, plan.tempFlagsIn || []), function (e) { return fo.ids ? fo.ids.indexOf(e.id) >= 0 : fo.p.indexOf(e.pat) >= 0; }); }
     var pats = s ? s.p : ['balance']; var ctx = safetyContext(ctxInput.trainee, ctxInput.screening, ctxInput.baseline, plan.tempFlagsIn || []);
     return allowedList(ctx, function (e) { return e.role.indexOf('main') >= 0 && pats.indexOf(e.pat) >= 0; });
   }
 
   root.MCEngine = { RULES: RULES, BASELINE_VERSION: BASELINE_VERSION, TESTS: TESTS, PATTERN_TEST: PATTERN_TEST, evaluateBaseline: evaluateBaseline, testLevel: testLevel,
     safetyContext: safetyContext, excludedBy: excludedBy, doseFor: doseFor, generatePlan: generatePlan, adapt: adapt, reviewQuestions: reviewQuestions,
-    applyOverride: applyOverride, candidatesFor: candidatesFor, chooseDays: chooseDays, addDays: addDays, DOW_AR: DOW_AR, DECISION_AR: DECISION_AR, hash: hash };
+    applyOverride: applyOverride, candidatesFor: candidatesFor, quickLevels: quickLevels, WALK_MIN: WALK_MIN, FOCUS: FOCUS, WEAK: WEAK, chooseDays: chooseDays, addDays: addDays, DOW_AR: DOW_AR, DECISION_AR: DECISION_AR, hash: hash };
 })(typeof window !== 'undefined' ? window : globalThis);
 
 ;
@@ -5232,9 +5369,9 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
   };
   App.field = function (q, val, prefix) {
-    var name = esc((prefix || '') + q.id), h = '<label for="f_' + name + '">' + esc(q.text) + (q.must ? '<span class="must">إلزامي</span>' : '') + (q.hint ? '<span class="hint">' + esc(q.hint) + '</span>' : '');
-    if (q.type === 'yn') h += '<select id="f_' + name + '" name="' + name + '"><option value="">— اختر —</option>' + SC.YN.map(function (o) { return '<option value="' + o[0] + '"' + (val === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>';
-    else if (q.type === 'select') h += '<select id="f_' + name + '" name="' + name + '"><option value="">— اختر —</option>' + q.opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (val === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select>';
+    var name = esc((prefix || '') + q.id), h = '<label for="f_' + name + '">' + esc(q.text) + (q.en ? ' <span class="en" dir="ltr">' + esc(q.en) + '</span>' : '') + (q.must ? '<span class="must">إلزامي</span>' : '') + (q.hint ? '<span class="hint">' + esc(q.hint) + '</span>' : '');
+    if (q.type === 'yn') h += '<select id="f_' + name + '" name="' + name + '"><option value="">— اختر —</option>' + SC.YN.map(function (o) { return '<option value="' + o[0] + '"' + (val === o[0] ? ' selected' : '') + '>' + o[1] + (o[2] ? ' · ' + o[2] : '') + '</option>'; }).join('') + '</select>';
+    else if (q.type === 'select') h += '<select id="f_' + name + '" name="' + name + '"><option value="">— اختر —</option>' + q.opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (val === o[0] ? ' selected' : '') + '>' + esc(o[1]) + (o[2] ? ' · ' + esc(o[2]) : '') + '</option>'; }).join('') + '</select>';
     else if (q.type === 'num') h += '<input id="f_' + name + '" name="' + name + '" type="number" inputmode="numeric" min="' + q.min + '" max="' + q.max + '" value="' + esc(val == null ? '' : val) + '">';
     else if (q.type === 'multi') { h += '</label><div class="checks" role="group" aria-label="' + esc(q.text) + '">' + q.opts.map(function (o) { return '<label><input type="checkbox" name="' + name + '" value="' + esc(o[0]) + '"' + (Array.isArray(val) && val.indexOf(o[0]) >= 0 ? ' checked' : '') + '> ' + esc(o[1]) + '</label>'; }).join('') + '<label><input type="checkbox" name="' + name + '" value="__none"' + (Array.isArray(val) && !val.length ? ' checked' : '') + '> لا شيء مما سبق</label></div>'; return '<div class="q">' + h + '</div>'; }
     else h += '<input id="f_' + name + '" name="' + name + '" value="' + esc(val || '') + '">';
@@ -5252,7 +5389,8 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
   };
 
   /* ---------- shell ---------- */
-  var NAV = [['dash', '◎', 'لوحة القيادة'], ['trainees', '👥', 'المتدربون'], ['screen', '🩺', 'الفحص والتقييم'], ['library', '📚', 'مكتبة التمارين'], ['plan', '🗓', 'الخطة الأسبوعية'], ['session', '⏱', 'الحصة المباشرة'], ['review', '✅', 'المراجعة الأسبوعية'], ['history', '📈', 'السجل والتقدم'], ['data', '💾', 'التصدير والاستيراد'], ['sources', '⚖', 'المصادر والسلامة']];
+  var NAV = [['dash', '', 'الرئيسية'], ['setup', '', 'الإعداد'], ['plan', '', 'الجدول'], ['session', '', 'التمرين'], ['review', '', 'المراجعة'], ['library', '', 'التمارين'], ['more', '', 'المزيد'], ['trainees', '', 'إدارة الملفات'], ['screen', '', 'الفحص الصحي'], ['history', '', 'السجل'], ['data', '', 'النسخ الاحتياطي'], ['sources', '', 'المصادر والسلامة']];
+  var IN_NAV = { dash: 1, plan: 1, session: 1, review: 1, library: 1, more: 1 };
   App.go = function (page, opts) { App.ui.page = page; Object.assign(App.ui, opts || {}); App.render(); var m = App.$('main'); if (m) { m.focus({ preventScroll: true }); window.scrollTo(0, 0); } };
   App.renderStatus = function () {
     var el = App.$('#storeStatus'); if (!el) return; var st = S.status;
@@ -5266,7 +5404,8 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     sel.innerHTML = '<option value="">— اختر المتدرب النشط —</option>' + list.map(function (t) { return '<option value="' + esc(t.id) + '"' + (t.id === App.ui.traineeId ? ' selected' : '') + '>' + esc(t.displayName) + ' · ' + esc(t.id) + '</option>'; }).join('');
   };
   App.render = function () {
-    App.$$('nav.side button').forEach(function (b) { if (b.dataset.page === App.ui.page) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    var navPage = IN_NAV[App.ui.page] ? App.ui.page : App.ui.page === 'setup' ? 'dash' : 'more';
+    App.$$('nav.side button').forEach(function (b) { if (b.dataset.page === navPage) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     App.renderTraineeSelect(); App.renderStatus();
     var v = App.$('#view');
     if (S.status.locked) { App.$$('nav.side button').forEach(function (b) { b.disabled = true; }); v.innerHTML = lockScreen(); var pi = App.$('#unlockPass'); if (pi) pi.focus(); return; }
@@ -5274,7 +5413,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     var fn = App.pages[App.ui.page] || App.pages.dash;
     try { v.innerHTML = fn(); } catch (e) { console.error(e); v.innerHTML = '<div class="alert danger"><b>خطأ في عرض الصفحة</b>' + esc(e.message) + '</div>'; }
     if (App.after[App.ui.page]) App.after[App.ui.page]();
-    var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'المدرب العسكري للياقة البدنية v5';
+    var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'مدرب اللياقة البدنية v5';
   };
   App.after = {};
   function lockScreen() {
@@ -5727,17 +5866,16 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
 
   /* ---------- library page ---------- */
   App.pages.library = function () {
-    var ui = App.ui, f = ui.lib || (ui.lib = { q: '', cat: '', pat: '', lvl: '', role: '', safe: false });
+    var ui = App.ui, f = ui.lib || (ui.lib = { q: '', cat: '', safe: true });
     var t = App.trainee(), ctx = null;
     if (t && f.safe) { var sc = App.latest('screenings', t.id), bl = App.latest('baselines', t.id); ctx = E.safetyContext(t, sc, bl, []); }
-    var fams = {}; X.list.forEach(function (e) { fams[e.fam] = 1; });
-    var h = '<h2>مكتبة التمارين</h2><p>تضم المكتبة <b>' + X.list.length + '</b> تمريناً/تنويعة، لكل منها سجل كامل ورسم متحرك أصلي خاص بها، ضمن <b>' + Object.keys(fams).length + '</b> عائلة حركية. العدد هو ما اكتمل وتحقق آلياً فقط؛ الهدف 200 لم يُبلغ بعد.</p>';
-    var opt = function (obj, v) { return Object.keys(obj).map(function (k) { return '<option value="' + esc(k) + '"' + (String(v) === String(k) ? ' selected' : '') + '>' + esc(obj[k]) + '</option>'; }).join(''); };
-    h += '<div class="card flat"><div class="grid g3"><label>بحث<input id="libq" value="' + esc(f.q) + '" placeholder="اسم عربي أو إنجليزي"></label><label>الفئة<select id="libcat"><option value="">الكل</option>' + opt(X.CAT, f.cat) + '</select></label><label>نمط الحركة<select id="libpat"><option value="">الكل</option>' + opt(X.PATTERN, f.pat) + '</select></label><label>المستوى<select id="liblvl"><option value="">الكل</option>' + opt(X.LEVEL, f.lvl) + '</select></label><label>الدور<select id="librole"><option value="">الكل</option>' + opt({ main: 'تمرين رئيسي', warmup: 'إحماء', cooldown: 'تهدئة' }, f.role) + '</select></label>' +
-      '<label>' + (t ? '<input type="checkbox" id="libsafe"' + (f.safe ? ' checked' : '') + '> المسموح فقط لـ ' + esc(t.displayName) : '<span class="muted small">اختر متدرباً لتصفية المسموح له</span>') + '</label></div></div>';
+    var h = '<h2>' + App.bi('التمارين', 'Exercises') + '</h2><p class="muted">' + X.list.length + ' تمريناً، لكل منها رسم متحرك وشرح بالعربي واسم بالإنجليزي للبحث عن فيديو.</p>';
+    var cats = Object.keys(X.CAT).map(function (k) { return '<option value="' + k + '"' + (f.cat === k ? ' selected' : '') + '>' + esc(X.CAT[k]) + '</option>'; }).join('');
+    h += '<div class="card flat"><div class="grid g3"><label>' + App.bi('بحث', 'Search') + '<input id="libq" value="' + esc(f.q) + '" placeholder="عربي أو English"></label><label>' + App.bi('النوع', 'Type') + '<select id="libcat"><option value="">الكل · All</option>' + cats + '</select></label>' +
+      (t ? '<label><input type="checkbox" id="libsafe"' + (f.safe ? ' checked' : '') + '> ' + App.bi('المناسب لـ ' + t.displayName + ' فقط', 'Suitable only') + '</label>' : '') + '</div></div>';
     var list = X.list.filter(function (e) {
       if (f.q && (e.ar + ' ' + e.en + ' ' + e.id).toLowerCase().indexOf(f.q.toLowerCase()) < 0) return false;
-      if (f.cat && e.cat !== f.cat) return false; if (f.pat && e.pat !== f.pat) return false; if (f.lvl && String(e.lvl) !== String(f.lvl)) return false; if (f.role && e.role.indexOf(f.role) < 0) return false;
+      if (f.cat && e.cat !== f.cat) return false;
       if (ctx && E.excludedBy(e, ctx, { ignoreLevel: true })) return false; return true;
     });
     h += '<p class="muted small" aria-live="polite">النتائج: ' + list.length + '</p>';
@@ -5747,8 +5885,8 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     }).join('') + '</div>';
     return h;
   };
-  ['libq', 'libcat', 'libpat', 'liblvl', 'librole', 'libsafe'].forEach(function (id) {
-    App.changes[id] = function (el) { var k = { libq: 'q', libcat: 'cat', libpat: 'pat', liblvl: 'lvl', librole: 'role', libsafe: 'safe' }[id]; App.ui.lib[k] = el.type === 'checkbox' ? el.checked : el.value; App.render(); if (id === 'libq') { var i = App.$('#libq'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); } };
+  ['libq', 'libcat', 'libsafe'].forEach(function (id) {
+    App.changes[id] = function (el) { var k = { libq: 'q', libcat: 'cat', libsafe: 'safe' }[id]; App.ui.lib[k] = el.type === 'checkbox' ? el.checked : el.value; App.render(); if (id === 'libq') { var i = App.$('#libq'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); } };
   });
 
   /* ---------- exercise detail dialog ---------- */
@@ -5766,6 +5904,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
       '<p><span class="pill">' + esc(ex.id) + '</span><span class="pill">' + esc(X.LEVEL[ex.lvl]) + '</span><span class="pill">' + esc(X.CAT[ex.cat]) + '</span><span class="pill">' + esc(X.PATTERN[ex.pat]) + '</span><span class="pill">عائلة: ' + esc(ex.fam) + '</span></p>' +
       '<p><b>العضلات الأساسية:</b> ' + esc(ex.prim.map(function (m) { return X.MUSCLE[m]; }).join('، ')) + '<br><b>الثانوية:</b> ' + esc(ex.sec.map(function (m) { return X.MUSCLE[m]; }).join('، ') || '—') + '</p>' +
       '<p><b>المعدات:</b> ' + esc(ex.eq.length ? ex.eq.map(function (q) { return X.EQUIP[q]; }).join('، ') : 'بدون أدوات') + ' · <b>المساحة:</b> ' + esc(ex.space) + ' · <b>التأثير:</b> ' + esc({ none: 'بدون', low: 'منخفض', high: 'مرتفع (قفز)' }[ex.impact]) + '</p>' +
+      '<p class="vid">🔎 ' + App.bi('فيديو', 'Video') + ': ابحث عن <b dir="ltr">“' + esc(ex.en) + ' exercise”</b> — <a href="' + esc(App.videoUrl(ex)) + '" target="_blank" rel="noopener noreferrer">يوتيوب ↗</a> <span class="small muted">(يحتاج إنترنت؛ نتائج بحث عامة لم يراجعها التطبيق)</span></p>' +
       '<p><b>الجرعة الافتراضية (قابلة للتعديل، ليست وصفة طبية):</b> ' + esc(dose) + '</p>' +
       (ex.mil ? '<p class="small"><b>🎖 مرجع عسكري:</b> ' + esc(ex.mil) + ' (الاسم فقط؛ الشرح بصياغة التطبيق)</p>' : '') +
       (ex.prereq ? '<p><b>المتطلب المسبق:</b> ' + esc(ex.prereq) + '</p>' : '') + '</div></div>' +
@@ -5783,101 +5922,127 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
 
 ;
 /* ==== src/ui_plan.js ==== */
-/* Weekly plan: generation, explanation, safe coach overrides, revisions, A4 print. WEEKLY ONLY. */
+/* Weekly plan: simple day-by-day view, safe changes, A4 print and a trainee reading copy. WEEKLY ONLY. */
 (function () {
   'use strict';
   var App = window.App, S = window.MCStore, E = window.MCEngine, X = window.MCEX, esc = App.esc;
+  var bi = function (a, e) { return App.bi ? App.bi(a, e) : esc(a); };
 
-  function nextWeekStart(t) {
-    var pls = App.plansOf(t.id), last = pls[pls.length - 1];
-    if (last) return E.addDays(last.weekStart, 7);
-    var d = new Date(App.today() + 'T12:00:00Z'), wd = App.db.settings.weekStartDay || 0;
-    var diff = (wd - d.getUTCDay() + 7) % 7; d.setUTCDate(d.getUTCDate() + diff); return d.toISOString().slice(0, 10);
-  }
-  App.dosageText = function (it) { var ex = X.byId(it.exId); return it.sets + ' × ' + (it.u === 'reps' ? it.target + ' تكرار' : it.target >= 120 ? Math.round(it.target / 60) + ' دقيقة' : it.target + ' ث') + (it.side ? ' لكل جانب' : '') + (it.rest ? ' · راحة ' + it.rest + ' ث' : '') + (ex && ex.dose.tempo && it.u === 'reps' ? ' · إيقاع ' + ex.dose.tempo : ''); };
-
-  App.pages.plan = function () {
-    var t = App.trainee(); if (!t) return '<h2>الخطة الأسبوعية</h2>' + App.needTrainee('الخطة');
-    var pls = App.plansOf(t.id), ui = App.ui;
-    var cur = (ui.planId && pls.filter(function (p) { return p.id === ui.planId; })[0]) || pls[pls.length - 1];
-    var h = '<div class="row"><h2 class="grow">الخطة الأسبوعية — ' + esc(t.displayName) + '</h2></div>';
-    h += '<div class="alert small"><b>الخطط أسبوعية فقط (7 أيام)</b>لكل أسبوع معرف خطة فريد؛ إعادة التوليد لنفس الأسبوع تُنشئ نسخة مراجَعة داخل الخطة نفسها مع سبب، ولا تحذف التاريخ.</div>';
-    var last = pls[pls.length - 1], unreviewed = last && last.status !== 'blocked' && !App.db.reviews.some(function (r) { return r.planId === last.id; });
-    var ws = nextWeekStart(t);
-    h += '<div class="card flat"><div class="row"><label>بداية الأسبوع الجديد<input type="date" id="weekStart" value="' + esc(ui.weekStart || ws) + '"></label><button data-act="genPlan"' + (unreviewed ? ' disabled' : '') + '>إنشاء خطة الأسبوع</button>' +
-      (pls.length ? '<label>عرض خطة<select id="planPick">' + pls.map(function (p) { return '<option value="' + esc(p.id) + '"' + (cur && p.id === cur.id ? ' selected' : '') + '>' + esc(App.fmtDate(p.weekStart)) + ' · ' + esc(p.id) + (p.status === 'blocked' ? ' (موقوفة)' : '') + '</option>'; }).join('') + '</select></label>' : '') + '</div>' +
-      (unreviewed ? '<p class="small">لا يمكن إنشاء أسبوع جديد قبل <button class="sec" data-act="go" data-page="review">مراجعة الخطة ' + esc(last.id) + '</button> — المراجعة تستخدم الأداء الفعلي لتعديل الأسبوع التالي.</p>' : '') + '</div>';
-    if (!cur) return h + '<div class="empty">لا توجد خطط بعد لهذا المتدرب.</div>';
-    return h + planView(cur, t);
+  App.videoUrl = function (ex) { return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(ex.en + ' exercise how to'); };
+  function sideAr(s) { return s === 'left' ? 'اليسرى' : 'اليمنى'; }
+  function setsAr(n) { return n === 1 ? 'مجموعة واحدة' : n === 2 ? 'مجموعتان' : n + ' مجموعات'; }
+  /* Plain-language dose, e.g. "3 مجموعات × 10 تكرارات لكل جهة · راحة 60 ثانية" */
+  App.dosageText = function (it) {
+    var ex = X.byId(it.exId), amount = it.u === 'reps' ? it.target + ' تكرار' : it.target >= 120 ? Math.round(it.target / 60) + ' دقيقة' : it.target + ' ثانية';
+    var t = (!it.walk ? setsAr(it.sets) + ' × ' : '') + amount + (it.side ? ' لكل جهة' : '') + (it.rest ? ' · راحة ' + it.rest + ' ثانية' : '');
+    if (it.weak) t += ' · الجهة الأضعف (' + sideAr(it.weak.side) + '): ' + setsAr(it.sets + 1) + '، وابدأ بها';
+    if (ex && ex.dose.tempo && it.u === 'reps' && !it.walk && it.sets > 1) t += ' · ببطء وتحكم';
+    return t;
   };
-  App.changes.planPick = function (el) { App.ui.planId = el.value; App.render(); };
-  App.changes.weekStart = function (el) { App.ui.weekStart = el.value; };
+  App.dosageEn = function (it) { var a = it.u === 'reps' ? it.target + ' reps' : it.target >= 120 ? Math.round(it.target / 60) + ' min' : it.target + ' s'; return (it.walk ? '' : it.sets + ' × ') + a + (it.side ? ' each side' : '') + (it.rest ? ', rest ' + it.rest + ' s' : '') + (it.weak ? ' (weak ' + it.weak.side + ' side: +1 set, start with it)' : ''); };
+  function dayHead(d) {
+    if (d.type === 'rest') return ['😴', 'راحة', 'Rest day'];
+    if (d.type === 'recovery') return d.place === 'outdoor' ? ['🌳', 'مشي خارج المنزل', 'Outdoor walk'] : ['🏠', 'مشي ونشاط خفيف في المنزل', 'Light activity at home'];
+    return ['🏠', 'تمارين في المنزل', 'Home workout'];
+  }
+  App.dayHead = dayHead;
 
-  App.acts.genPlan = function () {
-    var t = App.trainee(), ws = App.ui.weekStart || App.$('#weekStart').value;
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(ws)) { App.toast('تاريخ غير صالح'); return; }
+  /* Create (or update with a revision) the plan for week starting ws. autoReason → no prompts. */
+  App.createPlan = function (t, ws, autoReason) {
+    if (autoReason) { var cov = App.db.plans.filter(function (p) { return p.traineeId === t.id && p.weekStart <= ws && p.weekEnd >= ws; })[0]; if (cov) ws = cov.weekStart; }
     var existing = App.db.plans.filter(function (p) { return p.traineeId === t.id && p.weekStart === ws; })[0];
     var pls = App.plansOf(t.id).filter(function (p) { return p.weekStart < ws; }), prev = pls[pls.length - 1] || null;
     var rev = prev ? App.db.reviews.filter(function (r) { return r.planId === prev.id; }).pop() : null;
-    var sc = App.latest('screenings', t.id), bl = App.latest('baselines', t.id);
-    var input = { trainee: t, screening: sc, baseline: bl, prevPlan: prev, decision: rev ? Object.assign({ reviewId: rev.id, at: rev.at }, rev.decision) : null, weekStart: ws, planId: existing ? existing.id : S.uniqueId(App.db, 'plans', S.isoWeek(ws)), requireFreshBaseline: true };
-    var plan = E.generatePlan(input);
-    plan.decision = input.decision;
-    if (existing) {
-      if (App.db.sessions.some(function (s) { return s.planId === existing.id; }) && !confirm('توجد حصص مسجلة على هذه الخطة. إعادة التوليد ستنشئ نسخة جديدة مع الاحتفاظ بالقديمة في سجل النسخ. متابعة؟')) return;
-      var reason = prompt('سبب إعادة توليد خطة الأسبوع نفسه (مطلوب):'); if (!reason || reason.trim().length < 5) { App.toast('السبب مطلوب'); return; }
-      existing.revisions = existing.revisions || [];
-      existing.revisions.push({ at: S.nowISO(), reason: 'إعادة توليد: ' + reason.trim(), ruleVersion: existing.ruleVersion, days: existing.days, status: existing.status, notes: existing.notes, blockers: existing.blockers });
-      ['days', 'status', 'blockers', 'notes', 'ruleVersion', 'screeningId', 'baselineId', 'prevPlanId', 'pathway', 'decision', 'tempFlagsIn', 'traineeName', 'coachName'].forEach(function (k) { existing[k] = plan[k]; });
-      existing.updatedAt = S.nowISO();
-      App.audit('plan.regenerate', 'إعادة توليد ' + existing.id + ': ' + reason, t.id, existing.id); App.ui.planId = existing.id;
-    } else {
-      App.db.plans.push(plan); App.audit('plan.create', 'خطة ' + plan.id + ' (' + plan.status + ')', t.id, plan.id); App.ui.planId = plan.id;
-    }
-    App.ui.weekStart = null; App.save(); App.render();
+    var input = { trainee: t, screening: App.latest('screenings', t.id), baseline: App.latest('baselines', t.id), prevPlan: prev, decision: rev ? Object.assign({ reviewId: rev.id, at: rev.at }, rev.decision) : null, weekStart: ws, planId: existing ? existing.id : S.uniqueId(App.db, 'plans', S.isoWeek(ws)), requireFreshBaseline: true };
+    var plan = E.generatePlan(input); plan.decision = input.decision;
+    if (!existing) { App.db.plans.push(plan); App.audit('plan.create', 'خطة ' + plan.id + ' (' + plan.status + ')', t.id, plan.id); return plan; }
+    var hasSessions = App.db.sessions.some(function (s) { return s.planId === existing.id; });
+    if (hasSessions && autoReason) { App.toast('توجد حصص مسجلة هذا الأسبوع؛ سيُطبَّق التحديث على جدول الأسبوع القادم.', 6000); return existing; }
+    if (hasSessions && !confirm('توجد حصص مسجلة على هذه الخطة. إعادة التوليد تحفظ النسخة القديمة في السجل. متابعة؟')) return null;
+    var reason = autoReason || prompt('سبب إعادة إنشاء جدول الأسبوع نفسه:'); if (!reason || reason.trim().length < 5) { App.toast('السبب مطلوب (5 أحرف على الأقل)'); return null; }
+    existing.revisions = existing.revisions || [];
+    existing.revisions.push({ at: S.nowISO(), reason: 'إعادة توليد: ' + reason.trim(), ruleVersion: existing.ruleVersion, days: existing.days, status: existing.status, notes: existing.notes, blockers: existing.blockers });
+    ['days', 'status', 'blockers', 'notes', 'ruleVersion', 'screeningId', 'baselineId', 'prevPlanId', 'pathway', 'decision', 'tempFlagsIn', 'traineeName', 'coachName'].forEach(function (k) { existing[k] = plan[k]; });
+    existing.updatedAt = S.nowISO(); App.audit('plan.regenerate', 'إعادة توليد ' + existing.id + ': ' + reason, t.id, existing.id);
+    return existing;
   };
 
+  App.pages.plan = function () {
+    var t = App.trainee(); if (!t) return '<h2>' + bi('الجدول الأسبوعي', 'Weekly plan') + '</h2>' + App.needTrainee('الجدول');
+    var pls = App.plansOf(t.id), ui = App.ui;
+    var cur = (ui.planId && pls.filter(function (p) { return p.id === ui.planId; })[0]) || pls[pls.length - 1];
+    var h = '<h2>' + bi('جدول الأسبوع', 'Weekly plan') + ' — ' + esc(t.displayName) + '</h2>';
+    if (!cur) {
+      var sc0 = App.latest('screenings', t.id), bl0 = App.latest('baselines', t.id);
+      if (sc0 && sc0.outcome.status !== 'cleared') return h + '<div class="alert danger"><b>لا يوجد جدول تمارين حالياً — السبب صحي</b><ul>' + sc0.outcome.reasons.filter(function (r) { return r.level === 'refer' || r.level === 'more_info'; }).map(function (r) { return '<li>' + esc(r.text) + '</li>'; }).join('') + '</ul>هذا ليس تشخيصاً.</div><button class="sec" data-act="go" data-page="screen">' + bi('التفاصيل والتصريح الطبي', 'Details & clearance') + '</button>';
+      return h + '<div class="empty"><p>لا يوجد جدول بعد.</p>' + (sc0 && sc0.outcome.status === 'cleared' && bl0 ? '<button data-act="genFirst">' + bi('أنشئ الجدول ابتداءً من اليوم', 'Create plan starting today') + '</button>' : '<button data-act="setupEdit" data-id="' + esc(t.id) + '">' + bi('أكمل البيانات وأنشئ الجدول', 'Complete details & create plan') + '</button>') + '</div>';
+    }
+    var last = pls[pls.length - 1], reviewed = App.db.reviews.some(function (r) { return r.planId === last.id; });
+    if (cur === last && last.status !== 'blocked' && App.today() >= E.addDays(last.weekStart, 5)) {
+      h += reviewed ? '<div class="alert ok"><b>انتهى الأسبوع وتمت مراجعته</b><button data-act="genNext">' + bi('أنشئ جدول الأسبوع التالي', 'Create next week') + '</button></div>'
+        : '<div class="alert"><b>قارب الأسبوع على الانتهاء</b>أجب عن أسئلة المراجعة القصيرة ليتعدل الأسبوع القادم حسب أدائك. <button class="sec" data-act="go" data-page="review">' + bi('مراجعة الأسبوع', 'Weekly check') + '</button></div>';
+    }
+    h += planView(cur, t);
+    h += '<details class="card flat"><summary>' + bi('خيارات إضافية', 'More options') + '</summary>' +
+      (pls.length > 1 ? '<label>' + bi('عرض أسبوع سابق', 'Show another week') + '<select id="planPick">' + pls.map(function (p) { return '<option value="' + esc(p.id) + '"' + (p.id === cur.id ? ' selected' : '') + '>' + esc(App.fmtDate(p.weekStart)) + ' – ' + esc(App.fmtDate(p.weekEnd)) + (p.status === 'blocked' ? ' (متوقف)' : '') + '</option>'; }).join('') + '</select></label>' : '') +
+      '<div class="row"><label>' + bi('بداية أسبوع محدد', 'Custom week start') + '<input type="date" id="weekStart" value="' + esc(ui.weekStart || E.addDays(last.weekStart, 7)) + '"></label><button class="sec" data-act="genPlan"' + (!reviewed && last.status !== 'blocked' ? ' disabled title="راجع الأسبوع الحالي أولاً"' : '') + '>' + bi('إنشاء', 'Create') + '</button><button class="ghost" data-act="regen" data-id="' + esc(cur.id) + '">' + bi('إعادة إنشاء هذا الأسبوع', 'Rebuild this week') + '</button></div>' +
+      '<p class="small muted">رقم الخطة: ' + esc(cur.id) + ' · ' + esc(cur.ruleVersion) + '</p></details>';
+    return h;
+  };
+  App.changes.planPick = function (el) { App.ui.planId = el.value; App.render(); };
+  App.changes.weekStart = function (el) { App.ui.weekStart = el.value; };
+  App.acts.genPlan = function () { var t = App.trainee(), ws = App.ui.weekStart || App.$('#weekStart').value; if (!/^\d{4}-\d{2}-\d{2}$/.test(ws)) return App.toast('تاريخ غير صالح'); var p = App.createPlan(t, ws, null); if (p) { App.ui.planId = p.id; App.ui.weekStart = null; App.save(); App.render(); } };
+  App.acts.genFirst = function () { var p = App.createPlan(App.trainee(), App.today(), null); if (p) { App.ui.planId = p.id; App.save(); App.render(); } };
+  App.acts.genNext = function () { var t = App.trainee(), pls = App.plansOf(t.id), p = App.createPlan(t, E.addDays(pls[pls.length - 1].weekStart, 7), null); if (p) { App.ui.planId = p.id; App.save(); App.render(); App.toast('تم إنشاء جدول الأسبوع التالي ✔'); } };
+  App.acts.regen = function (el) { var t = App.trainee(), cur = App.db.plans.filter(function (p) { return p.id === el.dataset.id; })[0]; var p = App.createPlan(t, cur.weekStart, null); if (p) { App.ui.planId = p.id; App.save(); App.render(); } };
+
   function planView(p, t) {
-    var h = '<div class="card"><div class="row"><div class="grow"><h3>' + esc(p.id) + '</h3><div class="small muted">الأسبوع ' + App.fmtDate(p.weekStart) + ' ← ' + App.fmtDate(p.weekEnd) + ' · أُنشئت ' + App.fmtDT(p.createdAt) + ' · ' + esc(p.ruleVersion) + (p.revisions && p.revisions.length ? ' · نسخ سابقة: ' + p.revisions.length : '') + '</div></div>' +
-      (p.status === 'blocked' ? '<span class="badge b-danger">⛔ موقوفة</span>' : '<span class="badge b-ok">جاهزة</span>') + '<button class="sec" data-act="printPlan" data-id="' + esc(p.id) + '">🖨 طباعة / حفظ PDF</button></div>';
-    if (p.status === 'blocked') return h + '<div class="alert danger"><b>لم تُصدر خطة تمارين تلقائية</b><ul>' + p.blockers.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>المسموح: النشاط اليومي العادي الخفيف فقط حتى التقييم. هذه ليست تشخيصاً.</div><button class="sec" data-act="go" data-page="screen">الذهاب إلى الفحص</button></div>';
-    if (p.decision) h += '<div class="alert ' + (p.decision.overall === 'progress' ? 'ok' : p.decision.overall === 'maintain' ? '' : 'warn') + '"><b>قرار مراجعة الأسبوع السابق: ' + esc(E.DECISION_AR[p.decision.overall] || p.decision.overall) + '</b>' + (p.decision.reasons || []).map(function (r) { return esc(r.text); }).join('<br>') + '</div>';
-    h += '<details><summary><b>لماذا هذه الخطة؟</b> (قواعد ' + esc(p.ruleVersion) + ')</summary><ul class="small">' + p.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul></details>';
-    var trainMin = p.days.reduce(function (s, d) { return s + (d.type !== 'rest' ? d.estMinutes || 0 : 0); }, 0);
-    h += '<p class="small">مجموع الدقائق المقدّرة هذا الأسبوع: ' + trainMin + ' دقيقة. التوصية العامة للبالغين 150–300 دقيقة نشاطاً متوسطاً أسبوعياً من كل الأنشطة، وليس من هذه الخطة وحدها. [PAG2018]</p></div>';
+    var today = App.today();
+    var h = '<div class="card"><div class="row"><div class="grow"><b>' + App.fmtDate(p.weekStart) + ' ← ' + App.fmtDate(p.weekEnd) + '</b></div>' +
+      (p.status === 'blocked' ? '<span class="badge b-danger">⛔ ' + bi('متوقف', 'Paused') + '</span>' : '') +
+      '<button class="sec" data-act="printPlan" data-id="' + esc(p.id) + '">🖨 ' + bi('طباعة / PDF', 'Print / PDF') + '</button>' +
+      (p.status !== 'blocked' ? '<button class="sec" data-act="readCopy" data-id="' + esc(p.id) + '">📄 ' + bi('حفظ نسخة للمتدرب', 'Save reading copy') + '</button>' : '') + '</div>';
+    if (p.status === 'blocked') return h + '<div class="alert danger"><b>لا يوجد جدول تمارين حالياً</b><ul>' + p.blockers.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>حتى ذلك الحين: نشاط يومي خفيف فقط. هذا ليس تشخيصاً.</div><button class="sec" data-act="go" data-page="screen">' + bi('الجانب الصحي والتصريح', 'Health & clearance') + '</button></div>';
+    if (p.decision) h += '<div class="alert ' + (p.decision.overall === 'progress' ? 'ok' : p.decision.overall === 'maintain' ? '' : 'warn') + '"><b>بناءً على أدائك الأسبوع الماضي: ' + esc(E.DECISION_AR[p.decision.overall] || p.decision.overall) + '</b>' + (p.decision.reasons || []).slice(0, 4).map(function (r) { return esc(r.text); }).join('<br>') + '</div>';
+    var walkMin = 0, trainDays = 0; p.days.forEach(function (d) { if (d.type === 'train') trainDays++; (d.recovery || []).forEach(function (r) { walkMin += r.target / 60; }); });
+    h += '<p>' + bi(trainDays + ' أيام تمارين في المنزل · ' + Math.round(walkMin) + ' دقيقة مشي هذا الأسبوع', trainDays + ' home workouts · ' + Math.round(walkMin) + ' min walking') + '</p>';
+    h += '<details><summary class="small">' + bi('لماذا هذا الجدول؟', 'Why this plan?') + '</summary><ul class="small">' + p.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul></details></div>';
+    var openIdx = (p.days.filter(function (x) { return x.type !== 'rest' && x.date >= today; })[0] || p.days.filter(function (x) { return x.type !== 'rest'; })[0] || {}).index;
     p.days.forEach(function (d) {
-      var ses = App.db.sessions.filter(function (s) { return s.planId === p.id && s.dayIndex === d.index; });
-      var stat = ses.some(function (s) { return s.status === 'complete'; }) ? '<span class="badge b-ok">مكتملة</span>' : ses.length ? '<span class="badge b-warn">جزئية</span>' : '';
-      h += '<details class="day"' + (d.type === 'train' ? ' open' : '') + '><summary><b>' + esc(d.dowAr) + '</b> <span class="muted">' + App.fmtDate(d.date) + '</span> <span class="pill">' + esc({ train: 'تدريب ' + (d.template || ''), recovery: 'استشفاء نشط', rest: 'راحة' }[d.type]) + '</span>' + (d.estMinutes ? '<span class="pill">≈ ' + d.estMinutes + ' د</span>' : '') + stat + '</summary><div class="inner">';
-      if (d.type === 'rest') h += '<p class="muted">راحة تامة أو نشاط يومي خفيف. نم جيداً واشرب الماء.</p>';
-      if (d.type !== 'rest') {
-        if (d.warmup && d.warmup.length) h += '<h4>الإحماء (5–8 دقائق)</h4>' + d.warmup.map(function (it) { return mini(it); }).join('');
-        if (d.recovery && d.recovery.length) h += '<h4>نشاط الاستشفاء</h4>' + d.recovery.map(function (it) { return mini(it); }).join('');
-        if (d.main && d.main.length) { h += '<h4>التمارين الرئيسية</h4>'; d.main.forEach(function (it, j) { h += itemRow(p, d, it, j); }); }
-        if (d.cooldown && d.cooldown.length) h += '<h4>التهدئة (5 دقائق)</h4>' + d.cooldown.map(function (it) { return mini(it); }).join('');
-        h += '<div class="row"><button class="ok" data-act="startSession" data-plan="' + esc(p.id) + '" data-day="' + d.index + '">▶ بدء الحصة المباشرة</button></div>';
+      var hd = dayHead(d), ses = App.db.sessions.filter(function (s) { return s.planId === p.id && s.dayIndex === d.index; });
+      var stat = ses.some(function (s) { return s.status === 'complete'; }) ? '<span class="badge b-ok">✔ ' + bi('تم', 'Done') + '</span>' : ses.length ? '<span class="badge b-warn">' + bi('جزئي', 'Partial') + '</span>' : '';
+      var isToday = d.date === today;
+      h += '<details class="day' + (isToday ? ' today' : '') + '"' + (d.index === openIdx ? ' open' : '') + '><summary><span class="dico">' + hd[0] + '</span><b>' + esc(d.dowAr) + '</b> <span class="muted">' + App.fmtDate(d.date) + '</span> ' + bi(hd[1], hd[2]) + (d.estMinutes && d.type !== 'rest' ? ' <span class="pill">≈ ' + d.estMinutes + ' د</span>' : '') + (isToday ? ' <span class="badge b-info">' + bi('اليوم', 'Today') + '</span>' : '') + ' ' + stat + '</summary><div class="inner">';
+      if (d.type === 'rest') h += '<p class="muted">راحة تامة أو حركة يومية خفيفة. نم جيداً واشرب الماء.</p>';
+      else {
+        (d.recovery || []).forEach(function (it) { h += itemRow(p, d, it, -1); });
+        if (d.warmup && d.warmup.length) h += '<p class="small"><b>' + bi('إحماء 5 دقائق', 'Warm-up 5 min') + ':</b> ' + d.warmup.map(function (it) { return '<button class="linkbtn" data-act="exOpen" data-id="' + esc(it.exId) + '">' + esc(App.exName(it.exId)) + '</button>'; }).join(' · ') + '</p>';
+        (d.main || []).forEach(function (it, j) { h += itemRow(p, d, it, j); });
+        if (d.cooldown && d.cooldown.length) h += '<p class="small"><b>' + bi('تهدئة وإطالة', 'Cool-down') + ':</b> ' + d.cooldown.map(function (it) { return '<button class="linkbtn" data-act="exOpen" data-id="' + esc(it.exId) + '">' + esc(App.exName(it.exId)) + '</button>'; }).join(' · ') + '</p>';
+        h += '<div class="row"><button class="ok" data-act="startSession" data-plan="' + esc(p.id) + '" data-day="' + d.index + '">▶ ' + bi('ابدأ', 'Start') + '</button></div>';
       }
       h += '</div></details>';
     });
-    if (p.overrides && p.overrides.length) h += '<details class="card"><summary>تعديلات المدرب (' + p.overrides.length + ')</summary><table><tbody>' + p.overrides.map(function (o) { return '<tr><td>' + App.fmtDT(o.at) + '</td><td>' + esc(App.exName(o.from.exId)) + ' ' + o.from.sets + '×' + o.from.target + ' ← ' + esc(App.exName(o.to.exId)) + ' ' + o.to.sets + '×' + o.to.target + '</td><td>' + esc(o.reason) + '</td></tr>'; }).join('') + '</tbody></table></details>';
-    if (p.revisions && p.revisions.length) h += '<details class="card"><summary>النسخ السابقة لهذه الخطة (' + p.revisions.length + ')</summary><ul>' + p.revisions.map(function (r) { return '<li>' + App.fmtDT(r.at) + ' — ' + esc(r.reason) + ' (' + esc(r.ruleVersion) + ')</li>'; }).join('') + '</ul></details>';
+    if (p.overrides && p.overrides.length) h += '<details class="card flat"><summary class="small">تغييرات يدوية (' + p.overrides.length + ')</summary><ul class="small">' + p.overrides.map(function (o) { return '<li>' + App.fmtDT(o.at) + ': ' + esc(App.exName(o.from.exId)) + ' ← ' + esc(App.exName(o.to.exId)) + ' — ' + esc(o.reason) + '</li>'; }).join('') + '</ul></details>';
     return h + overrideDialog();
   }
-  function mini(it) { return '<div class="row small" style="border-bottom:1px dashed var(--line);padding:4px 0"><button class="ghost" data-act="exOpen" data-id="' + esc(it.exId) + '" style="min-height:0;padding:2px 8px">' + esc(App.exName(it.exId)) + '</button><span class="muted">' + esc(App.dosageText(it)) + '</span></div>'; }
   function itemRow(p, d, it, j) {
-    return '<div class="item"><div class="thumb">' + App.thumb(it.exId) + '</div><div><b>' + esc(App.exName(it.exId)) + '</b> <span class="pill">' + esc(it.slot) + '</span>' + (it.override ? '<span class="pill">معدّل يدوياً</span>' : '') + '<div>' + esc(App.dosageText(it)) + ' <span class="small muted">(خطوة جرعة ' + it.step + '/4)</span></div><div class="why">' + it.why.map(esc).join(' · ') + '</div></div>' +
-      '<div class="act row"><button class="sec" data-act="exOpen" data-id="' + esc(it.exId) + '">الشرح والرسم</button><button class="ghost" data-act="ovOpen" data-plan="' + esc(p.id) + '" data-day="' + d.index + '" data-item="' + j + '">تعديل آمن</button></div></div>';
+    var ex = X.byId(it.exId) || { ar: it.exId, en: '' };
+    return '<div class="item"><div class="thumb">' + App.thumb(it.exId) + '</div><div><b>' + esc(ex.ar) + '</b> <span class="en" dir="ltr">' + esc(ex.en) + '</span>' +
+      (it.weak ? ' <span class="pill wk">💪 ' + bi('الجانب الأضعف: ' + sideAr(it.weak.side), 'Weak side') + '</span>' : '') + (it.focus ? ' <span class="pill">🎯 ' + esc(E.FOCUS[it.focus].ar) + '</span>' : '') + (it.override ? ' <span class="pill">معدّل</span>' : '') +
+      '<div>' + esc(App.dosageText(it)) + '</div><details class="why"><summary>لماذا؟</summary>' + it.why.map(esc).join('<br>') + '</details></div>' +
+      '<div class="act row"><button class="sec" data-act="exOpen" data-id="' + esc(it.exId) + '">' + bi('الشرح', 'How to') + '</button>' + (j >= 0 ? '<button class="ghost" data-act="ovOpen" data-plan="' + esc(p.id) + '" data-day="' + d.index + '" data-item="' + j + '">' + bi('تغيير', 'Change') + '</button>' : '') + '</div></div>';
   }
 
-  /* ---------- safe override ---------- */
-  function overrideDialog() { return '<dialog id="ovDlg" aria-labelledby="ovTitle"><div class="dlg-head"><h3 id="ovTitle">تعديل المدرب ضمن الحدود الآمنة</h3><button class="ghost" data-act="ovClose" aria-label="إغلاق">✕</button></div><div class="dlg-body" id="ovBody"></div></dialog>'; }
+  /* ---------- safe change (coach override within safe bounds) ---------- */
+  function overrideDialog() { return '<dialog id="ovDlg" aria-labelledby="ovTitle"><div class="dlg-head"><h3 id="ovTitle">تغيير تمرين ضمن الحدود الآمنة</h3><button class="ghost" data-act="ovClose" aria-label="إغلاق">✕</button></div><div class="dlg-body" id="ovBody"></div></dialog>'; }
   App.acts.ovOpen = function (el) {
     var t = App.trainee(), p = App.db.plans.filter(function (x) { return x.id === el.dataset.plan; })[0], di = Number(el.dataset.day), ii = Number(el.dataset.item), it = p.days[di].main[ii];
     var ctxIn = { trainee: t, screening: App.latest('screenings', t.id), baseline: App.latest('baselines', t.id) };
     var cands = E.candidatesFor(p, di, ii, ctxIn), ex = X.byId(it.exId), d = ex.dose, rng = d.u === 'reps' ? d.reps : d.sec;
-    App.$('#ovBody').innerHTML = '<form data-form="override" data-plan="' + esc(p.id) + '" data-day="' + di + '" data-item="' + ii + '"><p>الحالي: <b>' + esc(ex.ar) + '</b> ' + esc(App.dosageText(it)) + '</p><label>التمرين (المرشحات الآمنة فقط: ' + cands.length + ')<select name="exId">' + cands.map(function (c) { return '<option value="' + esc(c.id) + '"' + (c.id === it.exId ? ' selected' : '') + '>' + esc(c.ar) + ' — ' + esc(X.LEVEL[c.lvl]) + '</option>'; }).join('') + '</select></label>' +
-      '<div class="grid"><label>المجموعات (' + d.sets.join('–') + ' للتمرين الحالي)<input type="number" name="sets" value="' + it.sets + '"></label><label>' + (d.u === 'reps' ? 'التكرارات' : 'الثواني') + ' (' + rng.join('–') + ')<input type="number" name="target" value="' + it.target + '"></label></div><p class="small muted">عند تغيير التمرين تُستخدم جرعته الابتدائية تلقائياً ما لم تُغيّر الأرقام.</p>' +
-      '<label><input type="checkbox" name="allDays" checked> تطبيق على كل أيام الأسبوع التي تحتوي هذه الخانة</label><label>السبب (مطلوب، يُسجل)<input name="reason" required minlength="5" maxlength="300"></label><div id="ovErr" role="alert"></div><button type="submit">تطبيق</button></form>';
+    App.$('#ovBody').innerHTML = '<form data-form="override" data-plan="' + esc(p.id) + '" data-day="' + di + '" data-item="' + ii + '"><p>الحالي: <b>' + esc(ex.ar) + '</b> ' + esc(App.dosageText(it)) + '</p><label>التمرين (البدائل الآمنة فقط: ' + cands.length + ')<select name="exId">' + cands.map(function (c) { return '<option value="' + esc(c.id) + '"' + (c.id === it.exId ? ' selected' : '') + '>' + esc(c.ar) + ' — ' + esc(c.en) + '</option>'; }).join('') + '</select></label>' +
+      '<div class="grid"><label>المجموعات (' + d.sets.join('–') + ')<input type="number" name="sets" value="' + it.sets + '"></label><label>' + (d.u === 'reps' ? 'التكرارات' : 'الثواني') + ' (' + rng.join('–') + ')<input type="number" name="target" value="' + it.target + '"></label></div>' +
+      '<label><input type="checkbox" name="allDays" checked> تطبيق على كل أيام الأسبوع</label><label>السبب (مطلوب)<input name="reason" required minlength="5" maxlength="300"></label><div id="ovErr" role="alert"></div><button type="submit">تطبيق</button></form>';
     App.$('#ovDlg').showModal();
   };
   App.acts.ovClose = function () { App.$('#ovDlg').close(); };
@@ -5889,40 +6054,61 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     if (exId !== it.exId && Number(fd.get('sets')) === it.sets && Number(fd.get('target')) === it.target) { delete ch.sets; delete ch.target; }
     var r = E.applyOverride(p, ch, { trainee: t, screening: App.latest('screenings', t.id), baseline: App.latest('baselines', t.id) });
     if (!r.ok) { App.$('#ovErr').innerHTML = '<div class="alert danger">' + esc(r.error) + '</div>'; return; }
-    p.updatedAt = S.nowISO(); App.audit('plan.override', p.id + ': ' + ch.reason, t.id, p.id); App.save(); App.$('#ovDlg').close(); App.render(); App.toast('تم التعديل وتسجيله');
+    p.updatedAt = S.nowISO(); App.audit('plan.override', p.id + ': ' + ch.reason, t.id, p.id); App.save(); App.$('#ovDlg').close(); App.render(); App.toast('تم التغيير وتسجيله');
   };
 
-  /* ---------- print (A4, Arabic RTL) — via the browser's Print → Save as PDF ---------- */
+  /* ---------- printable / reading-copy content (shared) ---------- */
+  function exercisesOf(p) { var ids = [], info = {}; p.days.forEach(function (d) { (d.recovery || []).concat(d.main || [], d.warmup || [], d.cooldown || []).forEach(function (it) { if (ids.indexOf(it.exId) < 0) { ids.push(it.exId); info[it.exId] = it; } if (it.weak) info[it.exId] = it; }); }); return { ids: ids, info: info }; }
+  function docBody(p, t, forScreen) {
+    var em = App.db.settings.emergencyNumber || '....';
+    var h = '<header class="p-head"><div><h1>جدول التمارين الأسبوعي <span class="en" dir="ltr">Weekly Training Plan</span></h1><div class="pname">' + esc(t.displayName) + '</div><div>الأسبوع · Week: <b>' + App.fmtDate(p.weekStart) + ' – ' + App.fmtDate(p.weekEnd) + '</b></div>' + (t.forWhom === 'trainee' && t.coachName ? '<div>المدرب · Coach: ' + esc(t.coachName) + '</div>' : '') + '</div><div class="meta">' + esc(p.id) + '</div></header>';
+    h += '<section class="p-box"><b>كيف تستخدم الجدول · How to use</b><ul><li>ابدأ كل يوم تمارين بإحماء 5 دقائق، واختم بالإطالة.</li><li>الشدة المناسبة: تتعب لكن تستطيع الكلام بجمل قصيرة. لا تحبس نفسك.</li><li>اسم كل تمرين مكتوب بالعربي والإنجليزي؛ ابحث بالاسم الإنجليزي لتجد فيديو شرح.</li>' + (Object.keys(exercisesOf(p).info).some(function (k) { return exercisesOf(p).info[k].weak; }) ? '<li><b>الجانب الأضعف:</b> في التمارين المعلَّمة ابدأ بالجهة الأضعف وأعطها مجموعة إضافية.</li>' : '') + '</ul><b>أوقف التمرين فوراً إذا:</b> ألم أو ضغط في الصدر، دوخة شديدة أو إغماء، ضيق نفس غير طبيعي، خفقان قوي، ألم حاد في مفصل' + (p.pathway === 'pregnancy' ? '، نزيف أو تسرب سوائل أو انقباضات' : '') + '. الطوارئ: <b>' + esc(em) + '</b>. هذا الجدول ليس استشارة طبية.</section>';
+    h += '<h2>الأسبوع يوماً بيوم · Day by day</h2><table class="wk"><thead><tr><th>اليوم</th><th>أين</th><th>ماذا تفعل</th></tr></thead><tbody>';
+    p.days.forEach(function (d) {
+      var hd = dayHead(d), body;
+      if (d.type === 'rest') body = 'راحة · Rest';
+      else if (d.type === 'recovery') body = (d.recovery || []).map(function (it) { var ex = X.byId(it.exId); return '<b>' + esc(ex.ar) + '</b> <span class="en" dir="ltr">(' + esc(ex.en) + ')</span> — ' + Math.round(it.target / 60) + ' دقيقة'; }).join('<br>');
+      else body = d.main.map(function (it, i) { var ex = X.byId(it.exId); return (i + 1) + '. <b>' + esc(ex.ar) + '</b> <span class="en" dir="ltr">(' + esc(ex.en) + ')</span> — ' + esc(App.dosageText(it)); }).join('<br>');
+      h += '<tr><td><b>' + esc(d.dowAr) + '</b><br>' + App.fmtDate(d.date) + '</td><td>' + hd[0] + ' ' + esc(hd[1]) + '</td><td>' + body + '</td></tr>';
+    });
+    h += '</tbody></table>';
+    var ex = exercisesOf(p);
+    h += '<h2 class="pb">شرح التمارين · Exercise guide</h2>';
+    ex.ids.forEach(function (id) {
+      var e = X.byId(id), it = ex.info[id]; if (!e) return;
+      h += '<article class="exs"><div class="pics"><div>' + App.thumb(id, 0) + '<small>البداية · Start</small></div><div>' + App.thumb(id) + '<small>النهاية · End</small></div></div><div class="txt"><h3>' + esc(e.ar) + '</h3><div class="enname" dir="ltr">' + esc(e.en) + '</div>' +
+        '<div class="dose">' + esc(App.dosageText(it)) + '</div><ol>' + e.steps.slice(0, 4).map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>' +
+        '<div><b>التنفس:</b> ' + esc(e.breath) + '</div><div><b>انتبه:</b> ' + esc(e.errors.slice(0, 2).join('؛ ')) + '</div><div><b>توقف إذا:</b> ' + esc(e.stop.slice(0, 2).join('؛ ')) + '</div>' +
+        '<div class="vid">🔎 فيديو: ابحث عن <span dir="ltr">“' + esc(e.en) + ' exercise”</span> — <a href="' + esc(App.videoUrl(e)) + '" target="_blank" rel="noopener noreferrer">فتح البحث في يوتيوب ↗</a></div></div></article>';
+    });
+    if (!forScreen) {
+      h += '<h2 class="pb">سجل الأسبوع · Weekly log</h2><table class="fb"><thead><tr><th>اليوم</th><th>تم؟</th><th>التعب 0–10</th><th>ألم 0–10 / أين</th><th>ملاحظات</th></tr></thead><tbody>' + p.days.filter(function (d) { return d.type !== 'rest'; }).map(function (d) { return '<tr><td>' + esc(d.dowAr) + ' ' + App.fmtDate(d.date) + '</td><td>☐ نعم ☐ جزئي ☐ لا</td><td></td><td></td><td></td></tr>'; }).join('') + '</tbody></table>';
+    }
+    h += '<p class="meta foot">روابط الفيديو تحتاج إنترنت وهي نتائج بحث عامة لم يراجعها التطبيق — اتبع الشرح المكتوب إذا اختلف الفيديو عنه. ملف PDF لا يُستورد في التطبيق؛ للنقل بين الأجهزة استخدم نسخة JSON. ' + esc(p.ruleVersion) + ' · v' + esc(S.APP_VERSION) + '</p>';
+    return h;
+  }
   App.acts.printPlan = function (el) {
     var p = App.db.plans.filter(function (x) { return x.id === el.dataset.id; })[0], t = App.trainee(p.traineeId);
-    App.$('#print').innerHTML = printHTML(p, t);
+    App.$('#print').innerHTML = p.status === 'blocked' ? '<header class="p-head"><h1>' + esc(t.displayName) + '</h1></header><div class="p-box"><b>لا يوجد جدول تمارين حالياً.</b><ul>' + p.blockers.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul></div>' : docBody(p, t, false);
     App.audit('plan.print', 'طباعة ' + p.id, t.id, p.id); App.save();
     setTimeout(function () { window.print(); }, 50);
   };
-  function printHTML(p, t) {
-    var sc = App.db.screenings.filter(function (s) { return s.id === p.screeningId; })[0];
-    var h = '<div class="p-head"><div><h1>الخطة التدريبية الأسبوعية — بوزن الجسم</h1><div><b>المتدرب:</b> ' + esc(t.displayName) + (t.internalId ? ' (' + esc(t.internalId) + ')' : '') + ' · <b>معرف المتدرب:</b> ' + esc(t.id) + '</div><div><b>المدرب:</b> ' + esc(t.coachName || App.db.settings.coachName || '................') + '</div></div>' +
-      '<div class="meta"><div><b>رقم الخطة:</b> ' + esc(p.id) + '</div><div><b>الأسبوع:</b> ' + App.fmtDate(p.weekStart) + ' – ' + App.fmtDate(p.weekEnd) + '</div><div><b>تاريخ الإنشاء:</b> ' + App.fmtDate(p.createdAt) + '</div><div>' + esc(p.ruleVersion) + ' · ' + esc(sc ? sc.version : '') + ' · v' + esc(S.APP_VERSION) + '</div></div></div>';
-    if (p.status === 'blocked') return h + '<div class="p-box"><b>لم تُصدر خطة تمارين.</b><ul>' + p.blockers.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul></div>' + footer(p);
-    h += '<div class="p-box"><b>تعليمات السلامة:</b> إحماء قبل كل حصة وتهدئة بعدها. تنفس بانتظام ولا تحبس النفس. الجهد المستهدف 5–7 من 10 (تستطيع الكلام بجمل قصيرة). أوقف التمرين فوراً عند: ' + esc(X.STOP_ALL.join('؛ ')) + '. رقم الطوارئ: ' + esc(App.db.settings.emergencyNumber || '....') + '. الخطة أداة تدريبية وليست تصريحاً طبياً.' + (p.pathway === 'pregnancy' ? ' <b>مسار الحمل:</b> بموافقة مقدم الرعاية؛ دون قفز أو استلقاء طويل على الظهر؛ اشربي الماء وتجنبي الحرارة.' : p.pathway === 'postpartum' ? ' <b>ما بعد الولادة:</b> دون قفز حتى التقييم؛ أوقفي عند تسرب أو ثقل في الحوض.' : '') + '</div>';
-    h += '<h2>جدول الأسبوع</h2><table><thead><tr><th style="width:16%">اليوم</th><th style="width:12%">النوع</th><th>التمارين والجرعة (مجموعات × عدد/مدة · راحة)</th><th style="width:9%">≈ دقائق</th></tr></thead><tbody>';
-    p.days.forEach(function (d) {
-      var body = d.type === 'rest' ? 'راحة' : d.type === 'recovery' ? (d.recovery || []).map(function (it) { return esc(App.exName(it.exId)) + ' ' + esc(App.dosageText(it)); }).join('<br>') + '<br>تهدئة: ' + (d.cooldown || []).map(function (it) { return esc(App.exName(it.exId)); }).join('، ') :
-        '<b>إحماء:</b> ' + (d.warmup || []).map(function (it) { return esc(App.exName(it.exId)) + ' (' + esc(App.dosageText(it)) + ')'; }).join('، ') + '<br>' + d.main.map(function (it, i) { return (i + 1) + ') <b>' + esc(App.exName(it.exId)) + '</b> — ' + esc(App.dosageText(it)); }).join('<br>') + '<br><b>تهدئة:</b> ' + (d.cooldown || []).map(function (it) { return esc(App.exName(it.exId)) + ' (' + esc(App.dosageText(it)) + ')'; }).join('، ');
-      h += '<tr><td><b>' + esc(d.dowAr) + '</b><br>' + App.fmtDate(d.date) + '</td><td>' + esc({ train: 'تدريب ' + (d.template || ''), recovery: 'استشفاء', rest: 'راحة' }[d.type]) + '</td><td>' + body + '</td><td>' + (d.estMinutes || '—') + '</td></tr>';
-    });
-    h += '</tbody></table>';
-    var ids = []; p.days.forEach(function (d) { (d.main || []).concat(d.warmup || [], d.cooldown || [], d.recovery || []).forEach(function (it) { if (ids.indexOf(it.exId) < 0) ids.push(it.exId); }); });
-    h += '<h2>بطاقات التمارين المصوّرة</h2><p class="meta">الرسوم أصلية مولدة برمجياً: الشكل الأول وضع البداية، والثاني وضع النهاية (الباهت = البداية، المنقط = المسار).</p>';
-    ids.forEach(function (id) {
-      var ex = X.byId(id); if (!ex) return;
-      h += '<div class="exs"><div>' + App.thumb(id, 0) + '</div><div>' + App.thumb(id) + '</div><div><h3>' + esc(ex.ar) + ' <span class="meta">(' + esc(ex.en) + ' · ' + esc(ex.id) + ' · ' + esc(X.LEVEL[ex.lvl]) + ')</span></h3><div class="meta"><b>البداية:</b> ' + esc(ex.setup) + '</div><ol class="meta" style="margin:2px 18px 2px 0;padding:0">' + ex.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol><div class="meta"><b>التنفس:</b> ' + esc(ex.breath) + ' <b>أخطاء:</b> ' + esc(ex.errors.join('؛ ')) + ' <b>أوقف إذا:</b> ' + esc(ex.stop.join('؛ ')) + (ex.easier.length ? ' <b>أسهل:</b> ' + esc(ex.easier.map(App.exName).join('، ')) : '') + '</div></div></div>';
-    });
-    h += '<h2 class="pb">سجل المتابعة (يُملأ يدوياً ثم يُدخل في التطبيق)</h2><table class="fb"><thead><tr><th>اليوم</th><th>أُنجزت؟</th><th>الجهد 0–10</th><th>ألم 0–10 / المكان</th><th>التقنية</th><th>ملاحظات</th></tr></thead><tbody>' + p.days.filter(function (d) { return d.type !== 'rest'; }).map(function (d) { return '<tr><td>' + esc(d.dowAr) + ' ' + App.fmtDate(d.date) + '</td><td>☐ كاملة ☐ جزئية ☐ لا</td><td></td><td></td><td>☐ جيدة ☐ متوسطة ☐ ضعيفة</td><td></td></tr>'; }).join('') + '</tbody></table>';
-    h += '<div class="p-box"><b>أسئلة نهاية الأسبوع:</b> 1) هل حدث ألم صدر/دوخة/إغماء/ضيق نفس غير معتاد/خفقان؟ ☐ لا ☐ نعم 2) أعلى ألم جديد 0–10 ومكانه: ...... 3) مرض مؤقت؟ ☐ لا ☐ نعم 4) النوم: ☐ جيد ☐ متوسط ☐ ضعيف 5) الإرهاق 0–10: ...... 6) ألم عضلي > 72 ساعة؟ ☐ لا ☐ نعم 7) هل الأيام والمدة مناسبة؟ ☐ نعم ☐ لا</div>';
-    return h + footer(p);
-  }
-  function footer(p) { return '<p class="meta" style="margin-top:8px;border-top:1px solid #999;padding-top:4px">طُبعت عبر خاصية الطباعة في المتصفح (Print → Save as PDF)؛ لا يحتوي ملف PDF على قاعدة بيانات قابلة للاستيراد — للنقل بين الأجهزة استخدم ملف JSON المصدَّر. البحث برقم الخطة يعمل فقط عند وجود السجل محلياً. المصادر: انظر صفحة «المصادر والسلامة» في التطبيق. ' + esc(p.id) + '</p>'; }
+  /* Stand-alone HTML reading copy for the trainee (opens on any phone/PC; no scripts). */
+  App.readingCopyHTML = function (p, t) {
+    var css = 'body{font-family:"Segoe UI",Tahoma,"Geeza Pro",Arial,sans-serif;margin:0;background:#f4f6f8;color:#14212d;line-height:1.7}main{max-width:820px;margin:auto;padding:14px}' +
+      '.p-head{display:flex;justify-content:space-between;gap:8px;border-bottom:3px solid #8a6a12;padding-bottom:8px}h1{font-size:1.35rem;margin:0}.pname{font-size:1.2rem;font-weight:700}.en{color:#4c5f70;font-size:.85em}.meta{color:#4c5f70;font-size:.8rem}' +
+      '.p-box{background:#fff;border:1px solid #c8d3dd;border-radius:12px;padding:10px 14px;margin:12px 0}table{width:100%;border-collapse:collapse;background:#fff}th,td{border:1px solid #c8d3dd;padding:6px;text-align:start;vertical-align:top}th{background:#e7edf2}' +
+      '.exs{background:#fff;border:1px solid #c8d3dd;border-radius:12px;padding:10px;margin:10px 0;display:grid;grid-template-columns:1fr 1.3fr;gap:10px}.pics{display:grid;grid-template-columns:1fr 1fr;gap:6px}.pics small{display:block;text-align:center;color:#4c5f70}' +
+      '.enname{font-weight:700;color:#0f7d6b}.dose{background:#fff4dc;border-radius:8px;padding:4px 8px;margin:4px 0}.vid a{font-weight:700}h3{margin:0}@media(max-width:600px){.exs{grid-template-columns:1fr}}' +
+      document.getElementById('figcss').textContent.replace(/var\(--fig-bg,[^)]*\)/g, '#f3f7fa').replace(/var\(--fig,[^)]*\)/g, '#1d4e7a').replace(/var\(--fig-far,[^)]*\)/g, '#7aa1c4');
+    return '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(t.displayName) + ' — جدول ' + esc(p.weekStart) + '</title><style>' + css + '</style></head><body><main>' + docBody(p, t, true) + '</main></body></html>';
+  };
+  App.acts.readCopy = function (el) {
+    var p = App.db.plans.filter(function (x) { return x.id === el.dataset.id; })[0], t = App.trainee(p.traineeId);
+    App.download('جدول_' + t.displayName + '_' + p.weekStart + '.html', App.readingCopyHTML(p, t), 'text/html');
+    App.audit('plan.readcopy', 'نسخة قراءة ' + p.id, t.id, p.id); App.save();
+    App.toast('تم حفظ نسخة القراءة. أرسلها للمتدرب ليفتحها على جواله. · Reading copy saved.', 6000);
+  };
 })();
 
 ;
@@ -5949,7 +6135,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     (d.main || []).forEach(function (it) { flat.push(Object.assign({ block: 'main' }, it)); });
     (d.cooldown || []).forEach(function (it) { flat.push(Object.assign({ block: 'cooldown' }, it)); });
     var s = { id: S.uniqueId(App.db, 'sessions'), traineeId: t.id, planId: p.id, dayIndex: di, date: d.date, kind: d.type === 'recovery' ? 'recovery' : 'train', status: 'partial', early: early, startedAt: S.nowISO(), updatedAt: S.nowISO(), cursor: 0, redFlag: false,
-      items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
+      items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, weak: it.weak || null, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
     App.db.sessions.push(s); App.audit('session.start', 'بدء حصة ' + s.id, t.id, s.id); App.save();
     App.ui.run = { id: s.id, idx: 0 }; App.go('session');
   };
@@ -5967,9 +6153,9 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     if (run.idx >= s.items.length) return postCheck(s);
     var it = s.items[run.idx], ex = X.byId(it.exId), pr = it.prescribed;
     var blockAr = { warmup: 'إحماء', main: 'رئيسي', cooldown: 'تهدئة', recovery: 'استشفاء' }[it.block];
-    var h = '<div class="row"><h2 class="grow">الحصة المباشرة · ' + esc(App.trainee(s.traineeId).displayName) + '</h2><span class="badge b-info">' + (run.idx + 1) + ' / ' + s.items.length + '</span></div>';
+    var h = '<div class="row"><h2 class="grow">' + App.bi('التمرين', 'Workout') + ' · ' + esc(App.trainee(s.traineeId).displayName) + '</h2><span class="badge b-info">' + (run.idx + 1) + ' / ' + s.items.length + '</span></div>';
     h += '<div class="stepper">' + s.items.map(function (x, i) { return '<span class="' + (i === run.idx ? 'on' : x.sets.length ? 'done' : '') + '" title="' + esc(App.exName(x.exId)) + '">' + (i + 1) + '</span>'; }).join('') + '</div>';
-    h += '<div class="card"><div class="row"><h3 class="grow">' + esc(ex.ar) + ' <span class="pill">' + blockAr + '</span></h3><span class="badge b-info">الهدف: ' + esc(App.dosageText({ exId: it.exId, sets: pr.sets, target: pr.target, u: pr.u, side: pr.side, rest: pr.rest })) + '</span></div>' +
+    h += '<div class="card"><div class="row"><h3 class="grow">' + esc(ex.ar) + ' <span class="en" dir="ltr">' + esc(ex.en) + '</span> <span class="pill">' + blockAr + '</span></h3><span class="badge b-info">' + esc(App.dosageText({ exId: it.exId, sets: pr.sets, target: pr.target, u: pr.u, side: pr.side, rest: pr.rest, weak: it.weak, walk: it.block === 'recovery' })) + '</span></div>' + (it.weak ? '<div class="alert warn"><b>💪 الجانب الأضعف: ابدأ بالجهة ' + (it.weak.side === 'left' ? 'اليسرى' : 'اليمنى') + '، ونفّذ لها مجموعة إضافية.</b></div>' : '') +
       '<div class="player"><div id="runPlayer"></div><div><ol class="steps">' + ex.steps.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol><p class="small"><b>التنفس:</b> ' + esc(ex.breath) + '</p><p class="small"><b>انتبه:</b> ' + esc(ex.errors.slice(0, 3).join('؛ ')) + '</p></div></div></div>';
     var done = it.sets.length, isTime = pr.u === 'time';
     h += '<div class="card"><h3>المجموعة ' + Math.min(done + 1, pr.sets) + ' من ' + pr.sets + (done >= pr.sets ? ' ✔ (اكتملت المجموعات المخططة)' : '') + '</h3><div class="counter">' +
@@ -5979,7 +6165,11 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
       '<button class="ok" data-act="runSet" style="width:100%">✔ تسجيل المجموعة وبدء الراحة</button></div>' +
       '<div class="card flat"><h4>الراحة</h4><div class="bignum" id="restVal">' + fmtS(pr.rest || 0) + '</div><div class="small" style="text-align:center" id="restLbl">تبدأ تلقائياً بعد تسجيل المجموعة</div><div class="row" style="justify-content:center"><button class="sec" data-act="restSkip">تخطي الراحة</button><label style="margin:0"><input type="checkbox" id="muteRun"' + (App.ui.mute ? ' checked' : '') + '> كتم</label></div>' +
       '<p class="small">المجموعات المسجلة: ' + (it.sets.map(function (x, i) { return (i + 1) + ') ' + x.value + (isTime ? ' ث' : ''); }).join(' · ') || '—') + (it.sets.length ? ' <button class="ghost" data-act="runUndo" style="min-height:0;padding:2px 8px">تراجع عن آخر مجموعة</button>' : '') + '</p></div></div></div>';
-    if (it.block === 'main') h += '<div class="card"><h4>بعد إنهاء التمرين</h4><div class="grid g3"><label>الجهد (0 = راحة، 10 = أقصى جهد ممكن)<input type="number" id="runEffort" min="0" max="10" value="' + esc(it.effort) + '"></label><label>جودة التقنية<select id="runTech"><option value="">—</option><option value="good"' + (it.technique === 'good' ? ' selected' : '') + '>جيدة</option><option value="fair"' + (it.technique === 'fair' ? ' selected' : '') + '>متوسطة</option><option value="poor"' + (it.technique === 'poor' ? ' selected' : '') + '>ضعيفة</option></select></label><label>ألم في التمرين (0–10)<input type="number" id="runPain" min="0" max="10" value="' + esc(it.pain || 0) + '"></label><label>منطقة الألم<select id="runPainArea"><option value="">—</option>' + SC.AREAS.map(function (a) { return '<option value="' + a[0] + '"' + (it.painArea === a[0] ? ' selected' : '') + '>' + a[1] + '</option>'; }).join('') + '</select></label></div><p class="small muted">ألم ≥ 4 ⇒ توقف عن هذا التمرين وانتقل للتالي؛ سيُستبدل الأسبوع القادم. ألم ≥ 7 أو ألم حاد في مفصل ⇒ أوقف الحصة.</p></div>';
+    if (it.block === 'main') {
+      var rate = it.rate || '';
+      h += '<div class="card"><h4>' + App.bi('كيف كان هذا التمرين؟', 'How was it?') + '</h4><div class="chips">' + [['easy', 'سهل', 'Easy'], ['ok', 'مناسب', 'Just right'], ['hard', 'صعب جداً', 'Too hard'], ['pain', 'ألم', 'Pain']].map(function (o) { return '<button type="button" class="chip' + (rate === o[0] ? ' on' : '') + '" data-act="runRate" data-v="' + o[0] + '" aria-pressed="' + (rate === o[0]) + '">' + App.bi(o[1], o[2]) + '</button>'; }).join('') + '</div>' +
+        (rate === 'pain' ? '<div class="grid g3"><label>' + App.bi('شدة الألم 0–10', 'Pain 0–10') + '<input type="number" id="runPain" min="1" max="10" value="' + esc(it.pain || 4) + '"></label><label>' + App.bi('أين؟', 'Where?') + '<select id="runPainArea"><option value="">—</option>' + SC.AREAS.map(function (a) { return '<option value="' + a[0] + '"' + (it.painArea === a[0] ? ' selected' : '') + '>' + a[1] + ' · ' + a[2] + '</option>'; }).join('') + '</select></label></div><p class="small">ألم 4 أو أكثر: أوقف هذا التمرين وانتقل للتالي، وسيُستبدل الأسبوع القادم. ألم 7 أو أكثر أو ألم حاد في مفصل: أوقف التمرين كله.</p>' : '') + '</div>';
+    }
     h += '<div class="row"><button class="sec" data-act="runPrev"' + (run.idx ? '' : ' disabled') + '>→ السابق</button><button data-act="runNext">التالي ←</button><button class="ghost" data-act="runPause">حفظ والخروج (حصة جزئية)</button></div>';
     h += '<div class="stopbar" role="region" aria-label="إيقاف طارئ"><span><b>علامة إنذار؟</b> ألم صدر، دوخة شديدة، ضيق نفس غير معتاد، خفقان، ألم حاد مفاجئ' + (App.latest('screenings', s.traineeId) && App.latest('screenings', s.traineeId).outcome.pathway === 'pregnancy' ? '، نزيف أو تسرب سوائل' : '') + '</span><button class="danger" data-act="runStop">⛔ إيقاف فوري</button></div>';
     return h;
@@ -5987,15 +6177,19 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
   App.after.session = function () {
     var run = App.ui.run, s = run && sesById(run.id); if (!s || s.status !== 'partial' || run.idx >= s.items.length) return;
     var box = App.$('#runPlayer'); if (box) App.mountPlayer(box, X.byId(s.items[run.idx].exId));
-    ['runEffort', 'runTech', 'runPain', 'runPainArea'].forEach(function (id) { var el = App.$('#' + id); if (el) el.addEventListener('change', saveMeta); });
+    ['runPain', 'runPainArea'].forEach(function (id) { var el = App.$('#' + id); if (el) el.addEventListener('change', saveMeta); });
   };
+  /* Quick rating → effort/technique used by the weekly adaptation rules (easy 4, just right 6, too hard 9). */
+  var RATE = { easy: { effort: 4, technique: 'good' }, ok: { effort: 6, technique: 'good' }, hard: { effort: 9, technique: 'fair' }, pain: { effort: 7, technique: 'fair' } };
   function saveMeta() {
-    var s = sesById(App.ui.run.id), it = s.items[App.ui.run.idx];
-    var v = function (id) { var el = App.$('#' + id); return el ? el.value : ''; };
-    it.effort = v('runEffort') === '' ? '' : Math.max(0, Math.min(10, Number(v('runEffort')))); it.technique = v('runTech'); it.pain = Math.max(0, Math.min(10, Number(v('runPain')) || 0)); it.painArea = v('runPainArea');
+    var s = sesById(App.ui.run.id), it = s.items[App.ui.run.idx]; if (!it || it.block !== 'main' || !it.rate) return;
+    it.effort = RATE[it.rate].effort; it.technique = RATE[it.rate].technique;
+    var pe = App.$('#runPain'), pa = App.$('#runPainArea');
+    it.pain = it.rate === 'pain' ? Math.max(1, Math.min(10, Number(pe && pe.value) || 4)) : 0; it.painArea = it.rate === 'pain' && pa ? pa.value : '';
     s.updatedAt = S.nowISO(); App.save();
-    if (it.pain >= 7) App.toast('ألم ≥ 7: أوقف الحصة واطلب تقييماً.', 6000);
+    if (it.pain >= 7) App.toast('ألم 7 أو أكثر: أوقف التمرين واطلب تقييماً.', 6000);
   }
+  App.acts.runRate = function (el) { var s = sesById(App.ui.run.id), it = s.items[App.ui.run.idx]; it.rate = el.dataset.v; saveMeta(); var y = window.scrollY; App.render(); window.scrollTo(0, y); };
   function fmtS(n) { n = Math.max(0, Math.round(n)); var m = Math.floor(n / 60), s = n % 60; return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; }
   var timers = { work: null, rest: null };
   function clearTimers() { clearInterval(timers.work); clearInterval(timers.rest); timers.work = timers.rest = null; }
@@ -6016,7 +6210,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     clearTimers(); if (it.block === 'main') saveMeta();
     it.sets.push({ value: val, at: S.nowISO() }); s.updatedAt = S.nowISO(); s.cursor = App.ui.run.idx; App.save();
     var rest = it.prescribed.rest || 0, y = window.scrollY; App.render(); window.scrollTo(0, y);
-    if (it.sets.length >= it.prescribed.sets) { App.toast('اكتملت المجموعات المخططة لهذا التمرين — سجّل الجهد والتقنية ثم «التالي».'); }
+    if (it.sets.length >= it.prescribed.sets) { App.toast(it.block === 'main' ? 'اكتملت المجموعات ✔ — اختر «كيف كان؟» ثم «التالي».' : 'تم ✔ — اضغط «التالي».'); }
     if (rest > 0) { var left = rest; App.$('#restLbl').textContent = 'راحة — تنفس بهدوء'; timers.rest = setInterval(function () { if (!App.$('#restVal')) return clearTimers(); left--; App.$('#restVal').textContent = fmtS(left); if (left <= 3 && left > 0) App.beep(740, 80); if (left <= 0) { clearInterval(timers.rest); timers.rest = null; App.$('#restLbl').textContent = 'انتهت الراحة'; App.beep(988, 200, 2); App.vibrate(200); } }, 1000); }
   };
   App.acts.restSkip = function () { clearInterval(timers.rest); timers.rest = null; var l = App.$('#restLbl'); if (l) l.textContent = 'تم التخطي'; };
@@ -6032,16 +6226,15 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
 
   /* ---------- post-session check (4–6 questions) ---------- */
   var POST = [
-    { id: 'effort', type: 'num', min: 0, max: 10, text: 'جهد الحصة كاملة (0 = راحة، 10 = أقصى جهد):', must: 1 },
-    { id: 'technique', type: 'select', opts: [['good', 'جيدة'], ['fair', 'متوسطة'], ['poor', 'ضعيفة']], text: 'جودة التقنية عموماً:', must: 1 },
-    { id: 'pain', type: 'num', min: 0, max: 10, text: 'أعلى ألم (غير الإرهاق العضلي العادي) 0–10:', must: 1 },
-    { id: 'painArea', type: 'select', opts: [['', '—']].concat(SC.AREAS), text: 'مكان الألم إن وجد:' },
-    { id: 'symptoms', type: 'yn', text: 'هل ظهر ألم صدر أو دوخة شديدة أو ضيق نفس غير معتاد أو خفقان؟', must: 1 },
-    { id: 'comment', type: 'text', text: 'ملاحظات (اختياري):' }
+    { id: 'effort', type: 'num', min: 0, max: 10, text: 'كم كان التمرين متعباً؟ (0 = سهل جداً، 10 = أقصى جهد)', en: 'How hard was the workout? (0–10)', must: 1 },
+    { id: 'pain', type: 'num', min: 0, max: 10, text: 'هل شعرت بألم (غير تعب العضلات العادي)؟ 0 = لا', en: 'Any pain (not normal muscle tiredness)? 0 = none', must: 1 },
+    { id: 'painArea', type: 'select', opts: [['', '—', '—']].concat(SC.AREAS), text: 'أين الألم؟', en: 'Where?' },
+    { id: 'symptoms', type: 'yn', text: 'هل حدث ألم صدر أو دوخة شديدة أو ضيق نفس غير طبيعي أو خفقان؟', en: 'Chest pain, severe dizziness, unusual breathlessness or palpitations?', must: 1 },
+    { id: 'comment', type: 'text', text: 'ملاحظة (اختياري)', en: 'Note (optional)' }
   ];
   function postCheck(s) {
     var done = s.items.filter(function (i) { return i.sets.length; }).length;
-    return '<h2>فحص ما بعد الحصة</h2><form class="card" data-form="post"><p>التمارين المنجزة: ' + done + ' من ' + s.items.length + '. الحصة محفوظة.</p>' + POST.map(function (q) { return App.field(q, q.id === 'pain' ? 0 : undefined, 'p_'); }).join('') + '<div id="postErr" role="alert"></div><div class="row"><button type="submit">إنهاء الحصة</button><button type="button" class="sec" data-act="runPrev">رجوع</button></div></form>';
+    return '<h2>' + App.bi('بعد التمرين', 'After the workout') + '</h2><form class="card" data-form="post"><p>التمارين المنجزة: ' + done + ' من ' + s.items.length + '. الحصة محفوظة.</p>' + POST.map(function (q) { return App.field(q, q.id === 'pain' ? 0 : undefined, 'p_'); }).join('') + '<div id="postErr" role="alert"></div><div class="row"><button type="submit">إنهاء الحصة</button><button type="button" class="sec" data-act="runPrev">رجوع</button></div></form>';
   }
   App.forms.post = function (f) {
     var s = sesById(App.ui.run.id), a = App.readForm(f, POST, 'p_');
@@ -6160,13 +6353,202 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
 })();
 
 ;
+/* ==== src/ui_setup.js ==== */
+/* Simple setup (one page, 3 short sections, bilingual), simple home page and "More" page. */
+(function () {
+  'use strict';
+  var App = window.App, S = window.MCStore, E = window.MCEngine, X = window.MCEX, SC = window.MCScreen, esc = App.esc;
+
+  /* bilingual label helper: Arabic line + small English line */
+  function bi(ar, en) { return '<span class="ar">' + esc(ar) + '</span>' + (en ? ' <span class="en" dir="ltr">' + esc(en) + '</span>' : ''); }
+  App.bi = bi;
+  function radios(name, opts, val) {
+    return '<div class="chips" role="radiogroup">' + opts.map(function (o) { return '<label class="chip"><input type="radio" name="' + esc(name) + '" value="' + esc(o[0]) + '"' + (String(val) === String(o[0]) ? ' checked' : '') + '><span>' + bi(o[1], o[2]) + '</span></label>'; }).join('') + '</div>';
+  }
+  function checks(name, opts, vals) {
+    vals = vals || [];
+    return '<div class="chips">' + opts.map(function (o) { return '<label class="chip"><input type="checkbox" name="' + esc(name) + '" value="' + esc(o[0]) + '"' + (vals.indexOf(String(o[0])) >= 0 || vals.indexOf(o[0]) >= 0 ? ' checked' : '') + '><span>' + bi(o[1], o[2]) + '</span></label>'; }).join('') + '</div>';
+  }
+  function q(label, en, body, note) { return '<div class="q"><div class="qt">' + bi(label, en) + '</div>' + body + (note ? '<div class="small muted">' + esc(note) + '</div>' : '') + '</div>'; }
+  App.biRadios = radios;
+
+  var DAYS = E.DOW_AR.map(function (d, i) { return [i, d, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][i]]; });
+  var GOALS = [['general', 'لياقة عامة', 'General fitness'], ['weight', 'إنقاص الوزن', 'Weight loss'], ['strength', 'قوة', 'Strength'], ['endurance', 'تحمّل', 'Endurance'], ['mobility', 'مرونة وحركة', 'Mobility']];
+  var EQUIP = [['chair', 'كرسي ثابت', 'Sturdy chair'], ['step', 'درجة أو درج', 'Step / stairs'], ['bar', 'عقلة', 'Pull-up bar'], ['table', 'طاولة متينة', 'Sturdy table'], ['towel', 'منشفة', 'Towel']];
+  var FIT = {
+    push: [['0', 'لا أستطيع', 'None'], ['1-5', '1–5'], ['6-15', '6–15'], ['16+', 'أكثر من 15', '16+']],
+    squat: [['<10', 'أقل من 10', 'Under 10'], ['10-20', '10–20'], ['20+', 'أكثر من 20', '20+']],
+    plank: [['<20', 'أقل من 20 ثانية', 'Under 20 s'], ['20-45', '20–45 ثانية', '20–45 s'], ['45+', 'أكثر من 45 ثانية', '45+ s']],
+    walk: [['<10', 'أقل من 10 دقائق', 'Under 10 min'], ['10-30', '10–30 دقيقة', '10–30 min'], ['30+', 'أكثر من 30 دقيقة', '30+ min']],
+    pull: [['0', 'ولا واحدة', 'None'], ['1-3', '1–3'], ['4+', '4 أو أكثر', '4+']],
+    side: [['none', 'لا', 'No'], ['left', 'اليسرى أضعف', 'Left is weaker'], ['right', 'اليمنى أضعف', 'Right is weaker']]
+  };
+
+  function fromTrainee(t) {
+    var sc = App.latest('screenings', t.id), bl = App.latest('baselines', t.id);
+    var eq = (t.equipment || []).filter(function (e) { return ['chair', 'step', 'bar', 'table', 'towel'].indexOf(e) >= 0; });
+    var ans = sc ? JSON.parse(JSON.stringify(sc.answers)) : {};
+    return { editId: t.id, forWhom: t.forWhom || 'trainee', name: t.displayName, coachName: t.coachName || '', age: t.age, sex: t.sex === 'male' || t.sex === 'female' ? t.sex : '', heightCm: t.heightCm || '', weightKg: t.weightKg || '',
+      goal: t.goal || 'general', days: (t.days || []).map(String), minutes: String(t.minutes || 30), place: t.place || 'home', eq: eq, answers: ans,
+      fit: (bl && bl.quick) || {}, weakArm: t.weakArm || 'none', weakLeg: t.weakLeg || 'none', focus: t.focus || [], consent: !!t.consent };
+  }
+  App.acts.setupNew = function (el) { App.ui.wz = { forWhom: el.dataset.for || 'self', days: ['0', '2', '4'], minutes: '30', place: 'both', goal: 'general', answers: {}, fit: {}, eq: ['chair'], weakArm: 'none', weakLeg: 'none', focus: [] }; App.go('setup'); };
+  App.acts.setupEdit = function (el) { var t = App.trainee(el.dataset.id); App.ui.traineeId = t.id; App.ui.wz = fromTrainee(t); App.go('setup'); };
+
+  App.pages.setup = function () {
+    var w = App.ui.wz; if (!w) { App.ui.wz = w = { forWhom: 'self', days: ['0', '2', '4'], minutes: '30', place: 'both', goal: 'general', answers: {}, fit: {}, eq: ['chair'], weakArm: 'none', weakLeg: 'none', focus: [] }; }
+    var tview = { sex: w.sex || '' };
+    var h = '<h2>' + (w.editId ? 'تعديل البيانات' : 'جدول جديد') + ' <span class="en" dir="ltr">' + (w.editId ? 'Edit details' : 'New plan') + '</span></h2><p class="muted lead">' + bi('3 أقسام قصيرة. اختر الإجابة الأقرب لك.', '3 short sections — pick the closest answer.') + '</p><div id="wzErr" role="alert"></div><form data-form="setup" id="wzForm" novalidate>';
+    /* 1) about */
+    h += '<fieldset class="card"><legend>' + bi('1) عنك', 'About you') + '</legend>';
+    h += q('لمن هذا الجدول؟', 'Who is this plan for?', radios('forWhom', [['self', 'لنفسي', 'For myself'], ['trainee', 'لمتدرب', 'For a trainee']], w.forWhom));
+    h += '<div class="grid g3"><label>' + bi('الاسم', 'Name') + '<input name="name" maxlength="80" value="' + esc(w.name || '') + '" required></label>' +
+      (w.forWhom === 'trainee' ? '<label>' + bi('اسم المدرب', 'Coach name') + '<input name="coachName" maxlength="80" value="' + esc(w.coachName || App.db.settings.coachName || '') + '"></label>' : '') +
+      '<label>' + bi('العمر', 'Age') + '<input name="age" type="number" inputmode="numeric" min="10" max="100" value="' + esc(w.age || '') + '"></label>' +
+      '<label>' + bi('الطول (سم)', 'Height (cm)') + '<input name="heightCm" type="number" inputmode="numeric" min="100" max="230" value="' + esc(w.heightCm || '') + '"></label>' +
+      '<label>' + bi('الوزن (كجم)', 'Weight (kg)') + '<input name="weightKg" type="number" inputmode="decimal" min="30" max="250" step="0.5" value="' + esc(w.weightKg || '') + '"></label></div>';
+    h += q('الجنس', 'Sex', radios('sex', [['male', 'ذكر', 'Male'], ['female', 'أنثى', 'Female']], w.sex), 'يُستخدم فقط لإظهار أسئلة الحمل، ولا يغيّر شدة التمارين.');
+    h += q('هدفك', 'Your goal', radios('goal', GOALS, w.goal));
+    h += q('الأيام المتاحة', 'Available days', checks('days', DAYS, w.days));
+    h += q('مدة التمرين', 'Session length', radios('minutes', [['20', '20 دقيقة', '20 min'], ['30', '30 دقيقة', '30 min'], ['45', '45 دقيقة', '45 min'], ['60', '60 دقيقة', '60 min']], w.minutes));
+    h += q('أين ستتمرن؟', 'Where will you train?', radios('place', [['home', 'في المنزل فقط', 'Home only'], ['both', 'المنزل + خارج المنزل (مشي، حديقة)', 'Home + outdoors (walks, park)']], w.place));
+    h += q('ما المتوفر لديك؟ (الحائط متوفر دائماً)', 'What do you have? (a wall is assumed)', checks('eq', EQUIP, w.eq));
+    h += '</fieldset>';
+    /* 2) health */
+    h += '<fieldset class="card"><legend>' + bi('2) صحتك', 'Your health') + '</legend><p class="small muted lead">' + bi('أسئلة سلامة قصيرة؛ أي «نعم» على علامة خطر يوقف الجدول حتى مراجعة الطبيب.', 'Short safety questions; a “yes” to a warning sign pauses the plan until a doctor review.') + '</p>';
+    SC.visible(w.answers, tview).filter(function (x) { return x.sec !== 'fitness'; }).forEach(function (x) {
+      var v = w.answers[x.id];
+      var body = x.type === 'yn' ? radios('h_' + x.id, SC.YN, v) : x.type === 'select' ? radios('h_' + x.id, x.opts, v) : x.type === 'multi' ? checks('h_' + x.id, x.opts, v || []) : '<input name="h_' + esc(x.id) + '" type="number" inputmode="numeric" min="' + x.min + '" max="' + x.max + '" value="' + esc(v == null ? '' : v) + '" style="max-width:160px">';
+      h += q(x.text, x.en, body);
+    });
+    h += '</fieldset>';
+    /* 3) fitness */
+    var f = w.fit || {};
+    h += '<fieldset class="card"><legend>' + bi('3) لياقتك الآن', 'Your fitness now') + '</legend><p class="small muted lead">' + bi('تقدير صادق يكفي — ليس اختباراً.', 'An honest estimate is enough — not a test.') + '</p>';
+    h += q('كم تمرين ضغط عادي تستطيع بشكل صحيح دون توقف؟', 'How many regular push-ups can you do in a row?', radios('f_push', FIT.push, f.push));
+    h += q('كم مرة تجلس وتقوم (سكوات) متتالية؟', 'How many squats in a row?', radios('f_squat', FIT.squat, f.squat));
+    h += q('كم ثانية تثبت في وضع البلانك؟', 'How long can you hold a plank?', radios('f_plank', FIT.plank, f.plank));
+    h += q('كم دقيقة تمشي دون توقف؟', 'How long can you walk without stopping?', radios('f_walk', FIT.walk, f.walk));
+    if ((w.eq || []).indexOf('bar') >= 0) h += q('كم عقلة تستطيع؟', 'How many pull-ups?', radios('f_pull', FIT.pull, f.pull));
+    var act = SC.QUESTIONS.filter(function (x) { return x.id === 'active'; })[0];
+    h += q(act.text, act.en, radios('h_active', SC.YN.slice(0, 2), w.answers.active));
+    h += q('هل إحدى يديك أضعف بوضوح من الأخرى؟', 'Is one arm clearly weaker?', radios('weakArm', FIT.side, w.weakArm));
+    h += q('هل إحدى ساقيك أضعف بوضوح من الأخرى؟', 'Is one leg clearly weaker?', radios('weakLeg', FIT.side, w.weakLeg));
+    h += q('مناطق تريد تقويتها أكثر (اختر حتى 2)', 'Areas to strengthen more (up to 2)', checks('focus', Object.keys(E.FOCUS).map(function (k) { return [k, E.FOCUS[k].ar, E.FOCUS[k].en]; }), w.focus || []));
+    h += '</fieldset>';
+    h += '<div class="card flat"><label><input type="checkbox" name="consent"' + (w.consent ? ' checked' : '') + '> ' + bi('أفهم أن البيانات تُحفظ على هذا الجهاز فقط، وأن الجدول ليس استشارة طبية.', 'I understand data stays on this device only and this is not medical advice.') + '</label></div>';
+    h += '<button type="submit" class="big">' + bi(w.editId ? 'حفظ وتحديث الجدول' : 'أنشئ الجدول', w.editId ? 'Save & update plan' : 'Create plan') + '</button></form>';
+    return h;
+  };
+  function readWz(form) {
+    var fd = new FormData(form), w = App.ui.wz, g = function (k) { var v = fd.get(k); return v == null ? '' : String(v); };
+    ['forWhom', 'name', 'coachName', 'age', 'sex', 'heightCm', 'weightKg', 'goal', 'minutes', 'place', 'weakArm', 'weakLeg'].forEach(function (k) { if (fd.has(k) || form.querySelector('[name="' + k + '"]')) w[k] = g(k); });
+    w.days = fd.getAll('days').map(String); w.eq = fd.getAll('eq').map(String); w.focus = fd.getAll('focus').map(String).slice(0, 2); w.consent = !!fd.get('consent');
+    w.fit = w.fit || {}; ['push', 'squat', 'plank', 'walk', 'pull'].forEach(function (k) { if (fd.get('f_' + k)) w.fit[k] = g('f_' + k); });
+    SC.QUESTIONS.forEach(function (x) {
+      var n = 'h_' + x.id;
+      if (x.type === 'multi') { if (form.querySelector('[name="' + n + '"]')) w.answers[x.id] = fd.getAll(n).map(String); }
+      else if (fd.get(n) != null && fd.get(n) !== '') w.answers[x.id] = x.type === 'num' ? Number(fd.get(n)) : g(n);
+    });
+    return w;
+  }
+  App.after.setup = function () {
+    var f = App.$('#wzForm'); if (!f) return;
+    f.addEventListener('change', function (e) {
+      var w = readWz(f);
+      if (e.target.name === 'focus' && w.focus.length >= 2) App.$$('[name=focus]', f).forEach(function (c) { if (!c.checked) c.disabled = true; });
+      if (['INPUT'].indexOf(e.target.tagName) >= 0 && (e.target.type === 'radio' || e.target.type === 'checkbox') && e.target.name !== 'consent') { var y = window.scrollY; App.render(); window.scrollTo(0, y); }
+    });
+    f.addEventListener('input', function (e) { if (e.target.type === 'text' || e.target.type === 'number' || !e.target.type) readWz(f); });
+    if ((App.ui.wz.focus || []).length >= 2) App.$$('[name=focus]', f).forEach(function (c) { if (!c.checked) c.disabled = true; });
+  };
+
+  App.forms.setup = function (form) {
+    var w = readWz(form), errs = [];
+    var age = Number(w.age), hcm = Number(w.heightCm), wkg = Number(w.weightKg);
+    if (!String(w.name || '').trim()) errs.push('الاسم مطلوب · Name is required');
+    if (!(age >= 10 && age <= 100)) errs.push('العمر بين 10 و100 · Age 10–100');
+    if (!(hcm >= 100 && hcm <= 230)) errs.push('الطول بين 100 و230 سم · Height 100–230 cm');
+    if (!(wkg >= 30 && wkg <= 250)) errs.push('الوزن بين 30 و250 كجم · Weight 30–250 kg');
+    if (!w.sex) errs.push('اختر الجنس · Choose sex');
+    if (!w.days.length) errs.push('اختر يوماً واحداً على الأقل · Pick at least one day');
+    if (!w.place) errs.push('اختر مكان التمرين · Choose where you will train');
+    var tview = { sex: w.sex, age: age };
+    var health = SC.visible(w.answers, tview).filter(function (x) { return x.sec !== 'fitness'; });
+    var missH = health.filter(function (x) { var v = w.answers[x.id]; return x.type === 'multi' ? false : (v === undefined || v === ''); });
+    if (missH.length) errs.push('أجب عن كل أسئلة الصحة (' + missH.length + ' متبقية) · Answer all health questions');
+    if (w.answers.msk === 'yes' && !(w.answers.msk_areas || []).length) errs.push('حدد مكان الإصابة أو الألم · Choose where the pain/injury is');
+    ['push', 'squat', 'plank', 'walk'].forEach(function (k) { if (!w.fit[k]) errs.push('أكمل قسم اللياقة · Complete the fitness section'); });
+    if (w.eq.indexOf('bar') >= 0 && !w.fit.pull) errs.push('كم عقلة تستطيع؟ · How many pull-ups?');
+    if (!w.answers.active) errs.push('هل تتمرن بانتظام؟ · Do you exercise regularly?');
+    if (!w.consent) errs.push('وافق على ملاحظة الخصوصية · Accept the privacy note');
+    errs = errs.filter(function (e, i) { return errs.indexOf(e) === i; });
+    if (errs.length) { App.$('#wzErr').innerHTML = '<div class="alert danger"><b>أكمل الحقول التالية · Please complete:</b>' + errs.map(esc).join('<br>') + '</div>'; window.scrollTo(0, 0); return; }
+
+    var now = S.nowISO(), t = w.editId ? App.trainee(w.editId) : null, isNew = !t;
+    if (isNew) t = { id: S.uniqueId(App.db, 'trainees'), createdAt: now, archived: false, avoid: [], limitations: [], revisions: [] };
+    else { t.revisions = t.revisions || []; var snap = JSON.parse(JSON.stringify(t)); delete snap.revisions; t.revisions.push({ at: now, snapshot: snap }); t.revisions = t.revisions.slice(-20); }
+    var name = String(w.name).trim().slice(0, 80);
+    Object.assign(t, { displayName: name, forWhom: w.forWhom === 'trainee' ? 'trainee' : 'self', coachName: w.forWhom === 'trainee' ? String(w.coachName || '').slice(0, 80) : name, age: age, sex: w.sex,
+      heightCm: hcm, weightKg: wkg, bodyMetricsConsent: true, goal: w.goal || 'general', experience: w.answers.active === 'yes' ? 'intermediate' : 'beginner', minutes: Number(w.minutes) || 30,
+      days: w.days.map(Number), place: w.place, equipment: ['wall', 'mat'].concat(w.eq, w.place === 'both' ? ['space'] : [], w.eq.indexOf('step') >= 0 ? ['stairs'] : []),
+      weakArm: w.weakArm || 'none', weakLeg: w.weakLeg || 'none', focus: w.focus || [], walkRange: w.fit.walk, updatedAt: now });
+    if (!t.consent) t.consent = { at: now, text: 'setup-5.1', version: 'CONSENT-5.1' };
+    if (t.forWhom === 'trainee' && t.coachName) App.db.settings.coachName = t.coachName;
+    if (isNew) App.db.trainees.push(t);
+    /* screening record (keeps every version) */
+    var ans = {}; SC.visible(w.answers, t).forEach(function (x) { if (w.answers[x.id] !== undefined) ans[x.id] = w.answers[x.id]; });
+    var prior = App.latest('screenings', t.id);
+    var sc = { id: S.uniqueId(App.db, 'screenings'), traineeId: t.id, at: S.nowISO(), version: SC.VERSION, answers: ans, shown: SC.visible(ans, t).map(function (x) { return x.id; }), ageAtScreening: age, sexAtScreening: w.sex, priorId: prior ? prior.id : null, clearance: null };
+    sc.outcome = SC.evaluate(ans, { trainee: t, prior: prior, clearance: null });
+    App.db.screenings.push(sc);
+    App.audit(isNew ? 'setup.create' : 'setup.update', (isNew ? 'إعداد ' : 'تحديث ') + name + ' ⇒ ' + sc.outcome.status, t.id, sc.id);
+    App.ui.traineeId = t.id; App.ui.wz = null;
+    if (sc.outcome.status !== 'cleared') { App.save(); App.ui.screenMode = null; App.go('screen'); App.toast('الجدول متوقف حتى استكمال الجانب الصحي — انظر السبب. · Plan paused for health reasons.', 7000); return; }
+    var fitRec = { push: w.fit.push, squat: w.fit.squat, plank: w.fit.plank, walk: w.fit.walk, pull: w.fit.pull || 'none', active: w.answers.active };
+    App.db.baselines.push({ id: S.uniqueId(App.db, 'baselines'), traineeId: t.id, at: S.nowISO(), version: 'BL-5.1-quick', screeningId: sc.id, tests: {}, quick: fitRec,
+      result: { levels: E.quickLevels(fitRec, t), notes: {}, flags: [], status: 'ok', messages: [], version: 'BL-5.1-quick' } });
+    var r = App.createPlan(t, App.today(), isNew ? null : 'تحديث البيانات من شاشة الإعداد');
+    App.save(); App.ui.planId = r && r.id; App.go('plan');
+    App.toast(r && r.status !== 'blocked' ? 'تم إنشاء الجدول ✔ · Plan created' : 'تم الحفظ', 5000);
+  };
+
+  /* ---------- simple home ---------- */
+  App.pages.dash = function () {
+    var db = App.db, act = db.trainees.filter(function (t) { return !t.archived; });
+    var h = '';
+    if (S.status.mode === 'memory' || S.status.error) h += '<div class="alert danger"><b>تحذير الحفظ</b>' + esc(S.status.error) + '</div>';
+    if (S.readV4Local() && !db.legacy) h += '<div class="alert warn"><b>وُجدت بيانات من النسخة v4 في هذا المتصفح</b>يمكن نقلها (قراءة فقط دون تعديل v4) من <button class="sec" data-act="go" data-page="data">النسخ الاحتياطي</button></div>';
+    h += '<div class="hero"><button class="big" data-act="setupNew" data-for="self">📋 ' + bi('جدول لنفسي', 'Plan for myself') + '</button><button class="big sec" data-act="setupNew" data-for="trainee">👥 ' + bi('جدول لمتدرب', 'Plan for a trainee') + '</button></div>';
+    if (!act.length) return h + '<p class="muted center lead">' + bi('ابدأ بأحد الزرين أعلاه: 3 أقسام قصيرة ثم يظهر الجدول الأسبوعي مباشرة.', 'Start above: 3 short sections, then your weekly plan.') + '</p>';
+    act.slice().sort(function (a, b) { return (a.forWhom === 'self' ? 0 : 1) - (b.forWhom === 'self' ? 0 : 1); }).forEach(function (t) {
+      var sc = App.latest('screenings', t.id), pls = App.plansOf(t.id), pl = pls[pls.length - 1], today = App.today(), di = -1, d = null;
+      if (pl && pl.status !== 'blocked' && today >= pl.weekStart && today <= pl.weekEnd) { d = pl.days.filter(function (x) { return x.date === today; })[0]; di = d ? d.index : -1; }
+      var todayTxt = !pl ? 'لا يوجد جدول بعد' : pl.status === 'blocked' ? '⛔ الجدول متوقف لسبب صحي' : !d ? 'أسبوع الجدول انتهى — راجع الأسبوع وأنشئ التالي' : d.type === 'rest' ? '😴 اليوم راحة' : d.type === 'recovery' ? (d.place === 'outdoor' ? '🌳 اليوم: مشي خارج المنزل ' : '🏠 اليوم: مشي في المنزل ') + Math.round(d.recovery[0].target / 60) + ' دقيقة' : '🏠 اليوم: تمارين في المنزل (' + d.main.length + ' تمارين)';
+      h += '<div class="card"><div class="row"><h3 class="grow">' + esc(t.displayName) + (t.forWhom === 'self' ? ' <span class="pill">أنا · Me</span>' : '') + '</h3>' + App.statusBadge(sc && sc.outcome.status) + '</div><p>' + esc(todayTxt) + '</p><div class="row">' +
+        (pl ? '<button data-act="pick" data-id="' + esc(t.id) + '" data-page="plan">🗓 ' + bi('الجدول', 'Plan') + '</button>' : '') +
+        (d && d.type !== 'rest' ? '<button class="ok" data-act="startSession" data-plan="' + esc(pl.id) + '" data-day="' + di + '">▶ ' + bi('ابدأ تمرين اليوم', 'Start today') + '</button>' : '') +
+        (pl && pl.status !== 'blocked' && !App.db.reviews.some(function (r) { return r.planId === pl.id; }) && today >= E.addDays(pl.weekStart, 5) ? '<button class="sec" data-act="pick" data-id="' + esc(t.id) + '" data-page="review">✅ ' + bi('مراجعة الأسبوع', 'Weekly check') + '</button>' : '') +
+        '<button class="ghost" data-act="setupEdit" data-id="' + esc(t.id) + '">✎ ' + bi('تعديل البيانات', 'Edit details') + '</button></div></div>';
+    });
+    return h;
+  };
+
+  /* ---------- More ---------- */
+  App.pages.more = function () {
+    var items = [['trainees', '👥', 'إدارة الملفات', 'Manage profiles'], ['screen', '🩺', 'الفحص الصحي والتصريح الطبي', 'Health screen & clearance'], ['history', '📈', 'السجل والتقدم', 'History & progress'], ['data', '💾', 'النسخ الاحتياطي والتشفير', 'Backup & encryption'], ['sources', '⚖', 'المصادر والسلامة', 'Sources & safety']];
+    return '<h2>' + bi('المزيد', 'More') + '</h2><div class="grid">' + items.map(function (i) { return '<button class="excard" data-act="go" data-page="' + i[0] + '"><h4>' + i[1] + ' ' + bi(i[2], i[3]) + '</h4></button>'; }).join('') + '</div>';
+  };
+})();
+
+;
 /* ==== src/main.js ==== */
 /* Boot + global event delegation. */
 (function () {
   'use strict';
   var App = window.App, S = window.MCStore;
-  var NAV = [['dash', '◎', 'لوحة القيادة'], ['trainees', '👥', 'المتدربون'], ['screen', '🩺', 'الفحص والتقييم'], ['library', '📚', 'مكتبة التمارين'], ['plan', '🗓', 'الخطة الأسبوعية'], ['session', '⏱', 'الحصة المباشرة'], ['review', '✅', 'المراجعة الأسبوعية'], ['history', '📈', 'السجل والتقدم'], ['data', '💾', 'التصدير والاستيراد'], ['sources', '⚖', 'المصادر والسلامة']];
-  document.getElementById('nav').innerHTML = NAV.map(function (n) { return '<button data-page="' + n[0] + '"><span class="ico" aria-hidden="true">' + n[1] + '</span>' + n[2] + '</button>'; }).join('');
+  var NAV = [['dash', '🏠', 'الرئيسية', 'Home'], ['plan', '🗓', 'الجدول', 'Plan'], ['session', '⏱', 'التمرين', 'Workout'], ['review', '✅', 'المراجعة', 'Check-in'], ['library', '📚', 'التمارين', 'Exercises'], ['more', '⋯', 'المزيد', 'More']];
+  document.getElementById('nav').innerHTML = NAV.map(function (n) { return '<button data-page="' + n[0] + '"><span class="ico" aria-hidden="true">' + n[1] + '</span><span>' + n[2] + '<small class="en" dir="ltr">' + n[3] + '</small></span></button>'; }).join('');
   document.getElementById('appver').textContent = S.APP_VERSION + ' · ' + window.MCEngine.RULES;
   try { var th = localStorage.getItem('MCC_V5_THEME'); if (th) document.documentElement.dataset.theme = th; } catch (e) { /* ignore */ }
   App.db = S.load();

@@ -1,1 +1,1 @@
-built /home/user/skills/military-calisthenics-coach/dist/military_calisthenics_coach_v5.html 614 KB files: 23 exercise files: 11
+built /home/user/skills/military-calisthenics-coach/dist/military_calisthenics_coach_v5.html 652 KB files: 25 exercise files: 12

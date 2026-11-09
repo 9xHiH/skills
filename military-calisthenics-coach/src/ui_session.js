@@ -20,7 +20,7 @@
     (d.main || []).forEach(function (it) { flat.push(Object.assign({ block: 'main' }, it)); });
     (d.cooldown || []).forEach(function (it) { flat.push(Object.assign({ block: 'cooldown' }, it)); });
     var s = { id: S.uniqueId(App.db, 'sessions'), traineeId: t.id, planId: p.id, dayIndex: di, date: d.date, kind: d.type === 'recovery' ? 'recovery' : 'train', status: 'partial', early: early, startedAt: S.nowISO(), updatedAt: S.nowISO(), cursor: 0, redFlag: false,
-      items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
+      items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, weak: it.weak || null, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
     App.db.sessions.push(s); App.audit('session.start', 'بدء حصة ' + s.id, t.id, s.id); App.save();
     App.ui.run = { id: s.id, idx: 0 }; App.go('session');
   };
@@ -38,9 +38,9 @@
     if (run.idx >= s.items.length) return postCheck(s);
     var it = s.items[run.idx], ex = X.byId(it.exId), pr = it.prescribed;
     var blockAr = { warmup: 'إحماء', main: 'رئيسي', cooldown: 'تهدئة', recovery: 'استشفاء' }[it.block];
-    var h = '<div class="row"><h2 class="grow">الحصة المباشرة · ' + esc(App.trainee(s.traineeId).displayName) + '</h2><span class="badge b-info">' + (run.idx + 1) + ' / ' + s.items.length + '</span></div>';
+    var h = '<div class="row"><h2 class="grow">' + App.bi('التمرين', 'Workout') + ' · ' + esc(App.trainee(s.traineeId).displayName) + '</h2><span class="badge b-info">' + (run.idx + 1) + ' / ' + s.items.length + '</span></div>';
     h += '<div class="stepper">' + s.items.map(function (x, i) { return '<span class="' + (i === run.idx ? 'on' : x.sets.length ? 'done' : '') + '" title="' + esc(App.exName(x.exId)) + '">' + (i + 1) + '</span>'; }).join('') + '</div>';
-    h += '<div class="card"><div class="row"><h3 class="grow">' + esc(ex.ar) + ' <span class="pill">' + blockAr + '</span></h3><span class="badge b-info">الهدف: ' + esc(App.dosageText({ exId: it.exId, sets: pr.sets, target: pr.target, u: pr.u, side: pr.side, rest: pr.rest })) + '</span></div>' +
+    h += '<div class="card"><div class="row"><h3 class="grow">' + esc(ex.ar) + ' <span class="en" dir="ltr">' + esc(ex.en) + '</span> <span class="pill">' + blockAr + '</span></h3><span class="badge b-info">' + esc(App.dosageText({ exId: it.exId, sets: pr.sets, target: pr.target, u: pr.u, side: pr.side, rest: pr.rest, weak: it.weak, walk: it.block === 'recovery' })) + '</span></div>' + (it.weak ? '<div class="alert warn"><b>💪 الجانب الأضعف: ابدأ بالجهة ' + (it.weak.side === 'left' ? 'اليسرى' : 'اليمنى') + '، ونفّذ لها مجموعة إضافية.</b></div>' : '') +
       '<div class="player"><div id="runPlayer"></div><div><ol class="steps">' + ex.steps.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol><p class="small"><b>التنفس:</b> ' + esc(ex.breath) + '</p><p class="small"><b>انتبه:</b> ' + esc(ex.errors.slice(0, 3).join('؛ ')) + '</p></div></div></div>';
     var done = it.sets.length, isTime = pr.u === 'time';
     h += '<div class="card"><h3>المجموعة ' + Math.min(done + 1, pr.sets) + ' من ' + pr.sets + (done >= pr.sets ? ' ✔ (اكتملت المجموعات المخططة)' : '') + '</h3><div class="counter">' +
@@ -50,7 +50,11 @@
       '<button class="ok" data-act="runSet" style="width:100%">✔ تسجيل المجموعة وبدء الراحة</button></div>' +
       '<div class="card flat"><h4>الراحة</h4><div class="bignum" id="restVal">' + fmtS(pr.rest || 0) + '</div><div class="small" style="text-align:center" id="restLbl">تبدأ تلقائياً بعد تسجيل المجموعة</div><div class="row" style="justify-content:center"><button class="sec" data-act="restSkip">تخطي الراحة</button><label style="margin:0"><input type="checkbox" id="muteRun"' + (App.ui.mute ? ' checked' : '') + '> كتم</label></div>' +
       '<p class="small">المجموعات المسجلة: ' + (it.sets.map(function (x, i) { return (i + 1) + ') ' + x.value + (isTime ? ' ث' : ''); }).join(' · ') || '—') + (it.sets.length ? ' <button class="ghost" data-act="runUndo" style="min-height:0;padding:2px 8px">تراجع عن آخر مجموعة</button>' : '') + '</p></div></div></div>';
-    if (it.block === 'main') h += '<div class="card"><h4>بعد إنهاء التمرين</h4><div class="grid g3"><label>الجهد (0 = راحة، 10 = أقصى جهد ممكن)<input type="number" id="runEffort" min="0" max="10" value="' + esc(it.effort) + '"></label><label>جودة التقنية<select id="runTech"><option value="">—</option><option value="good"' + (it.technique === 'good' ? ' selected' : '') + '>جيدة</option><option value="fair"' + (it.technique === 'fair' ? ' selected' : '') + '>متوسطة</option><option value="poor"' + (it.technique === 'poor' ? ' selected' : '') + '>ضعيفة</option></select></label><label>ألم في التمرين (0–10)<input type="number" id="runPain" min="0" max="10" value="' + esc(it.pain || 0) + '"></label><label>منطقة الألم<select id="runPainArea"><option value="">—</option>' + SC.AREAS.map(function (a) { return '<option value="' + a[0] + '"' + (it.painArea === a[0] ? ' selected' : '') + '>' + a[1] + '</option>'; }).join('') + '</select></label></div><p class="small muted">ألم ≥ 4 ⇒ توقف عن هذا التمرين وانتقل للتالي؛ سيُستبدل الأسبوع القادم. ألم ≥ 7 أو ألم حاد في مفصل ⇒ أوقف الحصة.</p></div>';
+    if (it.block === 'main') {
+      var rate = it.rate || '';
+      h += '<div class="card"><h4>' + App.bi('كيف كان هذا التمرين؟', 'How was it?') + '</h4><div class="chips">' + [['easy', 'سهل', 'Easy'], ['ok', 'مناسب', 'Just right'], ['hard', 'صعب جداً', 'Too hard'], ['pain', 'ألم', 'Pain']].map(function (o) { return '<button type="button" class="chip' + (rate === o[0] ? ' on' : '') + '" data-act="runRate" data-v="' + o[0] + '" aria-pressed="' + (rate === o[0]) + '">' + App.bi(o[1], o[2]) + '</button>'; }).join('') + '</div>' +
+        (rate === 'pain' ? '<div class="grid g3"><label>' + App.bi('شدة الألم 0–10', 'Pain 0–10') + '<input type="number" id="runPain" min="1" max="10" value="' + esc(it.pain || 4) + '"></label><label>' + App.bi('أين؟', 'Where?') + '<select id="runPainArea"><option value="">—</option>' + SC.AREAS.map(function (a) { return '<option value="' + a[0] + '"' + (it.painArea === a[0] ? ' selected' : '') + '>' + a[1] + ' · ' + a[2] + '</option>'; }).join('') + '</select></label></div><p class="small">ألم 4 أو أكثر: أوقف هذا التمرين وانتقل للتالي، وسيُستبدل الأسبوع القادم. ألم 7 أو أكثر أو ألم حاد في مفصل: أوقف التمرين كله.</p>' : '') + '</div>';
+    }
     h += '<div class="row"><button class="sec" data-act="runPrev"' + (run.idx ? '' : ' disabled') + '>→ السابق</button><button data-act="runNext">التالي ←</button><button class="ghost" data-act="runPause">حفظ والخروج (حصة جزئية)</button></div>';
     h += '<div class="stopbar" role="region" aria-label="إيقاف طارئ"><span><b>علامة إنذار؟</b> ألم صدر، دوخة شديدة، ضيق نفس غير معتاد، خفقان، ألم حاد مفاجئ' + (App.latest('screenings', s.traineeId) && App.latest('screenings', s.traineeId).outcome.pathway === 'pregnancy' ? '، نزيف أو تسرب سوائل' : '') + '</span><button class="danger" data-act="runStop">⛔ إيقاف فوري</button></div>';
     return h;
@@ -58,15 +62,19 @@
   App.after.session = function () {
     var run = App.ui.run, s = run && sesById(run.id); if (!s || s.status !== 'partial' || run.idx >= s.items.length) return;
     var box = App.$('#runPlayer'); if (box) App.mountPlayer(box, X.byId(s.items[run.idx].exId));
-    ['runEffort', 'runTech', 'runPain', 'runPainArea'].forEach(function (id) { var el = App.$('#' + id); if (el) el.addEventListener('change', saveMeta); });
+    ['runPain', 'runPainArea'].forEach(function (id) { var el = App.$('#' + id); if (el) el.addEventListener('change', saveMeta); });
   };
+  /* Quick rating → effort/technique used by the weekly adaptation rules (easy 4, just right 6, too hard 9). */
+  var RATE = { easy: { effort: 4, technique: 'good' }, ok: { effort: 6, technique: 'good' }, hard: { effort: 9, technique: 'fair' }, pain: { effort: 7, technique: 'fair' } };
   function saveMeta() {
-    var s = sesById(App.ui.run.id), it = s.items[App.ui.run.idx];
-    var v = function (id) { var el = App.$('#' + id); return el ? el.value : ''; };
-    it.effort = v('runEffort') === '' ? '' : Math.max(0, Math.min(10, Number(v('runEffort')))); it.technique = v('runTech'); it.pain = Math.max(0, Math.min(10, Number(v('runPain')) || 0)); it.painArea = v('runPainArea');
+    var s = sesById(App.ui.run.id), it = s.items[App.ui.run.idx]; if (!it || it.block !== 'main' || !it.rate) return;
+    it.effort = RATE[it.rate].effort; it.technique = RATE[it.rate].technique;
+    var pe = App.$('#runPain'), pa = App.$('#runPainArea');
+    it.pain = it.rate === 'pain' ? Math.max(1, Math.min(10, Number(pe && pe.value) || 4)) : 0; it.painArea = it.rate === 'pain' && pa ? pa.value : '';
     s.updatedAt = S.nowISO(); App.save();
-    if (it.pain >= 7) App.toast('ألم ≥ 7: أوقف الحصة واطلب تقييماً.', 6000);
+    if (it.pain >= 7) App.toast('ألم 7 أو أكثر: أوقف التمرين واطلب تقييماً.', 6000);
   }
+  App.acts.runRate = function (el) { var s = sesById(App.ui.run.id), it = s.items[App.ui.run.idx]; it.rate = el.dataset.v; saveMeta(); var y = window.scrollY; App.render(); window.scrollTo(0, y); };
   function fmtS(n) { n = Math.max(0, Math.round(n)); var m = Math.floor(n / 60), s = n % 60; return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; }
   var timers = { work: null, rest: null };
   function clearTimers() { clearInterval(timers.work); clearInterval(timers.rest); timers.work = timers.rest = null; }
@@ -87,7 +95,7 @@
     clearTimers(); if (it.block === 'main') saveMeta();
     it.sets.push({ value: val, at: S.nowISO() }); s.updatedAt = S.nowISO(); s.cursor = App.ui.run.idx; App.save();
     var rest = it.prescribed.rest || 0, y = window.scrollY; App.render(); window.scrollTo(0, y);
-    if (it.sets.length >= it.prescribed.sets) { App.toast('اكتملت المجموعات المخططة لهذا التمرين — سجّل الجهد والتقنية ثم «التالي».'); }
+    if (it.sets.length >= it.prescribed.sets) { App.toast(it.block === 'main' ? 'اكتملت المجموعات ✔ — اختر «كيف كان؟» ثم «التالي».' : 'تم ✔ — اضغط «التالي».'); }
     if (rest > 0) { var left = rest; App.$('#restLbl').textContent = 'راحة — تنفس بهدوء'; timers.rest = setInterval(function () { if (!App.$('#restVal')) return clearTimers(); left--; App.$('#restVal').textContent = fmtS(left); if (left <= 3 && left > 0) App.beep(740, 80); if (left <= 0) { clearInterval(timers.rest); timers.rest = null; App.$('#restLbl').textContent = 'انتهت الراحة'; App.beep(988, 200, 2); App.vibrate(200); } }, 1000); }
   };
   App.acts.restSkip = function () { clearInterval(timers.rest); timers.rest = null; var l = App.$('#restLbl'); if (l) l.textContent = 'تم التخطي'; };
@@ -103,16 +111,15 @@
 
   /* ---------- post-session check (4–6 questions) ---------- */
   var POST = [
-    { id: 'effort', type: 'num', min: 0, max: 10, text: 'جهد الحصة كاملة (0 = راحة، 10 = أقصى جهد):', must: 1 },
-    { id: 'technique', type: 'select', opts: [['good', 'جيدة'], ['fair', 'متوسطة'], ['poor', 'ضعيفة']], text: 'جودة التقنية عموماً:', must: 1 },
-    { id: 'pain', type: 'num', min: 0, max: 10, text: 'أعلى ألم (غير الإرهاق العضلي العادي) 0–10:', must: 1 },
-    { id: 'painArea', type: 'select', opts: [['', '—']].concat(SC.AREAS), text: 'مكان الألم إن وجد:' },
-    { id: 'symptoms', type: 'yn', text: 'هل ظهر ألم صدر أو دوخة شديدة أو ضيق نفس غير معتاد أو خفقان؟', must: 1 },
-    { id: 'comment', type: 'text', text: 'ملاحظات (اختياري):' }
+    { id: 'effort', type: 'num', min: 0, max: 10, text: 'كم كان التمرين متعباً؟ (0 = سهل جداً، 10 = أقصى جهد)', en: 'How hard was the workout? (0–10)', must: 1 },
+    { id: 'pain', type: 'num', min: 0, max: 10, text: 'هل شعرت بألم (غير تعب العضلات العادي)؟ 0 = لا', en: 'Any pain (not normal muscle tiredness)? 0 = none', must: 1 },
+    { id: 'painArea', type: 'select', opts: [['', '—', '—']].concat(SC.AREAS), text: 'أين الألم؟', en: 'Where?' },
+    { id: 'symptoms', type: 'yn', text: 'هل حدث ألم صدر أو دوخة شديدة أو ضيق نفس غير طبيعي أو خفقان؟', en: 'Chest pain, severe dizziness, unusual breathlessness or palpitations?', must: 1 },
+    { id: 'comment', type: 'text', text: 'ملاحظة (اختياري)', en: 'Note (optional)' }
   ];
   function postCheck(s) {
     var done = s.items.filter(function (i) { return i.sets.length; }).length;
-    return '<h2>فحص ما بعد الحصة</h2><form class="card" data-form="post"><p>التمارين المنجزة: ' + done + ' من ' + s.items.length + '. الحصة محفوظة.</p>' + POST.map(function (q) { return App.field(q, q.id === 'pain' ? 0 : undefined, 'p_'); }).join('') + '<div id="postErr" role="alert"></div><div class="row"><button type="submit">إنهاء الحصة</button><button type="button" class="sec" data-act="runPrev">رجوع</button></div></form>';
+    return '<h2>' + App.bi('بعد التمرين', 'After the workout') + '</h2><form class="card" data-form="post"><p>التمارين المنجزة: ' + done + ' من ' + s.items.length + '. الحصة محفوظة.</p>' + POST.map(function (q) { return App.field(q, q.id === 'pain' ? 0 : undefined, 'p_'); }).join('') + '<div id="postErr" role="alert"></div><div class="row"><button type="submit">إنهاء الحصة</button><button type="button" class="sec" data-act="runPrev">رجوع</button></div></form>';
   }
   App.forms.post = function (f) {
     var s = sesById(App.ui.run.id), a = App.readForm(f, POST, 'p_');

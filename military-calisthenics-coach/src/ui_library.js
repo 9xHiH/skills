@@ -89,17 +89,16 @@
 
   /* ---------- library page ---------- */
   App.pages.library = function () {
-    var ui = App.ui, f = ui.lib || (ui.lib = { q: '', cat: '', pat: '', lvl: '', role: '', safe: false });
+    var ui = App.ui, f = ui.lib || (ui.lib = { q: '', cat: '', safe: true });
     var t = App.trainee(), ctx = null;
     if (t && f.safe) { var sc = App.latest('screenings', t.id), bl = App.latest('baselines', t.id); ctx = E.safetyContext(t, sc, bl, []); }
-    var fams = {}; X.list.forEach(function (e) { fams[e.fam] = 1; });
-    var h = '<h2>مكتبة التمارين</h2><p>تضم المكتبة <b>' + X.list.length + '</b> تمريناً/تنويعة، لكل منها سجل كامل ورسم متحرك أصلي خاص بها، ضمن <b>' + Object.keys(fams).length + '</b> عائلة حركية. العدد هو ما اكتمل وتحقق آلياً فقط؛ الهدف 200 لم يُبلغ بعد.</p>';
-    var opt = function (obj, v) { return Object.keys(obj).map(function (k) { return '<option value="' + esc(k) + '"' + (String(v) === String(k) ? ' selected' : '') + '>' + esc(obj[k]) + '</option>'; }).join(''); };
-    h += '<div class="card flat"><div class="grid g3"><label>بحث<input id="libq" value="' + esc(f.q) + '" placeholder="اسم عربي أو إنجليزي"></label><label>الفئة<select id="libcat"><option value="">الكل</option>' + opt(X.CAT, f.cat) + '</select></label><label>نمط الحركة<select id="libpat"><option value="">الكل</option>' + opt(X.PATTERN, f.pat) + '</select></label><label>المستوى<select id="liblvl"><option value="">الكل</option>' + opt(X.LEVEL, f.lvl) + '</select></label><label>الدور<select id="librole"><option value="">الكل</option>' + opt({ main: 'تمرين رئيسي', warmup: 'إحماء', cooldown: 'تهدئة' }, f.role) + '</select></label>' +
-      '<label>' + (t ? '<input type="checkbox" id="libsafe"' + (f.safe ? ' checked' : '') + '> المسموح فقط لـ ' + esc(t.displayName) : '<span class="muted small">اختر متدرباً لتصفية المسموح له</span>') + '</label></div></div>';
+    var h = '<h2>' + App.bi('التمارين', 'Exercises') + '</h2><p class="muted">' + X.list.length + ' تمريناً، لكل منها رسم متحرك وشرح بالعربي واسم بالإنجليزي للبحث عن فيديو.</p>';
+    var cats = Object.keys(X.CAT).map(function (k) { return '<option value="' + k + '"' + (f.cat === k ? ' selected' : '') + '>' + esc(X.CAT[k]) + '</option>'; }).join('');
+    h += '<div class="card flat"><div class="grid g3"><label>' + App.bi('بحث', 'Search') + '<input id="libq" value="' + esc(f.q) + '" placeholder="عربي أو English"></label><label>' + App.bi('النوع', 'Type') + '<select id="libcat"><option value="">الكل · All</option>' + cats + '</select></label>' +
+      (t ? '<label><input type="checkbox" id="libsafe"' + (f.safe ? ' checked' : '') + '> ' + App.bi('المناسب لـ ' + t.displayName + ' فقط', 'Suitable only') + '</label>' : '') + '</div></div>';
     var list = X.list.filter(function (e) {
       if (f.q && (e.ar + ' ' + e.en + ' ' + e.id).toLowerCase().indexOf(f.q.toLowerCase()) < 0) return false;
-      if (f.cat && e.cat !== f.cat) return false; if (f.pat && e.pat !== f.pat) return false; if (f.lvl && String(e.lvl) !== String(f.lvl)) return false; if (f.role && e.role.indexOf(f.role) < 0) return false;
+      if (f.cat && e.cat !== f.cat) return false;
       if (ctx && E.excludedBy(e, ctx, { ignoreLevel: true })) return false; return true;
     });
     h += '<p class="muted small" aria-live="polite">النتائج: ' + list.length + '</p>';
@@ -109,8 +108,8 @@
     }).join('') + '</div>';
     return h;
   };
-  ['libq', 'libcat', 'libpat', 'liblvl', 'librole', 'libsafe'].forEach(function (id) {
-    App.changes[id] = function (el) { var k = { libq: 'q', libcat: 'cat', libpat: 'pat', liblvl: 'lvl', librole: 'role', libsafe: 'safe' }[id]; App.ui.lib[k] = el.type === 'checkbox' ? el.checked : el.value; App.render(); if (id === 'libq') { var i = App.$('#libq'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); } };
+  ['libq', 'libcat', 'libsafe'].forEach(function (id) {
+    App.changes[id] = function (el) { var k = { libq: 'q', libcat: 'cat', libsafe: 'safe' }[id]; App.ui.lib[k] = el.type === 'checkbox' ? el.checked : el.value; App.render(); if (id === 'libq') { var i = App.$('#libq'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); } };
   });
 
   /* ---------- exercise detail dialog ---------- */
@@ -128,6 +127,7 @@
       '<p><span class="pill">' + esc(ex.id) + '</span><span class="pill">' + esc(X.LEVEL[ex.lvl]) + '</span><span class="pill">' + esc(X.CAT[ex.cat]) + '</span><span class="pill">' + esc(X.PATTERN[ex.pat]) + '</span><span class="pill">عائلة: ' + esc(ex.fam) + '</span></p>' +
       '<p><b>العضلات الأساسية:</b> ' + esc(ex.prim.map(function (m) { return X.MUSCLE[m]; }).join('، ')) + '<br><b>الثانوية:</b> ' + esc(ex.sec.map(function (m) { return X.MUSCLE[m]; }).join('، ') || '—') + '</p>' +
       '<p><b>المعدات:</b> ' + esc(ex.eq.length ? ex.eq.map(function (q) { return X.EQUIP[q]; }).join('، ') : 'بدون أدوات') + ' · <b>المساحة:</b> ' + esc(ex.space) + ' · <b>التأثير:</b> ' + esc({ none: 'بدون', low: 'منخفض', high: 'مرتفع (قفز)' }[ex.impact]) + '</p>' +
+      '<p class="vid">🔎 ' + App.bi('فيديو', 'Video') + ': ابحث عن <b dir="ltr">“' + esc(ex.en) + ' exercise”</b> — <a href="' + esc(App.videoUrl(ex)) + '" target="_blank" rel="noopener noreferrer">يوتيوب ↗</a> <span class="small muted">(يحتاج إنترنت؛ نتائج بحث عامة لم يراجعها التطبيق)</span></p>' +
       '<p><b>الجرعة الافتراضية (قابلة للتعديل، ليست وصفة طبية):</b> ' + esc(dose) + '</p>' +
       (ex.mil ? '<p class="small"><b>🎖 مرجع عسكري:</b> ' + esc(ex.mil) + ' (الاسم فقط؛ الشرح بصياغة التطبيق)</p>' : '') +
       (ex.prereq ? '<p><b>المتطلب المسبق:</b> ' + esc(ex.prereq) + '</p>' : '') + '</div></div>' +

@@ -1,4 +1,4 @@
-exercises loaded: 197 
+exercises loaded: 199 
 ERRORS 0
 WARNINGS 6
   W CA-MCLIMB-S: pos prone without prone flag (ok only if weight on hands/forearms)

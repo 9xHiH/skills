@@ -124,3 +124,40 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
   #print .meta{font-size:8.5pt}
   #print .fb td{height:9mm}
 }
+/* ---------- simple mode (v5.1) ---------- */
+.en{color:var(--muted);font-size:.82em;font-weight:400;unicode-bidi:isolate}
+nav.side small.en{display:block;line-height:1.1}
+.center{text-align:center}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:10px 0 18px}
+button.big{min-height:64px;font-size:1.15rem;padding:14px 18px;border-radius:14px;width:100%}
+form[data-form=setup]>button.big{max-width:420px}
+.q .qt{font-weight:700;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;margin:0;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--bg2);cursor:pointer;font-weight:600;color:var(--text);min-height:44px}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip:has(input:checked),.chip.on{border-color:var(--acc);background:var(--panel2);box-shadow:inset 0 0 0 1px var(--acc)}
+.chip:has(input:focus-visible){outline:3px solid var(--acc2);outline-offset:2px}
+.chip:has(input:disabled){opacity:.45;cursor:not-allowed}
+button.chip{font:inherit}
+.linkbtn{background:none;border:0;color:var(--acc2);padding:0;min-height:0;font-weight:600;text-decoration:underline;cursor:pointer}
+.dico{font-size:1.3rem}
+.day.today{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.pill.wk{border-color:var(--warn);color:var(--warn)}
+.vid a{font-weight:700}
+details.why summary{cursor:pointer;color:var(--muted);font-size:.82rem}
+@media print{
+  #print .p-head{display:flex;justify-content:space-between}
+  #print .pname{font-size:14pt;font-weight:700}
+  #print .en{color:#444!important}
+  #print .exs{display:grid;grid-template-columns:70mm 1fr;gap:8px}
+  #print .pics{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+  #print .pics small{display:block;text-align:center;font-size:8pt}
+  #print .enname{font-weight:700;font-size:11pt}
+  #print .dose{border:1px solid #999;border-radius:4px;padding:2px 6px;margin:3px 0;font-weight:700}
+  #print .exs ol{margin:2px 18px 2px 0;padding:0}
+  #print .vid a{color:#0645ad!important;text-decoration:underline}
+  #print .foot{margin-top:8px;border-top:1px solid #999;padding-top:4px}
+}
+.qt .en,legend .en,h2 .en,.alert .en,label>.en{display:block;margin-top:1px}
+.lead{margin:0 0 10px}.lead .en{display:block}
+button .en,.badge .en{color:inherit}

@@ -15,7 +15,7 @@ Offline, Arabic RTL, single-file coach workstation. A coach can:
 
 | Path | What |
 |---|---|
-| `dist/military_calisthenics_coach_v5.html` | **The app.** One self-contained file (~760 KB): HTML, CSS, JS and 197 exercise animations inline. No external resources. |
+| `dist/military_calisthenics_coach_v5.html` | **The app.** One self-contained file (~810 KB): HTML, CSS, JS and 199 exercise animations inline. No external resources. |
 | `original/` | **v4 preserved unchanged** (`military_calisthenics_coach_v4.html`), the spec and the master prompt, plus `SHA256SUMS`. Git commit `65aeb40` is the rollback checkpoint. |
 | `AUDIT_v4.md` | Verified audit of v4 (real exercise count, defects). |
 | `SOURCES.md` | Source register, licensing decisions, rule→source and exercise→source mapping (generated from app data). |
@@ -23,7 +23,7 @@ Offline, Arabic RTL, single-file coach workstation. A coach can:
 | `TEST_REPORT.md` | Environment, steps, observed results, failures, risks, **unfinished requirements**. |
 | `src/` | Source modules (`anim.js` engine, `data/ex_*.js` exercises, `screening.js`, `engine.js`, `store.js`, `ui_*.js`). |
 | `tools/` | `build.mjs` (bundles `dist/`), `check.mjs` (exercise data + animation validator), `preview.mjs` (pose contact sheets), `gen_sources.mjs`, `AUTHORING.md`, `ids.txt`. |
-| `tests/` | `unit.mjs` (55 tests), `e2e.cjs` (27 browser tests), `a11y.cjs` (axe-core audit), results and evidence (sample PDF, plain and encrypted exports, screenshots). |
+| `tests/` | `unit.mjs` (63 tests), `e2e.cjs` (29 browser tests), `a11y.cjs` (axe-core audit), results and evidence (sample PDF, plain and encrypted exports, screenshots). |
 
 ## Run offline
 1. Copy `dist/military_calisthenics_coach_v5.html` anywhere, e.g. a USB stick or the desktop.
@@ -39,7 +39,28 @@ Offline, Arabic RTL, single-file coach workstation. A coach can:
    - Other browsers may isolate storage per file or folder.
    - Always use JSON export/import to move data.
 
-## Coach workflow
+## Simple workflow (default since round 3)
+1. **الرئيسية:** press **«جدول لنفسي · Plan for myself»** or **«جدول لمتدرب · Plan for a trainee»**.
+2. **One page, 3 short sections.** Every question is in Arabic and English, with tap-to-choose answers.
+   - **About you:** name, age, height, weight, sex (used only to show pregnancy questions), goal, days, session length, where you train (home only, or home plus outdoors) and equipment.
+   - **Health:** 8 short safety questions, plus 4 more only when they apply (pregnancy/postpartum). A «نعم» on a warning sign pauses the plan; it is never bypassed.
+   - **Fitness now:** ranges, not tests (push-ups, squats, plank, walking, pull-ups if there is a bar), regular exercise yes/no, weaker arm/leg, and up to 2 areas to strengthen.
+3. **The weekly plan appears immediately.**
+   - 🏠 home strength days.
+   - 🌳 outdoor walking days, or 🏠 walking in place if home-only. Walk length starts from the trainee's walking answer and goes up 5 minutes per walk after a week with at least 75% of walks done.
+   - A one-sided exercise for the weaker limb. The trainee starts with the weaker side and does one extra set for it.
+   - One exercise for each chosen area.
+   - BMI ≥ 30 removes jumping and favours walking. Age ≥ 65 adds balance work. Both are labelled local, conservative rules.
+4. **Live workout:** after each exercise, one tap — سهل / مناسب / صعب جداً / ألم (pain asks for 0–10 and where). After the workout there are 4 short questions.
+5. **Weekly check-in:** 6 base questions plus pathway questions plus 2 adaptive exercise questions. Then «أنشئ جدول الأسبوع التالي».
+6. **Print / PDF** and **«حفظ نسخة للمتدرب»:**
+   - The reading copy is a small stand-alone HTML file with no scripts that opens on any phone.
+   - Both show each exercise name in Arabic and English, illustrations, steps and the dose.
+   - Each exercise has a **«ابحث عن فيديو»** YouTube search link for the English name. Links need internet; the app itself stays offline, and the video results are not reviewed by the app.
+
+The detailed pages (profile management, detailed screening and clearance, detailed baseline, history, backup, sources) are still available under **المزيد · More**.
+
+## Detailed coach workflow (under More)
 1. **المتدربون:** create the profile.
    - Name and age are required. Choose available days, minutes, equipment and known limitations.
    - Sex is optional. It is used **only** to decide whether pregnancy/postpartum questions appear, never to set intensity.
@@ -96,7 +117,7 @@ To add an exercise, follow `tools/AUTHORING.md` (pose coordinates, required fiel
 
 ## Limitations
 See `TEST_REPORT.md → Unfinished requirements and risks`. In short:
-- The library has 197 verified exercises, not 200. Three planned ones were dropped because their drawings were misleading.
+- The library has 199 verified exercises, not 200. Three planned ones were dropped because their drawings were misleading.
 - Sources were seen through search results only and must be checked by a qualified person.
 - No real-device testing has been done.
 - Some animations are schematic. The affected exercises say so in their descriptions.

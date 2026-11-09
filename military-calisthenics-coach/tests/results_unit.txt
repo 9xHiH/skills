@@ -15,7 +15,7 @@ PASS Screen: all NO → cleared
 PASS Screen: incomplete answers → more_info
 PASS Screen: chest pain → refer
 PASS Screen: unsure about symptom → more_info
-PASS Screen: medication → more_info; documented clearance → cleared
+PASS Screen: chronic illness/daily medicine → more_info; documented clearance → cleared
 PASS Screen: clearance can NOT resolve red-flag refer
 PASS Screen: supervised-only → refer even with clearance
 PASS Screen: age < 18 → refer
@@ -23,8 +23,8 @@ PASS Screen: known CV disease + inactive → more_info; active → cleared with 
 PASS Screen: prior refer requires documented clearance
 PASS Screen: pregnancy questions hidden for male, shown otherwise (not sex-based ability)
 PASS Screen: pregnancy without provider approval → more_info
-PASS Screen: pregnancy warning sign → refer
-PASS Screen: pregnancy absolute contraindication → refer
+PASS Screen: pregnancy warning sign → refer (clearance cannot lift it)
+PASS Screen: doctor-reported pregnancy problem → more_info until documented obstetric clearance
 PASS Screen: pregnancy 24 wk approved → cleared, excludes supine/prone/impact
 PASS Screen: pregnancy 10 wk → supine NOT excluded
 PASS Screen: postpartum 8 wk + pelvic symptoms → cleared with referral & impact/iap excluded
@@ -48,10 +48,18 @@ PASS Adapt: pain 5/10 on an exercise → substitute; next week not the same exer
 PASS Adapt: low completion → reduce
 PASS Adapt: illness → global reduce
 PASS Adapt: <50% sessions completed → no progression
-PASS Review questions: 10–14 core + adaptive, safety mandatory, pregnancy branch
+PASS Review questions: short (≤ 12), bilingual, safety mandatory, pregnancy branch, adaptive per-exercise
 PASS Override: out-of-range dose rejected; unsafe exercise rejected; reason required; blocked plan locked
+PASS Screen: every question is bilingual and health section is short (≤ 10 general questions)
+PASS Quick fitness → levels; inactive capped at 2; walk range sets walk minutes
+PASS Weak left arm → unilateral arm exercise each strength day, left side first + extra set
+PASS Weak arm + weak leg → arm on A days, leg on B days
+PASS Focus areas add one exercise per area (max 2) and survive time trimming
+PASS Place: home+outdoor → walking days outdoors (CA-WALK); home only → marching at home
+PASS BMI ≥ 30 → no high-impact exercises anywhere in the week
+PASS Walking progression: ≥75% walks done → +5 min next week; otherwise unchanged
 PASS Data: every exercise referenced by baseline tests exists
 PASS Data: every exercise has original animation passing geometry validation
 PASS Data: exercise IDs unique; Arabic names unique
 
-UNIT: 55 passed, 0 failed (197 exercises loaded) — node v22.23.4
+UNIT: 63 passed, 0 failed (199 exercises loaded) — node v22.23.4

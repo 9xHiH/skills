@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## 5.0.0-dev, round 3 (simplified, bilingual) — 2026-11-09
+Requested by the user: fewer and clearer questions, Arabic and English, plans for yourself, home vs outdoor activities, plans based on height/weight/age/fitness, weak-side training, a clearer PDF with English names for finding videos, a reading copy for the trainee, and fewer options.
+### Added
+- **Setup page:** one page with 3 short sections, fully bilingual with tap-to-choose answers. It covers self or trainee, height/weight, home or home + outdoors, and a weaker arm/leg plus up to 2 focus areas.
+- **Engine — places and walking:**
+  - home strength days and outdoor-walk or home-walk days;
+  - walking minutes that progress after a week with ≥ 75% of walks done.
+- **Engine — trainee-specific additions:**
+  - weak-side unilateral work (start weak side, +1 set), reusing a one-sided exercise already in the session instead of duplicating it;
+  - focus-area exercises that are kept when the session is trimmed for time;
+  - a BMI ≥ 30 rule: no jumping.
+- **New exercises:** `PU-SA-WALL` (single-arm wall push-up) and `PH-DOOR-SA` (single-arm door-frame row). The library now has 199.
+- **Print and reading copy:**
+  - a new bilingual print layout with clear exercise cards (Arabic + English name, dose, steps, breathing, cautions, YouTube search link);
+  - **«حفظ نسخة للمتدرب»** saves a stand-alone reading copy (HTML, no scripts).
+- **Simple home page:** today's task for each profile, with buttons to start today's workout, open the plan or edit details.
+### Changed
+- **Health screening `SCR-5.1.0`:**
+  - 8 general questions (previously 16), each with an English line.
+  - Palpitations and ankle swelling merged into the breathlessness question; medication merged into the chronic-illness question.
+  - Pregnancy contraindication lists replaced by one doctor-reported-problem question (→ needs documented obstetric clearance) plus one warning-signs question (→ refer).
+  - Red-flag logic unchanged.
+- **Navigation reduced to 6 items:** Home, Plan, Workout, Check-in, Exercises, More.
+- **Library filters:** only search, type, and "suitable for this person".
+- **Live workout:** one-tap rating after each exercise instead of 4 inputs.
+- **Shorter question sets:** post-workout check 4 questions (previously 6); weekly review 6 base questions plus up to 2 exercises (previously 11 plus 3).
+- **This is a deliberate deviation from the spec's question budgets.** The spec asked for 18–25 intake and 10–14 weekly questions; the user asked for fewer.
+
 ## 5.0.0-dev, round 2 — 2026-11-09
 ### Added
 - **Exercise library expanded from 151 to 197**: 46 new documented variations, each with its own animation (`ex_upper2`, `ex_core2`, `ex_lower2`, `ex_mobility2`, `ex_cardio2`).

@@ -2,8 +2,8 @@
 (function () {
   'use strict';
   var App = window.App, S = window.MCStore;
-  var NAV = [['dash', '◎', 'لوحة القيادة'], ['trainees', '👥', 'المتدربون'], ['screen', '🩺', 'الفحص والتقييم'], ['library', '📚', 'مكتبة التمارين'], ['plan', '🗓', 'الخطة الأسبوعية'], ['session', '⏱', 'الحصة المباشرة'], ['review', '✅', 'المراجعة الأسبوعية'], ['history', '📈', 'السجل والتقدم'], ['data', '💾', 'التصدير والاستيراد'], ['sources', '⚖', 'المصادر والسلامة']];
-  document.getElementById('nav').innerHTML = NAV.map(function (n) { return '<button data-page="' + n[0] + '"><span class="ico" aria-hidden="true">' + n[1] + '</span>' + n[2] + '</button>'; }).join('');
+  var NAV = [['dash', '🏠', 'الرئيسية', 'Home'], ['plan', '🗓', 'الجدول', 'Plan'], ['session', '⏱', 'التمرين', 'Workout'], ['review', '✅', 'المراجعة', 'Check-in'], ['library', '📚', 'التمارين', 'Exercises'], ['more', '⋯', 'المزيد', 'More']];
+  document.getElementById('nav').innerHTML = NAV.map(function (n) { return '<button data-page="' + n[0] + '"><span class="ico" aria-hidden="true">' + n[1] + '</span><span>' + n[2] + '<small class="en" dir="ltr">' + n[3] + '</small></span></button>'; }).join('');
   document.getElementById('appver').textContent = S.APP_VERSION + ' · ' + window.MCEngine.RULES;
   try { var th = localStorage.getItem('MCC_V5_THEME'); if (th) document.documentElement.dataset.theme = th; } catch (e) { /* ignore */ }
   App.db = S.load();
