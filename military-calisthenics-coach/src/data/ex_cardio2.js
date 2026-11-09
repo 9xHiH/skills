@@ -53,7 +53,7 @@
   MCEX.add(
     {
       id: 'CA-SQTHRUST', ar: 'دفعة القرفصاء (أربع عدات)', en: 'Squat thrust (4-count)', fam: 'squat-thrust', pat: 'cardio', cat: 'cardio', role: ['main'], lvl: 2,
-      prim: ['cardio', 'quads'], sec: ['core', 'delts_front', 'chest', 'glutes'], eq: ['mat'], space: '1×2.5 م', impact: 'low', pos: 'mixed', flags: ['wrist', 'shoulder', 'floor', 'knee'],
+      prim: ['cardio', 'quads'], sec: ['core', 'delts_front', 'chest', 'glutes'], eq: ['mat'], space: '1×2.5 م', impact: 'high', pos: 'mixed', flags: ['wrist', 'shoulder', 'floor', 'knee', 'impact'],
       dose: { u: 'reps', sets: [2, 3], reps: [6, 12], rest: [60, 90] },
       setup: 'قف والقدمان بعرض الوركين والذراعان بجانب الجسم.',
       steps: ['العدّة 1: انزل في قرفصاء وضع الكفين على الأرض أمام القدمين بعرض الكتفين.', 'العدّة 2: انقل الوزن إلى الكفين وادفع القدمين معاً إلى الخلف لتصل إلى وضع البلانك المرتفع بجسم مستقيم.', 'العدّة 3: أعد القدمين معاً إلى قرب الكفين مع إبقاء الظهر محايداً.', 'العدّة 4: قف بالدفع من القدمين دون قفز في الأعلى، ثم ابدأ التكرار التالي.'],

@@ -3,16 +3,16 @@
   "formatVersion": 1,
   "appVersion": "5.0.0-dev",
   "schemaVersion": 5,
-  "exportedAt": "2026-11-09T11:56:03.876Z",
+  "exportedAt": "2026-11-09T12:13:59.383Z",
   "scope": "full",
   "traineeIds": [],
-  "checksum": "5be31436",
+  "checksum": "7159a23e",
   "data": {
     "schema": "MCC",
     "schemaVersion": 5,
     "appVersion": "5.0.0-dev",
-    "createdAt": "2026-11-09T11:55:52.523Z",
-    "updatedAt": "2026-11-09T11:56:03.627Z",
+    "createdAt": "2026-11-09T12:13:47.956Z",
+    "updatedAt": "2026-11-09T12:13:59.118Z",
     "settings": {
       "coachName": "",
       "emergencyNumber": "999",
@@ -20,8 +20,8 @@
     },
     "trainees": [
       {
-        "id": "TR5-PYXKA-FJX2K",
-        "createdAt": "2026-11-09T11:55:53.127Z",
+        "id": "TR5-Y3J9D-Y1DNB",
+        "createdAt": "2026-11-09T12:13:48.585Z",
         "archived": false,
         "avoid": [],
         "revisions": [],
@@ -47,16 +47,16 @@
         "weightKg": null,
         "accessibility": "",
         "notes": "",
-        "updatedAt": "2026-11-09T11:55:53.127Z",
+        "updatedAt": "2026-11-09T12:13:48.585Z",
         "consent": {
-          "at": "2026-11-09T11:55:53.127Z",
+          "at": "2026-11-09T12:13:48.585Z",
           "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
           "version": "CONSENT-5.0"
         }
       },
       {
-        "id": "TR5-WSNDW-VTXF7",
-        "createdAt": "2026-11-09T11:55:54.112Z",
+        "id": "TR5-09ZAN-APH52",
+        "createdAt": "2026-11-09T12:13:49.667Z",
         "archived": false,
         "avoid": [],
         "revisions": [],
@@ -80,16 +80,16 @@
         "weightKg": null,
         "accessibility": "",
         "notes": "",
-        "updatedAt": "2026-11-09T11:55:54.112Z",
+        "updatedAt": "2026-11-09T12:13:49.667Z",
         "consent": {
-          "at": "2026-11-09T11:55:54.112Z",
+          "at": "2026-11-09T12:13:49.667Z",
           "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
           "version": "CONSENT-5.0"
         }
       },
       {
-        "id": "TR5-G6GS1-9DG6F",
-        "createdAt": "2026-11-09T11:55:55.393Z",
+        "id": "TR5-4D5KA-3R733",
+        "createdAt": "2026-11-09T12:13:50.850Z",
         "archived": false,
         "avoid": [],
         "revisions": [],
@@ -112,9 +112,9 @@
         "weightKg": null,
         "accessibility": "",
         "notes": "",
-        "updatedAt": "2026-11-09T11:55:55.393Z",
+        "updatedAt": "2026-11-09T12:13:50.850Z",
         "consent": {
-          "at": "2026-11-09T11:55:55.393Z",
+          "at": "2026-11-09T12:13:50.850Z",
           "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
           "version": "CONSENT-5.0"
         }
@@ -122,9 +122,9 @@
     ],
     "screenings": [
       {
-        "id": "SC5-6HVRF-QS805",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "at": "2026-11-09T11:55:53.377Z",
+        "id": "SC5-MBRFT-EB1ND",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "at": "2026-11-09T12:13:48.885Z",
         "version": "SCR-5.0.0",
         "answers": {
           "cv_dx": "no",
@@ -181,9 +181,9 @@
         }
       },
       {
-        "id": "SC5-5XC0A-C5WGZ",
-        "traineeId": "TR5-WSNDW-VTXF7",
-        "at": "2026-11-09T11:55:54.711Z",
+        "id": "SC5-WCAZ3-RAXSA",
+        "traineeId": "TR5-09ZAN-APH52",
+        "at": "2026-11-09T12:13:50.201Z",
         "version": "SCR-5.0.0",
         "answers": {
           "cv_dx": "no",
@@ -260,9 +260,9 @@
         }
       },
       {
-        "id": "SC5-BC0HC-PEEN9",
-        "traineeId": "TR5-G6GS1-9DG6F",
-        "at": "2026-11-09T11:55:55.661Z",
+        "id": "SC5-YR53Z-TYMMK",
+        "traineeId": "TR5-4D5KA-3R733",
+        "at": "2026-11-09T12:13:51.134Z",
         "version": "SCR-5.0.0",
         "answers": {
           "cv_dx": "no",
@@ -324,11 +324,11 @@
     ],
     "baselines": [
       {
-        "id": "BL5-JQG85-59PJ4",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "at": "2026-11-09T11:55:53.545Z",
+        "id": "BL5-TZ6KE-CP2V5",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "at": "2026-11-09T12:13:49.053Z",
         "version": "BL-5.0.0",
-        "screeningId": "SC5-6HVRF-QS805",
+        "screeningId": "SC5-MBRFT-EB1ND",
         "tests": {
           "push": {
             "variant": "PU-KNEE",
@@ -405,11 +405,11 @@
         "notes": []
       },
       {
-        "id": "BL5-E5VYY-MC4BH",
-        "traineeId": "TR5-WSNDW-VTXF7",
-        "at": "2026-11-09T11:55:54.878Z",
+        "id": "BL5-E5PES-5CKTM",
+        "traineeId": "TR5-09ZAN-APH52",
+        "at": "2026-11-09T12:13:50.351Z",
         "version": "BL-5.0.0",
-        "screeningId": "SC5-5XC0A-C5WGZ",
+        "screeningId": "SC5-WCAZ3-RAXSA",
         "tests": {
           "push": {
             "skipped": true
@@ -468,14 +468,14 @@
     ],
     "plans": [
       {
-        "id": "PL5-2026W46-6T5RY-TS1M4",
-        "traineeId": "TR5-PYXKA-FJX2K",
+        "id": "PL5-2026W46-63E4Z-73FSN",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
         "weekStart": "2026-11-15",
         "weekEnd": "2026-11-21",
-        "createdAt": "2026-11-09T11:55:53.644Z",
+        "createdAt": "2026-11-09T12:13:49.152Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-6HVRF-QS805",
-        "baselineId": "BL5-JQG85-59PJ4",
+        "screeningId": "SC5-MBRFT-EB1ND",
+        "baselineId": "BL5-TZ6KE-CP2V5",
         "prevPlanId": null,
         "decisionFrom": null,
         "status": "reviewed",
@@ -510,10 +510,10 @@
                 "side": false
               },
               {
-                "exId": "MO-9090",
+                "exId": "MO-NECK",
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
+                "target": 4,
                 "rest": 0,
                 "side": false
               }
@@ -528,26 +528,26 @@
                 "side": false
               },
               {
-                "exId": "CA-MARCH",
+                "exId": "ST-CHILD",
                 "u": "time",
                 "sets": 1,
-                "target": 60,
+                "target": 20,
                 "rest": 0,
                 "side": false
               },
               {
-                "exId": "MO-CATCAMEL",
-                "u": "reps",
+                "exId": "ST-NECKSIDE",
+                "u": "time",
                 "sets": 1,
-                "target": 6,
+                "target": 20,
                 "rest": 0,
-                "side": false
+                "side": true
               }
             ],
             "main": [
               {
                 "slot": "A1",
-                "exId": "SQ-PAUSE",
+                "exId": "SQ-TEMPO",
                 "step": 0,
                 "u": "reps",
                 "sets": 2,
@@ -646,10 +646,10 @@
                 "side": false
               },
               {
-                "exId": "CR-BIRDDOG",
+                "exId": "HA-STANDABD",
                 "u": "reps",
                 "sets": 1,
-                "target": 5,
+                "target": 10,
                 "rest": 0,
                 "side": true
               }
@@ -664,26 +664,26 @@
                 "side": false
               },
               {
-                "exId": "MO-SHCIRCLE",
-                "u": "reps",
+                "exId": "ST-SLOVER",
+                "u": "time",
                 "sets": 1,
-                "target": 8,
+                "target": 20,
                 "rest": 0,
-                "side": false
+                "side": true
               },
               {
-                "exId": "MO-CATCAMEL",
-                "u": "reps",
+                "exId": "ST-GLUTE",
+                "u": "time",
                 "sets": 1,
-                "target": 6,
+                "target": 20,
                 "rest": 0,
-                "side": false
+                "side": true
               }
             ],
             "main": [
               {
                 "slot": "B1",
-                "exId": "BR-SL",
+                "exId": "BR-MARCH",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
@@ -722,12 +722,12 @@
               },
               {
                 "slot": "B4",
-                "exId": "CR-BICYCLE",
+                "exId": "CR-BIRDDOG-ELB",
                 "step": 0,
                 "u": "reps",
-                "sets": 2,
+                "sets": 1,
                 "target": 6,
-                "rest": 55,
+                "rest": 45,
                 "side": true,
                 "why": [
                   "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «مقاومة الدوران/دوران» ضمن المعدات وقيود السلامة."
@@ -735,19 +735,19 @@
               },
               {
                 "slot": "B5",
-                "exId": "LU-LAT",
+                "exId": "HA-SIDESTEP",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 5,
-                "rest": 70,
+                "target": 8,
+                "rest": 55,
                 "side": true,
                 "why": [
-                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «اندفاع/ساق واحدة» ضمن المعدات وقيود السلامة."
+                  "اختير لأنه أعلى مستوى مسموح (متوسط) لنمط «إبعاد الورك» ضمن المعدات وقيود السلامة."
                 ]
               }
             ],
-            "estMinutes": 22
+            "estMinutes": 20
           },
           {
             "index": 3,
@@ -782,7 +782,7 @@
                 "side": false
               },
               {
-                "exId": "HG-HIPHINGE",
+                "exId": "MO-WRIST",
                 "u": "reps",
                 "sets": 1,
                 "target": 8,
@@ -800,7 +800,7 @@
                 "side": false
               },
               {
-                "exId": "ST-SIDE",
+                "exId": "ST-OVERHEAD",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -819,7 +819,7 @@
             "main": [
               {
                 "slot": "A1",
-                "exId": "SQ-PAUSE",
+                "exId": "SQ-TEMPO",
                 "step": 0,
                 "u": "reps",
                 "sets": 2,
@@ -911,14 +911,14 @@
         "decision": null
       },
       {
-        "id": "PL5-2026W46-7ZQF9-PAWPA",
-        "traineeId": "TR5-WSNDW-VTXF7",
+        "id": "PL5-2026W46-8S5R0-H849V",
+        "traineeId": "TR5-09ZAN-APH52",
         "weekStart": "2026-11-15",
         "weekEnd": "2026-11-21",
-        "createdAt": "2026-11-09T11:55:54.961Z",
+        "createdAt": "2026-11-09T12:13:50.434Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-5XC0A-C5WGZ",
-        "baselineId": "BL5-E5VYY-MC4BH",
+        "screeningId": "SC5-WCAZ3-RAXSA",
+        "baselineId": "BL5-E5PES-5CKTM",
         "prevPlanId": null,
         "decisionFrom": null,
         "status": "reviewed",
@@ -965,10 +965,10 @@
                 "side": false
               },
               {
-                "exId": "MO-ARMCIRCLE",
+                "exId": "MO-NECK",
                 "u": "reps",
                 "sets": 1,
-                "target": 10,
+                "target": 4,
                 "rest": 0,
                 "side": false
               }
@@ -983,7 +983,7 @@
                 "side": false
               },
               {
-                "exId": "ST-CHILD",
+                "exId": "ST-GROIN",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -991,7 +991,7 @@
                 "side": false
               },
               {
-                "exId": "ST-SIDE",
+                "exId": "ST-CROSSARM",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -1114,17 +1114,17 @@
                 "side": false
               },
               {
-                "exId": "SC-RETRACT",
+                "exId": "MO-CATCAMEL",
                 "u": "reps",
                 "sets": 1,
-                "target": 10,
+                "target": 6,
                 "rest": 0,
                 "side": false
               }
             ],
             "cooldown": [
               {
-                "exId": "ST-HAM",
+                "exId": "ST-OVERHEAD",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -1140,10 +1140,10 @@
                 "side": false
               },
               {
-                "exId": "MO-SHCIRCLE",
-                "u": "reps",
+                "exId": "ST-GROIN",
+                "u": "time",
                 "sets": 1,
-                "target": 8,
+                "target": 20,
                 "rest": 0,
                 "side": false
               }
@@ -1224,33 +1224,33 @@
                 "side": false
               },
               {
-                "exId": "MO-CATCAMEL",
+                "exId": "MO-WINDMILL",
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
+                "target": 5,
                 "rest": 0,
                 "side": false
               }
             ],
             "cooldown": [
               {
-                "exId": "ST-HIPFLEX",
-                "u": "time",
-                "sets": 1,
-                "target": 20,
-                "rest": 0,
-                "side": true
-              },
-              {
-                "exId": "ST-SIDE",
-                "u": "time",
-                "sets": 1,
-                "target": 20,
-                "rest": 0,
-                "side": true
-              },
-              {
                 "exId": "ST-HAM",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "CA-MARCH",
+                "u": "time",
+                "sets": 1,
+                "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-NECKSIDE",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -1358,13 +1358,13 @@
         "decision": null
       },
       {
-        "id": "PL5-2026W46-D4ED9-HW5D9",
-        "traineeId": "TR5-G6GS1-9DG6F",
+        "id": "PL5-2026W46-W0KYG-RYP4W",
+        "traineeId": "TR5-4D5KA-3R733",
         "weekStart": "2026-11-15",
         "weekEnd": "2026-11-21",
-        "createdAt": "2026-11-09T11:55:55.744Z",
+        "createdAt": "2026-11-09T12:13:51.217Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-BC0HC-PEEN9",
+        "screeningId": "SC5-YR53Z-TYMMK",
         "baselineId": null,
         "prevPlanId": null,
         "decisionFrom": null,
@@ -1383,16 +1383,16 @@
         "decision": null
       },
       {
-        "id": "PL5-2026W47-MR9RZ-4AMH1",
-        "traineeId": "TR5-PYXKA-FJX2K",
+        "id": "PL5-2026W47-HM6KC-CH06S",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
         "weekStart": "2026-11-22",
         "weekEnd": "2026-11-28",
-        "createdAt": "2026-11-09T11:56:03.010Z",
+        "createdAt": "2026-11-09T12:13:58.419Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-6HVRF-QS805",
-        "baselineId": "BL5-JQG85-59PJ4",
-        "prevPlanId": "PL5-2026W46-6T5RY-TS1M4",
-        "decisionFrom": "RV5-F1D44-3KCP5",
+        "screeningId": "SC5-MBRFT-EB1ND",
+        "baselineId": "BL5-TZ6KE-CP2V5",
+        "prevPlanId": "PL5-2026W46-63E4Z-73FSN",
+        "decisionFrom": "RV5-38RX2-W6AR6",
         "status": "active",
         "blockers": [],
         "notes": [
@@ -1426,12 +1426,12 @@
                 "side": false
               },
               {
-                "exId": "CR-BLTWIST",
+                "exId": "HG-HIPHINGE",
                 "u": "reps",
                 "sets": 1,
-                "target": 5,
+                "target": 8,
                 "rest": 0,
-                "side": true
+                "side": false
               }
             ],
             "cooldown": [
@@ -1444,7 +1444,7 @@
                 "side": false
               },
               {
-                "exId": "ST-SLOVER",
+                "exId": "ST-SUPTWIST",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -1452,18 +1452,18 @@
                 "side": true
               },
               {
-                "exId": "ST-EXTFLEX",
+                "exId": "ST-SLOVER",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
                 "rest": 0,
-                "side": false
+                "side": true
               }
             ],
             "main": [
               {
                 "slot": "A1",
-                "exId": "SQ-PAUSE",
+                "exId": "SQ-TEMPO",
                 "step": 0,
                 "u": "reps",
                 "sets": 3,
@@ -1563,10 +1563,10 @@
                 "side": false
               },
               {
-                "exId": "SC-PRONE-T",
-                "u": "reps",
+                "exId": "CA-ROPE",
+                "u": "time",
                 "sets": 1,
-                "target": 8,
+                "target": 20,
                 "rest": 0,
                 "side": false
               }
@@ -1581,26 +1581,26 @@
                 "side": false
               },
               {
-                "exId": "ST-HIPFLEX",
+                "exId": "CA-STEPTOUCH",
                 "u": "time",
                 "sets": 1,
-                "target": 20,
+                "target": 30,
                 "rest": 0,
-                "side": true
+                "side": false
               },
               {
-                "exId": "ST-GLUTE",
+                "exId": "CA-MARCH",
                 "u": "time",
                 "sets": 1,
-                "target": 20,
+                "target": 60,
                 "rest": 0,
-                "side": true
+                "side": false
               }
             ],
             "main": [
               {
                 "slot": "B1",
-                "exId": "BR-SL",
+                "exId": "BR-MARCH",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
@@ -1639,12 +1639,12 @@
               },
               {
                 "slot": "B4",
-                "exId": "CR-BICYCLE",
+                "exId": "CR-BIRDDOG-ELB",
                 "step": 0,
                 "u": "reps",
-                "sets": 2,
+                "sets": 1,
                 "target": 6,
-                "rest": 55,
+                "rest": 45,
                 "side": true,
                 "why": [
                   "تثبيت: لا توجد بيانات أداء مسجلة"
@@ -1652,19 +1652,19 @@
               },
               {
                 "slot": "B5",
-                "exId": "LU-LAT",
+                "exId": "HA-SIDESTEP",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 5,
-                "rest": 70,
+                "target": 8,
+                "rest": 55,
                 "side": true,
                 "why": [
                   "تثبيت: لا توجد بيانات أداء مسجلة"
                 ]
               }
             ],
-            "estMinutes": 22
+            "estMinutes": 20
           },
           {
             "index": 3,
@@ -1699,12 +1699,12 @@
                 "side": false
               },
               {
-                "exId": "LU-FWD",
+                "exId": "MO-TOETOUCHSQ",
                 "u": "reps",
                 "sets": 1,
                 "target": 5,
                 "rest": 0,
-                "side": true
+                "side": false
               }
             ],
             "cooldown": [
@@ -1717,26 +1717,26 @@
                 "side": false
               },
               {
-                "exId": "ST-GLUTE",
+                "exId": "MO-9090",
+                "u": "reps",
+                "sets": 1,
+                "target": 6,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-OVERHEAD",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
                 "rest": 0,
                 "side": true
-              },
-              {
-                "exId": "ST-CHILD",
-                "u": "time",
-                "sets": 1,
-                "target": 20,
-                "rest": 0,
-                "side": false
               }
             ],
             "main": [
               {
                 "slot": "A1",
-                "exId": "SQ-PAUSE",
+                "exId": "SQ-TEMPO",
                 "step": 0,
                 "u": "reps",
                 "sets": 3,
@@ -1822,16 +1822,16 @@
         ],
         "overrides": [
           {
-            "at": "2026-11-09T11:56:03.626Z",
+            "at": "2026-11-09T12:13:59.118Z",
             "dayIndex": 0,
             "slot": "A1",
             "from": {
-              "exId": "SQ-PAUSE",
+              "exId": "SQ-TEMPO",
               "sets": 2,
               "target": 6
             },
             "to": {
-              "exId": "SQ-PAUSE",
+              "exId": "SQ-TEMPO",
               "sets": 3,
               "target": 6
             },
@@ -1840,7 +1840,7 @@
         ],
         "revisions": [
           {
-            "at": "2026-11-09T11:56:03.626Z",
+            "at": "2026-11-09T12:13:59.118Z",
             "reason": "تعديل المدرب: اختبار حدود",
             "ruleVersion": "RULES-5.0.0",
             "days": [
@@ -1869,12 +1869,12 @@
                     "side": false
                   },
                   {
-                    "exId": "CR-BLTWIST",
+                    "exId": "HG-HIPHINGE",
                     "u": "reps",
                     "sets": 1,
-                    "target": 5,
+                    "target": 8,
                     "rest": 0,
-                    "side": true
+                    "side": false
                   }
                 ],
                 "cooldown": [
@@ -1887,7 +1887,7 @@
                     "side": false
                   },
                   {
-                    "exId": "ST-SLOVER",
+                    "exId": "ST-SUPTWIST",
                     "u": "time",
                     "sets": 1,
                     "target": 20,
@@ -1895,18 +1895,18 @@
                     "side": true
                   },
                   {
-                    "exId": "ST-EXTFLEX",
+                    "exId": "ST-SLOVER",
                     "u": "time",
                     "sets": 1,
                     "target": 20,
                     "rest": 0,
-                    "side": false
+                    "side": true
                   }
                 ],
                 "main": [
                   {
                     "slot": "A1",
-                    "exId": "SQ-PAUSE",
+                    "exId": "SQ-TEMPO",
                     "step": 0,
                     "u": "reps",
                     "sets": 2,
@@ -2005,10 +2005,10 @@
                     "side": false
                   },
                   {
-                    "exId": "SC-PRONE-T",
-                    "u": "reps",
+                    "exId": "CA-ROPE",
+                    "u": "time",
                     "sets": 1,
-                    "target": 8,
+                    "target": 20,
                     "rest": 0,
                     "side": false
                   }
@@ -2023,26 +2023,26 @@
                     "side": false
                   },
                   {
-                    "exId": "ST-HIPFLEX",
+                    "exId": "CA-STEPTOUCH",
                     "u": "time",
                     "sets": 1,
-                    "target": 20,
+                    "target": 30,
                     "rest": 0,
-                    "side": true
+                    "side": false
                   },
                   {
-                    "exId": "ST-GLUTE",
+                    "exId": "CA-MARCH",
                     "u": "time",
                     "sets": 1,
-                    "target": 20,
+                    "target": 60,
                     "rest": 0,
-                    "side": true
+                    "side": false
                   }
                 ],
                 "main": [
                   {
                     "slot": "B1",
-                    "exId": "BR-SL",
+                    "exId": "BR-MARCH",
                     "step": 0,
                     "u": "reps",
                     "sets": 1,
@@ -2081,12 +2081,12 @@
                   },
                   {
                     "slot": "B4",
-                    "exId": "CR-BICYCLE",
+                    "exId": "CR-BIRDDOG-ELB",
                     "step": 0,
                     "u": "reps",
-                    "sets": 2,
+                    "sets": 1,
                     "target": 6,
-                    "rest": 55,
+                    "rest": 45,
                     "side": true,
                     "why": [
                       "تثبيت: لا توجد بيانات أداء مسجلة"
@@ -2094,19 +2094,19 @@
                   },
                   {
                     "slot": "B5",
-                    "exId": "LU-LAT",
+                    "exId": "HA-SIDESTEP",
                     "step": 0,
                     "u": "reps",
                     "sets": 1,
-                    "target": 5,
-                    "rest": 70,
+                    "target": 8,
+                    "rest": 55,
                     "side": true,
                     "why": [
                       "تثبيت: لا توجد بيانات أداء مسجلة"
                     ]
                   }
                 ],
-                "estMinutes": 22
+                "estMinutes": 20
               },
               {
                 "index": 3,
@@ -2141,12 +2141,12 @@
                     "side": false
                   },
                   {
-                    "exId": "LU-FWD",
+                    "exId": "MO-TOETOUCHSQ",
                     "u": "reps",
                     "sets": 1,
                     "target": 5,
                     "rest": 0,
-                    "side": true
+                    "side": false
                   }
                 ],
                 "cooldown": [
@@ -2159,26 +2159,26 @@
                     "side": false
                   },
                   {
-                    "exId": "ST-GLUTE",
+                    "exId": "MO-9090",
+                    "u": "reps",
+                    "sets": 1,
+                    "target": 6,
+                    "rest": 0,
+                    "side": false
+                  },
+                  {
+                    "exId": "ST-OVERHEAD",
                     "u": "time",
                     "sets": 1,
                     "target": 20,
                     "rest": 0,
                     "side": true
-                  },
-                  {
-                    "exId": "ST-CHILD",
-                    "u": "time",
-                    "sets": 1,
-                    "target": 20,
-                    "rest": 0,
-                    "side": false
                   }
                 ],
                 "main": [
                   {
                     "slot": "A1",
-                    "exId": "SQ-PAUSE",
+                    "exId": "SQ-TEMPO",
                     "step": 0,
                     "u": "reps",
                     "sets": 2,
@@ -2268,14 +2268,14 @@
         "traineeName": "سالم التجريبي",
         "tempFlagsIn": [],
         "decision": {
-          "reviewId": "RV5-F1D44-3KCP5",
-          "at": "2026-11-09T11:56:02.859Z",
+          "reviewId": "RV5-38RX2-W6AR6",
+          "at": "2026-11-09T12:13:58.251Z",
           "overall": "maintain",
           "reasons": [],
           "items": {
-            "A1|SQ-PAUSE": {
+            "A1|SQ-TEMPO": {
               "slot": "A1",
-              "exId": "SQ-PAUSE",
+              "exId": "SQ-TEMPO",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 5.0",
               "completion": 1,
@@ -2318,9 +2318,9 @@
               "effort": 5,
               "sessions": 1
             },
-            "B1|BR-SL": {
+            "B1|BR-MARCH": {
               "slot": "B1",
-              "exId": "BR-SL",
+              "exId": "BR-MARCH",
               "action": "maintain",
               "why": "إنجاز 100%",
               "completion": 1,
@@ -2345,18 +2345,18 @@
               "effort": null,
               "sessions": 0
             },
-            "B4|CR-BICYCLE": {
+            "B4|CR-BIRDDOG-ELB": {
               "slot": "B4",
-              "exId": "CR-BICYCLE",
+              "exId": "CR-BIRDDOG-ELB",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
               "effort": null,
               "sessions": 0
             },
-            "B5|LU-LAT": {
+            "B5|HA-SIDESTEP": {
               "slot": "B5",
-              "exId": "LU-LAT",
+              "exId": "HA-SIDESTEP",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
@@ -2370,19 +2370,19 @@
           "planned": 3,
           "ruleVersion": "RULES-5.0.0"
         },
-        "updatedAt": "2026-11-09T11:56:03.626Z"
+        "updatedAt": "2026-11-09T12:13:59.118Z"
       },
       {
-        "id": "PL5-2026W47-B3V0H-ZRG5G",
-        "traineeId": "TR5-WSNDW-VTXF7",
+        "id": "PL5-2026W47-N5BZQ-RDJ99",
+        "traineeId": "TR5-09ZAN-APH52",
         "weekStart": "2026-11-22",
         "weekEnd": "2026-11-28",
-        "createdAt": "2026-11-09T11:56:03.392Z",
+        "createdAt": "2026-11-09T12:13:58.849Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-5XC0A-C5WGZ",
-        "baselineId": "BL5-E5VYY-MC4BH",
-        "prevPlanId": "PL5-2026W46-7ZQF9-PAWPA",
-        "decisionFrom": "RV5-NRH2S-67S4D",
+        "screeningId": "SC5-WCAZ3-RAXSA",
+        "baselineId": "BL5-E5PES-5CKTM",
+        "prevPlanId": "PL5-2026W46-8S5R0-H849V",
+        "decisionFrom": "RV5-KXCP5-K6EBH",
         "status": "blocked",
         "blockers": [
           "مراجعة الأسبوع السابق انتهت بإحالة: ألم شديد (8/10): ليس ألماً عضلياً عادياً — إيقاف وتقييم مختص. — يلزم فحص جديد بعد المراجعة مع تصريح مختص موثق."
@@ -2395,8 +2395,8 @@
         "coachName": "",
         "traineeName": "مريم التجريبية",
         "decision": {
-          "reviewId": "RV5-NRH2S-67S4D",
-          "at": "2026-11-09T11:56:03.243Z",
+          "reviewId": "RV5-KXCP5-K6EBH",
+          "at": "2026-11-09T12:13:58.701Z",
           "overall": "refer",
           "reasons": [
             {
@@ -2518,15 +2518,16 @@
     ],
     "sessions": [
       {
-        "id": "SS5-1Y4PH-H4N8S",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "planId": "PL5-2026W46-6T5RY-TS1M4",
+        "id": "SS5-ZEGAA-F9XZG",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "planId": "PL5-2026W46-63E4Z-73FSN",
         "dayIndex": 0,
         "date": "2026-11-15",
         "kind": "train",
         "status": "complete",
-        "startedAt": "2026-11-09T11:55:55.944Z",
-        "updatedAt": "2026-11-09T11:55:59.827Z",
+        "early": true,
+        "startedAt": "2026-11-09T12:13:51.454Z",
+        "updatedAt": "2026-11-09T12:13:55.151Z",
         "cursor": 11,
         "redFlag": false,
         "items": [
@@ -2544,7 +2545,7 @@
             "sets": [
               {
                 "value": 60,
-                "at": "2026-11-09T11:55:56.011Z"
+                "at": "2026-11-09T12:13:51.519Z"
               }
             ],
             "effort": "",
@@ -2566,7 +2567,7 @@
             "sets": [
               {
                 "value": 20,
-                "at": "2026-11-09T11:55:56.160Z"
+                "at": "2026-11-09T12:13:51.652Z"
               }
             ],
             "effort": "",
@@ -2577,18 +2578,18 @@
           {
             "block": "warmup",
             "slot": null,
-            "exId": "MO-9090",
+            "exId": "MO-NECK",
             "prescribed": {
               "sets": 1,
-              "target": 6,
+              "target": 4,
               "u": "reps",
               "side": false,
               "rest": 0
             },
             "sets": [
               {
-                "value": 6,
-                "at": "2026-11-09T11:55:56.543Z"
+                "value": 4,
+                "at": "2026-11-09T12:13:51.968Z"
               }
             ],
             "effort": "",
@@ -2599,7 +2600,7 @@
           {
             "block": "main",
             "slot": "A1",
-            "exId": "SQ-PAUSE",
+            "exId": "SQ-TEMPO",
             "prescribed": {
               "sets": 2,
               "target": 6,
@@ -2610,11 +2611,11 @@
             "sets": [
               {
                 "value": 6,
-                "at": "2026-11-09T11:55:56.877Z"
+                "at": "2026-11-09T12:13:52.319Z"
               },
               {
                 "value": 6,
-                "at": "2026-11-09T11:55:57.161Z"
+                "at": "2026-11-09T12:13:52.601Z"
               }
             ],
             "effort": 5,
@@ -2636,7 +2637,7 @@
             "sets": [
               {
                 "value": 5,
-                "at": "2026-11-09T11:55:57.544Z"
+                "at": "2026-11-09T12:13:53.034Z"
               }
             ],
             "effort": 5,
@@ -2658,7 +2659,7 @@
             "sets": [
               {
                 "value": 8,
-                "at": "2026-11-09T11:55:58.043Z"
+                "at": "2026-11-09T12:13:53.536Z"
               }
             ],
             "effort": 5,
@@ -2680,11 +2681,11 @@
             "sets": [
               {
                 "value": 6,
-                "at": "2026-11-09T11:55:58.495Z"
+                "at": "2026-11-09T12:13:53.967Z"
               },
               {
                 "value": 6,
-                "at": "2026-11-09T11:55:58.777Z"
+                "at": "2026-11-09T12:13:54.287Z"
               }
             ],
             "effort": 5,
@@ -2706,7 +2707,7 @@
             "sets": [
               {
                 "value": 4,
-                "at": "2026-11-09T11:55:59.144Z"
+                "at": "2026-11-09T12:13:54.650Z"
               }
             ],
             "effort": 5,
@@ -2728,7 +2729,7 @@
             "sets": [
               {
                 "value": 60,
-                "at": "2026-11-09T11:55:59.376Z"
+                "at": "2026-11-09T12:13:54.891Z"
               }
             ],
             "effort": "",
@@ -2739,18 +2740,18 @@
           {
             "block": "cooldown",
             "slot": null,
-            "exId": "CA-MARCH",
+            "exId": "ST-CHILD",
             "prescribed": {
               "sets": 1,
-              "target": 60,
+              "target": 20,
               "u": "time",
               "side": false,
               "rest": 0
             },
             "sets": [
               {
-                "value": 60,
-                "at": "2026-11-09T11:55:59.494Z"
+                "value": 20,
+                "at": "2026-11-09T12:13:55.017Z"
               }
             ],
             "effort": "",
@@ -2761,18 +2762,18 @@
           {
             "block": "cooldown",
             "slot": null,
-            "exId": "MO-CATCAMEL",
+            "exId": "ST-NECKSIDE",
             "prescribed": {
               "sets": 1,
-              "target": 6,
-              "u": "reps",
-              "side": false,
+              "target": 20,
+              "u": "time",
+              "side": true,
               "rest": 0
             },
             "sets": [
               {
-                "value": 6,
-                "at": "2026-11-09T11:55:59.827Z"
+                "value": 20,
+                "at": "2026-11-09T12:13:55.151Z"
               }
             ],
             "effort": "",
@@ -2787,20 +2788,21 @@
           "pain": 0,
           "symptoms": "no"
         },
-        "endedAt": "2026-11-09T11:55:59.976Z",
+        "endedAt": "2026-11-09T12:13:55.301Z",
         "minutes": 1,
         "load": 5
       },
       {
-        "id": "SS5-DN141-9MWAA",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "planId": "PL5-2026W46-6T5RY-TS1M4",
+        "id": "SS5-MA3J7-A1BA1",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "planId": "PL5-2026W46-63E4Z-73FSN",
         "dayIndex": 2,
         "date": "2026-11-17",
         "kind": "train",
         "status": "partial",
-        "startedAt": "2026-11-09T11:56:00.077Z",
-        "updatedAt": "2026-11-09T11:56:00.245Z",
+        "early": true,
+        "startedAt": "2026-11-09T12:13:55.404Z",
+        "updatedAt": "2026-11-09T12:13:55.618Z",
         "cursor": 3,
         "redFlag": false,
         "items": [
@@ -2841,10 +2843,10 @@
           {
             "block": "warmup",
             "slot": null,
-            "exId": "CR-BIRDDOG",
+            "exId": "HA-STANDABD",
             "prescribed": {
               "sets": 1,
-              "target": 5,
+              "target": 10,
               "u": "reps",
               "side": true,
               "rest": 0
@@ -2858,7 +2860,7 @@
           {
             "block": "main",
             "slot": "B1",
-            "exId": "BR-SL",
+            "exId": "BR-MARCH",
             "prescribed": {
               "sets": 1,
               "target": 6,
@@ -2869,7 +2871,7 @@
             "sets": [
               {
                 "value": 6,
-                "at": "2026-11-09T11:56:00.245Z"
+                "at": "2026-11-09T12:13:55.618Z"
               }
             ],
             "effort": "",
@@ -2914,13 +2916,13 @@
           {
             "block": "main",
             "slot": "B4",
-            "exId": "CR-BICYCLE",
+            "exId": "CR-BIRDDOG-ELB",
             "prescribed": {
-              "sets": 2,
+              "sets": 1,
               "target": 6,
               "u": "reps",
               "side": true,
-              "rest": 55
+              "rest": 45
             },
             "sets": [],
             "effort": "",
@@ -2931,13 +2933,13 @@
           {
             "block": "main",
             "slot": "B5",
-            "exId": "LU-LAT",
+            "exId": "HA-SIDESTEP",
             "prescribed": {
               "sets": 1,
-              "target": 5,
+              "target": 8,
               "u": "reps",
               "side": true,
-              "rest": 70
+              "rest": 55
             },
             "sets": [],
             "effort": "",
@@ -2965,12 +2967,12 @@
           {
             "block": "cooldown",
             "slot": null,
-            "exId": "MO-SHCIRCLE",
+            "exId": "ST-SLOVER",
             "prescribed": {
               "sets": 1,
-              "target": 8,
-              "u": "reps",
-              "side": false,
+              "target": 20,
+              "u": "time",
+              "side": true,
               "rest": 0
             },
             "sets": [],
@@ -2982,12 +2984,12 @@
           {
             "block": "cooldown",
             "slot": null,
-            "exId": "MO-CATCAMEL",
+            "exId": "ST-GLUTE",
             "prescribed": {
               "sets": 1,
-              "target": 6,
-              "u": "reps",
-              "side": false,
+              "target": 20,
+              "u": "time",
+              "side": true,
               "rest": 0
             },
             "sets": [],
@@ -3001,10 +3003,10 @@
     ],
     "reviews": [
       {
-        "id": "RV5-F1D44-3KCP5",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "planId": "PL5-2026W46-6T5RY-TS1M4",
-        "at": "2026-11-09T11:56:02.859Z",
+        "id": "RV5-38RX2-W6AR6",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "planId": "PL5-2026W46-63E4Z-73FSN",
+        "at": "2026-11-09T12:13:58.251Z",
         "version": "RULES-5.0.0",
         "questions": [
           {
@@ -3056,12 +3058,12 @@
             "text": "صعوبة «السباح» (0–10):"
           },
           {
-            "id": "perEx.BR-SL.technique",
-            "text": "تقنية «جسر الحوض بساق واحدة» في آخر أداء:"
+            "id": "perEx.BR-MARCH.technique",
+            "text": "تقنية «جسر الحوض مع رفع القدمين بالتبادل» في آخر أداء:"
           },
           {
-            "id": "perEx.BR-SL.difficulty",
-            "text": "صعوبة «جسر الحوض بساق واحدة» (0–10):"
+            "id": "perEx.BR-MARCH.difficulty",
+            "text": "صعوبة «جسر الحوض مع رفع القدمين بالتبادل» (0–10):"
           },
           {
             "id": "perEx.CR-BENTLEG.technique",
@@ -3075,7 +3077,7 @@
         "answers": {
           "perEx": {
             "BE-SWIMMER": {},
-            "BR-SL": {},
+            "BR-MARCH": {},
             "CR-BENTLEG": {}
           },
           "safety": "no",
@@ -3089,9 +3091,9 @@
           "overall": "maintain",
           "reasons": [],
           "items": {
-            "A1|SQ-PAUSE": {
+            "A1|SQ-TEMPO": {
               "slot": "A1",
-              "exId": "SQ-PAUSE",
+              "exId": "SQ-TEMPO",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 5.0",
               "completion": 1,
@@ -3134,9 +3136,9 @@
               "effort": 5,
               "sessions": 1
             },
-            "B1|BR-SL": {
+            "B1|BR-MARCH": {
               "slot": "B1",
-              "exId": "BR-SL",
+              "exId": "BR-MARCH",
               "action": "maintain",
               "why": "إنجاز 100%",
               "completion": 1,
@@ -3161,18 +3163,18 @@
               "effort": null,
               "sessions": 0
             },
-            "B4|CR-BICYCLE": {
+            "B4|CR-BIRDDOG-ELB": {
               "slot": "B4",
-              "exId": "CR-BICYCLE",
+              "exId": "CR-BIRDDOG-ELB",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
               "effort": null,
               "sessions": 0
             },
-            "B5|LU-LAT": {
+            "B5|HA-SIDESTEP": {
               "slot": "B5",
-              "exId": "LU-LAT",
+              "exId": "HA-SIDESTEP",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
@@ -3185,14 +3187,14 @@
           "partial": 1,
           "planned": 3,
           "ruleVersion": "RULES-5.0.0",
-          "at": "2026-11-09T11:56:02.859Z"
+          "at": "2026-11-09T12:13:58.251Z"
         }
       },
       {
-        "id": "RV5-NRH2S-67S4D",
-        "traineeId": "TR5-WSNDW-VTXF7",
-        "planId": "PL5-2026W46-7ZQF9-PAWPA",
-        "at": "2026-11-09T11:56:03.243Z",
+        "id": "RV5-KXCP5-K6EBH",
+        "traineeId": "TR5-09ZAN-APH52",
+        "planId": "PL5-2026W46-8S5R0-H849V",
+        "at": "2026-11-09T12:13:58.701Z",
         "version": "RULES-5.0.0",
         "questions": [
           {
@@ -3397,162 +3399,162 @@
           "partial": 0,
           "planned": 3,
           "ruleVersion": "RULES-5.0.0",
-          "at": "2026-11-09T11:56:03.243Z"
+          "at": "2026-11-09T12:13:58.701Z"
         }
       }
     ],
     "audit": [
       {
-        "id": "AU5-X84SP-BHQNM",
-        "at": "2026-11-09T11:55:53.127Z",
+        "id": "AU5-K4YD3-NCRMR",
+        "at": "2026-11-09T12:13:48.585Z",
         "type": "trainee.create",
         "msg": "إنشاء سالم التجريبي",
-        "traineeId": "TR5-PYXKA-FJX2K",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
         "ref": null
       },
       {
-        "id": "AU5-ESBSS-SYPK0",
-        "at": "2026-11-09T11:55:53.378Z",
+        "id": "AU5-MX86M-3TGFF",
+        "at": "2026-11-09T12:13:48.886Z",
         "type": "screening",
-        "msg": "فحص SC5-6HVRF-QS805 ⇒ cleared",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "SC5-6HVRF-QS805"
+        "msg": "فحص SC5-MBRFT-EB1ND ⇒ cleared",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "SC5-MBRFT-EB1ND"
       },
       {
-        "id": "AU5-R28EH-WN2YG",
-        "at": "2026-11-09T11:55:53.545Z",
+        "id": "AU5-ZD4VR-HQEBW",
+        "at": "2026-11-09T12:13:49.053Z",
         "type": "baseline",
-        "msg": "تقييم أساسي BL5-JQG85-59PJ4 ⇒ {\"push\":2,\"squat\":2,\"core\":2,\"pull\":1,\"aerobic\":2,\"balance\":2}",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "BL5-JQG85-59PJ4"
+        "msg": "تقييم أساسي BL5-TZ6KE-CP2V5 ⇒ {\"push\":2,\"squat\":2,\"core\":2,\"pull\":1,\"aerobic\":2,\"balance\":2}",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "BL5-TZ6KE-CP2V5"
       },
       {
-        "id": "AU5-SSJNW-DZBSX",
-        "at": "2026-11-09T11:55:53.646Z",
+        "id": "AU5-R76HY-M6G2E",
+        "at": "2026-11-09T12:13:49.154Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W46-6T5RY-TS1M4 (active)",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "PL5-2026W46-6T5RY-TS1M4"
+        "msg": "خطة PL5-2026W46-63E4Z-73FSN (active)",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "PL5-2026W46-63E4Z-73FSN"
       },
       {
-        "id": "AU5-YP8ZY-YHS0N",
-        "at": "2026-11-09T11:55:54.112Z",
+        "id": "AU5-NW8B2-PXXXF",
+        "at": "2026-11-09T12:13:49.667Z",
         "type": "trainee.create",
         "msg": "إنشاء مريم التجريبية",
-        "traineeId": "TR5-WSNDW-VTXF7",
+        "traineeId": "TR5-09ZAN-APH52",
         "ref": null
       },
       {
-        "id": "AU5-HNA5G-F8WHZ",
-        "at": "2026-11-09T11:55:54.711Z",
+        "id": "AU5-1Y50M-05VAP",
+        "at": "2026-11-09T12:13:50.201Z",
         "type": "screening",
-        "msg": "فحص SC5-5XC0A-C5WGZ ⇒ cleared",
-        "traineeId": "TR5-WSNDW-VTXF7",
-        "ref": "SC5-5XC0A-C5WGZ"
+        "msg": "فحص SC5-WCAZ3-RAXSA ⇒ cleared",
+        "traineeId": "TR5-09ZAN-APH52",
+        "ref": "SC5-WCAZ3-RAXSA"
       },
       {
-        "id": "AU5-89PDB-FNBZ9",
-        "at": "2026-11-09T11:55:54.878Z",
+        "id": "AU5-H028K-2P03X",
+        "at": "2026-11-09T12:13:50.351Z",
         "type": "baseline",
-        "msg": "تقييم أساسي BL5-E5VYY-MC4BH ⇒ {\"push\":1,\"squat\":1,\"core\":1,\"pull\":1,\"aerobic\":1,\"balance\":1}",
-        "traineeId": "TR5-WSNDW-VTXF7",
-        "ref": "BL5-E5VYY-MC4BH"
+        "msg": "تقييم أساسي BL5-E5PES-5CKTM ⇒ {\"push\":1,\"squat\":1,\"core\":1,\"pull\":1,\"aerobic\":1,\"balance\":1}",
+        "traineeId": "TR5-09ZAN-APH52",
+        "ref": "BL5-E5PES-5CKTM"
       },
       {
-        "id": "AU5-B53R5-DH6MA",
-        "at": "2026-11-09T11:55:54.961Z",
+        "id": "AU5-9SCWZ-QB3QB",
+        "at": "2026-11-09T12:13:50.435Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W46-7ZQF9-PAWPA (active)",
-        "traineeId": "TR5-WSNDW-VTXF7",
-        "ref": "PL5-2026W46-7ZQF9-PAWPA"
+        "msg": "خطة PL5-2026W46-8S5R0-H849V (active)",
+        "traineeId": "TR5-09ZAN-APH52",
+        "ref": "PL5-2026W46-8S5R0-H849V"
       },
       {
-        "id": "AU5-W0JQJ-EZK4B",
-        "at": "2026-11-09T11:55:55.393Z",
+        "id": "AU5-W6J3D-C9S88",
+        "at": "2026-11-09T12:13:50.851Z",
         "type": "trainee.create",
         "msg": "إنشاء خالد التجريبي",
-        "traineeId": "TR5-G6GS1-9DG6F",
+        "traineeId": "TR5-4D5KA-3R733",
         "ref": null
       },
       {
-        "id": "AU5-3MJ6N-XBAP4",
-        "at": "2026-11-09T11:55:55.661Z",
+        "id": "AU5-RDY94-WRSYX",
+        "at": "2026-11-09T12:13:51.134Z",
         "type": "screening",
-        "msg": "فحص SC5-BC0HC-PEEN9 ⇒ refer",
-        "traineeId": "TR5-G6GS1-9DG6F",
-        "ref": "SC5-BC0HC-PEEN9"
+        "msg": "فحص SC5-YR53Z-TYMMK ⇒ refer",
+        "traineeId": "TR5-4D5KA-3R733",
+        "ref": "SC5-YR53Z-TYMMK"
       },
       {
-        "id": "AU5-5NF8Y-23G5F",
-        "at": "2026-11-09T11:55:55.744Z",
+        "id": "AU5-Z86QT-9QJXS",
+        "at": "2026-11-09T12:13:51.217Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W46-D4ED9-HW5D9 (blocked)",
-        "traineeId": "TR5-G6GS1-9DG6F",
-        "ref": "PL5-2026W46-D4ED9-HW5D9"
+        "msg": "خطة PL5-2026W46-W0KYG-RYP4W (blocked)",
+        "traineeId": "TR5-4D5KA-3R733",
+        "ref": "PL5-2026W46-W0KYG-RYP4W"
       },
       {
-        "id": "AU5-RARNF-1PG4X",
-        "at": "2026-11-09T11:55:55.944Z",
+        "id": "AU5-YRVP9-18BZK",
+        "at": "2026-11-09T12:13:51.454Z",
         "type": "session.start",
-        "msg": "بدء حصة SS5-1Y4PH-H4N8S",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "SS5-1Y4PH-H4N8S"
+        "msg": "بدء حصة SS5-ZEGAA-F9XZG",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "SS5-ZEGAA-F9XZG"
       },
       {
-        "id": "AU5-DBKHN-W0C9G",
-        "at": "2026-11-09T11:55:59.976Z",
+        "id": "AU5-SAQ3P-HNN02",
+        "at": "2026-11-09T12:13:55.301Z",
         "type": "session.complete",
-        "msg": "إنهاء SS5-1Y4PH-H4N8S جهد 5 ألم 0",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "SS5-1Y4PH-H4N8S"
+        "msg": "إنهاء SS5-ZEGAA-F9XZG جهد 5 ألم 0",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "SS5-ZEGAA-F9XZG"
       },
       {
-        "id": "AU5-3Y57W-D7629",
-        "at": "2026-11-09T11:56:00.077Z",
+        "id": "AU5-D473H-QBX3J",
+        "at": "2026-11-09T12:13:55.404Z",
         "type": "session.start",
-        "msg": "بدء حصة SS5-DN141-9MWAA",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "SS5-DN141-9MWAA"
+        "msg": "بدء حصة SS5-MA3J7-A1BA1",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "SS5-MA3J7-A1BA1"
       },
       {
-        "id": "AU5-2Q8FZ-QYFVM",
-        "at": "2026-11-09T11:56:02.859Z",
+        "id": "AU5-H0VXF-N3CM2",
+        "at": "2026-11-09T12:13:58.251Z",
         "type": "review",
-        "msg": "مراجعة PL5-2026W46-6T5RY-TS1M4 ⇒ maintain",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "RV5-F1D44-3KCP5"
+        "msg": "مراجعة PL5-2026W46-63E4Z-73FSN ⇒ maintain",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "RV5-38RX2-W6AR6"
       },
       {
-        "id": "AU5-RZTGX-HNQC9",
-        "at": "2026-11-09T11:56:03.010Z",
+        "id": "AU5-R2WST-0P1C6",
+        "at": "2026-11-09T12:13:58.420Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W47-MR9RZ-4AMH1 (active)",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "PL5-2026W47-MR9RZ-4AMH1"
+        "msg": "خطة PL5-2026W47-HM6KC-CH06S (active)",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "PL5-2026W47-HM6KC-CH06S"
       },
       {
-        "id": "AU5-XRSGP-0BH79",
-        "at": "2026-11-09T11:56:03.243Z",
+        "id": "AU5-0KMX7-WW7C2",
+        "at": "2026-11-09T12:13:58.701Z",
         "type": "review",
-        "msg": "مراجعة PL5-2026W46-7ZQF9-PAWPA ⇒ refer",
-        "traineeId": "TR5-WSNDW-VTXF7",
-        "ref": "RV5-NRH2S-67S4D"
+        "msg": "مراجعة PL5-2026W46-8S5R0-H849V ⇒ refer",
+        "traineeId": "TR5-09ZAN-APH52",
+        "ref": "RV5-KXCP5-K6EBH"
       },
       {
-        "id": "AU5-F2BQ7-4JN7Y",
-        "at": "2026-11-09T11:56:03.392Z",
+        "id": "AU5-0S4RT-9CJCR",
+        "at": "2026-11-09T12:13:58.849Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W47-B3V0H-ZRG5G (blocked)",
-        "traineeId": "TR5-WSNDW-VTXF7",
-        "ref": "PL5-2026W47-B3V0H-ZRG5G"
+        "msg": "خطة PL5-2026W47-N5BZQ-RDJ99 (blocked)",
+        "traineeId": "TR5-09ZAN-APH52",
+        "ref": "PL5-2026W47-N5BZQ-RDJ99"
       },
       {
-        "id": "AU5-0X5K2-N6BBE",
-        "at": "2026-11-09T11:56:03.626Z",
+        "id": "AU5-S6GTW-T16XK",
+        "at": "2026-11-09T12:13:59.118Z",
         "type": "plan.override",
-        "msg": "PL5-2026W47-MR9RZ-4AMH1: اختبار حدود",
-        "traineeId": "TR5-PYXKA-FJX2K",
-        "ref": "PL5-2026W47-MR9RZ-4AMH1"
+        "msg": "PL5-2026W47-HM6KC-CH06S: اختبار حدود",
+        "traineeId": "TR5-Y3J9D-Y1DNB",
+        "ref": "PL5-2026W47-HM6KC-CH06S"
       }
     ],
     "legacy": null

@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 5.0.0-dev, round 2 — 2026-11-09
+### Added
+- **Exercise library expanded from 151 to 197**: 46 new documented variations, each with its own animation (`ex_upper2`, `ex_core2`, `ex_lower2`, `ex_mobility2`, `ex_cardio2`).
+  - Three planned items were authored but **removed in final review because their drawings were misleading**: assisted archer push-up (read as a headstand), fire hydrant (read as a standing leg lift) and open book (too abstract). They are marked `OMITTED` in `tools/ids.txt`.
+- **Engine:** per-pose length multipliers (`k`) depict foreshortening, and `top:true` gives an explicit view from above (no floor).
+- **Optional encryption** with Web Crypto: PBKDF2-SHA256 (310,000 iterations) → AES-GCM-256.
+  - Applies to local storage and to export files; adds a lock screen.
+  - While encryption is on, plaintext restore points are removed and restore points are kept in memory only.
+  - Covered by E2E T27.
+- **Session guard:** confirmation before logging a session for a future day, or a second session on the same day.
+- **Accessibility:** automated axe-core 4.10.2 audit (`tests/a11y.cjs`), with two fixes:
+  - static thumbnails are now marked decorative;
+  - green-button contrast in the dark theme is fixed.
+
+  Result: 0 violations across 10 pages × 2 themes plus the exercise dialog.
+
+### Changed
+- `CA-SQTHRUST` is classified high-impact (feet thrust back together), so pregnancy/postpartum and 65+ pathways exclude it.
+- The checker allows `pos:'seated'` without the floor flag when the exercise uses a chair.
+
 ## 5.0.0-dev — 2026-11-09 (development version; v4 untouched)
 
 ### Preserved (from v4, re-implemented and covered by tests)

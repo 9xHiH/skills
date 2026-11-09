@@ -15,7 +15,7 @@ Offline, Arabic RTL, single-file coach workstation. A coach can:
 
 | Path | What |
 |---|---|
-| `dist/military_calisthenics_coach_v5.html` | **The app.** One self-contained file (~630 KB): HTML, CSS, JS and 151 exercise animations inline. No external resources. |
+| `dist/military_calisthenics_coach_v5.html` | **The app.** One self-contained file (~760 KB): HTML, CSS, JS and 197 exercise animations inline. No external resources. |
 | `original/` | **v4 preserved unchanged** (`military_calisthenics_coach_v4.html`), the spec and the master prompt, plus `SHA256SUMS`. Git commit `65aeb40` is the rollback checkpoint. |
 | `AUDIT_v4.md` | Verified audit of v4 (real exercise count, defects). |
 | `SOURCES.md` | Source register, licensing decisions, rule→source and exercise→source mapping (generated from app data). |
@@ -23,7 +23,7 @@ Offline, Arabic RTL, single-file coach workstation. A coach can:
 | `TEST_REPORT.md` | Environment, steps, observed results, failures, risks, **unfinished requirements**. |
 | `src/` | Source modules (`anim.js` engine, `data/ex_*.js` exercises, `screening.js`, `engine.js`, `store.js`, `ui_*.js`). |
 | `tools/` | `build.mjs` (bundles `dist/`), `check.mjs` (exercise data + animation validator), `preview.mjs` (pose contact sheets), `gen_sources.mjs`, `AUTHORING.md`, `ids.txt`. |
-| `tests/` | `unit.mjs` (55 tests), `e2e.cjs` (26 browser tests), results and evidence (sample PDF, export, screenshots). |
+| `tests/` | `unit.mjs` (55 tests), `e2e.cjs` (27 browser tests), `a11y.cjs` (axe-core audit), results and evidence (sample PDF, plain and encrypted exports, screenshots). |
 
 ## Run offline
 1. Copy `dist/military_calisthenics_coach_v5.html` anywhere, e.g. a USB stick or the desktop.
@@ -96,7 +96,7 @@ To add an exercise, follow `tools/AUTHORING.md` (pose coordinates, required fiel
 
 ## Limitations
 See `TEST_REPORT.md → Unfinished requirements and risks`. In short:
-- The library has 151 verified exercises, not 200.
+- The library has 197 verified exercises, not 200. Three planned ones were dropped because their drawings were misleading.
 - Sources were seen through search results only and must be checked by a qualified person.
 - No real-device testing has been done.
 - Some animations are schematic. The affected exercises say so in their descriptions.

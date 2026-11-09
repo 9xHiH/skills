@@ -1,9 +1,10 @@
-exercises loaded: 151 
+exercises loaded: 197 
 ERRORS 0
-WARNINGS 5
+WARNINGS 6
   W CA-MCLIMB-S: pos prone without prone flag (ok only if weight on hands/forearms)
   W CA-MCLIMB: pos prone without prone flag (ok only if weight on hands/forearms)
   W PL-TAP: pos prone without prone flag (ok only if weight on hands/forearms)
   W PL-UPDOWN: pos prone without prone flag (ok only if weight on hands/forearms)
+  W PL-REACH: pos prone without prone flag (ok only if weight on hands/forearms)
   W PU-SCAP: pos prone without prone flag (ok only if weight on hands/forearms)
 refs to not-yet-authored ids: 0

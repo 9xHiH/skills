@@ -54,4 +54,4 @@ PASS Data: every exercise referenced by baseline tests exists
 PASS Data: every exercise has original animation passing geometry validation
 PASS Data: exercise IDs unique; Arabic names unique
 
-UNIT: 55 passed, 0 failed (151 exercises loaded) — node v22.23.4
+UNIT: 55 passed, 0 failed (197 exercises loaded) — node v22.23.4

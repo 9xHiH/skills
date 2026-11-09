@@ -17,7 +17,7 @@ PU-HR|upper|ضغط رفع اليدين|Hand-release push-up|lvl2, Army Fitness T
 PU-DECL|upper|ضغط بقدمين مرتفعتين|Decline push-up (feet on chair)|lvl3, eq chair
 PU-PIKE|upper|ضغط بايك|Pike push-up|lvl2, inversion flag
 PU-PIKE-EL|upper|ضغط بايك بقدمين مرتفعتين|Elevated pike push-up|lvl3, eq chair, inversion
-PU-ARCHER|upper|ضغط آرتشر مساعد|Assisted archer push-up|lvl3 (front view)
+# OMITTED (drawing judged misleading in final review 2026-11-09): PU-ARCHER|upper|ضغط آرتشر مساعد|Assisted archer push-up|lvl3 (front view)
 PU-SL|upper|ضغط بساق واحدة|Single-leg push-up|lvl3, ATP 7-22.02 Conditioning Drill 1
 PU-T|upper|ضغط مع دوران (T)|T push-up (rotation)|lvl3
 PU-SCAP|upper|ضغط لوحي الكتف|Scapular push-up|lvl1-2
@@ -74,7 +74,7 @@ HA-CLAM|lower|تمرين المحارة|Clamshell|lvl1, side-lying
 HA-SIDELYING|lower|رفع الساق جانبياً مستلقياً على الجنب|Side-lying leg raise|lvl1, ATP Hip Stability Drill: Lateral Leg Raise
 HA-MEDIAL|lower|رفع الساق السفلى مستلقياً على الجنب|Side-lying medial leg raise|lvl1, ATP Hip Stability Drill: Medial Leg Raise
 HA-QUADEXT|lower|ركلة خلفية من وضع الأربع|Quadruped hip extension (donkey kick)|lvl1
-HA-FIRE|lower|فتح الورك من وضع الأربع|Fire hydrant|lvl1
+# OMITTED (drawing judged misleading in final review 2026-11-09): HA-FIRE|lower|فتح الورك من وضع الأربع|Fire hydrant|lvl1
 PL-HIGH|core|بلانك مرتفع بذراعين ممدودتين|High plank|lvl1-2
 PL-INCL|core|بلانك مائل على سطح مرتفع|Incline plank (hands on table/wall)|lvl1, eq table
 PL-KNEE|core|بلانك على الركبتين|Knee plank|lvl1
@@ -127,7 +127,7 @@ BA-TANDEM|cardio|الوقوف بقدمين متتاليتين|Tandem stance|lvl1
 BA-HEELTOE|cardio|المشي كعب-أصابع|Heel-to-toe walk|lvl1, balance (cat balance)
 BA-SLREACH|cardio|الوقوف على ساق مع الوصول للأمام|Single-leg stand with reach|lvl2, balance (cat balance)
 MO-CATCAMEL|mobility|قط-جمل|Cat-camel|lvl1, quadruped
-MO-OPENBOOK|mobility|الكتاب المفتوح|Open book (side-lying thoracic rotation)|lvl1, front view? side-lying
+# OMITTED (drawing judged misleading in final review 2026-11-09): MO-OPENBOOK|mobility|الكتاب المفتوح|Open book (side-lying thoracic rotation)|lvl1, front view? side-lying
 MO-ARMCIRCLE|mobility|دوائر الذراعين|Arm circles|lvl1, front view
 MO-SHCIRCLE|mobility|دوائر الكتفين|Shoulder rolls|lvl1
 MO-ANKLE|mobility|دوائر الكاحل|Ankle circles|lvl1
@@ -154,7 +154,7 @@ ST-GROIN|mobility|إطالة الفخذ الداخلية (الفراشة)|Seated
 ST-SIDE|mobility|إطالة جانبية للجذع واقفاً|Standing side bend stretch|lvl1, front view
 BT-DIAPH|mobility|تنفس حجابي|Diaphragmatic breathing|lvl1, pattern breathing
 # ---- Expansion batch 2 (2026-11-09): toward 200; each must be a genuinely distinct movement or variation ----
-PU-ARCHER|upper2|ضغط آرتشر مساعد|Assisted archer push-up|lvl3; use pose k (foreshortening) or top view; previously omitted
+# OMITTED (drawing judged misleading in final review 2026-11-09): PU-ARCHER|upper2|ضغط آرتشر مساعد|Assisted archer push-up|lvl3; use pose k (foreshortening) or top view; previously omitted
 PU-STAGGER|upper2|ضغط بيدين متفاوتتين|Staggered-hand push-up|lvl2-3; one hand forward one back; consider hands inset or top view
 PU-NEG|upper2|ضغط سلبي (نزول بطيء)|Eccentric (negative) push-up|lvl1-2; slow lowering from top then knees down to return
 PU-INCL-CLOSE|upper2|ضغط مائل بقبضة ضيقة|Close-grip incline push-up|lvl1-2; eq table; elbows by sides
@@ -171,7 +171,7 @@ CR-HOLLOW-ROCK|core2|هزاز الهولو|Hollow rock|lvl3; iap
 CR-SITUP|core2|الجلوس الكامل من الاستلقاء|Sit-up|lvl2; supine; iap; spinal flexion caution
 CR-SCISSOR|core2|المقص|Scissor kicks|lvl3; supine; iap
 CR-FRONTKICK|core2|ركلة أمامية مع لمس القدم بالتبادل|Front kick alternate toe touch|lvl2; standing; ATP Conditioning Drill 3 (name partly verified)
-HA-FIRE|lower2|فتح الورك من وضع الأربع|Fire hydrant|lvl1; quadruped; use k foreshortening (front or rear view) — previously omitted
+# OMITTED (drawing judged misleading in final review 2026-11-09): HA-FIRE|lower2|فتح الورك من وضع الأربع|Fire hydrant|lvl1; quadruped; use k foreshortening (front or rear view) — previously omitted
 SQ-TEMPO|lower2|سكوات بطيء النزول|Tempo squat (slow eccentric)|lvl2
 SQ-STAGGER|lower2|سكوات بوقفة متفاوتة|Staggered-stance squat|lvl2; one foot half a step back
 LU-CURTSY|lower2|اندفاع متقاطع (كيرتسي)|Curtsy lunge|lvl2; front view; knee caution
@@ -194,7 +194,7 @@ LO-LOWCRAWL|cardio2|الزحف المنخفض|Low crawl|lvl2; prone; floor; spac
 LO-BEARLAT|cardio2|زحف الدب الجانبي|Lateral bear crawl|lvl2; front view
 BA-CLOCK|cardio2|الوصول بالقدم في اتجاهات الساعة|Clock reach (single-leg balance)|lvl2; balance; front view
 BA-SHIFT|cardio2|نقل الوزن جانبياً|Lateral weight shift|lvl1; balance; front view; suitable for older adults
-MO-OPENBOOK|mobility2|الكتاب المفتوح|Open book (side-lying thoracic rotation)|lvl1; use top view or k foreshortening — previously omitted
+# OMITTED (drawing judged misleading in final review 2026-11-09): MO-OPENBOOK|mobility2|الكتاب المفتوح|Open book (side-lying thoracic rotation)|lvl1; use top view or k foreshortening — previously omitted
 MO-THREADNEEDLE|mobility2|تمرير الإبرة|Thread the needle|lvl1; quadruped
 MO-TOETOUCHSQ|mobility2|لمس أصابع القدم ثم القرفصاء|Toe-touch to squat|lvl1-2
 MO-NECK|mobility2|تحريك الرقبة|Gentle neck mobility|lvl1; standing or seated; small range; neck flag

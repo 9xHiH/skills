@@ -12,7 +12,7 @@ node tools/build.mjs
 node tests/unit.mjs
 NODE_PATH=$(npm root -g) node tests/e2e.cjs tests/evidence
 ```
-Raw outputs: `tests/results_check.txt`, `tests/results_build.txt`, `tests/results_unit.txt`, `tests/results_e2e.txt`.
+Raw outputs: `tests/results_check.txt`, `tests/results_build.txt`, `tests/results_unit.txt`, `tests/results_e2e.txt`, `tests/results_a11y.txt`.
 
 Evidence in `tests/evidence/`:
 - `weekly_plan_print.pdf` (9 A4 pages produced by Chromium's print engine);
@@ -23,9 +23,10 @@ Evidence in `tests/evidence/`:
 ## Results (final run)
 | Suite | Result |
 |---|---|
-| Exercise data + animation geometry (`check.mjs`) | 151 records, **0 errors**, 5 warnings (intentional: planks and mountain climbers marked prone-position without the "lying prone" flag, because the weight is on the hands) |
+| Exercise data + animation geometry (`check.mjs`) | 197 records, **0 errors**, 6 warnings (intentional: planks and mountain climbers marked prone-position without the "lying prone" flag, because the weight is on the hands) |
 | Unit (`unit.mjs`, DOM-free modules) | **55 passed, 0 failed** |
-| End-to-end (`e2e.cjs`, real UI in Chromium) | **26 passed, 0 failed** |
+| End-to-end (`e2e.cjs`, real UI in Chromium) | **27 passed, 0 failed** (T27 = encryption) |
+| Accessibility (`a11y.cjs`, axe-core 4.10.2, WCAG 2.0/2.1 A+AA rules) | **0 violations** on 10 pages × dark/light + exercise dialog (`tests/results_a11y.txt`). axe covers only part of WCAG; no screen-reader test. |
 
 Defects that earlier test runs caught and that were fixed before this run:
 - The check character missed about 6% of typos. Odd weights now make every single-character substitution detectable.
@@ -44,7 +45,7 @@ Defects that earlier test runs caught and that were fixed before this run:
 | 5 | Logs + review change next plan; pain blocks progression | Unit adapt tests (progress, reduce, substitute, illness, <50% attendance, "felt easy" alone does not progress, pain 8 → refer → blocked); T9, T11–T13 | **Pass** |
 | 6 | Unique plan IDs, lookup, JSON round trip, malformed import, history | Unit (20,000 IDs unique; typo detection 500/500); T12, T15, T16, T20 (fresh profile restores identical records; re-import adds no duplicates), T21 (syntax error and tampered file rejected, data unchanged) | **Pass** |
 | 7 | Arabic RTL weekly PDF, pagination, names, IDs, details, no clipped tables | T17 generated a real A4 PDF (9 pages). I inspected rendered pages: RTL Arabic is correct, the table header repeats on page 2, exercise cards have start/end figures. `pdftotext` finds the trainee name, trainee ID and plan ID. | **Pass in Chromium print engine; not tested on Windows print dialog or a physical printer** |
-| 8 | Images match movements; counters/timers work | T19: 151 distinct drawings. T18: animation moves, pause works, rep counter = 3 after 3 clicks, interval timer counts down. T10: rest timer 01:10 → 01:08. Visual review of every contact sheet by the authors, plus my spot checks. | **Pass with caveats** (some schematic drawings — see risks) |
+| 8 | Images match movements; counters/timers work | T19: 197 distinct drawings. T18: animation moves, pause works, rep counter = 3 after 3 clicks, interval timer counts down. T10: rest timer 01:10 → 01:08. Visual review of every contact sheet by the authors, plus my spot checks. | **Pass with caveats** (some schematic drawings — see risks) |
 | 9 | Regression vs v4 inventory | See table below; T23 runs the real v4 file, creates a trainee there, then migrates it into v5 with the v4 key unchanged | **Pass** |
 | 10 | Windows Chrome/Edge; iOS limitations documented | Windows: **not tested on a real machine** (Chromium engine only). iOS: documented in README; **not tested** | **Partially met** |
 
@@ -64,13 +65,13 @@ Defects that earlier test runs caught and that were fixed before this run:
 
 ## Unfinished requirements and risks (truthful gap list)
 
-1. **Exercise count: 151 of the 200 target.**
-   - 154 IDs were planned. Three were deliberately omitted because the 2D engine cannot depict them truthfully:
-     - `PU-ARCHER` (assisted archer push-up)
-     - `HA-FIRE` (fire hydrant)
-     - `MO-OPENBOOK` (open book)
+1. **Exercise count: 197 of the 200 target.**
+   - 200 IDs were planned. Three were drawn twice, the second time with the new foreshortening support, and were still removed in final review because the drawings would mislead:
+     - `PU-ARCHER` looked like a headstand;
+     - `HA-FIRE` looked like a standing leg lift;
+     - `MO-OPENBOOK` was too abstract.
    - Nothing was padded.
-   - Next step: add a foreshortening or top-down pose mode to the engine, then author roughly 50 more variations using `tools/AUTHORING.md`.
+   - Next step: a real 3-D or photo-based illustration for these three, or skip them.
 2. **Sources were not opened.**
    - The network policy blocked every source host. All 27 register entries are "seen in search results" or "unverified".
    - Some specifics are marked unconfirmed in `docs/research_notes_2026-11-09.md`:
@@ -88,7 +89,7 @@ Defects that earlier test runs caught and that were fixed before this run:
 5. **Real-device testing is not done.**
    - Not tested: Windows Chrome/Edge (double-click from Explorer), iOS Safari/Files, Android, a physical printer.
    - Next step: run `tests/e2e.cjs` against Edge/Chrome on Windows, and test manually on an iPhone.
-6. **Schematic animations.** Some figures cannot show the key detail of their movement in 2D; each one says so in its `desc`:
+6. **Schematic animations.** Some figures cannot show the key detail of their movement in 2D; each one says so in its `desc`. New items in round 2 with the same limitation: clock reach (forward and back taps look alike), carioca (which leg crosses in front is not visible), scissor kicks, lateral bear crawl, low crawl, and neck mobility (only nodding is drawn). Round-1 items:
    - lateral or rotational movements: bicycle twist, leg tuck & twist, windmill, skaters, T push-up, Y squat;
    - small-joint drills: wrist, ankle, shoulder circles;
    - top-down figures: `SC-PRONE-T`, `SC-PRONE-W`, `CR-BLTWIST`, `ST-SLOVER`;
@@ -96,14 +97,15 @@ Defects that earlier test runs caught and that were fixed before this run:
    - in-place gait: walk, jog, crawls.
 
    The prone T-raise top view can be mistaken for a standing figure. These figures have not been reviewed by a coach.
-7. **Privacy of local storage.**
-   - In Chromium, every local HTML file opened in the same browser profile shares one `file://` storage area. Another local HTML file could therefore read the stored trainee data.
-   - Data is not encrypted at rest, and export files are checksummed but not encrypted.
-   - Mitigation in the app: none beyond warnings.
-   - Next step: optional passphrase encryption (Web Crypto AES-GCM) for storage and exports.
+7. **Privacy of local storage: partly mitigated.**
+   - In Chromium, every local HTML file opened in the same browser profile shares one `file://` storage area.
+   - Optional passphrase encryption now exists (AES-GCM-256, PBKDF2 310k; T27 shows no plaintext in storage). It is **off by default**: without it, another local HTML file could read the data.
+   - A forgotten passphrase means the local data is lost.
+   - Passphrase strength is checked only for length (≥ 8).
+   - The cryptography has not been reviewed by an independent security expert.
 8. **No IndexedDB.** localStorage (about 5 MB) is enough for roughly hundreds of trainee-weeks (a 3-trainee, 4-plan export is 106 KB), but it is not unlimited. Next step: move to IndexedDB if long-term heavy use is expected.
 9. **No PDF import** (by design and disclosed). JSON is the only full-fidelity transfer. Printing relies on the browser's "Save as PDF"; there is no embedded PDF generator.
 10. **Camera-based automatic rep counting:** out of scope and not implemented. All counters are manual.
-11. **Accessibility** was checked by design and by keyboard-reachable controls only. It has not been tested with NVDA, VoiceOver or a contrast tool.
-12. **Sessions are not schedule-checked.** The live session can be started for any day, including future days. The review uses whatever was logged.
+11. **Accessibility:** the axe-core automated audit reports 0 violations. It has not been tested with NVDA or VoiceOver and has had no manual WCAG review.
+12. **Session dates:** logging a session for a future day, or a second session on the same day, now requires confirmation and the session is marked `early`. It is still possible after confirming.
 13. **The Sources page shows a static rule table.** It can drift from the code if rules change without updating `RULE_TABLE` in `src/ui_core.js` (SOURCES.md is generated from that same table).
