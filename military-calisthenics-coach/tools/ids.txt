@@ -153,3 +153,53 @@ ST-SLOVER|mobility|تمرير الساق فوق الأخرى|Single-leg over|lvl
 ST-GROIN|mobility|إطالة الفخذ الداخلية (الفراشة)|Seated butterfly stretch|lvl1, seated
 ST-SIDE|mobility|إطالة جانبية للجذع واقفاً|Standing side bend stretch|lvl1, front view
 BT-DIAPH|mobility|تنفس حجابي|Diaphragmatic breathing|lvl1, pattern breathing
+# ---- Expansion batch 2 (2026-11-09): toward 200; each must be a genuinely distinct movement or variation ----
+PU-ARCHER|upper2|ضغط آرتشر مساعد|Assisted archer push-up|lvl3; use pose k (foreshortening) or top view; previously omitted
+PU-STAGGER|upper2|ضغط بيدين متفاوتتين|Staggered-hand push-up|lvl2-3; one hand forward one back; consider hands inset or top view
+PU-NEG|upper2|ضغط سلبي (نزول بطيء)|Eccentric (negative) push-up|lvl1-2; slow lowering from top then knees down to return
+PU-INCL-CLOSE|upper2|ضغط مائل بقبضة ضيقة|Close-grip incline push-up|lvl1-2; eq table; elbows by sides
+PU-KNEE-CLOSE|upper2|ضغط على الركبتين بقبضة ضيقة|Close-grip knee push-up|lvl1-2
+PH-INV-FEETUP|upper2|سحب أفقي بقدمين مرتفعتين|Feet-elevated inverted row|lvl3; eq low_bar + chair
+PV-COMMANDO|upper2|عقلة الكوماندوز|Commando pull-up (neutral side grip)|lvl3; eq bar; front view shows head passing side of bar
+CR-HANGKNEE|core2|رفع الركبتين معلقاً|Hanging knee raise|lvl2-3; cat core; eq bar; grip flag
+PL-SIDE-DIP|core2|بلانك جانبي مع خفض ورفع الورك|Side plank hip dip|lvl2-3; front view
+PL-SAW|core2|بلانك المنشار|Forearm plank saw|lvl3; rocking forward/back on forearms
+PL-REACH|core2|بلانك مع مد الذراع|Plank with alternating arm reach|lvl2
+CR-DEADBUG-ARM|core2|الحشرة الميتة بالذراعين فقط|Dead bug (arms only)|lvl1; supine; knees stay at 90/90
+CR-BIRDDOG-ELB|core2|طائر-كلب مع ضم المرفق للركبة|Bird dog elbow-to-knee|lvl2
+CR-HOLLOW-ROCK|core2|هزاز الهولو|Hollow rock|lvl3; iap
+CR-SITUP|core2|الجلوس الكامل من الاستلقاء|Sit-up|lvl2; supine; iap; spinal flexion caution
+CR-SCISSOR|core2|المقص|Scissor kicks|lvl3; supine; iap
+CR-FRONTKICK|core2|ركلة أمامية مع لمس القدم بالتبادل|Front kick alternate toe touch|lvl2; standing; ATP Conditioning Drill 3 (name partly verified)
+HA-FIRE|lower2|فتح الورك من وضع الأربع|Fire hydrant|lvl1; quadruped; use k foreshortening (front or rear view) — previously omitted
+SQ-TEMPO|lower2|سكوات بطيء النزول|Tempo squat (slow eccentric)|lvl2
+SQ-STAGGER|lower2|سكوات بوقفة متفاوتة|Staggered-stance squat|lvl2; one foot half a step back
+LU-CURTSY|lower2|اندفاع متقاطع (كيرتسي)|Curtsy lunge|lvl2; front view; knee caution
+LU-REV-KNEE|lower2|اندفاع خلفي مع رفع الركبة|Reverse lunge to knee drive|lvl2-3; balance
+ST-DOWN|lower2|نزول متحكم عن درجة|Controlled step-down|lvl2; eq step
+BR-ELEV|lower2|جسر الحوض بقدمين على كرسي|Feet-elevated glute bridge|lvl2; eq chair; supine
+BR-HOLD|lower2|ثبات جسر الحوض|Glute bridge hold|lvl1; supine; isometric
+HG-KICKSTAND|lower2|مفصلة الورك بوقفة القدم المساندة|Kickstand hip hinge (B-stance)|lvl2
+CF-SEATED|lower2|رفع الكعبين جالساً|Seated calf raise|lvl1; eq chair; pos seated on a chair (no floor flag needed when eq includes chair)
+HA-STANDABD|lower2|إبعاد الورك واقفاً|Standing hip abduction|lvl1; front view; eq wall optional
+HA-SIDESTEP|lower2|خطوات جانبية بنصف قرفصاء|Lateral squat walk|lvl2; front view
+CA-SQTHRUST|cardio2|دفعة القرفصاء (أربع عدات)|Squat thrust (4-count)|lvl2; floor; no jump at top
+CA-ROPE|cardio2|قفز الحبل التخيلي|Imaginary jump rope|lvl2; impact
+CA-STRADDLE|cardio2|الجري بالمباعدة أمام-خلف|Straddle run (forward/backward)|lvl3; impact; front view; ATP Conditioning Drill 3 (partly verified)
+CA-TUCKJUMP|cardio2|قفز ضم الركبتين|Tuck jump|lvl3; impact; ATP Conditioning Drill 3 (partly verified)
+CA-SHUTTLE|cardio2|الجري المكوكي|Shuttle run|lvl3; impact; space
+CA-CARIOCA|cardio2|الخطوات المتقاطعة الجانبية (كاريوكا)|Carioca (grapevine)|lvl2; front view
+CA-STEPTOUCH|cardio2|خطوة ولمس جانبية|Side step-touch|lvl1; front view; low impact
+LO-LOWCRAWL|cardio2|الزحف المنخفض|Low crawl|lvl2; prone; floor; space
+LO-BEARLAT|cardio2|زحف الدب الجانبي|Lateral bear crawl|lvl2; front view
+BA-CLOCK|cardio2|الوصول بالقدم في اتجاهات الساعة|Clock reach (single-leg balance)|lvl2; balance; front view
+BA-SHIFT|cardio2|نقل الوزن جانبياً|Lateral weight shift|lvl1; balance; front view; suitable for older adults
+MO-OPENBOOK|mobility2|الكتاب المفتوح|Open book (side-lying thoracic rotation)|lvl1; use top view or k foreshortening — previously omitted
+MO-THREADNEEDLE|mobility2|تمرير الإبرة|Thread the needle|lvl1; quadruped
+MO-TOETOUCHSQ|mobility2|لمس أصابع القدم ثم القرفصاء|Toe-touch to squat|lvl1-2
+MO-NECK|mobility2|تحريك الرقبة|Gentle neck mobility|lvl1; standing or seated; small range; neck flag
+ST-CROSSARM|mobility2|إطالة الكتف بسحب الذراع عبر الصدر|Cross-body shoulder stretch|lvl1
+ST-COBRA|mobility2|إطالة الكوبرا|Cobra stretch (prone press-up)|lvl1; prone
+ST-KNEECHEST|mobility2|ضم الركبتين إلى الصدر|Knees-to-chest stretch|lvl1; supine
+ST-SUPTWIST|mobility2|التواء الجذع مستلقياً|Supine spinal twist|lvl1; supine
+ST-NECKSIDE|mobility2|إطالة جانب الرقبة|Side-neck stretch|lvl1; neck

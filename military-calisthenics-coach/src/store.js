@@ -205,8 +205,41 @@
 
   function safeFileName(s) { return String(s || 'file').replace(/[\\/:*?"<>|\u0000-\u001f]/g, '_').replace(/\s+/g, '_').slice(0, 80); }
 
+  /* ---------- optional encryption (Web Crypto: PBKDF2-SHA256 → AES-GCM-256) ---------- */
+  var ENC = { iter: 310000 };
+  function b64(u8) { var s = ''; for (var i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); }
+  function unb64(t) { var s = atob(t), u = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
+  function subtle() { var c = root.crypto; if (!c || !c.subtle) throw new Error('التشفير غير متاح في هذا المتصفح'); return c.subtle; }
+  function deriveKey(pass, salt, iter) {
+    return subtle().importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']).then(function (base) {
+      return subtle().deriveKey({ name: 'PBKDF2', salt: salt, iterations: iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    });
+  }
+  function encryptWith(key, salt, iter, text, extra) {
+    var iv = randomValues(12).bytes;
+    return subtle().encrypt({ name: 'AES-GCM', iv: iv }, key, new TextEncoder().encode(text)).then(function (ct) {
+      return Object.assign({ kdf: 'PBKDF2-SHA256', iter: iter, salt: b64(salt), iv: b64(iv), ct: b64(new Uint8Array(ct)) }, extra || {});
+    });
+  }
+  function decryptEnv(env, pass) {
+    if (!env || typeof env.salt !== 'string' || typeof env.iv !== 'string' || typeof env.ct !== 'string' || !(env.iter >= 100000 && env.iter <= 5000000)) return Promise.reject(new Error('غلاف تشفير غير صالح'));
+    var salt = unb64(env.salt);
+    return deriveKey(pass, salt, env.iter).then(function (key) {
+      return subtle().decrypt({ name: 'AES-GCM', iv: unb64(env.iv) }, key, unb64(env.ct)).then(function (pt) { return { text: new TextDecoder().decode(pt), key: key, salt: salt }; },
+        function () { throw new Error('كلمة المرور غير صحيحة أو الملف تالف'); });
+    });
+  }
+  /* Encrypted export file: {format:'MCC-EXPORT-ENC', ...} wrapping the normal MCC-EXPORT JSON text. */
+  function encryptExport(text, pass) {
+    var salt = randomValues(16).bytes;
+    return deriveKey(pass, salt, ENC.iter).then(function (key) { return encryptWith(key, salt, ENC.iter, text, { format: 'MCC-EXPORT-ENC', formatVersion: 1, appVersion: APP_VERSION, exportedAt: nowISO() }); });
+  }
+  function isEncryptedExport(text) { try { var o = JSON.parse(text); return !!(o && o.format === 'MCC-EXPORT-ENC'); } catch (e) { return false; } }
+  function decryptExport(text, pass) { return decryptEnv(JSON.parse(text), pass).then(function (r) { return r.text; }); }
+
   /* ---------- persistence (browser only) ---------- */
-  var mem = null, status = { mode: 'unknown', lastSaved: null, error: null, bytes: 0, secureIds: !!(root.crypto && root.crypto.getRandomValues) };
+  var mem = null, status = { mode: 'unknown', lastSaved: null, error: null, bytes: 0, secureIds: !!(root.crypto && root.crypto.getRandomValues), encrypted: false, locked: false, key: null, salt: null, pending: 0, memRestore: [] };
+  var lockedEnv = null, chain = Promise.resolve();
   function storageAvailable() {
     try { var k = '__mcc_test__'; root.localStorage.setItem(k, '1'); root.localStorage.removeItem(k); return true; } catch (e) { return false; }
   }
@@ -216,7 +249,9 @@
     var raw = root.localStorage.getItem(KEY);
     if (!raw) { mem = emptyDB(); status.known = null; return mem; }
     try {
-      var obj = JSON.parse(raw); var v = validateDBShape(obj);
+      var obj = JSON.parse(raw);
+      if (obj && obj.schema === 'MCC-ENC') { lockedEnv = obj; status.encrypted = true; status.locked = true; status.known = obj.updatedAt; status.bytes = raw.length; mem = emptyDB(); return mem; }
+      var v = validateDBShape(obj);
       if (!v.ok) throw new Error(v.errors.slice(0, 3).join('؛ '));
       mem = obj; status.bytes = raw.length; status.known = obj.updatedAt; return mem;
     } catch (e) {
@@ -225,21 +260,52 @@
       mem = emptyDB(); status.mode = 'local-recovered'; status.known = storedStamp(); return mem;
     }
   }
+  /* Unlock encrypted storage. Resolves to the DB; rejects on wrong passphrase (data untouched). */
+  function unlock(pass) {
+    return decryptEnv(lockedEnv, pass).then(function (r) {
+      var obj = JSON.parse(r.text), v = validateDBShape(obj);
+      if (!v.ok) throw new Error('البيانات بعد فك التشفير غير صالحة: ' + v.errors[0]);
+      status.key = r.key; status.salt = r.salt; status.locked = false; mem = obj; return obj;
+    });
+  }
+  function enableEncryption(db, pass) {
+    var salt = randomValues(16).bytes;
+    return deriveKey(pass, salt, ENC.iter).then(function (key) {
+      status.key = key; status.salt = salt; status.encrypted = true;
+      try { status.memRestore = restorePoints(); root.localStorage.removeItem(RESTORE_KEY); } catch (e) { /* ignore */ } /* plaintext restore points must not remain */
+      return saveAsync(db);
+    });
+  }
+  function disableEncryption(db) { status.key = null; status.salt = null; status.encrypted = false; return save(db); }
+  function lockNow() { status.key = null; }
   /* Optimistic concurrency: refuse to overwrite data written by another tab/window since we last read or wrote it. */
   function storedStamp() { try { var raw = root.localStorage.getItem(KEY); if (!raw) return null; var o = JSON.parse(raw); return (o && o.updatedAt) || 'unknown'; } catch (e) { return 'unparseable'; } }
   function save(db) {
     if (status.mode === 'memory') { db.updatedAt = nowISO(); return false; }
-    if (status.conflict) return false;
+    if (status.conflict || status.locked) return false;
     var cur = storedStamp();
-    if (cur !== status.known) { status.conflict = true; status.error = 'عُدّلت البيانات من نافذة أو تبويب آخر لهذا الملف. لم يُحفظ التغيير الأخير لتجنب الكتابة فوق تلك البيانات. أعد تحميل الصفحة (F5) ثم أعد الإجراء.'; return false; }
+    if (!status.pending && cur !== status.known) { status.conflict = true; status.error = 'عُدّلت البيانات من نافذة أو تبويب آخر لهذا الملف. لم يُحفظ التغيير الأخير لتجنب الكتابة فوق تلك البيانات. أعد تحميل الصفحة (F5) ثم أعد الإجراء.'; return false; }
     db.updatedAt = nowISO();
+    if (status.encrypted && status.key) { saveAsync(db); return true; }
     try { var s = JSON.stringify(db); root.localStorage.setItem(KEY, s); status.known = db.updatedAt; status.lastSaved = db.updatedAt; status.bytes = s.length; status.error = null; return true; }
     catch (e) { status.error = 'فشل الحفظ المحلي (' + e.name + '). صدّر نسخة JSON الآن.'; return false; }
   }
-  function restorePoints() { try { return JSON.parse(root.localStorage.getItem(RESTORE_KEY) || '[]'); } catch (e) { return []; } }
+  /* Encrypted writes are serialised so they land in order. */
+  function saveAsync(db) {
+    var text = JSON.stringify(db), stamp = db.updatedAt || (db.updatedAt = nowISO());
+    status.pending++;
+    chain = chain.then(function () { return encryptWith(status.key, status.salt, ENC.iter, text, { schema: 'MCC-ENC', v: 1, updatedAt: stamp }); }).then(function (env) {
+      var s = JSON.stringify(env); root.localStorage.setItem(KEY, s); status.known = stamp; status.lastSaved = stamp; status.bytes = s.length; status.error = null;
+    }).catch(function (e) { status.error = 'فشل الحفظ المشفّر (' + e.message + '). صدّر نسخة JSON الآن.'; }).then(function () { status.pending--; if (root.App && root.App.renderStatus) root.App.renderStatus(); });
+    return chain;
+  }
+  function flush() { return chain; }
+  function restorePoints() { if (status.encrypted) return status.memRestore; try { return JSON.parse(root.localStorage.getItem(RESTORE_KEY) || '[]'); } catch (e) { return []; } }
   function addRestorePoint(db, reason) {
     if (status.mode === 'memory') return false;
-    try { var rp = restorePoints(); rp.unshift({ at: nowISO(), reason: reason, db: db }); root.localStorage.setItem(RESTORE_KEY, JSON.stringify(rp.slice(0, 3))); return true; }
+    var snap = JSON.parse(JSON.stringify(db));
+    if (status.encrypted) { status.memRestore.unshift({ at: nowISO(), reason: reason, db: snap }); status.memRestore = status.memRestore.slice(0, 3); return true; } /* memory only: never stored in plaintext */
+    try { var rp = restorePoints(); rp.unshift({ at: nowISO(), reason: reason, db: snap }); root.localStorage.setItem(RESTORE_KEY, JSON.stringify(rp.slice(0, 3))); return true; }
     catch (e) { return false; }
   }
   function readV4Local() { try { var x = root.localStorage && root.localStorage.getItem(V4_KEY); return x ? JSON.parse(x) : null; } catch (e) { return null; } }
@@ -247,5 +313,6 @@
   root.MCStore = { APP_VERSION: APP_VERSION, SCHEMA_VERSION: SCHEMA_VERSION, COLLECTIONS: COLLECTIONS, KEY: KEY, V4_KEY: V4_KEY,
     makeId: makeId, uniqueId: uniqueId, idValid: idValid, normalizeId: normalizeId, isoWeek: isoWeek, emptyDB: emptyDB, fnv: fnv,
     validateDBShape: validateDBShape, parseImport: parseImport, migrateV4: migrateV4, mergeInto: mergeInto, exportEnvelope: exportEnvelope,
-    safeFileName: safeFileName, load: load, save: save, status: status, restorePoints: restorePoints, addRestorePoint: addRestorePoint, readV4Local: readV4Local, nowISO: nowISO };
+    safeFileName: safeFileName, load: load, save: save, status: status, restorePoints: restorePoints, addRestorePoint: addRestorePoint, readV4Local: readV4Local, nowISO: nowISO,
+    unlock: unlock, enableEncryption: enableEncryption, disableEncryption: disableEncryption, lockNow: lockNow, flush: flush, encryptExport: encryptExport, decryptExport: decryptExport, isEncryptedExport: isEncryptedExport, ENC_ITER: ENC.iter };
 })(typeof window !== 'undefined' ? window : globalThis);

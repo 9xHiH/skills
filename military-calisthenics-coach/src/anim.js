@@ -8,7 +8,8 @@
  *   a : [armNear, armFar]   each either [upperArmAngle, forearmAngle] (forward kinematics)
  *                           or {p:[x,y], b:+1|-1} (two-bone inverse kinematics, wrist target, bend side)
  *   l : [legNear, legFar]   same, for thigh/shin; IK target is the ankle
- *   f : [footNear, footFar] absolute foot angles (ankle -> toes), default 0 (side) / -90 (front)
+ *   f : [footNear, footFar] absolute foot angles (ankle -> toes), default 0 (side) / 180,0 (front)
+ *   k : optional [torso, armNear, armFar, legNear, legFar] length multipliers to depict foreshortening (segments pointing toward/away from the viewer)
  * Exercise animation spec: {view:'side'|'front', top:bool (seen from above: no floor line, no floor checks), props:[...], keys:[{p:pose, d:ms, lab:'..'}], hang:bool, air:[keyIdx]}
  */
 (function (root) {
@@ -47,8 +48,9 @@
   /* Forward kinematics: returns joint positions and IK reach errors. */
   function solve(p, view) {
     var front = view === 'front';
+    var k = p.k || [1, 1, 1, 1, 1]; /* foreshortening: [torso, armNear, armFar, legNear, legFar] length multipliers (0.3–1) */
     var hip = p.h, td = dir(p.t);
-    var neck = add(hip, td, L.torso);
+    var neck = add(hip, td, L.torso * k[0]);
     var hd = dir(p.t + (p.n || 0));
     var head = add(neck, hd, L.neck);
     var sh = add(neck, td, -L.shoulderDrop);
@@ -56,8 +58,8 @@
     var shN = front ? add(sh, perp, -L.shW) : sh, shF = front ? add(sh, perp, L.shW) : sh;
     var hpN = front ? add(hip, perp, -L.hipW) : hip, hpF = front ? add(hip, perp, L.hipW) : hip;
     var a = p.a || [[-90, -90], [-90, -90]], l = p.l || [[-90, -90], [-90, -90]];
-    var aN = limb(shN, a[0], L.ua, L.fa), aF = limb(shF, a[1], L.ua, L.fa);
-    var lN = limb(hpN, l[0], L.th, L.sh), lF = limb(hpF, l[1], L.th, L.sh);
+    var aN = limb(shN, a[0], L.ua * k[1], L.fa * k[1]), aF = limb(shF, a[1], L.ua * k[2], L.fa * k[2]);
+    var lN = limb(hpN, l[0], L.th * k[3], L.sh * k[3]), lF = limb(hpF, l[1], L.th * k[4], L.sh * k[4]);
     var fdef = front ? [180, 0] : [0, 0];
     var f = p.f || fdef;
     var toeN = add(lN.e, dir(f[0] == null ? fdef[0] : f[0]), front ? 6 : L.ft);
@@ -79,6 +81,7 @@
     var da = [[-90, -90], [-90, -90]];
     o.a = [lerpLimb((A.a || da)[0], (B.a || da)[0], k), lerpLimb((A.a || da)[1], (B.a || da)[1], k)];
     o.l = [lerpLimb((A.l || da)[0], (B.l || da)[0], k), lerpLimb((A.l || da)[1], (B.l || da)[1], k)];
+    if (A.k || B.k) { var ka = A.k || [1, 1, 1, 1, 1], kb = B.k || [1, 1, 1, 1, 1]; o.k = ka.map(function (v, i) { return lerp(v, kb[i], k); }); }
     if (A.f || B.f) { var fa = A.f || [0, 0], fb = B.f || [0, 0]; o.f = [lerp(fa[0], fb[0], k), lerp(fa[1], fb[1], k)]; }
     return o;
   }
@@ -219,7 +222,7 @@
     var tmp = document.createElement('div');
     var f = new Figure(tmp, spec, { ghost: keyIdx !== 0, traceJoint: spec.trace });
     f.seekKey(keyIdx);
-    f.svg.setAttribute('class', 'mc-fig ' + (cls || ''));
+    f.svg.setAttribute('class', 'mc-fig ' + (cls || '')); f.svg.removeAttribute('role'); f.svg.setAttribute('aria-hidden', 'true'); /* static copies are decorative: the surrounding control/card carries the name */
     return tmp.innerHTML;
   }
 
@@ -240,6 +243,7 @@
       if (!inAir && !support && low < FLOOR - 4) issues.push('figure floating ' + (FLOOR - low).toFixed(1) + 'px at ' + (i / 60).toFixed(2));
     }
     spec.keys.forEach(function (k, i) {
+      if (k.p.k && (k.p.k.length !== 5 || k.p.k.some(function (v) { return !(v >= 0.3 && v <= 1); }))) issues.push('key ' + i + ' k multipliers must be 5 values in [0.3,1]');
       var nx = spec.keys[(i + 1) % spec.keys.length].p;
       ['a', 'l'].forEach(function (g) { [0, 1].forEach(function (j) { var x = (k.p[g] || [[0]])[j], y = (nx[g] || [[0]])[j]; if (Array.isArray(x) !== Array.isArray(y)) issues.push('key ' + i + ' ' + g + j + ' mixes IK and angle modes'); }); });
     });

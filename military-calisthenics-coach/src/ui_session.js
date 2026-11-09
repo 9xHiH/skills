@@ -11,12 +11,15 @@
     if (p.status === 'blocked') return App.toast('الخطة موقوفة');
     var open = App.db.sessions.filter(function (s) { return s.planId === p.id && s.dayIndex === di && s.status === 'partial'; })[0];
     if (open) { App.ui.run = { id: open.id, idx: open.cursor || 0 }; return App.go('session'); }
+    var early = d.date > App.today();
+    if (early && !confirm('هذا اليوم (' + App.fmtDate(d.date) + ') لم يحن بعد. تسجيل حصة مبكرة قد يقلل أيام الراحة المخططة. هل تريد المتابعة؟')) return;
+    if (App.db.sessions.some(function (s) { return s.planId === p.id && s.dayIndex === di && s.status !== 'partial'; }) && !confirm('توجد حصة مسجلة لهذا اليوم. تسجيل حصة ثانية؟')) return;
     var flat = [];
     (d.warmup || []).forEach(function (it) { flat.push(Object.assign({ block: 'warmup' }, it)); });
     (d.recovery || []).forEach(function (it) { flat.push(Object.assign({ block: 'recovery' }, it)); });
     (d.main || []).forEach(function (it) { flat.push(Object.assign({ block: 'main' }, it)); });
     (d.cooldown || []).forEach(function (it) { flat.push(Object.assign({ block: 'cooldown' }, it)); });
-    var s = { id: S.uniqueId(App.db, 'sessions'), traineeId: t.id, planId: p.id, dayIndex: di, date: d.date, kind: d.type === 'recovery' ? 'recovery' : 'train', status: 'partial', startedAt: S.nowISO(), updatedAt: S.nowISO(), cursor: 0, redFlag: false,
+    var s = { id: S.uniqueId(App.db, 'sessions'), traineeId: t.id, planId: p.id, dayIndex: di, date: d.date, kind: d.type === 'recovery' ? 'recovery' : 'train', status: 'partial', early: early, startedAt: S.nowISO(), updatedAt: S.nowISO(), cursor: 0, redFlag: false,
       items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
     App.db.sessions.push(s); App.audit('session.start', 'بدء حصة ' + s.id, t.id, s.id); App.save();
     App.ui.run = { id: s.id, idx: 0 }; App.go('session');

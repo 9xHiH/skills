@@ -35,7 +35,7 @@ for (const e of MCEX.list) {
   if (e.pos === 'supine' && !e.flags.includes('supine')) E(id, 'pos supine requires flag supine');
   if (e.pos === 'prone' && !e.flags.includes('prone') && !['push_h', 'push_v', 'core_ext'].includes(e.pat)) W(id, 'pos prone without prone flag (ok only if weight on hands/forearms)');
   if ((e.impact === 'high') !== e.flags.includes('impact')) E(id, 'impact high <-> flag impact mismatch');
-  if (['supine', 'prone', 'side', 'kneeling', 'quadruped', 'seated'].includes(e.pos) && !e.flags.includes('floor')) E(id, 'floor position requires flag floor');
+  if (['supine', 'prone', 'side', 'kneeling', 'quadruped', 'seated'].includes(e.pos) && !e.flags.includes('floor') && !(e.pos === 'seated' && e.eq.includes('chair'))) E(id, 'floor position requires flag floor (seated on a chair: add eq chair instead)');
   const d = e.dose || {};
   if (!['reps', 'time'].includes(d.u)) E(id, 'dose.u'); 
   const rng = (r) => Array.isArray(r) && r.length === 2 && r[0] > 0 && r[0] <= r[1];

@@ -61,12 +61,24 @@
   App.render = function () {
     App.$$('nav.side button').forEach(function (b) { if (b.dataset.page === App.ui.page) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     App.renderTraineeSelect(); App.renderStatus();
-    var v = App.$('#view'); var fn = App.pages[App.ui.page] || App.pages.dash;
+    var v = App.$('#view');
+    if (S.status.locked) { App.$$('nav.side button').forEach(function (b) { b.disabled = true; }); v.innerHTML = lockScreen(); var pi = App.$('#unlockPass'); if (pi) pi.focus(); return; }
+    App.$$('nav.side button').forEach(function (b) { b.disabled = false; });
+    var fn = App.pages[App.ui.page] || App.pages.dash;
     try { v.innerHTML = fn(); } catch (e) { console.error(e); v.innerHTML = '<div class="alert danger"><b>خطأ في عرض الصفحة</b>' + esc(e.message) + '</div>'; }
     if (App.after[App.ui.page]) App.after[App.ui.page]();
     var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'المدرب العسكري للياقة البدنية v5';
   };
   App.after = {};
+  function lockScreen() {
+    return '<div class="card" style="max-width:560px;margin:40px auto"><h2>🔒 البيانات مشفّرة</h2><p>أدخل كلمة المرور لفك تشفير بيانات المتدربين المحفوظة في هذا المتصفح. لا يمكن استرجاع كلمة المرور؛ عند نسيانها لا سبيل إلا الاستيراد من نسخة JSON احتياطية.</p>' +
+      '<form data-form="unlock"><label for="unlockPass">كلمة المرور<input id="unlockPass" name="pass" type="password" autocomplete="current-password" required></label><div id="unlockErr" role="alert"></div><button type="submit">فتح</button></form></div>';
+  }
+  App.forms.unlock = function (f) {
+    var pass = String(new FormData(f).get('pass') || ''), btn = f.querySelector('button'); btn.disabled = true; App.$('#unlockErr').innerHTML = '<p class="small muted">جارٍ فك التشفير…</p>';
+    S.unlock(pass).then(function (db) { App.db = db; var first = db.trainees.filter(function (t) { return !t.archived; })[0]; App.ui.traineeId = first ? first.id : null; App.go('dash'); })
+      .catch(function (e) { btn.disabled = false; App.$('#unlockErr').innerHTML = '<div class="alert danger">' + esc(e.message) + '</div>'; });
+  };
   App.needTrainee = function (what) {
     if (App.trainee()) return '';
     return '<div class="empty"><p>اختر متدرباً نشطاً من الأعلى ' + (what ? 'ل' + esc(what) : '') + '، أو أنشئ ملفاً جديداً.</p><button data-act="go" data-page="trainees" data-new="1">+ متدرب جديد</button></div>';
@@ -177,7 +189,7 @@
     App.go(isNew ? 'screen' : 'trainees');
   };
   App.acts.tArchive = function (el) { var t = App.trainee(el.dataset.id); t.archived = !t.archived; t.updatedAt = S.nowISO(); App.audit('trainee.archive', (t.archived ? 'أرشفة ' : 'إلغاء أرشفة ') + t.displayName, t.id); if (t.archived && App.ui.traineeId === t.id) App.ui.traineeId = null; App.save(); App.render(); };
-  App.acts.tExport = function (el) { var t = App.trainee(el.dataset.id); var env = S.exportEnvelope(App.db, 'trainee', [t.id]); App.download('MCC5_' + t.id + '_' + App.today() + '.json', JSON.stringify(env, null, 2)); App.audit('export.trainee', 'تصدير سجل ' + t.displayName, t.id); App.save(); };
+  App.acts.tExport = function (el) { var t = App.trainee(el.dataset.id); App.exportFile('MCC5_' + t.id + '_' + App.today() + '.json', S.exportEnvelope(App.db, 'trainee', [t.id]), 'export.trainee', 'تصدير سجل ' + t.displayName, t.id); };
   App.acts.tDelete = function (el) {
     var t = App.trainee(el.dataset.id); var typed = prompt('حذف نهائي لكل سجلات «' + t.displayName + '» (فحوص، خطط، حصص، مراجعات). سيُحفظ نقطة استعادة واحدة مؤقتاً. للتأكيد اكتب: حذف');
     if (typed !== 'حذف') return;
@@ -197,7 +209,8 @@
     var h = '<h2>التصدير والاستيراد والنسخ الاحتياطي</h2>';
     h += '<div class="card"><h3>حالة التخزين</h3><p>الوضع: <b>' + (st.mode === 'memory' ? 'ذاكرة مؤقتة (لن تُحفظ)' : 'localStorage لهذا المتصفح') + '</b> · الحجم ≈ ' + Math.round(st.bytes / 1024) + ' ك.ب · آخر حفظ: ' + App.fmtDT(st.lastSaved || App.db.updatedAt) + '</p>' + (st.error ? '<div class="alert danger">' + esc(st.error) + '</div>' : '') +
       '<div class="alert warn small"><b>حدود مهمة</b>البيانات مرتبطة بهذا المتصفح وهذا الجهاز (وفي بعض المتصفحات بمسار الملف أيضاً؛ في Chrome/Edge تتشارك كل الملفات المحلية مساحة تخزين واحدة). تُحذف عند مسح بيانات المتصفح، وقد لا تُحفظ في التصفح الخاص، ولا تنتقل تلقائياً لجهاز آخر. سلوك التخزين على iPhone/iPad يختلف (قد تُمسح البيانات بعد فترة عدم استخدام). الحل الوحيد الموثوق: تصدير JSON دورياً.</div></div>';
-    h += '<div class="card"><h3>تصدير</h3><div class="row"><button data-act="expAll">تصدير كل البيانات (JSON)</button>' + (App.trainee() ? '<button class="sec" data-act="tExport" data-id="' + esc(App.ui.traineeId) + '">تصدير المتدرب النشط فقط</button>' : '') + '</div><p class="small muted">ملف التصدير يحتوي بيانات صحية حساسة (إجابات الفحص). شاركه فقط بإجراء صريح وبوسيلة آمنة. يتضمن الملف checksum للتحقق من السلامة (ليس تشفيراً).</p></div>';
+    h += '<div class="card"><h3>تصدير</h3><fieldset><legend><label style="margin:0"><input type="checkbox" id="expEnc"> تشفير ملف التصدير بكلمة مرور (موصى به)</label></legend><div class="grid"><label>كلمة مرور الملف<input type="password" id="expPass" autocomplete="new-password" minlength="8"></label><label>تأكيدها<input type="password" id="expPass2" autocomplete="new-password"></label></div><p class="small muted">AES-GCM 256 مع PBKDF2-SHA256 (' + S.ENC_ITER + ' تكرار). من دون كلمة المرور لا يمكن فتح الملف.</p></fieldset><div class="row"><button data-act="expAll">تصدير كل البيانات (JSON)</button>' + (App.trainee() ? '<button class="sec" data-act="tExport" data-id="' + esc(App.ui.traineeId) + '">تصدير المتدرب النشط فقط</button>' : '') + '</div><p class="small muted">ملف التصدير يحتوي بيانات صحية حساسة (إجابات الفحص). شاركه فقط بإجراء صريح وبوسيلة آمنة. الملف غير المشفّر يتضمن checksum للتحقق من السلامة فقط.</p></div>';
+    h += encCard();
     h += '<div class="card"><h3>استيراد</h3><label>ملف JSON (تصدير v5 أو نسخة v4)<input type="file" id="impFile" accept=".json,application/json"></label><div id="impPreview"></div><p class="small muted">PDF لا يُستورد: ملف PDF المطبوع لا يحتوي قاعدة بيانات قابلة للاستعادة. للنقل بين الأجهزة استخدم JSON.</p></div>';
     if (v4) h += '<div class="card"><h3>ترحيل بيانات v4 من هذا المتصفح</h3><p>وُجد مفتاح ' + esc(S.V4_KEY) + ' يحتوي ' + ((v4.people || []).length) + ' متدرب. الترحيل يقرأ البيانات فقط ولا يعدّل بيانات v4.</p><button data-act="migrateLocal">معاينة الترحيل</button></div>';
     h += '<div class="card"><h3>نقاط الاستعادة التلقائية (آخر 3)</h3>' + (rp.length ? '<table><tbody>' + rp.map(function (r, i) { return '<tr><td>' + App.fmtDT(r.at) + '</td><td>' + esc(r.reason) + '</td><td>' + ((r.db && r.db.trainees) || []).length + ' متدرب</td><td><button class="sec" data-act="restore" data-i="' + i + '">استعادة</button></td></tr>'; }).join('') + '</tbody></table>' : '<p class="muted">لا توجد. تُنشأ تلقائياً قبل الاستيراد والحذف.</p>') + '</div>';
@@ -206,14 +219,42 @@
     return h;
   };
   App.forms.settings = function (f) { var fd = new FormData(f); App.db.settings.emergencyNumber = String(fd.get('emergencyNumber') || '').replace(/[^0-9+]/g, '').slice(0, 12); App.db.settings.coachName = String(fd.get('coachName') || '').slice(0, 80); App.save(); App.toast('تم حفظ الإعدادات'); };
-  App.acts.expAll = function () { var env = S.exportEnvelope(App.db, 'full', []); App.download('MCC5_backup_' + App.today() + '.json', JSON.stringify(env, null, 2)); App.audit('export.full', 'تصدير كامل'); App.save(); };
+  App.exportFile = function (name, env, auditType, auditMsg, tid) {
+    var text = JSON.stringify(env, null, 2), cb = App.$('#expEnc');
+    var done = function (n, t) { App.download(n, t); App.audit(auditType, auditMsg + (cb && cb.checked ? ' (مشفّر)' : ''), tid); App.save(); };
+    if (!cb || !cb.checked) return done(name, text);
+    var p1 = App.$('#expPass').value, p2 = App.$('#expPass2').value;
+    if (p1.length < 8) return App.toast('كلمة مرور الملف 8 أحرف على الأقل');
+    if (p1 !== p2) return App.toast('كلمتا المرور غير متطابقتين');
+    S.encryptExport(text, p1).then(function (encEnv) { done(name.replace(/\.json$/, '_encrypted.json'), JSON.stringify(encEnv)); App.toast('تم تصدير ملف مشفّر'); }).catch(function (e) { App.toast('فشل التشفير: ' + e.message); });
+  };
+  App.acts.expAll = function () { App.exportFile('MCC5_backup_' + App.today() + '.json', S.exportEnvelope(App.db, 'full', []), 'export.full', 'تصدير كامل', null); };
+  function encCard() {
+    var st = S.status;
+    if (st.encrypted) return '<div class="card"><h3>🔒 تشفير البيانات المحلية: مفعّل</h3><p class="small">تُحفظ البيانات في المتصفح مشفّرة (AES-GCM 256). نقاط الاستعادة تُحفظ في الذاكرة فقط خلال هذه الجلسة. ملاحظة: بيانات v4 القديمة (إن وُجدت) تبقى غير مشفّرة لأن v4 لا يُعدَّل.</p><div class="row"><button class="sec" data-act="lockNow">قفل الآن</button><button class="danger" data-act="encOff">إلغاء التشفير</button></div></div>';
+    return '<div class="card"><h3>تشفير البيانات المحلية (اختياري)</h3><p class="small">يحمي بيانات المتدربين من القراءة من ملفات أو أشخاص آخرين يستخدمون المتصفح نفسه (في Chrome/Edge تتشارك كل الملفات المحلية مساحة تخزين واحدة). يُطلب إدخال كلمة المرور عند كل فتح.</p><form data-form="encOn" class="grid"><label>كلمة المرور (8 أحرف على الأقل)<input type="password" name="p1" autocomplete="new-password" minlength="8" required></label><label>تأكيدها<input type="password" name="p2" autocomplete="new-password" required></label><label class="grow"><input type="checkbox" name="ack"> أفهم أن نسيان كلمة المرور يعني فقدان البيانات المحلية نهائياً، وأن النسخة المصدّرة هي الحل الوحيد</label><div><button type="submit">تفعيل التشفير</button></div></form></div>';
+  }
+  App.forms.encOn = function (f) {
+    var fd = new FormData(f), p1 = String(fd.get('p1') || ''), p2 = String(fd.get('p2') || '');
+    if (p1.length < 8) return App.toast('8 أحرف على الأقل'); if (p1 !== p2) return App.toast('كلمتا المرور غير متطابقتين'); if (!fd.get('ack')) return App.toast('أكّد الإقرار');
+    S.enableEncryption(App.db, p1).then(function () { App.audit('storage.encrypt', 'تفعيل تشفير التخزين'); App.save(); App.toast('تم تفعيل التشفير'); App.render(); }).catch(function (e) { App.toast('فشل: ' + e.message); });
+  };
+  App.acts.lockNow = function () { S.flush().then(function () { S.lockNow(); location.reload(); }); };
+  App.acts.encOff = function () { if (!confirm('إلغاء التشفير وحفظ البيانات غير مشفّرة في المتصفح؟')) return; S.disableEncryption(App.db); App.audit('storage.decrypt', 'إلغاء تشفير التخزين'); App.save(); App.render(); };
   App.changes.impFile = function (el) {
     var f = el.files[0]; if (!f) return;
     if (f.size > 20 * 1024 * 1024) { App.$('#impPreview').innerHTML = '<div class="alert danger">الملف أكبر من 20 ميغابايت.</div>'; return; }
-    var r = new FileReader(); r.onload = function () { showImport(S.parseImport(String(r.result)), f.name); }; r.onerror = function () { App.$('#impPreview').innerHTML = '<div class="alert danger">تعذرت قراءة الملف.</div>'; }; r.readAsText(f);
+    var r = new FileReader(); r.onload = function () {
+      var text = String(r.result);
+      if (S.isEncryptedExport(text)) { pendingEnc = { text: text, name: f.name }; App.$('#impPreview').innerHTML = '<div class="alert"><b>ملف مشفّر</b><label>كلمة مرور الملف<input type="password" id="impPass" autocomplete="off"></label><button data-act="impDecrypt">فك التشفير والمعاينة</button></div>'; return; }
+      showImport(S.parseImport(text), f.name);
+    }; r.onerror = function () { App.$('#impPreview').innerHTML = '<div class="alert danger">تعذرت قراءة الملف.</div>'; }; r.readAsText(f);
   };
   App.acts.migrateLocal = function () { var p = S.parseImport(JSON.stringify(S.readV4Local())); App.go('data'); showImport(p, 'localStorage ' + S.V4_KEY); };
-  var pendingImport = null;
+  var pendingImport = null, pendingEnc = null;
+  App.acts.impDecrypt = function () { if (!pendingEnc) return; var b = App.$('[data-act=impDecrypt]'); b.disabled = true;
+    S.decryptExport(pendingEnc.text, App.$('#impPass').value).then(function (plain) { showImport(S.parseImport(plain), pendingEnc.name); })
+      .catch(function (e) { b.disabled = false; App.$('#impPreview').insertAdjacentHTML('beforeend', '<div class="alert danger">' + esc(e.message) + ' — لم يتغير شيء.</div>'); }); };
   function showImport(p, name) {
     var box = App.$('#impPreview'); pendingImport = null;
     if (!p.ok) { box.innerHTML = '<div class="alert danger"><b>رُفض الاستيراد — لم يتغير شيء</b>' + p.errors.map(esc).join('<br>') + '</div>'; return; }
