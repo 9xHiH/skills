@@ -75,6 +75,12 @@ Offline, Arabic RTL, single-file coach workstation. A coach can:
   A rejected file changes nothing. Before importing, the app saves a restore point (the last 3 are kept). Conflicting records are kept local by default; you can choose to prefer the imported version instead.
 - **v4 data:** v4 data stored in this browser (`MC_V3`) or a v4 JSON backup can be migrated **read-only**. v4 plans appear in History, and migrated trainees must be re-screened under v5.
 - **PDF:** printing uses the browser's Print → Save as PDF, which the Chromium engine produced in testing (9-page sample in `tests/evidence/weekly_plan_print.pdf`). **The PDF cannot be imported:** it has no machine-readable record. A plan ID found on paper can be looked up only if that record exists in this browser; otherwise import the JSON.
+- **Optional encryption:** التصدير والاستيراد → «تفعيل التشفير».
+  - Local data is stored as AES-GCM-256 ciphertext with a key derived from a passphrase (PBKDF2-SHA256, 310,000 iterations, Web Crypto). A lock screen asks for the passphrase on every open.
+  - While encryption is on, restore points are kept in memory only, so no plaintext copy remains.
+  - Export files can also be encrypted with their own passphrase; import asks for it.
+  - **Forgetting the passphrase means the local data is unrecoverable.** Keep exported backups.
+  - Not encrypted: the old v4 key `MC_V3`, which v5 never modifies, and the theme preference.
 - **Data storage:** `localStorage` of this browser only. It is lost if site data is cleared and may not persist in private mode. A second tab cannot silently overwrite newer data: the stale tab's save is refused and it is asked to reload.
 
 ## Build and test (developers)
@@ -82,7 +88,8 @@ Offline, Arabic RTL, single-file coach workstation. A coach can:
 node tools/check.mjs                 # exercise data + animation geometry validation
 node tools/build.mjs                 # → dist/military_calisthenics_coach_v5.html
 node tests/unit.mjs                  # 55 unit tests (Node 22)
-NODE_PATH=$(npm root -g) node tests/e2e.cjs tests/evidence   # 26 browser tests (Playwright + Chromium)
+NODE_PATH=$(npm root -g) node tests/e2e.cjs tests/evidence   # browser tests (Playwright + Chromium)
+AXE=/path/to/axe.min.js NODE_PATH=$(npm root -g) node tests/a11y.cjs tests/evidence/export_full.json   # axe-core WCAG A/AA audit (axe-core not bundled)
 node tools/gen_sources.mjs           # regenerate SOURCES.md
 ```
 To add an exercise, follow `tools/AUTHORING.md` (pose coordinates, required fields, visual-check procedure).

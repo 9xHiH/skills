@@ -30,12 +30,12 @@
 
 :root{
   --bg:#0a121b;--bg2:#0f1b27;--panel:#132233;--panel2:#18293c;--line:#2a3f55;--text:#e9f0f6;--muted:#a3b4c5;
-  --acc:#d6b25e;--acc2:#2bb39b;--acc-ink:#1a1405;--danger:#ff8a7a;--danger-bg:#3a1d1a;--warn:#f0c264;--warn-bg:#352a16;--ok:#7ddbb6;--ok-bg:#15322a;--info-bg:#162c40;
+  --acc:#d6b25e;--acc2:#2bb39b;--acc-ink:#1a1405;--acc2-ink:#04201a;--danger:#ff8a7a;--danger-bg:#3a1d1a;--warn:#f0c264;--warn-bg:#352a16;--ok:#7ddbb6;--ok-bg:#15322a;--info-bg:#162c40;
   --fig:#ffd166;--fig-far:#b48a2c;--fig-bg:#0d1d2b;--fig-floor:#58738a;--fig-prop:#8aa0b4;--fig-prop-fill:#2f465b;--fig-ghost:#7fa3c0;--fig-trace:#5ee0c1;--fig-mat:#2f6e63;
   --radius:14px;--shadow:0 8px 30px rgba(0,0,0,.35);
   font-family:"Segoe UI","Noto Sans Arabic","Noto Naskh Arabic","Geeza Pro","Arial",Tahoma,sans-serif;color-scheme:dark;
 }
-:root[data-theme=light]{--bg:#eef2f5;--bg2:#e3e9ee;--panel:#ffffff;--panel2:#f4f7fa;--line:#c8d3dd;--text:#13202c;--muted:#4c5f70;--acc:#8a6a12;--acc2:#0f7d6b;--acc-ink:#fff;
+:root[data-theme=light]{--bg:#eef2f5;--bg2:#e3e9ee;--panel:#ffffff;--panel2:#f4f7fa;--line:#c8d3dd;--text:#13202c;--muted:#4c5f70;--acc:#8a6a12;--acc2:#0f7d6b;--acc-ink:#fff;--acc2-ink:#fff;
   --danger:#a42617;--danger-bg:#fde8e5;--warn:#7a5300;--warn-bg:#fff4dc;--ok:#0d6a4f;--ok-bg:#e1f5ec;--info-bg:#e5f0fa;--fig:#1d4e7a;--fig-far:#7aa1c4;--fig-bg:#f3f7fa;--fig-floor:#7d93a6;--fig-prop:#5d7183;--fig-prop-fill:#d3dde6;--fig-ghost:#93a9bc;--fig-trace:#0f9c80;--fig-mat:#9fd3c7;--shadow:0 6px 20px rgba(20,40,60,.12);color-scheme:light}
 *{box-sizing:border-box}
 html{font-size:17px}
@@ -74,7 +74,7 @@ button,.btn{font:inherit;border:1px solid transparent;background:var(--acc);colo
 button.sec{background:var(--panel2);color:var(--text);border-color:var(--line)}
 button.ghost{background:transparent;color:var(--text);border-color:var(--line)}
 button.danger{background:var(--danger-bg);color:var(--danger);border-color:var(--danger)}
-button.ok{background:var(--acc2);color:#fff}
+button.ok{background:var(--acc2);color:var(--acc2-ink)}
 button:disabled{opacity:.45;cursor:not-allowed}
 button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
 label{display:block;margin:8px 0;font-weight:600}
@@ -181,7 +181,8 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
  *   a : [armNear, armFar]   each either [upperArmAngle, forearmAngle] (forward kinematics)
  *                           or {p:[x,y], b:+1|-1} (two-bone inverse kinematics, wrist target, bend side)
  *   l : [legNear, legFar]   same, for thigh/shin; IK target is the ankle
- *   f : [footNear, footFar] absolute foot angles (ankle -> toes), default 0 (side) / -90 (front)
+ *   f : [footNear, footFar] absolute foot angles (ankle -> toes), default 0 (side) / 180,0 (front)
+ *   k : optional [torso, armNear, armFar, legNear, legFar] length multipliers to depict foreshortening (segments pointing toward/away from the viewer)
  * Exercise animation spec: {view:'side'|'front', top:bool (seen from above: no floor line, no floor checks), props:[...], keys:[{p:pose, d:ms, lab:'..'}], hang:bool, air:[keyIdx]}
  */
 (function (root) {
@@ -220,8 +221,9 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
   /* Forward kinematics: returns joint positions and IK reach errors. */
   function solve(p, view) {
     var front = view === 'front';
+    var k = p.k || [1, 1, 1, 1, 1]; /* foreshortening: [torso, armNear, armFar, legNear, legFar] length multipliers (0.3–1) */
     var hip = p.h, td = dir(p.t);
-    var neck = add(hip, td, L.torso);
+    var neck = add(hip, td, L.torso * k[0]);
     var hd = dir(p.t + (p.n || 0));
     var head = add(neck, hd, L.neck);
     var sh = add(neck, td, -L.shoulderDrop);
@@ -229,8 +231,8 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     var shN = front ? add(sh, perp, -L.shW) : sh, shF = front ? add(sh, perp, L.shW) : sh;
     var hpN = front ? add(hip, perp, -L.hipW) : hip, hpF = front ? add(hip, perp, L.hipW) : hip;
     var a = p.a || [[-90, -90], [-90, -90]], l = p.l || [[-90, -90], [-90, -90]];
-    var aN = limb(shN, a[0], L.ua, L.fa), aF = limb(shF, a[1], L.ua, L.fa);
-    var lN = limb(hpN, l[0], L.th, L.sh), lF = limb(hpF, l[1], L.th, L.sh);
+    var aN = limb(shN, a[0], L.ua * k[1], L.fa * k[1]), aF = limb(shF, a[1], L.ua * k[2], L.fa * k[2]);
+    var lN = limb(hpN, l[0], L.th * k[3], L.sh * k[3]), lF = limb(hpF, l[1], L.th * k[4], L.sh * k[4]);
     var fdef = front ? [180, 0] : [0, 0];
     var f = p.f || fdef;
     var toeN = add(lN.e, dir(f[0] == null ? fdef[0] : f[0]), front ? 6 : L.ft);
@@ -252,6 +254,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     var da = [[-90, -90], [-90, -90]];
     o.a = [lerpLimb((A.a || da)[0], (B.a || da)[0], k), lerpLimb((A.a || da)[1], (B.a || da)[1], k)];
     o.l = [lerpLimb((A.l || da)[0], (B.l || da)[0], k), lerpLimb((A.l || da)[1], (B.l || da)[1], k)];
+    if (A.k || B.k) { var ka = A.k || [1, 1, 1, 1, 1], kb = B.k || [1, 1, 1, 1, 1]; o.k = ka.map(function (v, i) { return lerp(v, kb[i], k); }); }
     if (A.f || B.f) { var fa = A.f || [0, 0], fb = B.f || [0, 0]; o.f = [lerp(fa[0], fb[0], k), lerp(fa[1], fb[1], k)]; }
     return o;
   }
@@ -392,7 +395,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     var tmp = document.createElement('div');
     var f = new Figure(tmp, spec, { ghost: keyIdx !== 0, traceJoint: spec.trace });
     f.seekKey(keyIdx);
-    f.svg.setAttribute('class', 'mc-fig ' + (cls || ''));
+    f.svg.setAttribute('class', 'mc-fig ' + (cls || '')); f.svg.removeAttribute('role'); f.svg.setAttribute('aria-hidden', 'true'); /* static copies are decorative: the surrounding control/card carries the name */
     return tmp.innerHTML;
   }
 
@@ -413,6 +416,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
       if (!inAir && !support && low < FLOOR - 4) issues.push('figure floating ' + (FLOOR - low).toFixed(1) + 'px at ' + (i / 60).toFixed(2));
     }
     spec.keys.forEach(function (k, i) {
+      if (k.p.k && (k.p.k.length !== 5 || k.p.k.some(function (v) { return !(v >= 0.3 && v <= 1); }))) issues.push('key ' + i + ' k multipliers must be 5 values in [0.3,1]');
       var nx = spec.keys[(i + 1) % spec.keys.length].p;
       ['a', 'l'].forEach(function (g) { [0, 1].forEach(function (j) { var x = (k.p[g] || [[0]])[j], y = (nx[g] || [[0]])[j]; if (Array.isArray(x) !== Array.isArray(y)) issues.push('key ' + i + ' ' + g + j + ' mixes IK and angle modes'); }); });
     });
@@ -3513,8 +3517,41 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
 
   function safeFileName(s) { return String(s || 'file').replace(/[\\/:*?"<>|\u0000-\u001f]/g, '_').replace(/\s+/g, '_').slice(0, 80); }
 
+  /* ---------- optional encryption (Web Crypto: PBKDF2-SHA256 → AES-GCM-256) ---------- */
+  var ENC = { iter: 310000 };
+  function b64(u8) { var s = ''; for (var i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); }
+  function unb64(t) { var s = atob(t), u = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
+  function subtle() { var c = root.crypto; if (!c || !c.subtle) throw new Error('التشفير غير متاح في هذا المتصفح'); return c.subtle; }
+  function deriveKey(pass, salt, iter) {
+    return subtle().importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']).then(function (base) {
+      return subtle().deriveKey({ name: 'PBKDF2', salt: salt, iterations: iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    });
+  }
+  function encryptWith(key, salt, iter, text, extra) {
+    var iv = randomValues(12).bytes;
+    return subtle().encrypt({ name: 'AES-GCM', iv: iv }, key, new TextEncoder().encode(text)).then(function (ct) {
+      return Object.assign({ kdf: 'PBKDF2-SHA256', iter: iter, salt: b64(salt), iv: b64(iv), ct: b64(new Uint8Array(ct)) }, extra || {});
+    });
+  }
+  function decryptEnv(env, pass) {
+    if (!env || typeof env.salt !== 'string' || typeof env.iv !== 'string' || typeof env.ct !== 'string' || !(env.iter >= 100000 && env.iter <= 5000000)) return Promise.reject(new Error('غلاف تشفير غير صالح'));
+    var salt = unb64(env.salt);
+    return deriveKey(pass, salt, env.iter).then(function (key) {
+      return subtle().decrypt({ name: 'AES-GCM', iv: unb64(env.iv) }, key, unb64(env.ct)).then(function (pt) { return { text: new TextDecoder().decode(pt), key: key, salt: salt }; },
+        function () { throw new Error('كلمة المرور غير صحيحة أو الملف تالف'); });
+    });
+  }
+  /* Encrypted export file: {format:'MCC-EXPORT-ENC', ...} wrapping the normal MCC-EXPORT JSON text. */
+  function encryptExport(text, pass) {
+    var salt = randomValues(16).bytes;
+    return deriveKey(pass, salt, ENC.iter).then(function (key) { return encryptWith(key, salt, ENC.iter, text, { format: 'MCC-EXPORT-ENC', formatVersion: 1, appVersion: APP_VERSION, exportedAt: nowISO() }); });
+  }
+  function isEncryptedExport(text) { try { var o = JSON.parse(text); return !!(o && o.format === 'MCC-EXPORT-ENC'); } catch (e) { return false; } }
+  function decryptExport(text, pass) { return decryptEnv(JSON.parse(text), pass).then(function (r) { return r.text; }); }
+
   /* ---------- persistence (browser only) ---------- */
-  var mem = null, status = { mode: 'unknown', lastSaved: null, error: null, bytes: 0, secureIds: !!(root.crypto && root.crypto.getRandomValues) };
+  var mem = null, status = { mode: 'unknown', lastSaved: null, error: null, bytes: 0, secureIds: !!(root.crypto && root.crypto.getRandomValues), encrypted: false, locked: false, key: null, salt: null, pending: 0, memRestore: [] };
+  var lockedEnv = null, chain = Promise.resolve();
   function storageAvailable() {
     try { var k = '__mcc_test__'; root.localStorage.setItem(k, '1'); root.localStorage.removeItem(k); return true; } catch (e) { return false; }
   }
@@ -3524,7 +3561,9 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     var raw = root.localStorage.getItem(KEY);
     if (!raw) { mem = emptyDB(); status.known = null; return mem; }
     try {
-      var obj = JSON.parse(raw); var v = validateDBShape(obj);
+      var obj = JSON.parse(raw);
+      if (obj && obj.schema === 'MCC-ENC') { lockedEnv = obj; status.encrypted = true; status.locked = true; status.known = obj.updatedAt; status.bytes = raw.length; mem = emptyDB(); return mem; }
+      var v = validateDBShape(obj);
       if (!v.ok) throw new Error(v.errors.slice(0, 3).join('؛ '));
       mem = obj; status.bytes = raw.length; status.known = obj.updatedAt; return mem;
     } catch (e) {
@@ -3533,21 +3572,52 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
       mem = emptyDB(); status.mode = 'local-recovered'; status.known = storedStamp(); return mem;
     }
   }
+  /* Unlock encrypted storage. Resolves to the DB; rejects on wrong passphrase (data untouched). */
+  function unlock(pass) {
+    return decryptEnv(lockedEnv, pass).then(function (r) {
+      var obj = JSON.parse(r.text), v = validateDBShape(obj);
+      if (!v.ok) throw new Error('البيانات بعد فك التشفير غير صالحة: ' + v.errors[0]);
+      status.key = r.key; status.salt = r.salt; status.locked = false; mem = obj; return obj;
+    });
+  }
+  function enableEncryption(db, pass) {
+    var salt = randomValues(16).bytes;
+    return deriveKey(pass, salt, ENC.iter).then(function (key) {
+      status.key = key; status.salt = salt; status.encrypted = true;
+      try { status.memRestore = restorePoints(); root.localStorage.removeItem(RESTORE_KEY); } catch (e) { /* ignore */ } /* plaintext restore points must not remain */
+      return saveAsync(db);
+    });
+  }
+  function disableEncryption(db) { status.key = null; status.salt = null; status.encrypted = false; return save(db); }
+  function lockNow() { status.key = null; }
   /* Optimistic concurrency: refuse to overwrite data written by another tab/window since we last read or wrote it. */
   function storedStamp() { try { var raw = root.localStorage.getItem(KEY); if (!raw) return null; var o = JSON.parse(raw); return (o && o.updatedAt) || 'unknown'; } catch (e) { return 'unparseable'; } }
   function save(db) {
     if (status.mode === 'memory') { db.updatedAt = nowISO(); return false; }
-    if (status.conflict) return false;
+    if (status.conflict || status.locked) return false;
     var cur = storedStamp();
-    if (cur !== status.known) { status.conflict = true; status.error = 'عُدّلت البيانات من نافذة أو تبويب آخر لهذا الملف. لم يُحفظ التغيير الأخير لتجنب الكتابة فوق تلك البيانات. أعد تحميل الصفحة (F5) ثم أعد الإجراء.'; return false; }
+    if (!status.pending && cur !== status.known) { status.conflict = true; status.error = 'عُدّلت البيانات من نافذة أو تبويب آخر لهذا الملف. لم يُحفظ التغيير الأخير لتجنب الكتابة فوق تلك البيانات. أعد تحميل الصفحة (F5) ثم أعد الإجراء.'; return false; }
     db.updatedAt = nowISO();
+    if (status.encrypted && status.key) { saveAsync(db); return true; }
     try { var s = JSON.stringify(db); root.localStorage.setItem(KEY, s); status.known = db.updatedAt; status.lastSaved = db.updatedAt; status.bytes = s.length; status.error = null; return true; }
     catch (e) { status.error = 'فشل الحفظ المحلي (' + e.name + '). صدّر نسخة JSON الآن.'; return false; }
   }
-  function restorePoints() { try { return JSON.parse(root.localStorage.getItem(RESTORE_KEY) || '[]'); } catch (e) { return []; } }
+  /* Encrypted writes are serialised so they land in order. */
+  function saveAsync(db) {
+    var text = JSON.stringify(db), stamp = db.updatedAt || (db.updatedAt = nowISO());
+    status.pending++;
+    chain = chain.then(function () { return encryptWith(status.key, status.salt, ENC.iter, text, { schema: 'MCC-ENC', v: 1, updatedAt: stamp }); }).then(function (env) {
+      var s = JSON.stringify(env); root.localStorage.setItem(KEY, s); status.known = stamp; status.lastSaved = stamp; status.bytes = s.length; status.error = null;
+    }).catch(function (e) { status.error = 'فشل الحفظ المشفّر (' + e.message + '). صدّر نسخة JSON الآن.'; }).then(function () { status.pending--; if (root.App && root.App.renderStatus) root.App.renderStatus(); });
+    return chain;
+  }
+  function flush() { return chain; }
+  function restorePoints() { if (status.encrypted) return status.memRestore; try { return JSON.parse(root.localStorage.getItem(RESTORE_KEY) || '[]'); } catch (e) { return []; } }
   function addRestorePoint(db, reason) {
     if (status.mode === 'memory') return false;
-    try { var rp = restorePoints(); rp.unshift({ at: nowISO(), reason: reason, db: db }); root.localStorage.setItem(RESTORE_KEY, JSON.stringify(rp.slice(0, 3))); return true; }
+    var snap = JSON.parse(JSON.stringify(db));
+    if (status.encrypted) { status.memRestore.unshift({ at: nowISO(), reason: reason, db: snap }); status.memRestore = status.memRestore.slice(0, 3); return true; } /* memory only: never stored in plaintext */
+    try { var rp = restorePoints(); rp.unshift({ at: nowISO(), reason: reason, db: snap }); root.localStorage.setItem(RESTORE_KEY, JSON.stringify(rp.slice(0, 3))); return true; }
     catch (e) { return false; }
   }
   function readV4Local() { try { var x = root.localStorage && root.localStorage.getItem(V4_KEY); return x ? JSON.parse(x) : null; } catch (e) { return null; } }
@@ -3555,7 +3625,8 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
   root.MCStore = { APP_VERSION: APP_VERSION, SCHEMA_VERSION: SCHEMA_VERSION, COLLECTIONS: COLLECTIONS, KEY: KEY, V4_KEY: V4_KEY,
     makeId: makeId, uniqueId: uniqueId, idValid: idValid, normalizeId: normalizeId, isoWeek: isoWeek, emptyDB: emptyDB, fnv: fnv,
     validateDBShape: validateDBShape, parseImport: parseImport, migrateV4: migrateV4, mergeInto: mergeInto, exportEnvelope: exportEnvelope,
-    safeFileName: safeFileName, load: load, save: save, status: status, restorePoints: restorePoints, addRestorePoint: addRestorePoint, readV4Local: readV4Local, nowISO: nowISO };
+    safeFileName: safeFileName, load: load, save: save, status: status, restorePoints: restorePoints, addRestorePoint: addRestorePoint, readV4Local: readV4Local, nowISO: nowISO,
+    unlock: unlock, enableEncryption: enableEncryption, disableEncryption: disableEncryption, lockNow: lockNow, flush: flush, encryptExport: encryptExport, decryptExport: decryptExport, isEncryptedExport: isEncryptedExport, ENC_ITER: ENC.iter };
 })(typeof window !== 'undefined' ? window : globalThis);
 
 ;
@@ -4136,12 +4207,24 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
   App.render = function () {
     App.$$('nav.side button').forEach(function (b) { if (b.dataset.page === App.ui.page) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     App.renderTraineeSelect(); App.renderStatus();
-    var v = App.$('#view'); var fn = App.pages[App.ui.page] || App.pages.dash;
+    var v = App.$('#view');
+    if (S.status.locked) { App.$$('nav.side button').forEach(function (b) { b.disabled = true; }); v.innerHTML = lockScreen(); var pi = App.$('#unlockPass'); if (pi) pi.focus(); return; }
+    App.$$('nav.side button').forEach(function (b) { b.disabled = false; });
+    var fn = App.pages[App.ui.page] || App.pages.dash;
     try { v.innerHTML = fn(); } catch (e) { console.error(e); v.innerHTML = '<div class="alert danger"><b>خطأ في عرض الصفحة</b>' + esc(e.message) + '</div>'; }
     if (App.after[App.ui.page]) App.after[App.ui.page]();
     var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'المدرب العسكري للياقة البدنية v5';
   };
   App.after = {};
+  function lockScreen() {
+    return '<div class="card" style="max-width:560px;margin:40px auto"><h2>🔒 البيانات مشفّرة</h2><p>أدخل كلمة المرور لفك تشفير بيانات المتدربين المحفوظة في هذا المتصفح. لا يمكن استرجاع كلمة المرور؛ عند نسيانها لا سبيل إلا الاستيراد من نسخة JSON احتياطية.</p>' +
+      '<form data-form="unlock"><label for="unlockPass">كلمة المرور<input id="unlockPass" name="pass" type="password" autocomplete="current-password" required></label><div id="unlockErr" role="alert"></div><button type="submit">فتح</button></form></div>';
+  }
+  App.forms.unlock = function (f) {
+    var pass = String(new FormData(f).get('pass') || ''), btn = f.querySelector('button'); btn.disabled = true; App.$('#unlockErr').innerHTML = '<p class="small muted">جارٍ فك التشفير…</p>';
+    S.unlock(pass).then(function (db) { App.db = db; var first = db.trainees.filter(function (t) { return !t.archived; })[0]; App.ui.traineeId = first ? first.id : null; App.go('dash'); })
+      .catch(function (e) { btn.disabled = false; App.$('#unlockErr').innerHTML = '<div class="alert danger">' + esc(e.message) + '</div>'; });
+  };
   App.needTrainee = function (what) {
     if (App.trainee()) return '';
     return '<div class="empty"><p>اختر متدرباً نشطاً من الأعلى ' + (what ? 'ل' + esc(what) : '') + '، أو أنشئ ملفاً جديداً.</p><button data-act="go" data-page="trainees" data-new="1">+ متدرب جديد</button></div>';
@@ -4252,7 +4335,7 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     App.go(isNew ? 'screen' : 'trainees');
   };
   App.acts.tArchive = function (el) { var t = App.trainee(el.dataset.id); t.archived = !t.archived; t.updatedAt = S.nowISO(); App.audit('trainee.archive', (t.archived ? 'أرشفة ' : 'إلغاء أرشفة ') + t.displayName, t.id); if (t.archived && App.ui.traineeId === t.id) App.ui.traineeId = null; App.save(); App.render(); };
-  App.acts.tExport = function (el) { var t = App.trainee(el.dataset.id); var env = S.exportEnvelope(App.db, 'trainee', [t.id]); App.download('MCC5_' + t.id + '_' + App.today() + '.json', JSON.stringify(env, null, 2)); App.audit('export.trainee', 'تصدير سجل ' + t.displayName, t.id); App.save(); };
+  App.acts.tExport = function (el) { var t = App.trainee(el.dataset.id); App.exportFile('MCC5_' + t.id + '_' + App.today() + '.json', S.exportEnvelope(App.db, 'trainee', [t.id]), 'export.trainee', 'تصدير سجل ' + t.displayName, t.id); };
   App.acts.tDelete = function (el) {
     var t = App.trainee(el.dataset.id); var typed = prompt('حذف نهائي لكل سجلات «' + t.displayName + '» (فحوص، خطط، حصص، مراجعات). سيُحفظ نقطة استعادة واحدة مؤقتاً. للتأكيد اكتب: حذف');
     if (typed !== 'حذف') return;
@@ -4272,7 +4355,8 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     var h = '<h2>التصدير والاستيراد والنسخ الاحتياطي</h2>';
     h += '<div class="card"><h3>حالة التخزين</h3><p>الوضع: <b>' + (st.mode === 'memory' ? 'ذاكرة مؤقتة (لن تُحفظ)' : 'localStorage لهذا المتصفح') + '</b> · الحجم ≈ ' + Math.round(st.bytes / 1024) + ' ك.ب · آخر حفظ: ' + App.fmtDT(st.lastSaved || App.db.updatedAt) + '</p>' + (st.error ? '<div class="alert danger">' + esc(st.error) + '</div>' : '') +
       '<div class="alert warn small"><b>حدود مهمة</b>البيانات مرتبطة بهذا المتصفح وهذا الجهاز (وفي بعض المتصفحات بمسار الملف أيضاً؛ في Chrome/Edge تتشارك كل الملفات المحلية مساحة تخزين واحدة). تُحذف عند مسح بيانات المتصفح، وقد لا تُحفظ في التصفح الخاص، ولا تنتقل تلقائياً لجهاز آخر. سلوك التخزين على iPhone/iPad يختلف (قد تُمسح البيانات بعد فترة عدم استخدام). الحل الوحيد الموثوق: تصدير JSON دورياً.</div></div>';
-    h += '<div class="card"><h3>تصدير</h3><div class="row"><button data-act="expAll">تصدير كل البيانات (JSON)</button>' + (App.trainee() ? '<button class="sec" data-act="tExport" data-id="' + esc(App.ui.traineeId) + '">تصدير المتدرب النشط فقط</button>' : '') + '</div><p class="small muted">ملف التصدير يحتوي بيانات صحية حساسة (إجابات الفحص). شاركه فقط بإجراء صريح وبوسيلة آمنة. يتضمن الملف checksum للتحقق من السلامة (ليس تشفيراً).</p></div>';
+    h += '<div class="card"><h3>تصدير</h3><fieldset><legend><label style="margin:0"><input type="checkbox" id="expEnc"> تشفير ملف التصدير بكلمة مرور (موصى به)</label></legend><div class="grid"><label>كلمة مرور الملف<input type="password" id="expPass" autocomplete="new-password" minlength="8"></label><label>تأكيدها<input type="password" id="expPass2" autocomplete="new-password"></label></div><p class="small muted">AES-GCM 256 مع PBKDF2-SHA256 (' + S.ENC_ITER + ' تكرار). من دون كلمة المرور لا يمكن فتح الملف.</p></fieldset><div class="row"><button data-act="expAll">تصدير كل البيانات (JSON)</button>' + (App.trainee() ? '<button class="sec" data-act="tExport" data-id="' + esc(App.ui.traineeId) + '">تصدير المتدرب النشط فقط</button>' : '') + '</div><p class="small muted">ملف التصدير يحتوي بيانات صحية حساسة (إجابات الفحص). شاركه فقط بإجراء صريح وبوسيلة آمنة. الملف غير المشفّر يتضمن checksum للتحقق من السلامة فقط.</p></div>';
+    h += encCard();
     h += '<div class="card"><h3>استيراد</h3><label>ملف JSON (تصدير v5 أو نسخة v4)<input type="file" id="impFile" accept=".json,application/json"></label><div id="impPreview"></div><p class="small muted">PDF لا يُستورد: ملف PDF المطبوع لا يحتوي قاعدة بيانات قابلة للاستعادة. للنقل بين الأجهزة استخدم JSON.</p></div>';
     if (v4) h += '<div class="card"><h3>ترحيل بيانات v4 من هذا المتصفح</h3><p>وُجد مفتاح ' + esc(S.V4_KEY) + ' يحتوي ' + ((v4.people || []).length) + ' متدرب. الترحيل يقرأ البيانات فقط ولا يعدّل بيانات v4.</p><button data-act="migrateLocal">معاينة الترحيل</button></div>';
     h += '<div class="card"><h3>نقاط الاستعادة التلقائية (آخر 3)</h3>' + (rp.length ? '<table><tbody>' + rp.map(function (r, i) { return '<tr><td>' + App.fmtDT(r.at) + '</td><td>' + esc(r.reason) + '</td><td>' + ((r.db && r.db.trainees) || []).length + ' متدرب</td><td><button class="sec" data-act="restore" data-i="' + i + '">استعادة</button></td></tr>'; }).join('') + '</tbody></table>' : '<p class="muted">لا توجد. تُنشأ تلقائياً قبل الاستيراد والحذف.</p>') + '</div>';
@@ -4281,14 +4365,42 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     return h;
   };
   App.forms.settings = function (f) { var fd = new FormData(f); App.db.settings.emergencyNumber = String(fd.get('emergencyNumber') || '').replace(/[^0-9+]/g, '').slice(0, 12); App.db.settings.coachName = String(fd.get('coachName') || '').slice(0, 80); App.save(); App.toast('تم حفظ الإعدادات'); };
-  App.acts.expAll = function () { var env = S.exportEnvelope(App.db, 'full', []); App.download('MCC5_backup_' + App.today() + '.json', JSON.stringify(env, null, 2)); App.audit('export.full', 'تصدير كامل'); App.save(); };
+  App.exportFile = function (name, env, auditType, auditMsg, tid) {
+    var text = JSON.stringify(env, null, 2), cb = App.$('#expEnc');
+    var done = function (n, t) { App.download(n, t); App.audit(auditType, auditMsg + (cb && cb.checked ? ' (مشفّر)' : ''), tid); App.save(); };
+    if (!cb || !cb.checked) return done(name, text);
+    var p1 = App.$('#expPass').value, p2 = App.$('#expPass2').value;
+    if (p1.length < 8) return App.toast('كلمة مرور الملف 8 أحرف على الأقل');
+    if (p1 !== p2) return App.toast('كلمتا المرور غير متطابقتين');
+    S.encryptExport(text, p1).then(function (encEnv) { done(name.replace(/\.json$/, '_encrypted.json'), JSON.stringify(encEnv)); App.toast('تم تصدير ملف مشفّر'); }).catch(function (e) { App.toast('فشل التشفير: ' + e.message); });
+  };
+  App.acts.expAll = function () { App.exportFile('MCC5_backup_' + App.today() + '.json', S.exportEnvelope(App.db, 'full', []), 'export.full', 'تصدير كامل', null); };
+  function encCard() {
+    var st = S.status;
+    if (st.encrypted) return '<div class="card"><h3>🔒 تشفير البيانات المحلية: مفعّل</h3><p class="small">تُحفظ البيانات في المتصفح مشفّرة (AES-GCM 256). نقاط الاستعادة تُحفظ في الذاكرة فقط خلال هذه الجلسة. ملاحظة: بيانات v4 القديمة (إن وُجدت) تبقى غير مشفّرة لأن v4 لا يُعدَّل.</p><div class="row"><button class="sec" data-act="lockNow">قفل الآن</button><button class="danger" data-act="encOff">إلغاء التشفير</button></div></div>';
+    return '<div class="card"><h3>تشفير البيانات المحلية (اختياري)</h3><p class="small">يحمي بيانات المتدربين من القراءة من ملفات أو أشخاص آخرين يستخدمون المتصفح نفسه (في Chrome/Edge تتشارك كل الملفات المحلية مساحة تخزين واحدة). يُطلب إدخال كلمة المرور عند كل فتح.</p><form data-form="encOn" class="grid"><label>كلمة المرور (8 أحرف على الأقل)<input type="password" name="p1" autocomplete="new-password" minlength="8" required></label><label>تأكيدها<input type="password" name="p2" autocomplete="new-password" required></label><label class="grow"><input type="checkbox" name="ack"> أفهم أن نسيان كلمة المرور يعني فقدان البيانات المحلية نهائياً، وأن النسخة المصدّرة هي الحل الوحيد</label><div><button type="submit">تفعيل التشفير</button></div></form></div>';
+  }
+  App.forms.encOn = function (f) {
+    var fd = new FormData(f), p1 = String(fd.get('p1') || ''), p2 = String(fd.get('p2') || '');
+    if (p1.length < 8) return App.toast('8 أحرف على الأقل'); if (p1 !== p2) return App.toast('كلمتا المرور غير متطابقتين'); if (!fd.get('ack')) return App.toast('أكّد الإقرار');
+    S.enableEncryption(App.db, p1).then(function () { App.audit('storage.encrypt', 'تفعيل تشفير التخزين'); App.save(); App.toast('تم تفعيل التشفير'); App.render(); }).catch(function (e) { App.toast('فشل: ' + e.message); });
+  };
+  App.acts.lockNow = function () { S.flush().then(function () { S.lockNow(); location.reload(); }); };
+  App.acts.encOff = function () { if (!confirm('إلغاء التشفير وحفظ البيانات غير مشفّرة في المتصفح؟')) return; S.disableEncryption(App.db); App.audit('storage.decrypt', 'إلغاء تشفير التخزين'); App.save(); App.render(); };
   App.changes.impFile = function (el) {
     var f = el.files[0]; if (!f) return;
     if (f.size > 20 * 1024 * 1024) { App.$('#impPreview').innerHTML = '<div class="alert danger">الملف أكبر من 20 ميغابايت.</div>'; return; }
-    var r = new FileReader(); r.onload = function () { showImport(S.parseImport(String(r.result)), f.name); }; r.onerror = function () { App.$('#impPreview').innerHTML = '<div class="alert danger">تعذرت قراءة الملف.</div>'; }; r.readAsText(f);
+    var r = new FileReader(); r.onload = function () {
+      var text = String(r.result);
+      if (S.isEncryptedExport(text)) { pendingEnc = { text: text, name: f.name }; App.$('#impPreview').innerHTML = '<div class="alert"><b>ملف مشفّر</b><label>كلمة مرور الملف<input type="password" id="impPass" autocomplete="off"></label><button data-act="impDecrypt">فك التشفير والمعاينة</button></div>'; return; }
+      showImport(S.parseImport(text), f.name);
+    }; r.onerror = function () { App.$('#impPreview').innerHTML = '<div class="alert danger">تعذرت قراءة الملف.</div>'; }; r.readAsText(f);
   };
   App.acts.migrateLocal = function () { var p = S.parseImport(JSON.stringify(S.readV4Local())); App.go('data'); showImport(p, 'localStorage ' + S.V4_KEY); };
-  var pendingImport = null;
+  var pendingImport = null, pendingEnc = null;
+  App.acts.impDecrypt = function () { if (!pendingEnc) return; var b = App.$('[data-act=impDecrypt]'); b.disabled = true;
+    S.decryptExport(pendingEnc.text, App.$('#impPass').value).then(function (plain) { showImport(S.parseImport(plain), pendingEnc.name); })
+      .catch(function (e) { b.disabled = false; App.$('#impPreview').insertAdjacentHTML('beforeend', '<div class="alert danger">' + esc(e.message) + ' — لم يتغير شيء.</div>'); }); };
   function showImport(p, name) {
     var box = App.$('#impPreview'); pendingImport = null;
     if (!p.ok) { box.innerHTML = '<div class="alert danger"><b>رُفض الاستيراد — لم يتغير شيء</b>' + p.errors.map(esc).join('<br>') + '</div>'; return; }
@@ -4767,12 +4879,15 @@ footer.foot{padding:16px 3vw;color:var(--muted);font-size:.85rem;border-top:1px 
     if (p.status === 'blocked') return App.toast('الخطة موقوفة');
     var open = App.db.sessions.filter(function (s) { return s.planId === p.id && s.dayIndex === di && s.status === 'partial'; })[0];
     if (open) { App.ui.run = { id: open.id, idx: open.cursor || 0 }; return App.go('session'); }
+    var early = d.date > App.today();
+    if (early && !confirm('هذا اليوم (' + App.fmtDate(d.date) + ') لم يحن بعد. تسجيل حصة مبكرة قد يقلل أيام الراحة المخططة. هل تريد المتابعة؟')) return;
+    if (App.db.sessions.some(function (s) { return s.planId === p.id && s.dayIndex === di && s.status !== 'partial'; }) && !confirm('توجد حصة مسجلة لهذا اليوم. تسجيل حصة ثانية؟')) return;
     var flat = [];
     (d.warmup || []).forEach(function (it) { flat.push(Object.assign({ block: 'warmup' }, it)); });
     (d.recovery || []).forEach(function (it) { flat.push(Object.assign({ block: 'recovery' }, it)); });
     (d.main || []).forEach(function (it) { flat.push(Object.assign({ block: 'main' }, it)); });
     (d.cooldown || []).forEach(function (it) { flat.push(Object.assign({ block: 'cooldown' }, it)); });
-    var s = { id: S.uniqueId(App.db, 'sessions'), traineeId: t.id, planId: p.id, dayIndex: di, date: d.date, kind: d.type === 'recovery' ? 'recovery' : 'train', status: 'partial', startedAt: S.nowISO(), updatedAt: S.nowISO(), cursor: 0, redFlag: false,
+    var s = { id: S.uniqueId(App.db, 'sessions'), traineeId: t.id, planId: p.id, dayIndex: di, date: d.date, kind: d.type === 'recovery' ? 'recovery' : 'train', status: 'partial', early: early, startedAt: S.nowISO(), updatedAt: S.nowISO(), cursor: 0, redFlag: false,
       items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
     App.db.sessions.push(s); App.audit('session.start', 'بدء حصة ' + s.id, t.id, s.id); App.save();
     App.ui.run = { id: s.id, idx: 0 }; App.go('session');
