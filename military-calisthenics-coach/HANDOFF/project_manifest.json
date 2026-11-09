@@ -7,7 +7,7 @@
     "gym": "double progression (MCGym)",
     "goals": "MCGoals (estimates are labelled as estimates)"
   },
-  "generatedAt": "2026-11-09T13:13:45.284Z",
+  "generatedAt": "2026-11-09T13:25:20.922Z",
   "run": {
     "open": "Double-click dist/military_calisthenics_coach_v5.html (Chrome/Edge). No server, no internet needed.",
     "build": "node tools/build.mjs",
@@ -146,6 +146,14 @@
       "Revoking old encrypted copies after removing a user (impossible without a server)"
     ]
   },
+  "designBrief": [
+    "World-class tactical-military UI in khaki/black/grey; bold typography; refined cards; nothing 2000-era",
+    "Life & interaction: smooth transitions, press feedback, animated counters/progress rings, visual rest timer, military celebration (stamp/medal/badge) on record or rank-up; respect prefers-reduced-motion",
+    "Rotating positive AR/EN motivation lines between sets, between exercises, on return and after workouts; no immediate repeats",
+    "Formal tone; NO images of women or girls; keep animated figures and neutral icons, no photos",
+    "Do not display offline/local/محلي/بدون إنترنت anywhere in UI/branding; keep one formal backup reminder in the Backup page only",
+    "Keep fixed rules: no network, red-flag block, weekly plans, edit src then build, tests must pass, no invented results"
+  ],
   "knownIssues": [
     "GY-BB-OHP lockout clipped at top of frame",
     "Schematic: CR-BLTWIST, ST-SLOVER, SC-PRONE-T/W (top views), MO-WRIST, MO-ANKLE, MO-SHCIRCLE, CA-CARIOCA, BA-CLOCK, CR-SCISSOR, GY-LEGPRESS (simplified machine)",

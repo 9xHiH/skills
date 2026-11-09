@@ -51,3 +51,100 @@
 - **Storage:** data lives in this browser. Use «حفظ نسخة كاملة مشفرة» (full encrypted copy) to share or back up.
 - **Accounts:** they protect the file locally. A removed user can still open copies saved before removal.
 - **PDF:** it cannot be imported back; use the JSON or encrypted copy for that.
+
+---
+
+## أمر جاهز للنسخ إلى Manus · Ready-to-paste brief
+
+> **بالعربي:**
+> طوّر واجهة تطبيق «عزم · AZM» المرفق، دون كسر منطقه، لتكون بمستوى عالمي يشعر من يفتحها بأنه جندي «جلمود»: متحمس، واثق، وكل شيء سهل ومرن.
+>
+> **الإحساس والتصميم**
+> - هوية عسكرية تكتيكية فاخرة بالألوان الحالية: خاكي وأسود ورمادي.
+> - خطوط عريضة واضحة، ومسافات مريحة، وبطاقات أنيقة.
+> - لا شيء يوحي بتصميم قديم من سنة 2000.
+>
+> **الحيوية والتفاعل** (ليست صوراً فقط)
+> - انتقالات ناعمة بين الصفحات.
+> - أزرار لها استجابة لمس وضغط واضحة.
+> - عدادات وأرقام تتحرك عند التغيّر، وحلقات تقدم.
+> - مؤقت راحة بصري.
+> - لحظة احتفال عسكرية عند رقم قياسي أو ترقية رتبة، مثل ختم أو وسام يسقط أو شارة تلمع.
+> - احترم تقليل الحركة لمن يفضّله.
+>
+> **التحفيز**
+> - جمل إيجابية قصيرة ومتجددة، بالعربي والإنجليزي، تظهر:
+>   - بين المجموعات وأثناء الراحة؛
+>   - بين تمرين وآخر؛
+>   - عند الرجوع للملف؛
+>   - بعد كل تمرين.
+> - هدفها رفع الثقة بالنفس والاستمرار، مثل «الانضباط يصنع الأبطال»، «أنت أقوى من أمس»، «خطوة أقرب لهدفك».
+> - لا تكرّر نفس الجملة متتالية.
+>
+> **الطابع**
+> - رسمي ومحترم.
+> - لا تضف أي صور لنساء أو فتيات. الرسوم المتحركة الحالية والأيقونات المحايدة تكفي، ولا حاجة لصور فوتوغرافية.
+>
+> **النصوص**
+> - لا تُظهر في الواجهة أو الشعار أو الشارات أي عبارة مثل «بدون إنترنت» أو «Offline» أو «محلي» أو «Local».
+> - أبقِ سطراً واحداً رسمياً داخل صفحة النسخ الاحتياطي فقط، يذكّر بحفظ نسخة احتياطية، مثل: «احفظ نسخة كاملة بانتظام لحماية سجلك».
+>
+> **أمور ثابتة لا تُغيَّر**
+> - لا اتصال بالإنترنت ولا مكتبات خارجية ولا تتبع.
+> - علامة الخطر الصحي توقف الجدول دون تجاوز.
+> - الجداول أسبوعية.
+> - عدّل ملفات `src/` ثم ابنِ بالأمر `node tools/build.mjs`.
+> - أعد تشغيل الفحوص `node tools/check.mjs` و`node tests/unit.mjs` وتأكد أنها ناجحة.
+> - لا تدّعِ نتائج لم تحدث فعلاً.
+>
+> **التسليم:**
+> - الملف المبني الجديد؛
+> - قائمة بما غيّرته؛
+> - لقطات شاشة للكمبيوتر والجوال (390px)؛
+> - قائمة صريحة بما لم يُنجز.
+
+> **English:**
+> Upgrade the UI of the attached «عزم · AZM» app to a world-class level without breaking its logic. Anyone who opens it should feel like a tough, confident soldier: energised, with everything feeling easy and flexible.
+>
+> **Look and feel**
+> - Premium tactical-military identity in the current khaki/black/grey palette.
+> - Bold, clean typography, generous spacing, refined cards.
+> - Nothing that looks like a 2000-era page.
+>
+> **Life and interaction** (not just pictures)
+> - Smooth page transitions.
+> - Buttons with clear touch/press feedback.
+> - Animated counters and progress rings.
+> - A visual rest timer.
+> - A military-style celebration on a new personal record or rank-up (stamp, medal drop, badge shine).
+> - Honour `prefers-reduced-motion`.
+>
+> **Motivation**
+> - Short, rotating, positive Arabic/English lines that build confidence and consistency, shown:
+>   - between sets and during rest;
+>   - between exercises;
+>   - when the user returns to the profile;
+>   - after each workout.
+> - Never repeat the same line twice in a row.
+>
+> **Tone and imagery**
+> - Formal and respectful.
+> - Do NOT add any images of women or girls. Keep the existing animated figures and neutral icons; no photos are needed.
+>
+> **Wording**
+> - Do not show «offline», «local», «بدون إنترنت» or «محلي» anywhere in the UI, logo or badges.
+> - Keep only one formal backup reminder inside the Backup page, e.g. «Save a full copy regularly to protect your records».
+>
+> **Fixed rules (do not change)**
+> - No network calls, external libraries or tracking.
+> - A health red flag blocks the plan with no bypass.
+> - Plans stay weekly.
+> - Edit `src/`, then run `node tools/build.mjs`.
+> - Re-run `node tools/check.mjs` and `node tests/unit.mjs` and make sure they pass.
+> - Never claim results that did not happen.
+>
+> **Deliver:**
+> - the new built file;
+> - a change list;
+> - desktop and 390 px mobile screenshots;
+> - an honest list of anything not done.
