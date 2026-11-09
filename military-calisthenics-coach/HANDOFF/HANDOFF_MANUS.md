@@ -85,6 +85,20 @@
 > - رسمي ومحترم.
 > - لا تضف أي صور لنساء أو فتيات. الرسوم المتحركة الحالية والأيقونات المحايدة تكفي، ولا حاجة لصور فوتوغرافية.
 >
+> **تمارين أكثر ورسوم أوضح** (إن استطعت)
+> - حسّن وضوح الرسوم: جسم بحجم وسماكة واقعية، مفاصل أوضح، ظلال خفيفة، وزوايا عرض أفضل.
+> - أصلح الرسوم الضعيفة المذكورة في `knownIssues` داخل ملف JSON.
+> - أضف تمارين حقيقية جديدة بالشرطين التاليين:
+>   - كل تمرين حركة حقيقية معروفة باسمها، بمسمى عربي وإنجليزي صحيحين.
+>   - لا حشو ولا تكرار بأسماء مختلفة.
+> - اتبع مواصفة السجل في `tools/AUTHORING.md`، ويجب أن ينجح `node tools/check.mjs` بلا أخطاء.
+> - الرسوم يجب أن تكون:
+>   - أصلية أو مرخّصة صراحة؛
+>   - مضمّنة في الملف نفسه، دون روابط خارجية؛
+>   - مطابقة للحركة المسماة؛
+>   - خالية من صور النساء أو الفتيات.
+> - لا تنسخ صوراً أو رسوماً محمية بحقوق من مواقع أو تطبيقات أخرى.
+>
 > **النصوص**
 > - لا تُظهر في الواجهة أو الشعار أو الشارات أي عبارة مثل «بدون إنترنت» أو «Offline» أو «محلي» أو «Local».
 > - أبقِ سطراً واحداً رسمياً داخل صفحة النسخ الاحتياطي فقط، يذكّر بحفظ نسخة احتياطية، مثل: «احفظ نسخة كاملة بانتظام لحماية سجلك».
@@ -130,6 +144,20 @@
 > **Tone and imagery**
 > - Formal and respectful.
 > - Do NOT add any images of women or girls. Keep the existing animated figures and neutral icons; no photos are needed.
+>
+> **More exercises and clearer illustrations** (if you can)
+> - Make the figures clearer: realistic body proportions and thickness, clearer joints, subtle shading, better viewing angles.
+> - Fix the weak drawings listed in `knownIssues` in the JSON file.
+> - Add new real exercises, on two conditions:
+>   - each one is a genuine, recognised movement with a correct Arabic and English name;
+>   - no padding and no duplicates under different names.
+> - Follow the record schema in `tools/AUTHORING.md`; `node tools/check.mjs` must pass with zero errors.
+> - Illustrations must be:
+>   - original or explicitly licensed;
+>   - embedded in the file (no external links);
+>   - accurate to the named movement;
+>   - free of any images of women or girls.
+> - Never copy copyrighted images or drawings from other sites or apps.
 >
 > **Wording**
 > - Do not show «offline», «local», «بدون إنترنت» or «محلي» anywhere in the UI, logo or badges.

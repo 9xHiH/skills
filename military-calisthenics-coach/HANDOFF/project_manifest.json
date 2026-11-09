@@ -7,7 +7,7 @@
     "gym": "double progression (MCGym)",
     "goals": "MCGoals (estimates are labelled as estimates)"
   },
-  "generatedAt": "2026-11-09T13:25:20.922Z",
+  "generatedAt": "2026-11-09T13:26:01.558Z",
   "run": {
     "open": "Double-click dist/military_calisthenics_coach_v5.html (Chrome/Edge). No server, no internet needed.",
     "build": "node tools/build.mjs",
@@ -150,6 +150,7 @@
     "World-class tactical-military UI in khaki/black/grey; bold typography; refined cards; nothing 2000-era",
     "Life & interaction: smooth transitions, press feedback, animated counters/progress rings, visual rest timer, military celebration (stamp/medal/badge) on record or rank-up; respect prefers-reduced-motion",
     "Rotating positive AR/EN motivation lines between sets, between exercises, on return and after workouts; no immediate repeats",
+    "If possible: more real exercises (genuine named movements, correct AR/EN names, no padding/duplicates, follow tools/AUTHORING.md, check.mjs must pass) and clearer original or licensed embedded illustrations matching each movement; fix knownIssues drawings; never copy copyrighted images",
     "Formal tone; NO images of women or girls; keep animated figures and neutral icons, no photos",
     "Do not display offline/local/محلي/بدون إنترنت anywhere in UI/branding; keep one formal backup reminder in the Backup page only",
     "Keep fixed rules: no network, red-flag block, weekly plans, edit src then build, tests must pass, no invented results"
