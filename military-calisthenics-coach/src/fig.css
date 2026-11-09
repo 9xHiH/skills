@@ -1,0 +1,17 @@
+.mc-fig{width:100%;height:auto;display:block;background:var(--fig-bg,#0f2232);border-radius:10px}
+.mc-floor{stroke:var(--fig-floor,#5f7a8f);stroke-width:2}
+.mc-prop{stroke:var(--fig-prop,#8aa0b4);stroke-width:3;fill:none;stroke-linecap:round}
+.mc-prop-fill{fill:var(--fig-prop-fill,#3a5166);stroke:var(--fig-prop,#8aa0b4);stroke-width:1.5}
+.mc-post{stroke-width:2;stroke-dasharray:3 3}
+.mc-mat{fill:var(--fig-mat,#2f6e63)}
+.mc-body polyline,.mc-body line{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.mc-near polyline,.mc-near line{stroke:var(--fig,#ffd166);stroke-width:7}
+.mc-far polyline,.mc-far line{stroke:var(--fig-far,#b48a2c);stroke-width:7}
+.mc-torso{stroke:var(--fig,#ffd166);stroke-width:11}
+.mc-neck{stroke:var(--fig,#ffd166);stroke-width:5}
+.mc-head{fill:var(--fig,#ffd166)}
+.mc-towel{stroke:var(--fig-towel,#7fd1ff);stroke-width:3;stroke-dasharray:4 2}
+.mc-ghost polyline{fill:none;stroke:var(--fig-ghost,#7fa3c0);stroke-opacity:.35;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.mc-ghost circle{fill:var(--fig-ghost,#7fa3c0);fill-opacity:.3}
+.mc-trace{fill:none;stroke:var(--fig-trace,#5ee0c1);stroke-width:1.6;stroke-dasharray:3 3}
+.mc-mirror{transform:scaleX(-1)}

@@ -1,0 +1,155 @@
+# Master exercise ID plan. Format: ID | file(agent) | Arabic name | English name | notes
+SQ-BW|ref|سكوات بوزن الجسم|Bodyweight squat|
+PU-STD|ref|ضغط عادي|Standard push-up|
+PL-FA|ref|بلانك على الساعدين|Forearm plank|
+BR-GLUTE|ref|جسر الحوض|Glute bridge|
+LU-REV|ref|اندفاع خلفي|Reverse lunge|ATP 7-22.02 Preparation Drill: Rear Lunge
+PV-PULLUP|ref|عقلة (قبضة علوية)|Pull-up (overhand grip)|
+CA-JJ|ref|قفز فتح وإغلاق|Jumping jack|
+PU-WALL|upper|ضغط على الحائط|Wall push-up|lvl1, equipment wall
+PU-INCL|upper|ضغط مائل على سطح ثابت|Incline push-up|lvl1, hands on sturdy table/bench (eq table)
+PU-KNEE|upper|ضغط على الركبتين|Knee push-up|lvl1
+PU-WIDE|upper|ضغط بقبضة واسعة|Wide-hand push-up|lvl2 (side view cannot show width -> say so in desc; consider front view)
+PU-CLOSE|upper|ضغط بقبضة ضيقة|Close-grip push-up|lvl2, elbows close to body
+PU-PAUSE|upper|ضغط مع توقف سفلي|Pause push-up|lvl2-3
+PU-TEMPO|upper|ضغط بطيء النزول|Tempo (slow-eccentric) push-up|lvl2
+PU-HR|upper|ضغط رفع اليدين|Hand-release push-up|lvl2, Army Fitness Test event name (HRP); chest to floor, hands lift briefly
+PU-DECL|upper|ضغط بقدمين مرتفعتين|Decline push-up (feet on chair)|lvl3, eq chair
+PU-PIKE|upper|ضغط بايك|Pike push-up|lvl2, inversion flag
+PU-PIKE-EL|upper|ضغط بايك بقدمين مرتفعتين|Elevated pike push-up|lvl3, eq chair, inversion
+PU-ARCHER|upper|ضغط آرتشر مساعد|Assisted archer push-up|lvl3 (front view)
+PU-SL|upper|ضغط بساق واحدة|Single-leg push-up|lvl3, ATP 7-22.02 Conditioning Drill 1
+PU-T|upper|ضغط مع دوران (T)|T push-up (rotation)|lvl3
+PU-SCAP|upper|ضغط لوحي الكتف|Scapular push-up|lvl1-2
+PU-SCAP-W|upper|ضغط لوحي الكتف على الحائط|Wall scapular push-up|lvl1, eq wall
+DP-CHAIR|upper|غطس ثلاثية على كرسي بركبتين مثنيتين|Bench dip (knees bent)|lvl2, eq chair, shoulder caution
+DP-CHAIR-STR|upper|غطس على كرسي بساقين ممدودتين|Bench dip (legs straight)|lvl3, eq chair
+PH-TOWEL|upper|شد منشفة متساوي القياس|Isometric towel pull-apart|lvl1, eq towel, standing, isometric
+PH-DOOR|upper|سحب إطار الباب|Door-frame row|lvl1, eq wall (sturdy door frame) — strong caution re: frame stability
+PH-TABLE|upper|سحب أفقي تحت طاولة متينة|Table inverted row|lvl2, eq table, caution table stability
+PH-INV-BENT|upper|سحب أفقي بعارضة منخفضة وركبتين مثنيتين|Inverted row, knees bent|lvl2, eq low_bar
+PH-INV|upper|سحب أفقي بعارضة منخفضة|Inverted row|lvl2-3, eq low_bar
+PH-PRONE-ROW|upper|تجديف منبطح|Prone row|lvl1, ATP 7-22.02 Preparation Drill: Prone Row
+SC-RETRACT|upper|ضم لوحي الكتف واقفاً|Standing scapular retraction|lvl1, warmup
+SC-PRONE-Y|upper|رفع Y منبطحاً|Prone Y raise|lvl1-2
+SC-PRONE-T|upper|رفع T منبطحاً|Prone T raise|lvl1-2
+SC-PRONE-W|upper|سحب W منبطحاً|Prone W pull|lvl1
+SC-WALLANGEL|upper|ملاك الحائط|Wall angel|lvl1, warmup/mobility, eq wall
+PV-DEADHANG|upper|تعلق بذراعين ممدودتين|Dead hang|lvl2, eq bar
+PV-SCAP-PULL|upper|تعلق نشط (سحب لوح الكتف)|Scapular pull-up / active hang|lvl2, eq bar
+PV-ASSIST|upper|عقلة بمساعدة القدمين|Feet-assisted pull-up|lvl2, eq bar + chair
+PV-NEG|upper|عقلة سلبية (نزول بطيء)|Negative pull-up|lvl3, eq bar + chair
+PV-FLEXHANG|upper|تعلق بذراعين مثنيتين|Flexed-arm hang|lvl3, eq bar
+PV-CHIN|upper|عقلة بقبضة سفلية|Chin-up (underhand)|lvl3, eq bar
+SQ-CHAIR|lower|جلوس ووقوف من كرسي|Chair sit-to-stand|lvl1, eq chair
+SQ-BOX|lower|سكوات لمس الكرسي|Box (chair-touch) squat|lvl1, eq chair
+SQ-HALF|lower|سكوات نصف مدى|Half squat|lvl1
+SQ-PAUSE|lower|سكوات مع توقف|Pause squat|lvl2
+SQ-SUMO|lower|سكوات واسع (سومو)|Sumo squat|lvl2, front view
+SQ-WALLSIT|lower|جلوس الحائط|Wall sit|lvl2, eq wall, isometric
+SQ-BENDER|lower|سكوات بندر|Squat bender|lvl1-2, ATP 7-22.02 Preparation Drill: Squat Bender
+SQ-Y|lower|سكوات Y|Y squat|lvl2, ATP 7-22.02 Conditioning Drill 3 (name partly verified)
+SQ-JUMP|lower|قفز من السكوات|Squat jump|lvl3, impact
+SQ-COSSACK|lower|سكوات القوزاق|Cossack squat|lvl3, front view
+SQ-PISTOL-BOX|lower|سكوات بساق واحدة إلى كرسي|Single-leg box squat|lvl3, eq chair
+LU-REV-AS|lower|اندفاع خلفي مدعوم|Supported reverse lunge|lvl1, eq wall or chair for hand support
+LU-SPLIT|lower|سكوات منقسم ثابت|Split squat (static lunge)|lvl1-2
+LU-FWD|lower|اندفاع أمامي|Forward lunge|lvl2, ATP 7-22.02 Preparation Drill: Forward Lunge
+LU-LAT|lower|اندفاع جانبي|Lateral lunge|lvl2, front view
+LU-WALK|lower|اندفاع مشياً|Walking lunge|lvl2-3, space
+LU-BULG|lower|سكوات بلغاري (القدم الخلفية على كرسي)|Rear-foot-elevated split squat|lvl3, eq chair
+LU-TURN|lower|اندفاع مع التفاف|Turn and lunge|lvl2, ATP 7-22.02 Conditioning Drill 2 (name from 2013 card)
+LU-JUMP|lower|اندفاع بالقفز|Jump lunge|lvl3, impact
+ST-LOW|lower|صعود درجة منخفضة|Low step-up|lvl1, eq step
+ST-HIGH|lower|صعود درجة مرتفعة|High step-up|lvl2, eq step or chair
+ST-LAT|lower|صعود جانبي على درجة|Lateral step-up|lvl2, eq step, front view
+BR-SL|lower|جسر الحوض بساق واحدة|Single-leg glute bridge|lvl2
+BR-MARCH|lower|جسر الحوض مع رفع القدمين بالتبادل|Bridge march|lvl2
+HG-HIPHINGE|lower|مفصلة الورك (انحناء من الورك)|Bodyweight hip hinge (good morning)|lvl1
+HG-SLDL|lower|رفعة مميتة بساق واحدة بوزن الجسم|Single-leg Romanian deadlift (bodyweight)|lvl2, balance; ATP CD3 Single-Leg Deadlift
+CF-RAISE|lower|رفع الكعبين|Calf raise|lvl1, eq wall for balance optional
+CF-SL|lower|رفع الكعب بساق واحدة|Single-leg calf raise|lvl2
+CF-TOE|lower|رفع مقدمة القدمين|Toe raise (tibialis)|lvl1
+HA-CLAM|lower|تمرين المحارة|Clamshell|lvl1, side-lying
+HA-SIDELYING|lower|رفع الساق جانبياً مستلقياً على الجنب|Side-lying leg raise|lvl1, ATP Hip Stability Drill: Lateral Leg Raise
+HA-MEDIAL|lower|رفع الساق السفلى مستلقياً على الجنب|Side-lying medial leg raise|lvl1, ATP Hip Stability Drill: Medial Leg Raise
+HA-QUADEXT|lower|ركلة خلفية من وضع الأربع|Quadruped hip extension (donkey kick)|lvl1
+HA-FIRE|lower|فتح الورك من وضع الأربع|Fire hydrant|lvl1
+PL-HIGH|core|بلانك مرتفع بذراعين ممدودتين|High plank|lvl1-2
+PL-INCL|core|بلانك مائل على سطح مرتفع|Incline plank (hands on table/wall)|lvl1, eq table
+PL-KNEE|core|بلانك على الركبتين|Knee plank|lvl1
+PL-SIDE-K|core|بلانك جانبي على الركبتين|Side plank from knees|lvl1, front view
+PL-SIDE|core|بلانك جانبي كامل|Side plank|lvl2, front view; ATP 4 for the Core: Side Bridge (unverified)
+PL-TAP|core|بلانك مع لمس الكتف|Plank shoulder tap|lvl2-3
+PL-UPDOWN|core|بلانك صعود ونزول|Plank up-down|lvl3
+PL-BEAR|core|ثبات الدب|Bear hold|lvl2, quadruped knees hover
+CR-DEADBUG|core|الحشرة الميتة|Dead bug|lvl1, supine
+CR-HEELTAP|core|لمس الكعب مستلقياً|Supine heel tap (dead-bug regression)|lvl1, supine
+CR-BIRDDOG|core|طائر-كلب|Bird dog|lvl1, ATP 4 for the Core: Quadraplex
+CR-CURLUP|core|كرنش مختصر (كيرل أب)|Curl-up (McGill)|lvl1, supine
+CR-CRUNCH|core|كرنش|Crunch|lvl1, supine
+CR-REVCRUNCH|core|كرنش عكسي|Reverse crunch|lvl2, supine
+CR-BENTLEG|core|رفع الساقين المثنيتين|Bent-leg raise|lvl2, ATP 4 for the Core: Bent-Leg Raise
+CR-HOLLOW-T|core|ثبات الهولو بركبتين مثنيتين|Tuck hollow hold|lvl2, iap
+CR-HOLLOW|core|ثبات الهولو|Hollow hold|lvl3, iap
+CR-LEGRAISE|core|رفع الساقين ممدودتين|Straight-leg raise|lvl3, iap, lowback
+CR-FLUTTER|core|ركلات الرفرفة|Flutter kicks|lvl3, iap
+CR-BICYCLE|core|الدراجة مستلقياً|Supine bicycle|lvl2, ATP Conditioning Drill 2
+CR-VUP|core|تمرين V|V-up|lvl3, iap, ATP Conditioning Drill 1
+CR-LEGTUCK-TW|core|ثني الساقين مع الالتفاف|Leg tuck and twist|lvl3, seated, ATP Conditioning Drill 1
+CR-BLTWIST|core|التفاف الجسم بساقين مثنيتين|Bent-leg body twist|lvl2, supine, ATP Preparation Drill
+BE-SUPERMAN|core|سوبرمان (مد الظهر منبطحاً)|Prone back extension (superman)|lvl1-2, prone
+BE-SWIMMER|core|السباح|Swimmer|lvl2, prone, ATP Conditioning Drill 2
+CR-STANDBRACE|core|رفع الركبة واقفاً مع شد الجذع|Standing knee raise with brace|lvl1, standing, pregnancy-friendly option
+CR-SIDEKNEE|core|رفع الركبة الجانبي واقفاً|Standing side-to-side knee lift|lvl1-2, ATP CD3 (partly verified)
+CA-MARCH|cardio|مشي في المكان|Marching in place|lvl1, warmup
+CA-WALK|cardio|مشي سريع|Brisk walking|lvl1, space
+CA-STEPJACK|cardio|فتح وإغلاق بالخطوة|Step jack (low-impact jack)|lvl1, front view
+CA-HALFJACK|cardio|نصف فتح وإغلاق|Half jack|lvl2, impact, ATP CD2 (2013 card)
+CA-HIGHKNEE|cardio|رفع الركبتين في المكان|High knees (jog in place)|lvl2, impact
+CA-BUTTKICK|cardio|ركل الخلف في المكان|Butt kicks|lvl2, impact
+CA-MCLIMB-S|cardio|متسلق الجبل البطيء|Slow mountain climber|lvl2
+CA-MCLIMB|cardio|متسلق الجبل|Mountain climber|lvl3, ATP CD1
+CA-BURPEE-S|cardio|بيربي بالخطوة دون قفز|Step-back burpee (no jump)|lvl2
+CA-BURPEE|cardio|بيربي كامل|Burpee|lvl3, impact
+CA-SKATER-S|cardio|خطوة التزلج|Skater step (no hop)|lvl1-2, front view
+CA-SKATER|cardio|قفز التزلج|Skater hop|lvl3, impact, front view
+CA-SHUFFLE|cardio|خطوات جانبية متتابعة|Lateral shuffle|lvl2, front view
+CA-HIGHJUMPER|cardio|القافز العالي|High jumper|lvl2, impact, ATP Preparation Drill
+CA-POWERJUMP|cardio|القفز القوي|Power jump|lvl3, impact, ATP CD1
+CA-JOG|cardio|جري خفيف|Easy jog|lvl2, impact, space
+CA-STAIRS|cardio|صعود الدرج|Stair climbing|lvl2, eq stairs
+LO-BEARCRAWL|cardio|زحف الدب|Bear crawl|lvl2, space
+LO-CRAB|cardio|مشي السلطعون|Crab walk|lvl2, space, wrist/shoulder
+LO-INCHWORM|cardio|الدودة|Inchworm|lvl2
+BA-SLSTAND|cardio|الوقوف على ساق واحدة|Single-leg stand|lvl1, balance (cat balance)
+BA-TANDEM|cardio|الوقوف بقدمين متتاليتين|Tandem stance|lvl1, balance (cat balance)
+BA-HEELTOE|cardio|المشي كعب-أصابع|Heel-to-toe walk|lvl1, balance (cat balance)
+BA-SLREACH|cardio|الوقوف على ساق مع الوصول للأمام|Single-leg stand with reach|lvl2, balance (cat balance)
+MO-CATCAMEL|mobility|قط-جمل|Cat-camel|lvl1, quadruped
+MO-OPENBOOK|mobility|الكتاب المفتوح|Open book (side-lying thoracic rotation)|lvl1, front view? side-lying
+MO-ARMCIRCLE|mobility|دوائر الذراعين|Arm circles|lvl1, front view
+MO-SHCIRCLE|mobility|دوائر الكتفين|Shoulder rolls|lvl1
+MO-ANKLE|mobility|دوائر الكاحل|Ankle circles|lvl1
+MO-WRIST|mobility|تحريك الرسغين|Wrist mobility|lvl1
+MO-HIPCIRCLE|mobility|دوائر الورك|Hip circles|lvl1, front view
+MO-LEGSWING|mobility|أرجحة الساق أمام-خلف|Front-back leg swing|lvl1, eq wall for support
+MO-LEGSWING-LAT|mobility|أرجحة الساق جانبياً|Lateral leg swing|lvl1, front view, eq wall
+MO-WGS|mobility|إطالة الاندفاع مع الدوران|Lunge with rotation (world's greatest stretch)|lvl2
+MO-BENDREACH|mobility|الانحناء والوصول|Bend and reach|lvl1-2, ATP Preparation Drill
+MO-WINDMILL|mobility|الطاحونة|Windmill|lvl2, ATP Preparation Drill, front view
+MO-ROWER|mobility|المجدف|Rower|lvl2, supine/seated, ATP Preparation Drill
+MO-9090|mobility|تبديل الورك 90/90|90/90 hip switch|lvl2, seated
+ST-CALF|mobility|إطالة السمانة على الحائط|Wall calf stretch|lvl1, eq wall
+ST-HIPFLEX|mobility|إطالة مثنيات الورك نصف ركوع|Half-kneeling hip-flexor stretch|lvl1
+ST-HAM|mobility|إطالة الفخذ الخلفية|Hamstring stretch|lvl1
+ST-QUAD|mobility|إطالة الفخذ الأمامية واقفاً|Standing quadriceps stretch|lvl1, ATP Recovery Drill: Thigh Stretch (variant)
+ST-GLUTE|mobility|إطالة الألوية مستلقياً|Supine figure-4 glute stretch|lvl1, supine
+ST-CHILD|mobility|وضعية الطفل|Child's pose|lvl1, kneeling
+ST-CHEST|mobility|إطالة الصدر على الحائط|Wall chest stretch|lvl1, eq wall
+ST-OVERHEAD|mobility|سحب الذراع فوق الرأس|Overhead arm pull|lvl1, ATP Recovery Drill
+ST-EXTFLEX|mobility|المد والثني|Extend and flex|lvl1-2, ATP Recovery Drill, prone
+ST-SLOVER|mobility|تمرير الساق فوق الأخرى|Single-leg over|lvl1-2, ATP Recovery Drill, supine
+ST-GROIN|mobility|إطالة الفخذ الداخلية (الفراشة)|Seated butterfly stretch|lvl1, seated
+ST-SIDE|mobility|إطالة جانبية للجذع واقفاً|Standing side bend stretch|lvl1, front view
+BT-DIAPH|mobility|تنفس حجابي|Diaphragmatic breathing|lvl1, pattern breathing
