@@ -1,9 +1,10 @@
 // Unit tests for the DOM-free modules (store, screening, engine, data). Run: node tests/unit.mjs
 import fs from 'fs'; import path from 'path'; import vm from 'vm'; import { fileURLToPath } from 'url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ctx = vm.createContext({ console, crypto: globalThis.crypto }); ctx.globalThis = ctx;
+const LS = {}; const localStorage = { getItem: k => (k in LS ? LS[k] : null), setItem: (k, v) => { LS[k] = String(v); }, removeItem: k => { delete LS[k]; } };
+const ctx = vm.createContext({ console, crypto: globalThis.crypto, localStorage, btoa, atob, TextEncoder, TextDecoder }); ctx.globalThis = ctx;
 const data = fs.readdirSync(path.join(root, 'src/data')).filter(f => f.startsWith('ex_')).sort().map(f => 'src/data/' + f);
-for (const f of ['src/anim.js', 'src/data/_core.js', ...data, 'src/sources.js', 'src/store.js', 'src/screening.js', 'src/engine.js']) vm.runInContext(fs.readFileSync(path.join(root, f), 'utf8'), ctx, { filename: f });
+for (const f of ['src/anim.js', 'src/data/_core.js', ...data, 'src/sources.js', 'src/store.js', 'src/screening.js', 'src/engine.js', 'src/gym.js', 'src/goals.js']) vm.runInContext(fs.readFileSync(path.join(root, f), 'utf8'), ctx, { filename: f });
 const { MCStore: S, MCScreen: SC, MCEngine: E, MCEX: X } = ctx;
 let pass = 0, fail = 0; const results = [];
 function t(name, fn) { try { fn(); pass++; results.push('PASS ' + name); } catch (e) { fail++; results.push('FAIL ' + name + ' :: ' + e.message); } }
@@ -134,6 +135,31 @@ t('Data: every exercise referenced by baseline tests exists', () => E.TESTS.forE
 t('Data: every exercise has original animation passing geometry validation', () => X.list.forEach(e => eq(ctx.MCAnim.validate(e.anim), [], e.id)));
 t('Data: exercise IDs unique; Arabic names unique', () => { eq(new Set(X.list.map(e => e.id)).size, X.list.length); eq(new Set(X.list.map(e => e.ar)).size, X.list.length); });
 
+const { MCGoals: G, MCGym: GY } = ctx;
+t('Bodyweight plans never contain gym (weighted) exercises', () => { const s = quick({ days: [0, 1, 2, 3, 4, 5], minutes: 60, equipment: ['dumbbell', 'barbell', 'bench', 'cable', 'machine'] }, fitMid); ok(allPlanIds(gen(s)).every(id => X.byId(id).mode !== 'gym')); });
+const gymT = (extra) => quick(Object.assign({ program: 'gym', gymLevel: 2, days: [0, 2, 4], minutes: 60, equipment: ['wall', 'mat', 'dumbbell', 'barbell', 'rack', 'bench', 'kettlebell', 'cable', 'machine', 'legpress', 'pulldown'] }, extra || {}), fitMid);
+t('Gym program: main exercises are gym-only with load fields; warm-up/cool-down keep mobility', () => { const p = gen(gymT()); eq(p.program, 'gym'); const tr = p.days.filter(d => d.type === 'train'); ok(tr.length >= 2); tr.forEach(d => { ok(d.main.length >= 3, 'few items'); d.main.forEach(i => { ok(X.byId(i.exId).mode === 'gym', i.exId); ok((i.repRange || i.u === 'time') && i.rir && i.inc > 0); }); ok(d.cooldown.length >= 3); }); });
+t('Gym double progression: all sets at top → +inc; below range → −inc; otherwise same load +1 rep', () => { const ex = { load: { inc: 2.5, start: 'x' } }; eq(GY.progress(ex, { load: 20, reps: [12, 12, 12], setsPlanned: 3, rate: 'ok', pain: 0 }, 8, 12).load, 22.5); eq(GY.progress(ex, { load: 20, reps: [7, 8, 8], setsPlanned: 3, rate: 'ok', pain: 0 }, 8, 12).load, 17.5); const m = GY.progress(ex, { load: 20, reps: [9, 10, 9], setsPlanned: 3, rate: 'ok', pain: 0 }, 8, 12); eq([m.load, m.target], [20, 10]); eq(GY.progress(ex, null, 8, 12).load, null); });
+t('Gym: next week load comes from logged sessions', () => { const s = gymT(); const p = gen(s); const it = p.days.find(d => d.type === 'train').main[0]; const ses = [{ status: 'complete', startedAt: '2026-11-09T10:00:00Z', items: [{ exId: it.exId, sets: Array.from({ length: it.sets }, () => ({ value: it.repRange[1], load: 40 })), prescribed: { sets: it.sets, repRange: it.repRange }, rate: 'ok' }] }]; const p2 = E.generatePlan({ trainee: s.trainee, screening: s.sc, baseline: s.bl, prevPlan: p, sessions: ses, weekStart: '2026-11-15', planId: 'y' }); const it2 = p2.days.flatMap(d => d.main || []).find(x => x.exId === it.exId); eq(it2.load, 40 + it.inc); });
+t('Goal 60 push-ups (2 min): test in week 0 on first strength day, goal training on the others, no test in week 1', () => { const s = quick({ goalTarget: { kind: 'pushup', target: 60, timed: true }, days: [0, 2, 4] }, fitMid); const p = E.generatePlan({ trainee: s.trainee, screening: s.sc, baseline: s.bl, weekStart: '2026-11-08', planId: 'x', weekNo: 0 }); const tr = p.days.filter(d => d.type === 'train'); ok(tr[0].main[0].test, 'no test first'); ok(tr.slice(1).every(d => d.main.some(i => i.slot === 'GOAL'))); const p1 = E.generatePlan({ trainee: s.trainee, screening: s.sc, baseline: s.bl, weekStart: '2026-11-15', planId: 'y', weekNo: 1 }); ok(!p1.days.some(d => (d.main || []).some(i => i.test))); });
+t('Goal projection is a labelled range; reached goal detected', () => { const tr = { goalTarget: { kind: 'pushup', target: 60 }, goalLog: [{ kind: 'pushup', value: 20 }] }; const pj = G.project(tr); ok(pj.lo > 0 && pj.hi >= pj.lo); eq(G.percent(tr), 33); tr.goalLog.push({ kind: 'pushup', value: 61 }); ok(G.project(tr).done); const w = { goalTarget: { kind: 'weight', target: 80, start: 90 }, weightKg: 90, goalLog: [{ kind: 'weight', value: 86 }] }; eq(G.percent(w), 40); const pw = G.project(w); eq([pw.lo, pw.hi], [6, 12]); });
+t('Goal sit-ups is blocked (with alternative) when screening excludes it (pregnancy 24 wk)', () => { const s = quick({ sex: 'female', goalTarget: { kind: 'situp', target: 60, timed: true } }, fitMid, preg(24)); const p = gen(s); ok(p.goal && p.goal.blocked, 'not blocked'); ok(!allPlanIds(p).includes('CR-SITUP')); });
+t('Ranks progress with completed sessions', () => { eq(G.rank(0).ar, 'مستجد'); eq(G.rank(10).ar, 'جندي أول'); eq(G.rank(9).next.left, 1); });
+const asyncTests = [];
+const ta = (name, fn) => asyncTests.push([name, fn]);
+ta('Accounts: owner creates, wrong password rejected, second coach added and signs in, removed user cannot sign in to new copy', async () => {
+  for (const k of Object.keys(LS)) delete LS[k];
+  S.load(); const db = S.emptyDB(); db.trainees.push({ id: S.makeId('TR5'), displayName: 'سرّي', createdAt: 'x' });
+  await S.createAccounts(db, 'Owner', 'pass-owner-1'); await S.flush();
+  const raw = LS[S.KEY]; ok(raw && !raw.includes('سرّي'), 'plaintext stored'); const env = JSON.parse(raw); eq(env.v, 2); eq(env.users.length, 1);
+  await S.addUser(db, 'coach2', 'pass-coach-2', 'coach'); await S.flush(); eq(JSON.parse(LS[S.KEY]).users.length, 2);
+  S.load(); let err = null; try { await S.login('owner', 'wrong-pass'); } catch (e) { err = e; } ok(err, 'wrong password accepted');
+  const d2 = await S.login('COACH2', 'pass-coach-2'); eq(d2.trainees[0].displayName, 'سرّي'); eq(S.status.currentUser.role, 'coach');
+  err = null; try { await S.addUser(d2, 'x3', 'pass-xxxx-3', 'coach'); } catch (e) { err = e; } ok(err, 'coach must not add users');
+  S.load(); const d3 = await S.login('owner', 'pass-owner-1'); await S.removeUser(d3, 'coach2'); await S.flush();
+  S.load(); err = null; try { await S.login('coach2', 'pass-coach-2'); } catch (e) { err = e; } ok(err, 'removed user signed in');
+});
+for (const [name, fn] of asyncTests) { try { await fn(); pass++; results.push('PASS ' + name); } catch (e) { fail++; results.push('FAIL ' + name + ' :: ' + e.message); } }
 results.forEach(r => console.log(r));
 console.log(`\nUNIT: ${pass} passed, ${fail} failed (${X.list.length} exercises loaded) — node ${process.version}`);
 process.exit(fail ? 1 : 0);

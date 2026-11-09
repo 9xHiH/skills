@@ -11,6 +11,9 @@
   App.dosageText = function (it) {
     var ex = X.byId(it.exId), amount = it.u === 'reps' ? it.target + ' تكرار' : it.target >= 120 ? Math.round(it.target / 60) + ' دقيقة' : it.target + ' ثانية';
     var t = (!it.walk ? setsAr(it.sets) + ' × ' : '') + amount + (it.side ? ' لكل جهة' : '') + (it.rest ? ' · راحة ' + it.rest + ' ثانية' : '');
+    if (it.repRange) t = setsAr(it.sets) + ' × ' + it.repRange[0] + '–' + it.repRange[1] + ' تكرار (الهدف ' + it.target + ')' + (it.side ? ' لكل جهة' : '') + ' · ' + (it.load ? 'الوزن ' + it.load + ' كجم' : 'اختر وزناً يترك ' + (it.rir || 2) + ' تكرارات احتياطاً') + (it.rest ? ' · راحة ' + it.rest + ' ثانية' : '');
+    if (it.test) t = 'اختبار: أكبر عدد بأداء صحيح (الهدف ' + it.target + ')';
+    if (it.gym && it.u === 'time') t += ' · ' + (it.load ? 'الوزن ' + it.load + ' كجم' : 'وزن تتحكم به جيداً');
     if (it.weak) t += ' · الجهة الأضعف (' + sideAr(it.weak.side) + '): ' + setsAr(it.sets + 1) + '، وابدأ بها';
     if (ex && ex.dose.tempo && it.u === 'reps' && !it.walk && it.sets > 1) t += ' · ببطء وتحكم';
     return t;
@@ -19,6 +22,7 @@
   function dayHead(d) {
     if (d.type === 'rest') return ['😴', 'راحة', 'Rest day'];
     if (d.type === 'recovery') return d.place === 'outdoor' ? ['🌳', 'مشي خارج المنزل', 'Outdoor walk'] : ['🏠', 'مشي ونشاط خفيف في المنزل', 'Light activity at home'];
+    if (d.place === 'gym') return ['🏋', 'تمارين الصالة', 'Gym workout'];
     return ['🏠', 'تمارين في المنزل', 'Home workout'];
   }
   App.dayHead = dayHead;
@@ -29,7 +33,7 @@
     var existing = App.db.plans.filter(function (p) { return p.traineeId === t.id && p.weekStart === ws; })[0];
     var pls = App.plansOf(t.id).filter(function (p) { return p.weekStart < ws; }), prev = pls[pls.length - 1] || null;
     var rev = prev ? App.db.reviews.filter(function (r) { return r.planId === prev.id; }).pop() : null;
-    var input = { trainee: t, screening: App.latest('screenings', t.id), baseline: App.latest('baselines', t.id), prevPlan: prev, decision: rev ? Object.assign({ reviewId: rev.id, at: rev.at }, rev.decision) : null, weekStart: ws, planId: existing ? existing.id : S.uniqueId(App.db, 'plans', S.isoWeek(ws)), requireFreshBaseline: true };
+    var input = { trainee: t, sessions: App.db.sessions.filter(function (x) { return x.traineeId === t.id; }), weekNo: App.plansOf(t.id).filter(function (p) { return p.weekStart < ws && p.status !== 'blocked'; }).length, screening: App.latest('screenings', t.id), baseline: App.latest('baselines', t.id), prevPlan: prev, decision: rev ? Object.assign({ reviewId: rev.id, at: rev.at }, rev.decision) : null, weekStart: ws, planId: existing ? existing.id : S.uniqueId(App.db, 'plans', S.isoWeek(ws)), requireFreshBaseline: true };
     var plan = E.generatePlan(input); plan.decision = input.decision;
     if (!existing) { App.db.plans.push(plan); App.audit('plan.create', 'خطة ' + plan.id + ' (' + plan.status + ')', t.id, plan.id); return plan; }
     var hasSessions = App.db.sessions.some(function (s) { return s.planId === existing.id; });
@@ -58,6 +62,7 @@
       h += reviewed ? '<div class="alert ok"><b>انتهى الأسبوع وتمت مراجعته</b><button data-act="genNext">' + bi('أنشئ جدول الأسبوع التالي', 'Create next week') + '</button></div>'
         : '<div class="alert"><b>قارب الأسبوع على الانتهاء</b>أجب عن أسئلة المراجعة القصيرة ليتعدل الأسبوع القادم حسب أدائك. <button class="sec" data-act="go" data-page="review">' + bi('مراجعة الأسبوع', 'Weekly check') + '</button></div>';
     }
+    h += App.motivation(t);
     h += planView(cur, t);
     h += '<details class="card flat"><summary>' + bi('خيارات إضافية', 'More options') + '</summary>' +
       (pls.length > 1 ? '<label>' + bi('عرض أسبوع سابق', 'Show another week') + '<select id="planPick">' + pls.map(function (p) { return '<option value="' + esc(p.id) + '"' + (p.id === cur.id ? ' selected' : '') + '>' + esc(App.fmtDate(p.weekStart)) + ' – ' + esc(App.fmtDate(p.weekEnd)) + (p.status === 'blocked' ? ' (متوقف)' : '') + '</option>'; }).join('') + '</select></label>' : '') +
@@ -92,6 +97,7 @@
       if (d.type === 'rest') h += '<p class="muted">راحة تامة أو حركة يومية خفيفة. نم جيداً واشرب الماء.</p>';
       else {
         (d.recovery || []).forEach(function (it) { h += itemRow(p, d, it, -1); });
+        if (d.note) h += '<p class="small muted">' + esc(d.note) + '</p>';
         if (d.warmup && d.warmup.length) h += '<p class="small"><b>' + bi('إحماء 5 دقائق', 'Warm-up 5 min') + ':</b> ' + d.warmup.map(function (it) { return '<button class="linkbtn" data-act="exOpen" data-id="' + esc(it.exId) + '">' + esc(App.exName(it.exId)) + '</button>'; }).join(' · ') + '</p>';
         (d.main || []).forEach(function (it, j) { h += itemRow(p, d, it, j); });
         if (d.cooldown && d.cooldown.length) h += '<p class="small"><b>' + bi('تهدئة وإطالة', 'Cool-down') + ':</b> ' + d.cooldown.map(function (it) { return '<button class="linkbtn" data-act="exOpen" data-id="' + esc(it.exId) + '">' + esc(App.exName(it.exId)) + '</button>'; }).join(' · ') + '</p>';
@@ -105,7 +111,7 @@
   function itemRow(p, d, it, j) {
     var ex = X.byId(it.exId) || { ar: it.exId, en: '' };
     return '<div class="item"><div class="thumb">' + App.thumb(it.exId) + '</div><div><b>' + esc(ex.ar) + '</b> <span class="en" dir="ltr">' + esc(ex.en) + '</span>' +
-      (it.weak ? ' <span class="pill wk">💪 ' + bi('الجانب الأضعف: ' + sideAr(it.weak.side), 'Weak side') + '</span>' : '') + (it.focus ? ' <span class="pill">🎯 ' + esc(E.FOCUS[it.focus].ar) + '</span>' : '') + (it.override ? ' <span class="pill">معدّل</span>' : '') +
+      (it.weak ? ' <span class="pill wk">💪 ' + bi('الجانب الأضعف: ' + sideAr(it.weak.side), 'Weak side') + '</span>' : '') + (it.focus ? ' <span class="pill">🎯 ' + esc(E.FOCUS[it.focus].ar) + '</span>' : '') + (it.goal ? ' <span class="pill goalp">🎯 ' + (it.test ? 'اختبار الهدف' : 'تدريب الهدف') + '</span>' : '') + (it.override ? ' <span class="pill">معدّل</span>' : '') +
       '<div>' + esc(App.dosageText(it)) + '</div><details class="why"><summary>لماذا؟</summary>' + it.why.map(esc).join('<br>') + '</details></div>' +
       '<div class="act row"><button class="sec" data-act="exOpen" data-id="' + esc(it.exId) + '">' + bi('الشرح', 'How to') + '</button>' + (j >= 0 ? '<button class="ghost" data-act="ovOpen" data-plan="' + esc(p.id) + '" data-day="' + d.index + '" data-item="' + j + '">' + bi('تغيير', 'Change') + '</button>' : '') + '</div></div>';
   }

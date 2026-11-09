@@ -46,6 +46,8 @@ for (const e of MCEX.list) {
   if (e.lvl >= 2 && (typeof e.prereq !== 'string' || e.prereq.length < 8)) E(id, 'lvl>=2 needs prereq');
   if (!Array.isArray(e.src) || !e.src.length || e.src.some(s => !SRC.includes(s))) E(id, 'bad src ' + JSON.stringify(e.src));
   if (e.src && e.src.includes('ATP722') && !e.mil) W(id, 'ATP722 cited but no mil drill name');
+  if (e.mode === 'gym') { if (!e.load || !(e.load.inc > 0) || typeof e.load.start !== 'string') E(id, 'gym exercise needs load:{inc:kg, start:"Arabic tip for choosing the first weight"}'); if (!e.eq.length) E(id, 'gym exercise needs equipment'); if (!Array.isArray(e.dose.rir)) E(id, 'gym dose needs rir:[a,b] (reps in reserve)'); }
+  else if (e.mode !== undefined) E(id, 'mode must be gym or absent');
   if (!e.anim) E(id, 'no anim'); else { const v = MCAnim.validate(e.anim); v.forEach(m => E(id, 'anim ' + m)); if (!['side', 'front'].includes(e.anim.view)) E(id, 'anim.view'); e.anim.keys.forEach((k, i) => { if (!k.lab) W(id, 'key ' + i + ' no label'); }); }
 }
 const dang = [];

@@ -23,7 +23,9 @@
     },
     CAT: { upper: 'الجزء العلوي', lower: 'الجزء السفلي', core: 'الجذع', cardio: 'تحمل وتنقل', mobility: 'حركية وإطالة', balance: 'توازن' },
     LEVEL: { 1: 'مبتدئ', 2: 'متوسط', 3: 'متقدم' },
-    EQUIP: { none: 'بدون أدوات', wall: 'حائط', chair: 'كرسي ثابت', step: 'درجة/عتبة ثابتة', table: 'طاولة متينة', bar: 'عقلة ثابتة', low_bar: 'عارضة منخفضة ثابتة', towel: 'منشفة', mat: 'سجادة تمرين', space: 'مساحة مفتوحة', stairs: 'درج' },
+    EQUIP: { none: 'بدون أدوات', wall: 'حائط', chair: 'كرسي ثابت', step: 'درجة/عتبة ثابتة', table: 'طاولة متينة', bar: 'عقلة ثابتة', low_bar: 'عارضة منخفضة ثابتة', towel: 'منشفة', mat: 'سجادة تمرين', space: 'مساحة مفتوحة', stairs: 'درج',
+      dumbbell: 'دمبل', barbell: 'بار حديد وأقراص', rack: 'حامل بار (رف)', bench: 'بنش (مقعد)', kettlebell: 'كيتل بل', cable: 'جهاز كيبل', machine: 'أجهزة الصالة (مقعد/رافعة)', legpress: 'جهاز دفع الأرجل', pulldown: 'جهاز السحب العلوي' },
+    EQUIP_EN: { dumbbell: 'Dumbbells', barbell: 'Barbell & plates', rack: 'Squat rack', bench: 'Bench', kettlebell: 'Kettlebell', cable: 'Cable machine', machine: 'Gym machines', legpress: 'Leg press', pulldown: 'Lat pulldown' },
     FLAG: {
       wrist: 'تحميل على الرسغ', shoulder: 'تحميل على الكتف', overhead: 'رفع الذراعين فوق الرأس', elbow: 'تحميل على المرفق', knee: 'ثني ركبة تحت حمل', hip: 'تحميل على الورك',
       lowback: 'تحميل أسفل الظهر', ankle: 'تحميل على الكاحل', neck: 'وضع الرقبة', supine: 'استلقاء على الظهر', prone: 'انبطاح على البطن', inversion: 'الرأس أخفض من القلب',

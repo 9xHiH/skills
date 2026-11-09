@@ -206,3 +206,36 @@ ST-NECKSIDE|mobility2|إطالة جانب الرقبة|Side-neck stretch|lvl1; n
 # ---- Unilateral batch (weak-side training) ----
 PU-SA-WALL|unilateral|ضغط الحائط بذراع واحدة|Single-arm wall push-up|lvl2; eq wall; side
 PH-DOOR-SA|unilateral|سحب إطار الباب بذراع واحدة|Single-arm door-frame row|lvl2; eq wall; side
+# ---- GYM batch (mode:'gym', weighted, separate from bodyweight plans) ----
+GY-BB-SQUAT|gymlow|سكوات بالبار على الظهر|Barbell back squat|lvl2-3; eq barbell+rack; props bb at sh, rack
+GY-GOBLET|gymlow|سكوات الكأس بالدمبل|Goblet squat|lvl1; eq dumbbell (or kettlebell); weight held at chest
+GY-DB-RDL|gymlow|رفعة رومانية بالدمبل|Dumbbell Romanian deadlift|lvl1-2; eq dumbbell; hinge
+GY-BB-DL|gymlow|الرفعة الميتة بالبار|Barbell deadlift|lvl3; eq barbell; plates on floor at start
+GY-HIPTHRUST|gymlow|دفع الورك بالبار على بنش|Barbell hip thrust|lvl2; eq barbell+bench; upper back on bench, bar on hips
+GY-DB-LUNGE|gymlow|اندفاع خلفي بالدمبل|Dumbbell reverse lunge|lvl2; eq dumbbell; side
+GY-DB-SPLIT|gymlow|سكوات بلغاري بالدمبل|Dumbbell Bulgarian split squat|lvl3; eq dumbbell+bench; side
+GY-DB-STEPUP|gymlow|صعود بنش بالدمبل|Dumbbell step-up|lvl2; eq dumbbell+bench; side
+GY-LEGPRESS|gymlow|دفع الأرجل بالجهاز|Leg press|lvl1; eq legpress
+GY-LEGCURL|gymlow|ثني الأرجل بالجهاز|Machine leg curl|lvl1; eq machine
+GY-LEGEXT|gymlow|مد الأرجل بالجهاز|Machine leg extension|lvl1; eq machine; knee caution
+GY-DB-CALF|gymlow|رفع الكعبين بالدمبل|Dumbbell calf raise|lvl1; eq dumbbell
+GY-KB-SWING|gymlow|أرجحة الكيتل بل|Kettlebell swing|lvl2; eq kettlebell; hinge; power
+GY-FARMER|gymlow|حمل المزارع بالدمبل|Farmer carry|lvl1; eq dumbbell; grip+core
+GY-PALLOF|gymlow|ضغط بالوف بالكيبل|Cable Pallof press|lvl1; eq cable; core anti-rotation (cat core)
+GY-WOODCHOP|gymlow|قطع الخشب بالكيبل|Cable woodchop (high to low)|lvl2; eq cable; core rotation; front view (cat core)
+GY-SUITCASE|gymlow|حمل الحقيبة بدمبل واحد|Suitcase carry|lvl1; eq dumbbell; core lateral (cat core); side
+GY-GOBLET-HOLD|gymlow|ثبات القرفصاء العميقة بالدمبل (حركية)|Goblet squat hold (mobility)|lvl1; eq dumbbell; role warmup/cooldown; mobility
+GY-BB-BENCH|gymup|ضغط البنش بالبار|Barbell bench press|lvl2-3; eq barbell+bench+rack; spotter caution
+GY-DB-BENCH|gymup|ضغط البنش بالدمبل|Dumbbell bench press|lvl1-2; eq dumbbell+bench
+GY-DB-INCLINE|gymup|ضغط مائل بالدمبل|Incline dumbbell press|lvl2; eq dumbbell+bench (incline)
+GY-DB-OHP|gymup|ضغط الكتف بالدمبل جالساً|Seated dumbbell shoulder press|lvl1-2; eq dumbbell+bench; overhead
+GY-BB-OHP|gymup|ضغط البار فوق الرأس واقفاً|Standing barbell overhead press|lvl2-3; eq barbell+rack; overhead; front view (bbline)
+GY-DB-ROW|gymup|تجديف بدمبل واحد على البنش|One-arm dumbbell row|lvl1; eq dumbbell+bench; side
+GY-BB-ROW|gymup|تجديف بالبار منحنياً|Bent-over barbell row|lvl2-3; eq barbell; lowback caution
+GY-PULLDOWN|gymup|السحب العلوي بالجهاز|Lat pulldown|lvl1; eq pulldown (cable)
+GY-CABLE-ROW|gymup|التجديف جالساً بالكيبل|Seated cable row|lvl1; eq cable
+GY-FACEPULL|gymup|سحب الحبل نحو الوجه|Cable face pull|lvl1; eq cable; shoulder health
+GY-DB-LATRAISE|gymup|رفع جانبي بالدمبل|Dumbbell lateral raise|lvl1; eq dumbbell; front view
+GY-DB-CURL|gymup|ثني الذراعين بالدمبل|Dumbbell biceps curl|lvl1; eq dumbbell
+GY-PUSHDOWN|gymup|دفع الحبل للأسفل (ثلاثية)|Cable triceps pushdown|lvl1; eq cable
+GY-DB-FLY|gymup|تفتيح الصدر بالدمبل على البنش|Dumbbell chest fly|lvl2; eq dumbbell+bench; shoulder caution; front view

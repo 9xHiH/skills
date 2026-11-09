@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; connect-src 'none'; font-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
-<title>المدرب العسكري للياقة البدنية v5</title>
+<title>عزم · AZM — مدربك الشخصي للياقة</title>
 <style id="figcss">.mc-fig{width:100%;height:auto;display:block;background:var(--fig-bg,#0f2232);border-radius:10px}
 .mc-floor{stroke:var(--fig-floor,#5f7a8f);stroke-width:2}
 .mc-prop{stroke:var(--fig-prop,#8aa0b4);stroke-width:3;fill:none;stroke-linecap:round}
@@ -27,16 +27,20 @@
 .mc-inset-body{fill:var(--fig-ghost,#7fa3c0);fill-opacity:.55}
 .mc-inset-sh{stroke:var(--fig-ghost,#7fa3c0);stroke-width:2}
 .mc-inset-hand{fill:var(--fig,#ffd166)}
+.mc-plate{fill:var(--fig-load,#9a9a92);stroke:var(--fig-bg,#0f2232);stroke-width:1.2}
+.mc-bar{stroke:var(--fig-load,#9a9a92);stroke-width:3.5;stroke-linecap:round}
+.mc-cable{stroke:var(--fig-load,#9a9a92);stroke-width:1.5;stroke-dasharray:3 2}
+.mc-stack{fill:var(--fig-prop-fill,#3a5166);stroke:var(--fig-prop,#8aa0b4);stroke-width:1}
 </style>
 <style>:root{
-  --bg:#0a121b;--bg2:#0f1b27;--panel:#132233;--panel2:#18293c;--line:#2a3f55;--text:#e9f0f6;--muted:#a3b4c5;
-  --acc:#d6b25e;--acc2:#2bb39b;--acc-ink:#1a1405;--acc2-ink:#04201a;--danger:#ff8a7a;--danger-bg:#3a1d1a;--warn:#f0c264;--warn-bg:#352a16;--ok:#7ddbb6;--ok-bg:#15322a;--info-bg:#162c40;
-  --fig:#ffd166;--fig-far:#b48a2c;--fig-bg:#0d1d2b;--fig-floor:#58738a;--fig-prop:#8aa0b4;--fig-prop-fill:#2f465b;--fig-ghost:#7fa3c0;--fig-trace:#5ee0c1;--fig-mat:#2f6e63;
-  --radius:14px;--shadow:0 8px 30px rgba(0,0,0,.35);
+  --bg:#0d0e0b;--bg2:#141510;--panel:#1b1c16;--panel2:#23251d;--line:#3b3d31;--text:#ece9dd;--muted:#aaa896;
+  --acc:#c3b091;--acc2:#9aa25f;--acc-ink:#16150c;--acc2-ink:#12140a;--danger:#ff8a7a;--danger-bg:#3a1d1a;--warn:#e7c46a;--warn-bg:#352c16;--ok:#a9c77d;--ok-bg:#1f2a17;--info-bg:#22251c;
+  --fig:#d9c89b;--fig-far:#8d7f58;--fig-bg:#15160f;--fig-floor:#5c5e51;--fig-prop:#8e9081;--fig-prop-fill:#34362b;--fig-ghost:#8f8f7d;--fig-trace:#b7c27a;--fig-mat:#4b5320;--fig-load:#b9b9ad;
+  --radius:12px;--shadow:0 8px 28px rgba(0,0,0,.45);
   font-family:"Segoe UI","Noto Sans Arabic","Noto Naskh Arabic","Geeza Pro","Arial",Tahoma,sans-serif;color-scheme:dark;
 }
-:root[data-theme=light]{--bg:#eef2f5;--bg2:#e3e9ee;--panel:#ffffff;--panel2:#f4f7fa;--line:#c8d3dd;--text:#13202c;--muted:#4c5f70;--acc:#8a6a12;--acc2:#0f7d6b;--acc-ink:#fff;--acc2-ink:#fff;
-  --danger:#a42617;--danger-bg:#fde8e5;--warn:#7a5300;--warn-bg:#fff4dc;--ok:#0d6a4f;--ok-bg:#e1f5ec;--info-bg:#e5f0fa;--fig:#1d4e7a;--fig-far:#7aa1c4;--fig-bg:#f3f7fa;--fig-floor:#7d93a6;--fig-prop:#5d7183;--fig-prop-fill:#d3dde6;--fig-ghost:#93a9bc;--fig-trace:#0f9c80;--fig-mat:#9fd3c7;--shadow:0 6px 20px rgba(20,40,60,.12);color-scheme:light}
+:root[data-theme=light]{--bg:#ebe7da;--bg2:#e1dccb;--panel:#faf8f1;--panel2:#f1eee2;--line:#c8c1aa;--text:#1a1b15;--muted:#535345;--acc:#5f532a;--acc2:#4b5320;--acc-ink:#fff;--acc2-ink:#fff;
+  --danger:#a42617;--danger-bg:#fbe7e3;--warn:#6f4f00;--warn-bg:#fbf0d4;--ok:#3f5a17;--ok-bg:#e7efd9;--info-bg:#efece0;--fig:#3d4320;--fig-far:#9aa07c;--fig-bg:#f4f1e6;--fig-floor:#8a8a78;--fig-prop:#6c6c5c;--fig-prop-fill:#d9d4c2;--fig-ghost:#a9a790;--fig-trace:#6b7a1f;--fig-mat:#c9cfa0;--fig-load:#55554b;--shadow:0 6px 18px rgba(40,40,20,.12);color-scheme:light}
 *{box-sizing:border-box}
 html{font-size:17px}
 body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
@@ -44,8 +48,8 @@ a{color:var(--acc2)}
 h1,h2,h3,h4{line-height:1.35;margin:.2em 0 .5em}
 h2{font-size:1.45rem}h3{font-size:1.15rem}
 .skip{position:absolute;inset-inline-start:-999px;top:0}.skip:focus{inset-inline-start:8px;z-index:99;background:var(--acc);color:var(--acc-ink);padding:8px 12px;border-radius:8px}
-header.top{background:linear-gradient(135deg,#0d1824,#16283a 60%,#1d3246);border-bottom:3px solid var(--acc);padding:14px 4vw;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-:root[data-theme=light] header.top{background:linear-gradient(135deg,#17324a,#21476a);color:#fff}
+header.top{background:linear-gradient(135deg,#0b0c09,#1b1d14 55%,#2a2c1f);border-bottom:3px solid var(--acc);padding:14px 4vw;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+:root[data-theme=light] header.top{background:linear-gradient(135deg,#2a2c1f,#4b5320);color:#fff}
 .brand{display:flex;align-items:center;gap:12px;flex:1 1 320px}
 .brand svg{width:48px;height:48px;flex:none}
 .brand h1{font-size:1.35rem;margin:0;color:#fff}.brand small{color:#c9d6e2;display:block;font-size:.8rem}
@@ -191,19 +195,37 @@ details.why summary{cursor:pointer;color:var(--muted);font-size:.82rem}
 .qt .en,legend .en,h2 .en,.alert .en,label>.en{display:block;margin-top:1px}
 .lead{margin:0 0 10px}.lead .en{display:block}
 button .en,.badge .en{color:inherit}
+
+/* ---------- AZM brand ---------- */
+.brand h1{font-size:1.6rem;letter-spacing:.5px}
+.brand h1 .en{color:#c3b091;font-size:.62em;letter-spacing:3px;margin-inline-start:6px}
+.brand small{color:#bdb9a4}
+header.top{border-bottom:3px solid #c3b091;background-image:repeating-linear-gradient(135deg,rgba(195,176,145,.05) 0 8px,transparent 8px 16px),linear-gradient(135deg,#0b0c09,#1b1d14 55%,#2a2c1f)}
+nav.side button[aria-current=page]{box-shadow:inset -4px 0 0 var(--acc)}
+.card{border-top:2px solid color-mix(in srgb,var(--acc) 35%,transparent)}
+
+/* motivation & goals */
+.motiv{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0}
+.motiv .rank,.rankbig{font-weight:800;color:var(--acc)}
+.rankbig{font-size:1.5rem}
+.goal{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
+.bar{height:12px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);overflow:hidden;margin:6px 0}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--acc2),var(--acc));transition:width .6s ease}
+.hero-msg{text-align:center}
+.pill.goalp{border-color:var(--acc);color:var(--acc)}
 </style>
 </head>
 <body>
 <a class="skip" href="#view">تخطي إلى المحتوى</a>
 <header class="top">
-  <div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="10" fill="#d6b25e"/><path d="M24 7l14 6v10c0 9-6 15-14 18C16 38 10 32 10 23V13z" fill="#13202c"/><circle cx="24" cy="17" r="3.2" fill="#d6b25e"/><path d="M24 21v8m-6-4l6-3 6 3m-9 12l3-5 3 5" stroke="#d6b25e" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <div><h1>المدرب العسكري للياقة البدنية</h1><small>نسخة تطوير v5 · <span id="appver"></span> · يعمل دون إنترنت بالكامل · خطط أسبوعية فقط</small></div></div>
+  <div class="brand"><svg viewBox="0 0 64 64" role="img" aria-label="شعار عزم"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d6c6a0"/><stop offset="1" stop-color="#9c8a5f"/></linearGradient></defs><path d="M32 3l24 8v17c0 16-10 27-24 33C18 55 8 44 8 28V11z" fill="url(#lg)" stroke="#0b0c09" stroke-width="2"/><path d="M32 9l18 6v13c0 12-7.5 20.5-18 25.5C21.5 48.5 14 40 14 28V15z" fill="#14150f"/><path d="M20 36l12-8 12 8M20 44l12-8 12 8" fill="none" stroke="#c3b091" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M32 13l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="#c3b091"/></svg>
+    <div><h1>عزم <span class="en" dir="ltr">AZM</span></h1><small>مدربك الشخصي للياقة · Your fitness coach · <span id="appver"></span> · يعمل دون إنترنت</small></div></div>
   <div class="topctl"><label class="sr" for="activeTrainee">المتدرب النشط</label><select id="activeTrainee"></select><span id="storeStatus" class="badge b-info" role="status">…</span><button class="ghost" data-act="theme" aria-label="تبديل الوضع الفاتح/الداكن" style="color:#fff;border-color:#fff4">◐</button></div>
 </header>
 <div class="layout">
   <nav class="side" aria-label="الأقسام" id="nav"></nav>
   <div><main id="view" tabindex="-1"></main>
-  <footer class="foot">أداة مساعدة للمدرب وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة. لا اتصال بالشبكة، لا إعلانات، لا تتبع. البيانات في هذا المتصفح فقط — صدّر JSON بانتظام. الرسوم المتحركة أصلية مولدة برمجياً.</footer></div>
+  <footer class="foot">عزم · AZM — أداة مساعدة للمدرب وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة. لا اتصال بالشبكة، لا إعلانات، لا تتبع. البيانات في هذا المتصفح فقط — صدّر JSON بانتظام. الرسوم المتحركة أصلية مولدة برمجياً.</footer></div>
 </div>
 <dialog id="exDialog" aria-labelledby="exTitle"><div class="dlg-head"><h3 id="exTitle"></h3><button class="ghost" data-act="exClose" aria-label="إغلاق">✕</button></div><div class="dlg-body" id="exBody"></div></dialog>
 <div id="print" aria-hidden="true"></div>
@@ -354,6 +376,11 @@ button .en,.badge .en{color:inherit}
           el('line', { x1: cx - 12, y1: gy + 17, x2: cx + 12, y2: gy + 17, 'class': 'mc-inset-sh' }, g);
           [-1, 1].forEach(function (sgn) { var hx = cx + sgn * 12 * pr.r; el('rect', { x: hx - 3, y: gy + 18, width: 6, height: 9, rx: 2, 'class': 'mc-inset-hand' }, g); el('line', { x1: cx + sgn * 12, y1: gy + 17, x2: hx, y2: gy + 22, 'class': 'mc-inset-sh' }, g); });
           break;
+        case 'bench': /* flat or inclined bench pad on legs; incline: {deg} */
+          el('rect', { x: pr.x, y: FLOOR - pr.h, width: pr.w, height: 6, rx: 2, 'class': 'mc-prop-fill', transform: pr.deg ? 'rotate(' + (-pr.deg) + ' ' + (pr.x + pr.w) + ' ' + (FLOOR - pr.h) + ')' : '' }, g);
+          el('line', { x1: pr.x + 6, y1: FLOOR - pr.h + 6, x2: pr.x + 6, y2: FLOOR, 'class': 'mc-prop' }, g);
+          el('line', { x1: pr.x + pr.w - 6, y1: FLOOR - pr.h + 6, x2: pr.x + pr.w - 6, y2: FLOOR, 'class': 'mc-prop' }, g); break;
+        case 'rack': el('line', { x1: pr.x, y1: pr.y || 40, x2: pr.x, y2: FLOOR, 'class': 'mc-prop' }, g); el('line', { x1: pr.x - 6, y1: pr.hook || 60, x2: pr.x + 6, y2: pr.hook || 60, 'class': 'mc-prop' }, g); break;
         case 'mat': el('rect', { x: pr.x1, y: FLOOR - 2, width: pr.x2 - pr.x1, height: 3, rx: 1, 'class': 'mc-mat' }, g); break;
         case 'step': el('rect', { x: pr.x, y: FLOOR - pr.h, width: pr.w, height: pr.h, rx: 1, 'class': 'mc-prop-fill' }, g); break;
         default: break;
@@ -382,6 +409,19 @@ button .en,.badge .en{color:inherit}
     };
     var near = el('g', { 'class': 'mc-near' }, g);
     this.p.lN = el('polyline', {}, near); this.p.fN = el('line', {}, near); this.p.aN = el('polyline', {}, near);
+    /* gym equipment attached to joints: dumbbell 'db', kettlebell 'kb', barbell end-on 'bb', barbell seen from the front 'bbline', cable 'cable' */
+    this.att = (spec.props || []).filter(function (q) { return q.at; }).map(function (q) {
+      var gg = el('g', { 'class': 'mc-load' }, svg), o = { q: q, g: gg, e: [] };
+      var ats = q.at === 'both' ? ['wrN', 'wrF'] : [q.at];
+      if (q.k === 'cable') { o.e.push(el('line', { 'class': 'mc-cable' }, gg)); el('circle', { cx: q.to[0], cy: q.to[1], r: 4, 'class': 'mc-prop-fill' }, gg); el('rect', { x: q.to[0] - 5, y: q.to[1], width: 10, height: 150 - q.to[1], 'class': 'mc-stack' }, gg); }
+      else if (q.k === 'bbline') { o.e.push(el('line', { 'class': 'mc-bar' }, gg)); o.e.push(el('rect', { width: 5, height: 22, rx: 1.5, 'class': 'mc-plate' }, gg)); o.e.push(el('rect', { width: 5, height: 22, rx: 1.5, 'class': 'mc-plate' }, gg)); }
+      else ats.forEach(function () {
+        if (q.k === 'bb') o.e.push(el('circle', { r: q.r || 10, 'class': 'mc-plate' }, gg));
+        else if (q.k === 'kb') o.e.push(el('circle', { r: 6, 'class': 'mc-plate' }, gg));
+        else o.e.push(el('rect', { width: 12, height: 6, rx: 2, 'class': 'mc-plate' }, gg));
+      });
+      o.ats = ats; return o;
+    });
     this.svg = svg; container.appendChild(svg);
     if (opts.ghost !== false) this.drawGhost(opts.traceJoint);
     this.render();
@@ -411,6 +451,16 @@ button .en,.badge .en{color:inherit}
     var hb = add(s.neck, dir(this.spec.keys[0].p.t), 0);
     p.neck.setAttribute('x1', hb[0]); p.neck.setAttribute('y1', hb[1]); p.neck.setAttribute('x2', s.head[0]); p.neck.setAttribute('y2', s.head[1]);
     p.head.setAttribute('cx', s.head[0]); p.head.setAttribute('cy', s.head[1]);
+    this.att.forEach(function (o) {
+      var q = o.q, off = q.off || [0, 0];
+      if (q.k === 'cable') { var w = s[q.at]; o.e[0].setAttribute('x1', w[0]); o.e[0].setAttribute('y1', w[1]); o.e[0].setAttribute('x2', q.to[0]); o.e[0].setAttribute('y2', q.to[1]); return; }
+      if (q.k === 'bbline') { var a = s.wrN, c = s.wrF, ext = q.ext || 22, dx = c[0] - a[0], dy = c[1] - a[1], ln = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / ln, uy = dy / ln;
+        var p1 = [a[0] - ux * ext, a[1] - uy * ext], p2 = [c[0] + ux * ext, c[1] + uy * ext];
+        o.e[0].setAttribute('x1', p1[0]); o.e[0].setAttribute('y1', p1[1]); o.e[0].setAttribute('x2', p2[0]); o.e[0].setAttribute('y2', p2[1]);
+        [[o.e[1], p1, 1], [o.e[2], p2, -1]].forEach(function (z) { z[0].setAttribute('x', z[1][0] + ux * 4 * z[2] - 2.5); z[0].setAttribute('y', z[1][1] - 11); }); return; }
+      o.ats.forEach(function (j, i) { var pt = s[j] || s.wrN, e = o.e[i], x = pt[0] + off[0], y = pt[1] + off[1];
+        if (q.k === 'bb' || q.k === 'kb') { e.setAttribute('cx', x); e.setAttribute('cy', y + (q.k === 'kb' ? 6 : 0)); } else { e.setAttribute('x', x - 6); e.setAttribute('y', y - 3); } });
+    });
     if (this.onLabel && r.idx !== this._idx) { this._idx = r.idx; this.onLabel(r.label, r.idx); }
   };
   Figure.prototype.tick = function (dt) { if (this.playing) { this.t += dt * this.speed; this.render(); } };
@@ -490,7 +540,9 @@ button .en,.badge .en{color:inherit}
     },
     CAT: { upper: 'الجزء العلوي', lower: 'الجزء السفلي', core: 'الجذع', cardio: 'تحمل وتنقل', mobility: 'حركية وإطالة', balance: 'توازن' },
     LEVEL: { 1: 'مبتدئ', 2: 'متوسط', 3: 'متقدم' },
-    EQUIP: { none: 'بدون أدوات', wall: 'حائط', chair: 'كرسي ثابت', step: 'درجة/عتبة ثابتة', table: 'طاولة متينة', bar: 'عقلة ثابتة', low_bar: 'عارضة منخفضة ثابتة', towel: 'منشفة', mat: 'سجادة تمرين', space: 'مساحة مفتوحة', stairs: 'درج' },
+    EQUIP: { none: 'بدون أدوات', wall: 'حائط', chair: 'كرسي ثابت', step: 'درجة/عتبة ثابتة', table: 'طاولة متينة', bar: 'عقلة ثابتة', low_bar: 'عارضة منخفضة ثابتة', towel: 'منشفة', mat: 'سجادة تمرين', space: 'مساحة مفتوحة', stairs: 'درج',
+      dumbbell: 'دمبل', barbell: 'بار حديد وأقراص', rack: 'حامل بار (رف)', bench: 'بنش (مقعد)', kettlebell: 'كيتل بل', cable: 'جهاز كيبل', machine: 'أجهزة الصالة (مقعد/رافعة)', legpress: 'جهاز دفع الأرجل', pulldown: 'جهاز السحب العلوي' },
+    EQUIP_EN: { dumbbell: 'Dumbbells', barbell: 'Barbell & plates', rack: 'Squat rack', bench: 'Bench', kettlebell: 'Kettlebell', cable: 'Cable machine', machine: 'Gym machines', legpress: 'Leg press', pulldown: 'Lat pulldown' },
     FLAG: {
       wrist: 'تحميل على الرسغ', shoulder: 'تحميل على الكتف', overhead: 'رفع الذراعين فوق الرأس', elbow: 'تحميل على المرفق', knee: 'ثني ركبة تحت حمل', hip: 'تحميل على الورك',
       lowback: 'تحميل أسفل الظهر', ankle: 'تحميل على الكاحل', neck: 'وضع الرقبة', supine: 'استلقاء على الظهر', prone: 'انبطاح على البطن', inversion: 'الرأس أخفض من القلب',
@@ -1986,6 +2038,634 @@ button .en,.badge .en{color:inherit}
         { p: { h: [120, 84], t: 48, a: [{ p: [128, 96], b: -1 }, { p: [183, 83], b: -1 }], l: [[-5, -5], [-90, -90]], f: [85, 0] }, d: 800, hold: 250, lab: 'عد للوقوف — شهيق' },
         { p: { h: [120, 84], t: 90, a: [{ p: [121, 89], b: -1 }, { p: [119, 89], b: -1 }], l: [[-90, -90], [-90, -90]] }, d: 700, hold: 200, lab: 'الساق الأخرى — زفير' },
         { p: { h: [120, 84], t: 48, a: [{ p: [183, 83], b: -1 }, { p: [128, 96], b: -1 }], l: [[-90, -90], [-5, -5]], f: [0, 85] }, d: 800, hold: 250, lab: 'عد للوقوف — شهيق' }
+      ] }
+    }
+  );
+})();
+
+;
+/* ==== src/data/ex_gym_lower.js ==== */
+/* Gym (weighted) lower-body and loaded-core exercises: mode:'gym'. Poses face RIGHT (x grows forward).
+ * Equipment props with `at:` follow a joint every frame (see src/anim.js). See tools/AUTHORING.md. */
+(function () {
+  var DBH = [[-92, -92], [-88, -88]];            /* arms hanging straight by the sides holding dumbbells */
+  var FEET = [{ p: [122, 150], b: 1 }, { p: [118, 150], b: 1 }];
+  var R = Math.PI / 180;
+  /* shoulder point for a given hip and torso angle (torso 46, shoulder 4 below the neck) */
+  function SH(h, t) { return [h[0] + 42 * Math.cos(t * R), h[1] - 42 * Math.sin(t * R)]; }
+  /* both wrists on one point (bar or bell held with both hands) */
+  function both(pt, b) { return [{ p: pt, b: b }, { p: pt, b: b }]; }
+  function add(p, d) { return [p[0] + d[0], p[1] + d[1]]; }
+  var GYM_SRC = ['ACSM-RT26', 'ACSM-RT'];
+
+  /* back squat key poses: bar rests on the upper back just behind the shoulder point */
+  var BSQ_TOP = { h: [120, 84], t: 90 }, BSQ_BOT = { h: [100, 120], t: 55 };
+  var BAR_OFF = [-7, 1];
+  function bsq(q) { return { h: q.h, t: q.t, a: both(add(SH(q.h, q.t), BAR_OFF), 1), l: FEET }; }
+
+  /* goblet squat: dumbbell held vertically against the chest */
+  function gob(h, t) { return { h: h, t: t, a: both(add(SH(h, t), [9, 9]), -1), l: FEET }; }
+
+  MCEX.add(
+    /* ---------------------------------------------------------------- SQUAT PATTERN */
+    {
+      id: 'GY-BB-SQUAT', ar: 'سكوات بالبار على الظهر', en: 'Barbell back squat', fam: 'squat', pat: 'squat', cat: 'lower', role: ['main'], lvl: 3, mode: 'gym',
+      prim: ['quads', 'glutes'], sec: ['hamstrings', 'adductors', 'lower_back', 'core'], eq: ['barbell', 'rack'], space: 'داخل حامل البار (رف) بمساند أمان', impact: 'none', pos: 'standing', flags: ['knee', 'hip', 'lowback', 'shoulder', 'iap'],
+      load: { inc: 5, start: 'ابدأ بالبار وحده لتعلّم الحركة، ثم أضف أوزاناً صغيرة حتى تصل إلى وزن تستطيع رفعه 8 مرات ويبقى لديك 2–3 تكرارات بتقنية نظيفة.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [5, 10], rest: [120, 180], tempo: '3-0-1', rir: [1, 3] },
+      setup: 'اضبط مساند الأمان في الرف تحت أدنى نقطة ستصل إليها، وضع البار على أعلى الظهر (فوق لوحي الكتف لا على الرقبة) والقبضة أوسع قليلاً من الكتفين، ثم اخرج خطوتين للخلف وقف والقدمان بعرض الكتفين.',
+      steps: ['خذ نفساً وشد البطن قبل كل تكرار دون أن تحبسه طويلاً.', 'ادفع الوركين للخلف واثنِ الركبتين معاً بإيقاع متحكم، والركبتان باتجاه أصابع القدم.', 'انزل حتى يقترب الفخذ من الموازاة أو حسب المدى الذي تحافظ فيه على ظهر محايد.', 'ادفع الأرض بكامل القدم لتصعد والبار فوق منتصف القدم، وأخرج النفس أثناء الصعود.', 'أعد البار إلى الخطافات بالمشي للأمام حتى يلمس العمود ثم أنزله.'],
+      breath: 'شهيق وشد البطن قبل النزول، وزفير تدريجي أثناء الصعود. لا تحبس النفس لفترة طويلة.',
+      errors: ['وضع البار على عظم الرقبة', 'انهيار الركبتين للداخل', 'رفع الوركين قبل الصدر عند الصعود', 'تدوير أسفل الظهر في القاع', 'التمرين دون مساند أمان أو مساعد (سبوتر)'],
+      stop: ['ألم حاد في الركبة أو أسفل الظهر', 'دوخة بعد التكرارات الثقيلة', 'فقدان التحكم بالبار — أنزله على مساند الأمان'],
+      prereq: 'إتقان سكوات الكأس بالدمبل 3×10 بتقنية جيدة ودون ألم، والتدرب على إنزال البار على مساند الأمان.',
+      easier: ['GY-GOBLET'], harder: [], subs: ['GY-GOBLET', 'GY-LEGPRESS'], src: GYM_SRC,
+      desc: 'رسم جانبي: البار (دائرة القرص) على أعلى الظهر واليدان تمسكانه، ويظهر عمود الرف أمام الشخص. يدفع الوركين للخلف وينزل حتى يقترب الفخذ من الأفقي ثم يصعد. لا يُرسم عرض القبضة ولا مساند الأمان الجانبية.',
+      anim: { view: 'side', trace: 'hip', props: [{ k: 'rack', x: 168, y: 26, hook: 52 }, { k: 'bb', at: 'sh', off: BAR_OFF, r: 10 }], keys: [
+        { p: bsq(BSQ_TOP), d: 1600, hold: 400, lab: 'نزول متحكم — شهيق وشد البطن' },
+        { p: bsq(BSQ_BOT), d: 1200, hold: 200, lab: 'صعود — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-GOBLET', ar: 'سكوات الكأس بالدمبل', en: 'Goblet squat', fam: 'squat', pat: 'squat', cat: 'lower', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['quads', 'glutes'], sec: ['adductors', 'core', 'upper_back'], eq: ['dumbbell'], space: '1×1 م', impact: 'none', pos: 'standing', flags: ['knee', 'hip'],
+      load: { inc: 2.5, start: 'اختر دمبلاً تستطيع حمله أمام الصدر 12 تكراراً ويبقى لديك 2–3 تكرارات؛ يمكن استخدام كيتل بل بالطريقة نفسها.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [8, 12], rest: [60, 120], tempo: '3-0-1', rir: [1, 3] },
+      setup: 'أمسك دمبلاً واحداً عمودياً من طرفه العلوي بكلتا اليدين أمام الصدر، وقف والقدمان أوسع قليلاً من الوركين وأصابعهما للخارج قليلاً.',
+      steps: ['أبقِ الدمبل ملاصقاً للصدر والمرفقين للأسفل.', 'انزل بين الركبتين بإيقاع متحكم مع إبقاء الصدر مرفوعاً.', 'توقف عندما يقترب الفخذ من الموازاة أو قبل أن يتدور أسفل الظهر.', 'ادفع بكامل القدم لتعود للوقوف دون قفل الركبتين بعنف.'],
+      breath: 'شهيق أثناء النزول، زفير أثناء الصعود. لا تحبس النفس.',
+      errors: ['ابتعاد الدمبل عن الصدر', 'رفع الكعبين', 'انهيار الركبتين للداخل', 'النزول السريع والارتداد في الأسفل'],
+      stop: ['ألم حاد في الركبة أو الورك', 'ألم أسفل الظهر'],
+      easier: ['SQ-BW', 'SQ-BOX'], harder: ['GY-BB-SQUAT'], subs: ['GY-LEGPRESS', 'SQ-BOX'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص يمسك دمبلاً أمام صدره بكلتا اليدين والمرفقان للأسفل، ينزل في قرفصاء والجذع أكثر انتصاباً من السكوات العادي ثم يصعد. الدمبل يظهر مستطيلاً صغيراً عند الصدر.',
+      anim: { view: 'side', trace: 'hip', props: [{ k: 'db', at: 'wrN', off: [0, -1] }], keys: [
+        { p: gob([120, 84], 90), d: 1500, hold: 300, lab: 'نزول متحكم — شهيق' },
+        { p: gob([104, 120], 68), d: 1200, hold: 200, lab: 'صعود — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-GOBLET-HOLD', ar: 'ثبات القرفصاء العميقة بالدمبل (حركية)', en: 'Goblet squat hold (mobility)', fam: 'squat', pat: 'mobility', cat: 'mobility', role: ['warmup', 'cooldown'], lvl: 1, mode: 'gym',
+      prim: ['hips', 'ankles'], sec: ['adductors', 't_spine', 'quads'], eq: ['dumbbell'], space: '1×1 م', impact: 'none', pos: 'standing', flags: ['knee', 'hip', 'isometric_long'],
+      load: { inc: 2.5, start: 'وزن خفيف (نحو ثلث وزن سكوات الكأس) يساعد على التوازن فقط؛ الهدف هو الحركية لا الإجهاد.' },
+      dose: { u: 'time', sets: [1, 3], sec: [20, 40], rest: [30, 60], rir: [3, 5] },
+      setup: 'أمسك دمبلاً خفيفاً أمام الصدر بكلتا اليدين، وقف والقدمان أوسع من الوركين وأصابعهما للخارج قليلاً.',
+      steps: ['انزل ببطء إلى أعمق قرفصاء مريحة مع بقاء الكعبين على الأرض.', 'استخدم المرفقين لدفع الركبتين للخارج بلطف.', 'ثبت مع تنفس هادئ وأبقِ الصدر مرفوعاً.', 'اصعد ببطء بدفع الأرض بكامل القدم.'],
+      breath: 'تنفس بطيء وعميق طوال الثبات؛ لا تحبس النفس.',
+      errors: ['رفع الكعبين', 'تدوير الظهر بشدة في الأسفل', 'الارتداد للأعلى والأسفل بدل الثبات الهادئ', 'استخدام وزن ثقيل'],
+      stop: ['ألم في مقدمة الركبة أو أعلى الورك', 'خدر أو تنميل في الساقين'],
+      easier: ['SQ-BOX'], harder: [], subs: ['ST-GROIN', 'SQ-HALF'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص يمسك دمبلاً أمام صدره، ينزل ببطء إلى قرفصاء عميقة والكعبان على الأرض ويثبت مع تنفس هادئ، ثم يصعد. لا يُظهر الرسم الجانبي دفع المرفقين للركبتين نحو الخارج.',
+      anim: { view: 'side', props: [{ k: 'db', at: 'wrN', off: [0, -1] }], keys: [
+        { p: gob([120, 84], 90), d: 1800, hold: 300, lab: 'انزل ببطء' },
+        { p: gob([106, 128], 74), d: 5000, hold: 4200, lab: 'ثبات — تنفس عميق منتظم' },
+        { p: gob([106, 128], 74), d: 1800, lab: 'اصعد ببطء' }
+      ] }
+    },
+    /* ---------------------------------------------------------------- HINGE PATTERN */
+    {
+      id: 'GY-DB-RDL', ar: 'رفعة رومانية بالدمبل', en: 'Dumbbell Romanian deadlift', fam: 'hinge', pat: 'hinge', cat: 'lower', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['hamstrings', 'glutes'], sec: ['lower_back', 'forearms', 'core'], eq: ['dumbbell'], space: '1×1 م', impact: 'none', pos: 'standing', flags: ['lowback', 'hip', 'grip'],
+      load: { inc: 5, start: 'اختر زوج دمبل تستطيع رفعه 10 مرات ويبقى لديك 2–3 تكرارات مع ظهر محايد طوال المدى.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [8, 12], rest: [90, 120], tempo: '3-0-1', rir: [1, 3] },
+      setup: 'قف والقدمان بعرض الوركين، وأمسك دمبلين أمام الفخذين والذراعان ممدودتان، والركبتان مثنيتان قليلاً.',
+      steps: ['ادفع الوركين للخلف مع ثني بسيط ثابت في الركبتين.', 'أنزل الدمبلين قريبين من الفخذين ثم الساقين والظهر محايد.', 'توقف عندما تشعر بشد في الفخذ الخلفية أو قبل أن يتدور الظهر (غالباً منتصف الساق).', 'شد الألوية وادفع الوركين للأمام لتعود للوقوف دون تقوس للخلف.'],
+      breath: 'شهيق أثناء النزول، زفير أثناء الصعود. لا تحبس النفس.',
+      errors: ['تدوير الظهر للوصول أعمق', 'تحويل الحركة إلى سكوات بثني الركبتين كثيراً', 'ابتعاد الدمبل عن الساقين', 'التقوس للخلف في الأعلى'],
+      stop: ['ألم أسفل الظهر', 'شد مؤلم أو حاد في الفخذ الخلفية'],
+      prereq: 'إتقان مفصلة الورك بوزن الجسم 3×12 بظهر محايد ودون ألم.',
+      easier: ['HG-HIPHINGE'], harder: ['GY-BB-DL'], subs: ['GY-HIPTHRUST', 'HG-KICKSTAND'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص واقف يحمل دمبلين بذراعين ممدودتين، يدفع الوركين للخلف والركبتان مثنيتان قليلاً فينزل الجذع والدمبلان قريبان من الساقين، ثم يعود للوقوف.',
+      anim: { view: 'side', trace: 'hip', props: [{ k: 'db', at: 'both', off: [0, 2] }], keys: [
+        { p: { h: [120, 84], t: 90, a: DBH, l: FEET }, d: 1700, hold: 300, lab: 'ادفع الوركين للخلف — شهيق' },
+        { p: { h: [97, 90], t: 24, n: 6, a: [[-100, -100], [-98, -98]], l: [{ p: [122, 150], b: 1 }, { p: [118, 150], b: 1 }] }, d: 1300, hold: 300, lab: 'عد للوقوف — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-BB-DL', ar: 'الرفعة الميتة بالبار', en: 'Barbell deadlift', fam: 'hinge', pat: 'hinge', cat: 'lower', role: ['main'], lvl: 3, mode: 'gym',
+      prim: ['glutes', 'hamstrings', 'lower_back'], sec: ['quads', 'upper_back', 'forearms', 'core'], eq: ['barbell'], space: '1×2.5 م على أرضية مناسبة', impact: 'none', pos: 'standing', flags: ['lowback', 'hip', 'knee', 'grip', 'iap'],
+      load: { inc: 5, start: 'ابدأ ببار خفيف بأقراص بالقطر الكامل (أو على مرتفعات) لتعلّم الحركة، ثم زد تدريجياً حتى وزن تستطيع رفعه 6 مرات ويبقى لديك 2–3 تكرارات.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [3, 8], rest: [120, 180], tempo: '1-1-2', rir: [2, 3] },
+      setup: 'قف والبار فوق منتصف القدم، والقدمان بعرض الوركين. انحنِ من الوركين وامسك البار خارج الساقين مباشرة، والساقان تلامسان البار تقريباً والظهر محايد.',
+      steps: ['خذ نفساً وشد البطن، واسحب الكتفين للأسفل حتى "يشتد" البار دون رفعه بعد.', 'ادفع الأرض بالقدمين ليرتفع البار ملاصقاً للساقين ثم الفخذين.', 'مد الوركين والركبتين معاً حتى تقف مستقيماً دون تقوس للخلف.', 'أنزل البار بالعكس: الوركان للخلف أولاً ثم الركبتان بعد أن يتجاوز البار الركبة، بإيقاع متحكم.'],
+      breath: 'شهيق وشد البطن قبل الرفع، وزفير تدريجي عند الاقتراب من الوقوف أو في الأعلى. لا تحبس النفس لفترة طويلة.',
+      errors: ['تدوير الظهر عند بداية السحب', 'ابتعاد البار عن الجسم', 'رفع الوركين أولاً بسرعة ثم السحب بالظهر', 'التقوس للخلف في الأعلى', 'الارتطام بالأرض وارتداد البار بين التكرارات'],
+      stop: ['ألم أسفل الظهر أو ألم ينتشر إلى الساق', 'دوخة بعد التكرارات الثقيلة', 'انزلاق القبضة'],
+      prereq: 'إتقان الرفعة الرومانية بالدمبل 3×10 بظهر محايد ودون ألم، وتعلّم الحركة مع مدرب إن أمكن.',
+      easier: ['GY-DB-RDL'], harder: [], subs: ['GY-DB-RDL', 'GY-HIPTHRUST'], src: GYM_SRC,
+      desc: 'رسم جانبي: البار (دائرة القرص) على الأرض فوق منتصف القدم، والشخص منحنٍ يمسكه بذراعين ممدودتين. يدفع الأرض فيرتفع البار ملاصقاً للساقين حتى يقف مستقيماً، ثم ينزله بالعكس. لا يُظهر الرسم عرض القبضة.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'bb', at: 'wrN', r: 11 }], keys: [
+        { p: { h: [89, 108], t: 27, n: 8, a: both([127, 139], -1), l: FEET }, d: 900, hold: 500, lab: 'شد البطن ثم ادفع الأرض' },
+        { p: { h: [100, 94], t: 45, n: 4, a: both([125, 111], -1), l: FEET }, d: 900, lab: 'البار ملاصق للساقين — زفير قرب الأعلى' },
+        { p: { h: [120, 84], t: 90, a: both([121, 89], -1), l: FEET }, d: 1100, hold: 300, lab: 'أنزل بتحكم: الوركان للخلف أولاً' },
+        { p: { h: [100, 94], t: 45, n: 4, a: both([125, 111], -1), l: FEET }, d: 900, lab: 'ثم الركبتان بعد تجاوز البار لهما' }
+      ] }
+    },
+    {
+      id: 'GY-HIPTHRUST', ar: 'دفع الورك بالبار على بنش', en: 'Barbell hip thrust', fam: 'bridge', pat: 'bridge', cat: 'lower', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['glutes'], sec: ['hamstrings', 'quads', 'core'], eq: ['barbell', 'bench'], space: '1×2.5 م بجانب بنش ثابت', impact: 'none', pos: 'supine', flags: ['supine', 'floor', 'hip', 'lowback'],
+      load: { inc: 5, start: 'ابدأ بالبار وحده مع وسادة على الوركين، ثم زد حتى وزن تستطيع دفعه 10 مرات ويبقى لديك 2–3 تكرارات.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [8, 12], rest: [90, 120], tempo: '2-1-2', rir: [1, 3] },
+      setup: 'اجلس على الأرض وأسفل لوحي الكتف على حافة بنش ثابت لا ينزلق، ودحرج البار بوسادة إلى ثنية الوركين، والقدمان على الأرض بعرض الوركين.',
+      steps: ['أمسك البار باليدين لتثبيته وأبقِ الذقن نحو الصدر قليلاً.', 'اضغط بالكعبين وشد الألوية لترفع الوركين حتى يصبح الجذع موازياً للأرض تقريباً.', 'في الأعلى تكون الساق عمودية تقريباً؛ توقف ثانية دون تقوس أسفل الظهر.', 'أنزل الوركين بتحكم حتى يقتربا من الأرض ثم كرر.'],
+      breath: 'زفير أثناء الدفع، شهيق أثناء النزول. لا تحبس النفس.',
+      errors: ['تقوس أسفل الظهر بدل مد الورك', 'انزلاق البنش أو الكتفين عن حافته', 'رفع الرأس للخلف بقوة', 'الدفع بأصابع القدم'],
+      stop: ['ألم أسفل الظهر', 'ألم أو ضغط مزعج من البار على عظم الحوض — أضف وسادة أو خفف الوزن', 'تشنج في الفخذ الخلفية'],
+      prereq: 'إتقان جسر الحوض بساق واحدة 3×10 لكل ساق دون ألم.',
+      easier: ['BR-GLUTE', 'BR-ELEV'], harder: [], subs: ['BR-SL', 'GY-DB-RDL'], src: GYM_SRC,
+      desc: 'رسم جانبي: أعلى الظهر مستند إلى حافة بنش على اليسار والقدمان على الأرض، والبار (دائرة القرص) على الوركين واليدان تثبتانه. يرتفع الحوض حتى يصبح الجذع أفقياً والساق عمودية تقريباً ثم ينزل.',
+      anim: { view: 'side', trace: 'hip', props: [{ k: 'bench', x: 34, w: 54, h: 36 }, { k: 'bb', at: 'hip', off: [0, -9], r: 10 }], keys: [
+        { p: { h: [124, 138], t: 151, n: -14, a: both([124, 129], -1), l: [{ p: [160, 150], b: 1 }, { p: [158, 150], b: 1 }] }, d: 1300, hold: 300, lab: 'ادفع بالكعبين — زفير' },
+        { p: { h: [130, 110], t: 180, n: -28, a: both([130, 101], -1), l: [{ p: [160, 150], b: 1 }, { p: [158, 150], b: 1 }] }, d: 1500, hold: 700, lab: 'ثانية في الأعلى ثم انزل — شهيق' }
+      ] }
+    },
+    /* ---------------------------------------------------------------- SINGLE-LEG */
+    {
+      id: 'GY-DB-LUNGE', ar: 'اندفاع خلفي بالدمبل', en: 'Dumbbell reverse lunge', fam: 'lunge', pat: 'lunge', cat: 'lower', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['quads', 'glutes'], sec: ['hamstrings', 'glute_med', 'forearms', 'balance'], eq: ['dumbbell'], space: '1×2 م', impact: 'low', pos: 'standing', flags: ['knee', 'balance', 'grip'],
+      load: { inc: 2.5, start: 'اختر زوج دمبل تستطيع به 10 تكرارات لكل ساق ويبقى لديك 2–3 تكرارات دون فقدان التوازن.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [6, 12], rest: [60, 120], side: true, rir: [1, 3] },
+      setup: 'قف مستقيماً والقدمان بعرض الوركين، ودمبل في كل يد والذراعان ممدودتان بجانب الجسم.',
+      steps: ['اخطُ بقدم واحدة خطوة واسعة للخلف وارتكز على مقدمتها.', 'انزل عمودياً بتحكم حتى تقترب الركبة الخلفية من الأرض دون ارتطام.', 'أبقِ الجذع منتصباً والدمبلين متدليين بجانب الجسم.', 'ادفع بكامل القدم الأمامية لتعود إلى البداية، وأكمل المجموعة ثم بدّل.'],
+      breath: 'شهيق أثناء النزول، زفير أثناء العودة. لا تحبس النفس.',
+      errors: ['ارتطام الركبة الخلفية بالأرض', 'انحراف الركبة الأمامية للداخل', 'تأرجح الدمبلين', 'خطوة قصيرة جداً'],
+      stop: ['ألم في الركبة الأمامية', 'فقدان التوازن المتكرر — خفف الوزن أو استخدم الدعم'],
+      prereq: 'إتقان الاندفاع الخلفي بوزن الجسم 3×10 لكل ساق بتوازن جيد ودون ألم.',
+      easier: ['LU-REV'], harder: ['GY-DB-SPLIT'], subs: ['GY-DB-STEPUP', 'LU-SPLIT'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص يحمل دمبلاً في كل يد بجانب الجسم، يخطو للخلف وينزل حتى تقترب الركبة الخلفية من الأرض مع بقاء الجذع منتصباً، ثم يعود.',
+      anim: { view: 'side', trace: 'hip', props: [{ k: 'db', at: 'both', off: [0, 2] }], keys: [
+        { p: { h: [120, 84], t: 90, a: DBH, l: FEET }, d: 1400, hold: 300, lab: 'خطوة للخلف ونزول — شهيق' },
+        { p: { h: [100, 116], t: 86, a: DBH, l: [{ p: [122, 150], b: 1 }, { p: [60, 141], b: 1 }], f: [0, -70] }, d: 1400, hold: 300, lab: 'ادفع وعد — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-DB-SPLIT', ar: 'سكوات بلغاري بالدمبل', en: 'Dumbbell Bulgarian split squat', fam: 'lunge', pat: 'lunge', cat: 'lower', role: ['main'], lvl: 3, mode: 'gym',
+      prim: ['quads', 'glutes'], sec: ['hamstrings', 'adductors', 'hip_flexors', 'balance'], eq: ['dumbbell', 'bench'], space: '1×2.5 م خلف بنش', impact: 'none', pos: 'standing', flags: ['knee', 'balance', 'hip', 'grip'],
+      load: { inc: 2.5, start: 'ابدأ بدمبلين خفيفين جداً أو بلا وزن، ثم اختر وزناً تستطيع به 8 تكرارات لكل ساق ويبقى لديك 2–3 تكرارات بتوازن ثابت.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [6, 10], rest: [60, 120], side: true, rir: [1, 3] },
+      setup: 'قف أمام بنش بنحو خطوة كبيرة وضع ظهر القدم الخلفية عليه، ودمبل في كل يد بجانب الجسم.',
+      steps: ['انزل عمودياً بتحكم بثني الركبة الأمامية حتى يقترب الفخذ الأمامي من الأفقي.', 'أبقِ معظم الوزن على القدم الأمامية والجذع مائلاً قليلاً للأمام.', 'ادفع بكامل القدم الأمامية لتصعد دون قفل الركبة بعنف.', 'أكمل المجموعة ثم بدّل الساق.'],
+      breath: 'شهيق أثناء النزول، زفير أثناء الصعود. لا تحبس النفس.',
+      errors: ['القدم الأمامية قريبة جداً من البنش', 'الدفع بالقدم الخلفية', 'انهيار الركبة الأمامية للداخل', 'تأرجح الجذع أو الدمبلين'],
+      stop: ['ألم في الركبة الأمامية أو مقدمة الورك الخلفي', 'فقدان التوازن المتكرر'],
+      prereq: 'إتقان السكوات البلغاري بوزن الجسم 3×10 لكل ساق دون ألم وبتوازن جيد.',
+      easier: ['LU-BULG', 'GY-DB-LUNGE'], harder: [], subs: ['GY-DB-LUNGE', 'LU-SPLIT'], src: GYM_SRC,
+      desc: 'رسم جانبي: ظهر القدم الخلفية على بنش خلف الشخص والقدم الأمامية على الأرض، ودمبل في كل يد. ينزل عمودياً بثني الركبة الأمامية ثم يصعد.',
+      anim: { view: 'side', trace: 'hip', props: [{ k: 'bench', x: 26, w: 44, h: 34 }, { k: 'db', at: 'both', off: [0, 2] }], keys: [
+        { p: { h: [100, 90], t: 86, a: DBH, l: [{ p: [126, 150], b: 1 }, { p: [62, 111], b: 1 }], f: [0, 195] }, d: 1500, hold: 300, lab: 'نزول — شهيق' },
+        { p: { h: [96, 118], t: 80, a: DBH, l: [{ p: [126, 150], b: 1 }, { p: [62, 111], b: 1 }], f: [0, 195] }, d: 1400, hold: 300, lab: 'صعود — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-DB-STEPUP', ar: 'صعود بنش بالدمبل', en: 'Dumbbell step-up', fam: 'step-up', pat: 'lunge', cat: 'lower', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['quads', 'glutes'], sec: ['hamstrings', 'forearms', 'balance'], eq: ['dumbbell', 'bench'], space: 'أمام بنش أو صندوق ثابت', impact: 'none', pos: 'standing', flags: ['knee', 'balance', 'hip', 'grip'],
+      load: { inc: 2.5, start: 'ابدأ بلا وزن على ارتفاع منخفض، ثم اختر دمبلين تستطيع بهما 10 تكرارات لكل ساق ويبقى لديك 2–3 تكرارات.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [6, 12], rest: [60, 120], side: true, rir: [1, 3] },
+      setup: 'قف أمام بنش ثابت أو صندوق متين (بحيث لا تتجاوز الركبة مستوى الورك عند وضع القدم)، ودمبل في كل يد بجانب الجسم.',
+      steps: ['ضع القدم كاملة على البنش.', 'مِل بالجذع قليلاً للأمام وادفع بكعب القدم العليا لتصعد حتى تستقيم الساق.', 'أحضر القدم الأخرى إلى السطح.', 'انزل بالقدم الخلفية أولاً بتحكم، وأكمل المجموعة ثم بدّل.'],
+      breath: 'زفير أثناء الصعود، شهيق أثناء النزول. لا تحبس النفس.',
+      errors: ['القفز بالقدم السفلية بدل الدفع بالعليا', 'انهيار الركبة للداخل', 'سطح مرتفع جداً أو غير ثابت', 'تأرجح الدمبلين'],
+      stop: ['ألم في الركبة أو الورك', 'عدم ثبات السطح أو فقدان التوازن'],
+      prereq: 'إتقان صعود الدرجة المرتفعة بوزن الجسم 3×12 لكل ساق دون ألم وبتوازن جيد.',
+      easier: ['ST-HIGH'], harder: ['GY-DB-SPLIT'], subs: ['GY-DB-LUNGE', 'ST-HIGH'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص يحمل دمبلاً في كل يد، يضع قدماً على صندوق أو بنش ثابت ويصعد حتى يقف عليه ثم ينزل بالقدم الخلفية أولاً. يُرسم السطح كتلة مصمتة.',
+      anim: { view: 'side', trace: 'hip', props: [{ k: 'step', x: 128, w: 50, h: 22 }, { k: 'db', at: 'both', off: [0, 2] }], keys: [
+        { p: { h: [104, 84], t: 90, a: DBH, l: [{ p: [106, 150], b: 1 }, { p: [102, 150], b: 1 }] }, d: 900, hold: 200, lab: 'ضع القدم على البنش' },
+        { p: { h: [112, 98], t: 76, a: DBH, l: [{ p: [142, 128], b: 1 }, { p: [104, 150], b: 1 }] }, d: 1300, hold: 200, lab: 'اصعد — زفير' },
+        { p: { h: [142, 70], t: 90, a: DBH, l: [{ p: [146, 128], b: 1 }, { p: [142, 128], b: 1 }] }, d: 1100, hold: 300, lab: 'انزل بالقدم الخلفية — شهيق' },
+        { p: { h: [118, 100], t: 82, a: DBH, l: [{ p: [142, 128], b: 1 }, { p: [104, 150], b: 1 }] }, d: 1000, hold: 150, lab: 'ثم القدم الأولى' }
+      ] }
+    },
+    /* ---------------------------------------------------------------- MACHINES */
+    {
+      id: 'GY-LEGPRESS', ar: 'دفع الأرجل بالجهاز', en: 'Leg press', fam: 'leg-press', pat: 'squat', cat: 'lower', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['quads', 'glutes'], sec: ['hamstrings', 'adductors'], eq: ['legpress'], space: 'جهاز دفع الأرجل', impact: 'none', pos: 'seated', flags: ['knee', 'hip', 'lowback', 'floor'],
+      load: { inc: 5, start: 'ابدأ بوزن خفيف لضبط المقعد والمدى، ثم اختر وزناً تدفعه 12 مرة ويبقى لديك 2–3 تكرارات دون أن يرتفع الحوض عن المقعد.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [8, 15], rest: [90, 120], tempo: '3-0-1', rir: [1, 3] },
+      setup: 'اجلس وظهرك وحوضك ملاصقان لمسند الجهاز، والقدمان على المنصة بعرض الوركين، ثم ادفع المنصة قليلاً وحرر مقابض الأمان.',
+      steps: ['أنزل المنصة ببطء بثني الركبتين نحو الصدر والركبتان باتجاه أصابع القدم.', 'توقف قبل أن يرتفع الحوض أو يتدور أسفل الظهر عن المسند.', 'ادفع المنصة بكامل القدمين حتى تمتد الساقان دون قفل الركبتين.', 'أعد مقابض الأمان قبل النزول من الجهاز.'],
+      breath: 'شهيق أثناء النزول، زفير أثناء الدفع. لا تحبس النفس.',
+      errors: ['النزول العميق حتى يرتفع الحوض عن المقعد', 'قفل الركبتين بعنف في الأعلى', 'انهيار الركبتين للداخل', 'دفع الركبتين باليدين'],
+      stop: ['ألم في الركبة أو أسفل الظهر', 'دوخة أو صداع شديد مع الجهد'],
+      easier: ['SQ-BOX'], harder: ['GY-BB-SQUAT'], subs: ['GY-GOBLET', 'SQ-WALLSIT'], src: GYM_SRC,
+      desc: 'رسم جانبي مبسّط لجهاز دفع الأرجل المائل: الشخص جالس على مقعد منخفض وظهره على مسند مائل، يدفع بقدميه للأعلى والأمام ثم يثني ركبتيه نحو الصدر. المنصة المنزلقة وسكتها لا تُرسمان كاملتين؛ يظهر قرص وزن عند القدمين يتحرك معهما ليمثل المنصة.',
+      anim: { view: 'side', trace: 'anN', props: [{ k: 'box', x: 64, w: 40, h: 20 }, { k: 'bench', x: 40, w: 48, h: 26, deg: -45 }, { k: 'bb', at: 'anN', off: [5, -8], r: 9 }], keys: [
+        { p: { h: [94, 124], t: 135, n: -20, a: both([102, 120], 1), l: [{ p: [146, 80], b: 1 }, { p: [144, 80], b: 1 }], f: [130, 130] }, d: 1600, hold: 300, lab: 'أنزل المنصة ببطء — شهيق' },
+        { p: { h: [94, 124], t: 135, n: -20, a: both([102, 120], 1), l: [{ p: [118, 98], b: 1 }, { p: [116, 98], b: 1 }], f: [130, 130] }, d: 1200, hold: 200, lab: 'ادفع — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-LEGCURL', ar: 'ثني الأرجل بالجهاز', en: 'Machine leg curl', fam: 'leg-curl', pat: 'hinge', cat: 'lower', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['hamstrings'], sec: ['calves'], eq: ['machine'], space: 'جهاز ثني الأرجل', impact: 'none', pos: 'seated', flags: ['knee', 'floor'],
+      load: { inc: 5, start: 'اختر وزناً تثني به الساقين 12–15 مرة ويبقى لديك 2–3 تكرارات دون رفع الوركين عن المقعد.' },
+      dose: { u: 'reps', sets: [2, 3], reps: [10, 15], rest: [60, 90], tempo: '2-1-3', rir: [1, 3] },
+      setup: 'اجلس على جهاز ثني الأرجل الجالس، الركبة على محور الجهاز، الوسادة السفلية خلف الكاحلين، ووسادة الفخذ مثبتة فوق الفخذين.',
+      steps: ['أمسك المقابض وأبقِ الظهر على المسند.', 'اثنِ الركبتين لتسحب الوسادة للأسفل والخلف بقدر ما تستطيع دون رفع الوركين.', 'توقف ثانية مع شد الفخذ الخلفية.', 'أعد الساقين ببطء حتى تقتربا من الامتداد دون أن ترتطم الأوزان.'],
+      breath: 'زفير أثناء الثني، شهيق أثناء العودة. لا تحبس النفس.',
+      errors: ['محور الجهاز بعيد عن مفصل الركبة', 'رفع الوركين أو تقويس الظهر', 'الإرجاع السريع وارتطام الأوزان', 'مدى حركة ناقص'],
+      stop: ['ألم في الركبة أو تشنج مؤلم في الفخذ الخلفية', 'ألم خلف الركبة'],
+      easier: ['BR-GLUTE'], harder: [], subs: ['GY-DB-RDL', 'BR-SL'], src: GYM_SRC,
+      desc: 'رسم جانبي مبسّط لجهاز ثني الأرجل الجالس: الشخص جالس على مقعد بمسند والساقان ممدودتان أمامه، وقرص صغير خلف الكاحل يمثل وسادة الجهاز. يثني الركبتين فتنزل الساقان تحت المقعد ثم تعودان. وسادة الفخذ العلوية لا تُرسم.',
+      anim: { view: 'side', props: [{ k: 'chair', x: 66, w: 46, h: 42, back: 'l' }, { k: 'bb', at: 'anN', off: [-2, 6], r: 5 }], keys: [
+        { p: { h: [82, 104], t: 96, a: both([96, 104], 1), l: [[2, -4], [0, -6]], f: [80, 80] }, d: 1300, hold: 300, lab: 'اثنِ الركبتين — زفير' },
+        { p: { h: [82, 104], t: 96, a: both([96, 104], 1), l: [[2, -112], [0, -114]], f: [-20, -20] }, d: 1800, hold: 500, lab: 'عد ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-LEGEXT', ar: 'مد الأرجل بالجهاز', en: 'Machine leg extension', fam: 'leg-extension', pat: 'squat', cat: 'lower', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['quads'], sec: [], eq: ['machine'], space: 'جهاز مد الأرجل', impact: 'none', pos: 'seated', flags: ['knee', 'floor'],
+      load: { inc: 5, start: 'ابدأ بوزن خفيف واختر وزناً تمد به الساقين 12–15 مرة ويبقى لديك 2–3 تكرارات دون أي ألم في الركبة.' },
+      dose: { u: 'reps', sets: [2, 3], reps: [10, 15], rest: [60, 90], tempo: '2-1-3', rir: [2, 3] },
+      setup: 'اجلس والظهر على المسند، وحاذِ محور الجهاز مع مفصل الركبة، وضع الوسادة على مقدمة الساق فوق الكاحل مباشرة.',
+      steps: ['أمسك المقابض وثبت الحوض على المقعد.', 'مد الركبتين بتحكم حتى تستقيم الساقان تقريباً.', 'توقف ثانية مع شد الفخذ الأمامية دون قفل عنيف.', 'أنزل الوزن ببطء ضمن مدى مريح للركبة.'],
+      breath: 'زفير أثناء المد، شهيق أثناء النزول. لا تحبس النفس.',
+      errors: ['الركل السريع والتأرجح', 'محور الجهاز بعيد عن الركبة', 'رفع الحوض عن المقعد', 'وزن ثقيل يسبب ألماً في مقدمة الركبة'],
+      stop: ['ألم في مقدمة الركبة أو تحت الرضفة — قلل المدى أو الوزن أو توقف', 'طقطقة مؤلمة في الركبة'],
+      easier: ['SQ-CHAIR'], harder: [], subs: ['GY-LEGPRESS', 'SQ-WALLSIT'], src: GYM_SRC,
+      desc: 'رسم جانبي مبسّط لجهاز مد الأرجل: الشخص جالس على مقعد بمسند والساقان متدليتان، وقرص صغير أمام الكاحل يمثل وسادة الجهاز. يمد الركبتين حتى تستقيم الساقان أفقياً ثم ينزلهما ببطء.',
+      anim: { view: 'side', props: [{ k: 'chair', x: 66, w: 46, h: 46, back: 'l' }, { k: 'bb', at: 'anN', off: [5, -3], r: 5 }], keys: [
+        { p: { h: [82, 100], t: 96, a: both([96, 100], 1), l: [[2, -92], [0, -94]], f: [-10, -10] }, d: 1300, hold: 300, lab: 'مد الساقين — زفير' },
+        { p: { h: [82, 100], t: 96, a: both([96, 100], 1), l: [[2, 0], [0, -2]], f: [80, 80] }, d: 1800, hold: 500, lab: 'أنزل ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-DB-CALF', ar: 'رفع الكعبين بالدمبل', en: 'Dumbbell calf raise', fam: 'calf-raise', pat: 'calf', cat: 'lower', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['calves'], sec: ['forearms', 'balance'], eq: ['dumbbell'], space: '1×1 م', impact: 'none', pos: 'standing', flags: ['ankle', 'grip'],
+      load: { inc: 2.5, start: 'اختر دمبلين تستطيع بهما 15 تكراراً كاملة المدى ويبقى لديك 2–3 تكرارات.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [10, 20], rest: [45, 90], tempo: '1-1-3', rir: [1, 3] },
+      setup: 'قف مستقيماً والقدمان بعرض الوركين، ودمبل في كل يد بجانب الجسم. يمكن الوقوف بجانب حامل لوضع يد عليه للتوازن مع دمبل واحد في اليد الأخرى.',
+      steps: ['ارفع الكعبين ببطء إلى أعلى ما تستطيع والضغط على مقدمة القدم كلها.', 'توقف ثانية في الأعلى.', 'أنزل الكعبين ببطء حتى يلامسا الأرض.', 'أبقِ الركبتين ممدودتين دون قفل والجسم مستقيماً.'],
+      breath: 'زفير أثناء الرفع، شهيق أثناء النزول. لا تحبس النفس.',
+      errors: ['الارتداد السريع', 'ميل الكاحلين للخارج والضغط على الأصابع الخارجية', 'مدى حركة ناقص', 'ميل الجسم للأمام'],
+      stop: ['ألم في وتر أكيلس أو الكاحل', 'تشنج مؤلم في السمانة'],
+      easier: ['CF-RAISE'], harder: [], subs: ['CF-SL', 'CF-RAISE'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص واقف يحمل دمبلاً في كل يد، يرفع الكعبين فيرتفع الجسم على مقدمة القدمين ثم ينزل ببطء.',
+      anim: { view: 'side', trace: 'head', props: [{ k: 'db', at: 'both', off: [0, 2] }], keys: [
+        { p: { h: [120, 84], t: 90, a: DBH, l: FEET, f: [0, 0] }, d: 1200, hold: 300, lab: 'ارفع الكعبين — زفير' },
+        { p: { h: [125, 76], t: 90, a: DBH, l: [{ p: [126.2, 142.2], b: 1 }, { p: [122.2, 142.2], b: 1 }], f: [-45, -45] }, d: 1600, hold: 700, lab: 'انزل ببطء — شهيق' }
+      ] }
+    },
+    /* ---------------------------------------------------------------- POWER / CARRIES / CORE */
+    {
+      id: 'GY-KB-SWING', ar: 'أرجحة الكيتل بل', en: 'Kettlebell swing', fam: 'hinge', pat: 'hinge', cat: 'lower', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['glutes', 'hamstrings'], sec: ['lower_back', 'core', 'forearms', 'cardio'], eq: ['kettlebell'], space: '1.5×2 م خالية أمامك وخلفك', impact: 'low', pos: 'standing', flags: ['lowback', 'hip', 'grip', 'iap'],
+      load: { inc: 4, start: 'ابدأ بكيتل بل خفيف (غالباً 8–12 كغ للمبتدئين و12–16 كغ للمتمرسين) تستطيع أرجحته 15 مرة بتقنية نظيفة ويبقى لديك 2–3 تكرارات.' },
+      dose: { u: 'reps', sets: [2, 4], reps: [10, 20], rest: [60, 120], rir: [2, 3] },
+      setup: 'قف والقدمان أوسع قليلاً من الكتفين والكيتل بل على الأرض أمامك بنحو 30 سم. انحنِ من الوركين وامسك المقبض بكلتا اليدين.',
+      steps: ['اسحب الكيتل بل للخلف بين الفخذين كتمرير كرة، والظهر محايد.', 'ادفع الوركين للأمام بقوة وشد الألوية لتقف مستقيماً، فيندفع الكيتل بل للأمام حتى مستوى الصدر تقريباً.', 'الذراعان توجّهان فقط ولا ترفعان الوزن.', 'دع الكيتل بل يعود، وانحنِ من الوركين عندما يقترب من الحوض، ثم كرر بإيقاع ثابت.'],
+      breath: 'زفير قصير قوي عند دفع الوركين، وشهيق أثناء النزول. لا تحبس النفس.',
+      errors: ['تحويل الحركة إلى سكوات بثني الركبتين كثيراً', 'رفع الكيتل بل بالذراعين أو الكتفين', 'تدوير الظهر في الأسفل', 'التقوس للخلف في الأعلى', 'أرجحة الوزن فوق الرأس'],
+      stop: ['ألم أسفل الظهر', 'انزلاق القبضة — أوقف الأرجحة بأمان وأنزل الوزن', 'دوخة'],
+      prereq: 'إتقان الرفعة الرومانية بالدمبل 3×10 بظهر محايد ودون ألم.',
+      easier: ['GY-DB-RDL'], harder: [], subs: ['GY-DB-RDL', 'GY-HIPTHRUST'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص منحنٍ من الوركين والكيتل بل (دائرة) بين فخذيه، ثم يدفع الوركين للأمام بقوة فيقف مستقيماً وتتأرجح الذراعان الممدودتان مع الكيتل بل حتى مستوى الصدر، ثم يعود.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'kb', at: 'wrN' }], keys: [
+        { p: { h: [100, 94], t: 28, n: 6, a: [[-112, -112], [-110, -110]], l: [{ p: [124, 150], b: 1 }, { p: [120, 150], b: 1 }] }, d: 600, hold: 100, lab: 'ادفع الوركين — زفير قوي' },
+        { p: { h: [120, 84], t: 90, a: [[-2, -2], [-4, -4]], l: [{ p: [124, 150], b: 1 }, { p: [120, 150], b: 1 }] }, d: 700, hold: 100, lab: 'دعها تعود وانحنِ — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-FARMER', ar: 'حمل المزارع بالدمبل', en: 'Farmer carry', fam: 'carry', pat: 'locomotion', cat: 'core', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['forearms', 'core'], sec: ['upper_back', 'glutes', 'calves'], eq: ['dumbbell'], space: 'ممر خالٍ 10–20 م', impact: 'low', pos: 'standing', flags: ['grip'],
+      load: { inc: 2.5, start: 'اختر دمبلين تستطيع حملهما 30 ثانية بقبضة ثابتة وجسم مستقيم ويبقى لديك هامش؛ كثيرون يبدؤون بنحو ربع وزن الجسم في كل يد ثم يزيدون.' },
+      dose: { u: 'time', sets: [2, 4], sec: [20, 40], rest: [60, 120], rir: [1, 3] },
+      setup: 'قف بين دمبلين، وانحنِ من الوركين بظهر محايد وارفعهما كرفعة ميتة حتى تقف مستقيماً والذراعان ممدودتان بجانب الجسم.',
+      steps: ['أبقِ الكتفين للخلف وللأسفل والصدر مرفوعاً.', 'امشِ بخطوات قصيرة ثابتة ومتحكمة دون تأرجح الدمبلين.', 'أبقِ البطن مشدوداً والجذع منتصباً.', 'توقف وأنزل الدمبلين بالانحناء من الوركين لا بتدوير الظهر.'],
+      breath: 'تنفس منتظم أثناء المشي؛ لا تحبس النفس.',
+      errors: ['رفع الكتفين نحو الأذنين', 'ميل الجذع للأمام أو للجانب', 'خطوات طويلة متسرعة', 'إنزال الدمبلين بتدوير الظهر'],
+      stop: ['انزلاق القبضة — أنزل الوزن فوراً بأمان', 'ألم أسفل الظهر أو الكتف'],
+      easier: ['CA-WALK'], harder: [], subs: ['GY-SUITCASE', 'CR-STANDBRACE'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص يمشي بخطوات قصيرة منتظمة والجذع منتصب، ويحمل دمبلاً في كل يد والذراعان ممدودتان بجانب الجسم دون تأرجح.',
+      anim: { view: 'side', props: [{ k: 'db', at: 'both', off: [0, 2] }], keys: [
+        { p: { h: [120, 86], t: 90, a: DBH, l: [{ p: [134, 148], b: 1 }, { p: [104, 145], b: 1 }], f: [12, -30] }, d: 450, lab: 'خطوة قصيرة — تنفس منتظم' },
+        { p: { h: [120, 84], t: 90, a: DBH, l: [{ p: [121, 150], b: 1 }, { p: [116, 136], b: 1 }], f: [0, -35] }, d: 450, lab: 'الجذع منتصب' },
+        { p: { h: [120, 86], t: 90, a: DBH, l: [{ p: [104, 145], b: 1 }, { p: [134, 148], b: 1 }], f: [-30, 12] }, d: 450, lab: 'خطوة قصيرة — تنفس منتظم' },
+        { p: { h: [120, 84], t: 90, a: DBH, l: [{ p: [116, 136], b: 1 }, { p: [121, 150], b: 1 }], f: [-35, 0] }, d: 450, lab: 'الكتفان للخلف' }
+      ] }
+    },
+    {
+      id: 'GY-SUITCASE', ar: 'حمل الحقيبة بدمبل واحد', en: 'Suitcase carry', fam: 'carry', pat: 'core_lat', cat: 'core', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['obliques', 'core'], sec: ['forearms', 'glute_med', 'upper_back'], eq: ['dumbbell'], space: 'ممر خالٍ 10–20 م', impact: 'low', pos: 'standing', flags: ['grip'],
+      load: { inc: 2.5, start: 'اختر دمبلاً واحداً تستطيع حمله 30 ثانية دون أن يميل جذعك نحوه، ويبقى لديك هامش؛ ابدأ أخف من وزن حمل المزارع لليد الواحدة.' },
+      dose: { u: 'time', sets: [2, 3], sec: [20, 40], rest: [45, 90], side: true, rir: [1, 3] },
+      setup: 'قف ودمبل واحد بجانب قدم واحدة، انحنِ من الوركين بظهر محايد وارفعه حتى تقف مستقيماً والذراع ممدودة بجانب الجسم.',
+      steps: ['أبقِ الكتفين متوازيين وأفقيين، ولا تمِل نحو الدمبل ولا بعيداً عنه.', 'امشِ بخطوات قصيرة ثابتة والبطن مشدود.', 'أبقِ الذراع الحرة مسترخية بجانبك أو ممدودة جانباً قليلاً للتوازن.', 'أنزل الدمبل بالانحناء من الوركين ثم بدّل اليد للجانب الآخر.'],
+      breath: 'تنفس منتظم أثناء المشي؛ لا تحبس النفس.',
+      errors: ['ميل الجذع نحو جهة الدمبل', 'رفع كتف الجهة الحرة', 'خطوات متسرعة', 'إنزال الدمبل بتدوير الظهر'],
+      stop: ['ألم أسفل الظهر أو في جانب الجذع', 'انزلاق القبضة — أنزل الوزن فوراً بأمان'],
+      easier: ['CR-STANDBRACE'], harder: [], subs: ['GY-FARMER', 'PL-SIDE-K'], src: GYM_SRC,
+      desc: 'رسم جانبي: الشخص يمشي بخطوات قصيرة منتظمة والجذع منتصب، ويحمل دمبلاً واحداً في اليد القريبة بينما اليد الأخرى حرة. الرسم الجانبي لا يُظهر ميلان الجذع جانبياً الذي يجب تجنبه.',
+      anim: { view: 'side', props: [{ k: 'db', at: 'wrN', off: [0, 2] }], keys: [
+        { p: { h: [120, 86], t: 90, a: [[-92, -92], [-80, -76]], l: [{ p: [134, 148], b: 1 }, { p: [104, 145], b: 1 }], f: [12, -30] }, d: 450, lab: 'خطوة قصيرة — تنفس منتظم' },
+        { p: { h: [120, 84], t: 90, a: [[-92, -92], [-88, -86]], l: [{ p: [121, 150], b: 1 }, { p: [116, 136], b: 1 }], f: [0, -35] }, d: 450, lab: 'لا تمِل نحو الدمبل' },
+        { p: { h: [120, 86], t: 90, a: [[-92, -92], [-98, -100]], l: [{ p: [104, 145], b: 1 }, { p: [134, 148], b: 1 }], f: [-30, 12] }, d: 450, lab: 'خطوة قصيرة — تنفس منتظم' },
+        { p: { h: [120, 84], t: 90, a: [[-92, -92], [-88, -86]], l: [{ p: [116, 136], b: 1 }, { p: [121, 150], b: 1 }], f: [-35, 0] }, d: 450, lab: 'الكتفان أفقيان' }
+      ] }
+    },
+    {
+      id: 'GY-PALLOF', ar: 'ضغط بالوف بالكيبل', en: 'Cable Pallof press', fam: 'anti-rotation', pat: 'core_rot', cat: 'core', role: ['main', 'warmup'], lvl: 1, mode: 'gym',
+      prim: ['obliques', 'core'], sec: ['glute_med', 'delts_front'], eq: ['cable'], space: '1.5×1.5 م بجانب جهاز الكيبل', impact: 'none', pos: 'standing', flags: [],
+      load: { inc: 2.5, start: 'اختر أخف وزن يجعلك تشعر بسحب الكيبل للدوران، وتستطيع به 12 تكراراً لكل جهة دون أن يدور الجذع ويبقى لديك 2–3 تكرارات.' },
+      dose: { u: 'reps', sets: [2, 3], reps: [8, 12], rest: [45, 90], tempo: '2-2-2', side: true, rir: [2, 3] },
+      setup: 'اضبط بكرة الكيبل على مستوى الصدر، وقف وجانبك نحو الجهاز على بعد خطوة أو اثنتين والقدمان بعرض الكتفين، وامسك المقبض بكلتا اليدين أمام منتصف الصدر.',
+      steps: ['شد البطن والألوية واثنِ الركبتين قليلاً.', 'ادفع المقبض للأمام مباشرة حتى تمتد الذراعان دون أن يدور الجذع نحو الجهاز.', 'ثبت ثانيتين مع تنفس منتظم.', 'أعد المقبض إلى الصدر ببطء، وأكمل المجموعة ثم بدّل الجهة.'],
+      breath: 'زفير أثناء الدفع، شهيق أثناء الإرجاع، وتنفس منتظم أثناء الثبات.',
+      errors: ['دوران الجذع أو الحوض نحو الجهاز', 'الوقوف قريباً جداً بلا مقاومة كافية', 'رفع الكتفين', 'حبس النفس'],
+      stop: ['ألم أسفل الظهر', 'ألم في الكتف'],
+      easier: ['CR-STANDBRACE'], harder: ['GY-WOODCHOP'], subs: ['CR-DEADBUG', 'CR-BIRDDOG'], src: GYM_SRC,
+      desc: 'رسم أمامي: الشخص يواجهنا وجهاز الكيبل إلى يمين الصورة والخط المتقطع هو الكيبل. يبدأ والمقبض عند منتصف الصدر، ثم يدفعه نحونا مباشرة فتبدو الذراعان أقصر لأنهما متجهتان نحو المشاهد، والجذع لا يدور، ثم يعيده.',
+      anim: { view: 'front', props: [{ k: 'cable', at: 'wrN', to: [222, 70] }], keys: [
+        { p: { h: [120, 86], t: 90, a: [{ p: [120, 74], b: -1 }, { p: [120, 74], b: 1 }], l: [{ p: [108, 150], b: -1 }, { p: [132, 150], b: 1 }] }, d: 1200, hold: 300, lab: 'ادفع للأمام — زفير' },
+        { p: { h: [120, 86], t: 90, k: [1, 0.5, 0.5, 1, 1], a: [{ p: [120, 62], b: -1 }, { p: [120, 62], b: 1 }], l: [{ p: [108, 150], b: -1 }, { p: [132, 150], b: 1 }] }, d: 2600, hold: 1800, lab: 'ثبت بلا دوران ثم أعد — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-WOODCHOP', ar: 'قطع الخشب بالكيبل', en: 'Cable woodchop (high to low)', fam: 'rotation', pat: 'core_rot', cat: 'core', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['obliques', 'core'], sec: ['glutes', 'delts_front', 'upper_back'], eq: ['cable'], space: '2×2 م بجانب جهاز الكيبل', impact: 'none', pos: 'standing', flags: ['lowback', 'shoulder'],
+      load: { inc: 2.5, start: 'ابدأ بوزن خفيف تستطيع به 12 تكراراً لكل جهة بتحكم كامل ويبقى لديك 2–3 تكرارات؛ الحركة تُقاد بالوركين والجذع لا بالذراعين.' },
+      dose: { u: 'reps', sets: [2, 3], reps: [8, 12], rest: [60, 90], tempo: '2-0-2', side: true, rir: [2, 3] },
+      setup: 'اضبط بكرة الكيبل في أعلى الجهاز، وقف وجانبك نحوه والقدمان أوسع من الكتفين، وامسك المقبض بكلتا اليدين فوق الكتف القريبة من الجهاز والذراعان ممدودتان تقريباً.',
+      steps: ['شد البطن وابدأ بلف الوركين والجذع معاً بعيداً عن الجهاز.', 'اسحب المقبض بخط قطري من أعلى الكتف إلى خارج الورك أو الركبة المقابلة.', 'اثنِ الركبتين قليلاً ولُفّ القدم الخلفية على مقدمتها لحماية أسفل الظهر.', 'عد ببطء على المسار نفسه، وأكمل المجموعة ثم بدّل الجهة.'],
+      breath: 'زفير أثناء السحب للأسفل، شهيق أثناء العودة. لا تحبس النفس.',
+      errors: ['السحب بالذراعين فقط', 'لف أسفل الظهر وحده مع تثبيت الوركين والقدمين', 'ثني الظهر للأمام بدل اللف', 'العودة السريعة غير المتحكمة'],
+      stop: ['ألم أسفل الظهر', 'ألم في الكتف'],
+      prereq: 'إتقان ضغط بالوف بالكيبل 3×12 لكل جهة دون دوران أو ألم.',
+      easier: ['GY-PALLOF'], harder: [], subs: ['GY-PALLOF', 'CR-BLTWIST'], src: GYM_SRC,
+      desc: 'رسم أمامي: الشخص يواجهنا وبكرة الكيبل في أعلى يسار الصورة. يبدأ واليدان معاً فوق الكتف القريبة من الجهاز، ثم يسحب المقبض قطرياً إلى أسفل الجهة الأخرى مع ثني الركبتين قليلاً، ثم يعود ببطء. دوران الجذع لا يظهر بوضوح من الأمام.',
+      anim: { view: 'front', trace: 'wrN', props: [{ k: 'cable', at: 'wrN', to: [16, 18] }], keys: [
+        { p: { h: [118, 86], t: 92, a: [{ p: [88, 28], b: 1 }, { p: [88, 28], b: 1 }], l: [{ p: [102, 150], b: -1 }, { p: [138, 150], b: 1 }] }, d: 1100, hold: 200, lab: 'اسحب قطرياً للأسفل — زفير' },
+        { p: { h: [122, 94], t: 80, a: [{ p: [142, 92], b: -1 }, { p: [142, 92], b: -1 }], l: [{ p: [102, 150], b: -1 }, { p: [138, 150], b: 1 }] }, d: 1600, hold: 300, lab: 'عد ببطء — شهيق' }
+      ] }
+    }
+  );
+})();
+
+;
+/* ==== src/data/ex_gym_upper.js ==== */
+/* Gym (weighted) upper-body exercises: presses, rows, pulldown, cable work and isolation lifts.
+ * mode:'gym' keeps them out of bodyweight plans. Poses face RIGHT (x grows forward).
+ * Equipment props with `at:` follow a joint every frame (db = dumbbell, bb = barbell end-on, bbline = barbell from the front, cable = cable to a pulley). */
+(function () {
+  function HA(x, y, b) { return [{ p: [x, y], b: b }, { p: [x, y], b: b }]; }
+  function LA(x, y, b) { return [{ p: [x, y], b: b }, { p: [x, y], b: b }]; }
+  var SRC = ['ACSM-RT', 'ACSM-RT26'];
+  var DOSE_C = function (r) { return { u: 'reps', sets: [2, 4], reps: r || [6, 12], rest: [90, 180], tempo: '2-0-1', rir: [1, 3] }; };
+  var DOSE_I = function () { return { u: 'reps', sets: [2, 3], reps: [10, 15], rest: [60, 90], tempo: '2-0-2', rir: [1, 3] }; };
+
+  /* Supine on a flat bench (pad top y=110), head to the LEFT, feet flat on the floor. */
+  var BENCH_FLAT = { k: 'bench', x: 70, w: 90, h: 40 };
+  function supine(arms) { return { h: [140, 104], t: 180, a: arms, l: LA(170, 149, 1), f: [0, 0] }; }
+  /* Incline bench, 30 deg, high end on the left; seat near the right end. */
+  var BENCH_INC = { k: 'bench', x: 70, w: 90, h: 40, deg: -30 };
+  function incline(arms) { return { h: [151, 101], t: 150, a: arms, l: LA(180, 149, 1), f: [0, 0] }; }
+  /* Seated upright on a seat with a back rest (seat top y=110). */
+  function seated(arms, t) { return { h: [120, 106], t: t || 90, a: arms, l: LA(152, 149, 1), f: [0, 0] }; }
+  /* Standing upright, feet hip width. */
+  function stand(arms, t, hx) { var x = hx || 120; return { h: [x, 84], t: t || 90, a: arms, l: [{ p: [x + 2, 150], b: 1 }, { p: [x - 2, 150], b: 1 }] }; }
+  /* Standing in front view. */
+  function standF(arms) { return { h: [120, 84], t: 90, a: arms, l: [{ p: [111, 150], b: -1 }, { p: [129, 150], b: 1 }] }; }
+
+  MCEX.add(
+    {
+      id: 'GY-BB-BENCH', ar: 'ضغط البنش بالبار', en: 'Barbell bench press', fam: 'bench-press', pat: 'push_h', cat: 'upper', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['chest', 'triceps'], sec: ['delts_front'], eq: ['barbell', 'bench', 'rack'], space: 'بنش مستوٍ داخل حامل بار بمساند أمان', impact: 'none', pos: 'supine',
+      flags: ['supine', 'floor', 'shoulder', 'elbow', 'wrist'],
+      dose: DOSE_C([5, 10]), load: { inc: 2.5, start: 'ابدأ بالبار الفارغ لتتعلم المسار، ثم أضف وزناً تستطيع رفعه 10 مرات ويبقى لديك 2–3 تكرارات على الأقل.' },
+      setup: 'استلقِ على البنش والعينان تحت البار تقريباً، والقدمان ثابتتان على الأرض. اضبط مساند الأمان (السيفتي) أسفل مستوى الصدر بقليل أو اطلب مساعداً (سبوتر) يقف خلف رأسك، وأمسك البار بقبضة أوسع قليلاً من الكتفين.',
+      steps: ['اسحب لوحي الكتف للخلف والأسفل وثبت الظهر والقدمين، ثم أخرج البار من الحامل بذراعين ممدودتين فوق الكتفين.', 'أنزل البار ببطء وتحكم إلى أسفل الصدر والمرفقان بزاوية تقارب 45–70 درجة عن الجذع.', 'المس الصدر برفق دون ارتداد.', 'ادفع البار للأعلى وقليلاً نحو الكتفين حتى تمتد الذراعان، ثم أعده إلى الحامل بعد آخر تكرار.'],
+      breath: 'شهيق أثناء الإنزال، زفير أثناء الدفع. لا تحبس النفس لفترة طويلة.',
+      errors: ['التمرين دون مساعد أو مساند أمان', 'ارتداد البار عن الصدر', 'فتح المرفقين 90 درجة عن الجذع', 'رفع الحوض عن البنش', 'ثني الرسغين للخلف كثيراً'],
+      stop: ['ألم حاد في مقدمة الكتف أو الصدر أو المرفق', 'تعثر البار أو عدم القدرة على إكمال التكرار — أنزله على مساند الأمان أو اطلب المساعد فوراً'],
+      prereq: 'إتقان الضغط العادي 3×10 أو ضغط البنش بالدمبل 3×10 بتقنية جيدة ودون ألم في الكتف.',
+      easier: ['GY-DB-BENCH', 'PU-STD'], harder: [], subs: ['GY-DB-BENCH', 'PU-STD'], src: SRC,
+      desc: 'رسم جانبي: الشخص مستلقٍ على بنش مستوٍ والرأس جهة اليسار والقدمان على الأرض، والقرص الدائري هو طرف البار. ينزل البار من فوق الكتفين إلى أسفل الصدر ثم يُدفع للأعلى. الخط العمودي خلف الرأس يمثل حامل البار؛ مساند الأمان والمساعد غير ظاهرين في الرسم.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'rack', x: 62, y: 40, hook: 56 }, BENCH_FLAT, { k: 'bb', at: 'wrN', r: 9 }], keys: [
+        { p: supine(HA(100, 58, -1)), d: 1600, hold: 300, lab: 'أنزل البار ببطء — شهيق' },
+        { p: supine(HA(106, 94, -1)), d: 1200, hold: 150, lab: 'ادفع للأعلى — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-DB-BENCH', ar: 'ضغط البنش بالدمبل', en: 'Dumbbell bench press', fam: 'bench-press', pat: 'push_h', cat: 'upper', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['chest', 'triceps'], sec: ['delts_front', 'core'], eq: ['dumbbell', 'bench'], space: 'بنش مستوٍ ومساحة 1 م حوله', impact: 'none', pos: 'supine',
+      flags: ['supine', 'floor', 'shoulder', 'elbow', 'wrist'],
+      dose: DOSE_C([8, 12]), load: { inc: 2.5, start: 'اختر دمبلين تستطيع ضغطهما 12 مرة ويبقى لديك 2–3 تكرارات بتقنية نظيفة؛ ابدأ خفيفاً واصعد تدريجياً.' },
+      setup: 'اجلس على طرف البنش والدمبلان على الفخذين، ثم استلقِ وارفعهما بمساعدة الركبتين إلى فوق الصدر. القدمان ثابتتان على الأرض.',
+      steps: ['ثبت لوحي الكتف للخلف والأسفل والذراعان ممدودتان فوق الصدر.', 'أنزل الدمبلين ببطء إلى جانبي الصدر والمرفقان بزاوية تقارب 45 درجة عن الجذع.', 'توقف عندما يصل الدمبلان إلى مستوى الصدر أو ضمن المدى المريح للكتف.', 'ادفعهما للأعلى حتى تمتد الذراعان دون ارتطامهما ببعض.'],
+      breath: 'شهيق أثناء الإنزال، زفير أثناء الدفع. لا تحبس النفس.',
+      errors: ['إنزال الدمبلين أعمق من المدى المريح للكتف', 'فتح المرفقين 90 درجة', 'رفع الحوض عن البنش', 'إسقاط الدمبلين بقوة على الأرض بعد المجموعة'],
+      stop: ['ألم حاد في مقدمة الكتف أو المرفق', 'ارتجاف شديد وفقدان السيطرة على الدمبل — أنهِ المجموعة بإنزالهما إلى الفخذين'],
+      easier: ['PU-INCL', 'PU-KNEE'], harder: ['GY-BB-BENCH', 'GY-DB-INCLINE'], subs: ['PU-STD', 'PU-INCL'], src: SRC,
+      desc: 'رسم جانبي: الشخص مستلقٍ على بنش مستوٍ والقدمان على الأرض، والدمبلان في اليدين (متطابقان في الرسم الجانبي). ينزلان إلى جانب الصدر ثم يُدفعان فوق الكتفين.',
+      anim: { view: 'side', trace: 'wrN', props: [BENCH_FLAT, { k: 'db', at: 'both' }], keys: [
+        { p: supine(HA(100, 58, -1)), d: 1600, hold: 300, lab: 'أنزل ببطء — شهيق' },
+        { p: supine(HA(103, 96, -1)), d: 1200, hold: 150, lab: 'ادفع للأعلى — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-DB-INCLINE', ar: 'ضغط مائل بالدمبل', en: 'Incline dumbbell press', fam: 'bench-press', pat: 'push_h', cat: 'upper', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['chest', 'delts_front'], sec: ['triceps'], eq: ['dumbbell', 'bench'], space: 'بنش قابل للإمالة ومساحة 1 م حوله', impact: 'none', pos: 'supine',
+      flags: ['supine', 'floor', 'shoulder', 'elbow', 'wrist'],
+      dose: DOSE_C([8, 12]), load: { inc: 2.5, start: 'ابدأ بوزن أخف بنحو 20% من دمبل البنش المستوي، بحيث تكمل 10–12 تكراراً ويبقى لديك 2–3.' },
+      setup: 'اضبط ظهر البنش على ميل منخفض (نحو 30 درجة)، واجلس والظهر ملتصق بالمسند والقدمان على الأرض، ثم ارفع الدمبلين إلى مستوى أعلى الصدر.',
+      steps: ['ثبت لوحي الكتف على المسند وأبقِ الصدر مرفوعاً.', 'ادفع الدمبلين للأعلى فوق الكتفين حتى تمتد الذراعان.', 'أنزلهما ببطء إلى جانبي أعلى الصدر والمرفقان أسفل المعصمين.', 'كرر دون أن ينفصل الظهر عن المسند.'],
+      breath: 'زفير أثناء الدفع، شهيق أثناء الإنزال. لا تحبس النفس.',
+      errors: ['ميل البنش عالٍ جداً فيتحول التمرين إلى ضغط كتف', 'تقوس أسفل الظهر وابتعاده عن المسند', 'إنزال الدمبلين أعمق من المدى المريح', 'فتح المرفقين للجانبين كثيراً'],
+      stop: ['ألم حاد في مقدمة الكتف', 'ألم في المرفق أو الرسغ'],
+      prereq: 'إتقان ضغط البنش بالدمبل 3×10 دون ألم في الكتف.',
+      easier: ['GY-DB-BENCH'], harder: [], subs: ['GY-DB-BENCH', 'PU-DECL'], src: SRC,
+      desc: 'رسم جانبي: بنش مائل مرتفع من جهة الرأس (يسار)، الشخص جالس مسنود الظهر والقدمان على الأرض. ينزل الدمبلان إلى جانبي أعلى الصدر ثم يُدفعان عمودياً فوق الكتفين.',
+      anim: { view: 'side', trace: 'wrN', props: [BENCH_INC, { k: 'db', at: 'both' }], keys: [
+        { p: incline(HA(118, 33, -1)), d: 1600, hold: 300, lab: 'أنزل ببطء — شهيق' },
+        { p: incline(HA(124, 74, -1)), d: 1200, hold: 150, lab: 'ادفع للأعلى — زفير' }
+      ] }
+    },
+    {
+      id: 'GY-DB-OHP', ar: 'ضغط الكتف بالدمبل جالساً', en: 'Seated dumbbell shoulder press', fam: 'overhead-press', pat: 'push_v', cat: 'upper', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['delts_front', 'triceps'], sec: ['delts_side', 'upper_back', 'core'], eq: ['dumbbell', 'bench'], space: 'بنش بمسند عمودي', impact: 'none', pos: 'seated',
+      flags: ['floor', 'shoulder', 'overhead', 'elbow'],
+      dose: DOSE_C([8, 12]), load: { inc: 2.5, start: 'اختر دمبلين تستطيع ضغطهما فوق الرأس 12 مرة ويبقى لديك 2–3 تكرارات دون تقوس الظهر؛ غالباً أخف كثيراً من دمبل البنش.' },
+      setup: 'اجلس على بنش بمسند شبه عمودي والظهر ملتصق به والقدمان على الأرض، وارفع الدمبلين إلى مستوى الكتفين والكفان للأمام أو متقابلتان قليلاً.',
+      steps: ['شد البطن وأبقِ الظهر على المسند دون تقوس.', 'ادفع الدمبلين للأعلى فوق الرأس حتى تمتد الذراعان تقريباً.', 'أنزلهما ببطء إلى مستوى الكتفين أو الأذنين.', 'لا تنزل أعمق من المدى المريح للكتف.'],
+      breath: 'زفير أثناء الدفع، شهيق أثناء الإنزال. لا تحبس النفس.',
+      errors: ['تقوس أسفل الظهر وابتعاده عن المسند', 'رفع الكتفين نحو الأذنين', 'ارتطام الدمبلين في الأعلى', 'إنزال سريع غير متحكم'],
+      stop: ['ألم في الكتف عند رفع الذراع فوق الرأس', 'ألم أسفل الظهر'],
+      easier: [], harder: ['GY-BB-OHP'], subs: ['GY-DB-INCLINE', 'PU-PIKE'], src: SRC,
+      desc: 'رسم جانبي: الشخص جالس منتصباً على بنش بمسند، والدمبلان في اليدين (متطابقان في الرسم الجانبي) عند مستوى الكتفين، يُدفعان فوق الرأس ثم ينزلان ببطء.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'chair', x: 108, w: 36, h: 40, back: 'l' }, { k: 'db', at: 'both' }], keys: [
+        { p: seated([[-62, 94], [-62, 94]]), d: 1400, hold: 300, lab: 'ادفع للأعلى — زفير' },
+        { p: seated([[86, 88], [86, 88]]), d: 1700, hold: 200, lab: 'أنزل ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-BB-OHP', ar: 'ضغط البار فوق الرأس واقفاً', en: 'Standing barbell overhead press', fam: 'overhead-press', pat: 'push_v', cat: 'upper', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['delts_front', 'triceps'], sec: ['delts_side', 'upper_back', 'core', 'glutes'], eq: ['barbell', 'rack'], space: 'أمام حامل بار، 2×2 م', impact: 'none', pos: 'standing',
+      flags: ['shoulder', 'overhead', 'elbow', 'wrist', 'lowback', 'iap'],
+      dose: DOSE_C([5, 10]), load: { inc: 2.5, start: 'ابدأ بالبار الفارغ (أو بار أخف) لتتعلم المسار، ثم أضف وزناً تكمل به 8 تكرارات ويبقى لديك 2–3.' },
+      setup: 'خذ البار من الحامل على ارتفاع أعلى الصدر، وقف والقدمان بعرض الوركين، والبار على مقدمة الكتفين والقبضة أوسع قليلاً من الكتفين والمرفقان أمام البار قليلاً.',
+      steps: ['شد البطن والألوية حتى لا يتقوس أسفل الظهر.', 'ادفع البار عمودياً للأعلى مع إرجاع الرأس قليلاً ليمر البار أمام الوجه.', 'عند مرور البار فوق الجبهة أدخل الرأس تحته وأكمل مد الذراعين فوق منتصف القدم.', 'أنزل البار ببطء إلى مقدمة الكتفين.'],
+      breath: 'زفير أثناء الدفع، شهيق أثناء الإنزال أو في الأسفل. لا تحبس النفس لفترة طويلة.',
+      errors: ['تقوس أسفل الظهر للخلف لرفع الوزن', 'دفع البار أمام الجسم بعيداً عن خط منتصف القدم', 'ثني الركبتين للدفع (يصبح تمريناً آخر)', 'وزن ثقيل يكسر التقنية'],
+      stop: ['ألم في الكتف عند رفع الذراع فوق الرأس', 'ألم أسفل الظهر', 'دوخة — توقف وأعد البار إلى الحامل'],
+      prereq: 'إتقان ضغط الكتف بالدمبل جالساً 3×10 دون ألم، ورفع الذراعين فوق الرأس بالكامل دون تقوس الظهر.',
+      easier: ['GY-DB-OHP'], harder: [], subs: ['GY-DB-OHP', 'GY-DB-INCLINE'], src: SRC,
+      desc: 'رسم أمامي: الشخص واقف والبار بين يديه عند مستوى الكتفين، يُدفع البار للأعلى فوق الرأس ثم ينزل. لضيق إطار الرسم يظهر البار في أعلى نقطة عند حافة الإطار والمرفقان منثنيان قليلاً؛ في التمرين الفعلي تمتد الذراعان بالكامل فوق الرأس.',
+      anim: { view: 'front', trace: 'wrN', props: [{ k: 'bbline', at: 'both', ext: 16 }], keys: [
+        { p: standF([{ p: [103, 43], b: 1 }, { p: [137, 43], b: -1 }]), d: 1300, hold: 300, lab: 'ادفع للأعلى — زفير' },
+        { p: standF([{ p: [96, 3], b: 1 }, { p: [144, 3], b: -1 }]), d: 1600, hold: 300, lab: 'أنزل ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-DB-ROW', ar: 'تجديف بدمبل واحد على البنش', en: 'One-arm dumbbell row', fam: 'row', pat: 'pull_h', cat: 'upper', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['lats', 'upper_back'], sec: ['biceps', 'delts_rear', 'forearms'], eq: ['dumbbell', 'bench'], space: 'بنش مستوٍ ومساحة 1 م بجانبه', impact: 'none', pos: 'kneeling',
+      flags: ['floor', 'grip', 'shoulder'],
+      dose: { u: 'reps', sets: [2, 4], reps: [8, 12], rest: [60, 120], tempo: '2-1-2', rir: [1, 3], side: true }, load: { inc: 2.5, start: 'اختر دمبلاً تسحبه 12 مرة لكل جهة ويبقى لديك 2–3 تكرارات دون أن يدور الجذع.' },
+      setup: 'ضع ركبة ويد الجهة نفسها على البنش، والقدم الأخرى على الأرض، والظهر مستوٍ تقريباً، وأمسك الدمبل باليد الحرة والذراع ممدودة نحو الأرض.',
+      steps: ['ثبت الجذع مستوياً وشد البطن.', 'اسحب الدمبل نحو جانب الورك والمرفق قريب من الجسم.', 'اضغط لوح الكتف للخلف في الأعلى لحظة.', 'أنزل الدمبل ببطء حتى تمتد الذراع، ثم بدّل الجهة بعد المجموعة.'],
+      breath: 'زفير أثناء السحب، شهيق أثناء الإنزال.',
+      errors: ['تدوير الجذع لرفع الوزن', 'تقوس أو تدوير الظهر', 'السحب نحو الكتف بدل الورك', 'رفع الكتف نحو الأذن'],
+      stop: ['ألم أسفل الظهر', 'ألم في الكتف أو المرفق'],
+      easier: ['PH-TABLE', 'PH-DOOR'], harder: ['GY-BB-ROW'], subs: ['GY-CABLE-ROW', 'PH-INV-BENT'], src: SRC,
+      desc: 'رسم جانبي: ركبة ويد الجهة البعيدة على البنش والقدم القريبة على الأرض والظهر شبه أفقي. الذراع القريبة تسحب الدمبل من الأسفل نحو الورك والمرفق يرتفع خلف الجذع ثم تنزل. الدمبل يتحرك بجانب البنش وليس فوقه.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'bench', x: 76, w: 100, h: 30 }, { k: 'db', at: 'wrN' }], keys: [
+        { p: { h: [112, 86], t: 15, a: [{ p: [153, 122], b: 1 }, { p: [163, 113], b: -1 }], l: [{ p: [104, 149], b: 1 }, [-80, 180]], f: [0, 180] }, d: 1300, hold: 200, lab: 'اسحب — زفير' },
+        { p: { h: [112, 86], t: 15, a: [{ p: [133, 92], b: -1 }, { p: [163, 113], b: -1 }], l: [{ p: [104, 149], b: 1 }, [-80, 180]], f: [0, 180] }, d: 1600, hold: 400, lab: 'أنزل ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-BB-ROW', ar: 'تجديف بالبار منحنياً', en: 'Bent-over barbell row', fam: 'row', pat: 'pull_h', cat: 'upper', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['lats', 'upper_back'], sec: ['biceps', 'delts_rear', 'lower_back', 'hamstrings', 'forearms'], eq: ['barbell'], space: '2×2 م', impact: 'none', pos: 'standing',
+      flags: ['lowback', 'grip', 'shoulder', 'iap'],
+      dose: DOSE_C([6, 10]), load: { inc: 2.5, start: 'ابدأ بالبار الفارغ أو وزن خفيف تكمل به 10 تكرارات ويبقى لديك 3 دون أن يتقوس الظهر أو يرتفع الجذع.' },
+      setup: 'قف والقدمان بعرض الوركين والبار أمام الساقين، اثنِ الركبتين قليلاً وادفع الوركين للخلف حتى يميل الجذع نحو 30–45 درجة فوق الأفقي مع ظهر مستقيم، وأمسك البار بقبضة بعرض الكتفين.',
+      steps: ['شد البطن وثبت زاوية الجذع والظهر محايد.', 'اسحب البار نحو أسفل الصدر أو أعلى البطن والمرفقان للخلف.', 'اضغط لوحي الكتف معاً في الأعلى لحظة.', 'أنزل البار ببطء حتى تمتد الذراعان دون أن يتغير وضع الظهر.'],
+      breath: 'زفير أثناء السحب، شهيق أثناء الإنزال. لا تحبس النفس لفترة طويلة.',
+      errors: ['تدوير أسفل الظهر', 'رفع الجذع والتأرجح لسحب الوزن', 'السحب بالذراعين فقط دون لوحي الكتف', 'وزن ثقيل يكسر وضع الظهر'],
+      stop: ['أي ألم أسفل الظهر — انتقل إلى التجديف بالكيبل أو بالدمبل على البنش', 'ألم في الكتف أو المرفق'],
+      prereq: 'إتقان مفصلة الورك بظهر مستقيم والتجديف بدمبل واحد 3×10 دون ألم أسفل الظهر.',
+      easier: ['GY-DB-ROW', 'GY-CABLE-ROW'], harder: [], subs: ['GY-CABLE-ROW', 'GY-DB-ROW', 'PH-INV'], src: SRC,
+      desc: 'رسم جانبي: الشخص منحنٍ من الوركين والركبتان مثنيتان قليلاً والظهر مستقيم، والقرص الدائري طرف البار. يُسحب البار من أمام الركبتين نحو أعلى البطن ثم ينزل.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'bb', at: 'wrN', r: 9 }], keys: [
+        { p: { h: [98, 90], t: 25, a: HA(136, 119, -1), l: LA(116, 149, 1), f: [0, 0] }, d: 1200, hold: 200, lab: 'اسحب — زفير' },
+        { p: { h: [98, 90], t: 25, a: HA(127, 86, -1), l: LA(116, 149, 1), f: [0, 0] }, d: 1600, hold: 300, lab: 'أنزل ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-PULLDOWN', ar: 'السحب العلوي بالجهاز', en: 'Lat pulldown', fam: 'pulldown', pat: 'pull_v', cat: 'upper', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['lats', 'biceps'], sec: ['upper_back', 'delts_rear', 'forearms'], eq: ['pulldown', 'cable'], space: 'جهاز السحب العلوي', impact: 'none', pos: 'seated',
+      flags: ['floor', 'shoulder', 'overhead', 'grip', 'elbow'],
+      dose: DOSE_C([8, 12]), load: { inc: 2.5, start: 'اختر وزناً على الجهاز تسحبه 12 مرة ويبقى لديك 2–3 تكرارات دون أن تميل للخلف كثيراً أو تتأرجح.' },
+      setup: 'اجلس على مقعد الجهاز والفخذان تحت المسند، وأمسك المقبض بقبضة أوسع قليلاً من الكتفين والذراعان ممدودتان للأعلى.',
+      steps: ['اسحب لوحي الكتف للأسفل قبل ثني المرفقين.', 'اسحب المقبض أمام الوجه نحو أعلى الصدر والمرفقان نحو الأسفل والجانبين مع ميل خفيف للخلف.', 'توقف لحظة عند أعلى الصدر.', 'أعد المقبض ببطء حتى تمتد الذراعان دون أن ترتفع الكتفان نحو الأذنين.'],
+      breath: 'زفير أثناء السحب، شهيق أثناء الإرجاع.',
+      errors: ['سحب المقبض خلف الرقبة', 'الميل الكبير للخلف والتأرجح', 'ترك الوزن يرتد للأعلى بسرعة', 'مدى حركة ناقص'],
+      stop: ['ألم في الكتف عند رفع الذراعين', 'ألم في المرفق أو الرقبة'],
+      easier: [], harder: ['PV-PULLUP', 'PV-CHIN'], subs: ['PV-ASSIST', 'GY-CABLE-ROW'], src: SRC,
+      desc: 'رسم جانبي: الشخص جالس على مقعد الجهاز والقدمان على الأرض، والخط المتقطع هو الكيبل الصاعد إلى البكرة ورصة الأوزان أمامه. يسحب المقبض من فوق الرأس إلى أعلى الصدر ثم يعيده ببطء.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'chair', x: 96, w: 36, h: 40 }, { k: 'cable', at: 'wrN', to: [176, 8] }], keys: [
+        { p: seated(HA(122, 16, -1), 98), d: 1300, hold: 200, lab: 'اسحب للأسفل — زفير' },
+        { p: seated(HA(126, 66, -1), 100), d: 1700, hold: 300, lab: 'أرجع ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-CABLE-ROW', ar: 'التجديف جالساً بالكيبل', en: 'Seated cable row', fam: 'row', pat: 'pull_h', cat: 'upper', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['upper_back', 'lats'], sec: ['biceps', 'delts_rear', 'forearms'], eq: ['cable'], space: 'جهاز تجديف بالكيبل', impact: 'none', pos: 'seated',
+      flags: ['floor', 'grip'],
+      dose: DOSE_C([8, 12]), load: { inc: 2.5, start: 'اختر وزناً تسحبه 12 مرة ويبقى لديك 2–3 تكرارات والجذع ثابت دون تأرجح للخلف.' },
+      setup: 'اجلس على المقعد والقدمان على المسند والركبتان مثنيتان قليلاً، وأمسك المقبض والذراعان ممدودتان والجذع منتصب.',
+      steps: ['شد البطن وأبقِ الجذع منتصباً.', 'اسحب المقبض نحو أسفل البطن والمرفقان قريبان من الجسم ويتجهان للخلف.', 'اضغط لوحي الكتف معاً لحظة.', 'أعد المقبض ببطء حتى تمتد الذراعان مع السماح للوحي الكتف بالتقدم قليلاً دون انحناء الظهر.'],
+      breath: 'زفير أثناء السحب، شهيق أثناء الإرجاع.',
+      errors: ['التأرجح بالجذع للخلف والأمام', 'تدوير الظهر عند الإرجاع', 'رفع الكتفين نحو الأذنين', 'ترك الوزن يسحب الذراعين بسرعة'],
+      stop: ['ألم أسفل الظهر', 'ألم في الكتف أو المرفق'],
+      easier: ['PH-DOOR'], harder: ['GY-BB-ROW'], subs: ['GY-DB-ROW', 'PH-INV-BENT'], src: SRC,
+      desc: 'رسم جانبي: الشخص جالس على مقعد منخفض والقدمان على مسند أمامه، والخط المتقطع هو الكيبل المتجه إلى بكرة منخفضة. يسحب المقبض من أمامه إلى البطن والمرفقان للخلف ثم يعيده.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'bench', x: 60, w: 70, h: 24 }, { k: 'box', x: 160, w: 8, h: 34 }, { k: 'cable', at: 'wrN', to: [196, 112] }], keys: [
+        { p: { h: [96, 122], t: 84, a: HA(142, 92, 1), l: LA(156, 132, 1), f: [80, 80] }, d: 1200, hold: 200, lab: 'اسحب — زفير' },
+        { p: { h: [96, 122], t: 92, a: HA(108, 104, -1), l: LA(156, 132, 1), f: [80, 80] }, d: 1600, hold: 400, lab: 'أرجع ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-FACEPULL', ar: 'سحب الحبل نحو الوجه', en: 'Cable face pull', fam: 'face-pull', pat: 'pull_h', cat: 'upper', role: ['main', 'warmup'], lvl: 1, mode: 'gym',
+      prim: ['delts_rear', 'upper_back'], sec: ['shoulders_mob'], eq: ['cable'], space: 'أمام جهاز كيبل، 2 م', impact: 'none', pos: 'standing',
+      flags: ['shoulder'],
+      dose: { u: 'reps', sets: [2, 3], reps: [12, 15], rest: [45, 75], tempo: '2-1-2', rir: [2, 3] }, load: { inc: 2.5, start: 'ابدأ بوزن خفيف تسحبه 15 مرة بتحكم كامل ويبقى لديك 3 تكرارات؛ هذا تمرين صحة كتف وليس تمرين أوزان ثقيلة.' },
+      setup: 'اضبط البكرة على مستوى الوجه أو أعلى قليلاً مع مقبض الحبل، وأمسك طرفيه والإبهامان للخلف، وتراجع خطوة حتى تمتد الذراعان أمامك.',
+      steps: ['قف منتصباً والبطن مشدود.', 'اسحب الحبل نحو الوجه مع فتح طرفيه للجانبين والمرفقان مرتفعان قليلاً.', 'في النهاية تكون اليدان بجانب الأذنين ولوحا الكتف مضمومين.', 'أعد الحبل ببطء حتى تمتد الذراعان.'],
+      breath: 'زفير أثناء السحب، شهيق أثناء الإرجاع.',
+      errors: ['الميل للخلف بالجسم بدل السحب بالكتفين', 'وزن ثقيل يرفع الكتفين نحو الأذنين', 'إنزال المرفقين تحت مستوى الكتف كثيراً', 'سحب سريع غير متحكم'],
+      stop: ['ألم في الكتف أو ألم واخز في مقدمته', 'ألم في الرقبة'],
+      easier: ['SC-RETRACT'], harder: [], subs: ['SC-PRONE-T', 'SC-PRONE-W', 'PH-TOWEL'], src: SRC,
+      desc: 'رسم جانبي: الشخص واقف أمام بكرة مرتفعة والخط المتقطع هو الكيبل. يسحب الحبل من الذراعين الممدودتين نحو الوجه فيرتفع المرفق ويتجه للخلف وتصل اليد قرب الأذن. لا يظهر في الرسم الجانبي فتح طرفي الحبل للجانبين.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'cable', at: 'wrN', to: [206, 36] }], keys: [
+        { p: stand(HA(165, 38, 1), 88, 116), d: 1200, hold: 200, lab: 'اسحب نحو الوجه — زفير' },
+        { p: stand(HA(112, 28, 1), 92, 116), d: 1600, hold: 500, lab: 'أرجع ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-DB-LATRAISE', ar: 'رفع جانبي بالدمبل', en: 'Dumbbell lateral raise', fam: 'lateral-raise', pat: 'push_v', cat: 'upper', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['delts_side'], sec: ['upper_back'], eq: ['dumbbell'], space: '1.5×1.5 م', impact: 'none', pos: 'standing',
+      flags: ['shoulder'],
+      dose: DOSE_I(), load: { inc: 1, start: 'ابدأ بدمبلين خفيفين جداً (1–4 كغ غالباً) ترفعهما 15 مرة دون تأرجح ويبقى لديك 2–3؛ زد الوزن بأصغر خطوة متاحة.' },
+      setup: 'قف والقدمان بعرض الوركين، والدمبلان بجانب الفخذين، والمرفقان مثنيان قليلاً.',
+      steps: ['شد البطن وأبقِ الجذع ثابتاً.', 'ارفع الذراعين جانبياً حتى مستوى الكتفين تقريباً مع بقاء انثناء خفيف في المرفقين.', 'توقف لحظة دون رفع الكتفين نحو الأذنين.', 'أنزل الدمبلين ببطء إلى الجانبين.'],
+      breath: 'زفير أثناء الرفع، شهيق أثناء الإنزال.',
+      errors: ['التأرجح بالجذع لرفع الوزن', 'الرفع أعلى كثيراً من مستوى الكتف', 'رفع الكتفين نحو الأذنين', 'وزن ثقيل جداً'],
+      stop: ['ألم واخز في الكتف عند الرفع', 'ألم في الرقبة'],
+      easier: [], harder: [], subs: ['SC-PRONE-T', 'GY-FACEPULL'], src: SRC,
+      desc: 'رسم أمامي: الشخص واقف والدمبلان بجانب الفخذين، يرفع الذراعين جانبياً بمرفقين مثنيين قليلاً حتى مستوى الكتفين ثم ينزلهما.',
+      anim: { view: 'front', trace: 'wrN', props: [{ k: 'db', at: 'both' }], keys: [
+        { p: standF([[-100, -94], [-80, -86]]), d: 1300, hold: 200, lab: 'ارفع جانبياً — زفير' },
+        { p: standF([[178, 188], [2, -8]]), d: 1700, hold: 400, lab: 'أنزل ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-DB-CURL', ar: 'ثني الذراعين بالدمبل', en: 'Dumbbell biceps curl', fam: 'curl', pat: 'pull_h', cat: 'upper', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['biceps'], sec: ['forearms'], eq: ['dumbbell'], space: '1×1 م', impact: 'none', pos: 'standing',
+      flags: ['elbow', 'grip'],
+      dose: DOSE_I(), load: { inc: 1, start: 'اختر دمبلين ترفعهما 12–15 مرة دون تأرجح الجذع ويبقى لديك 2–3 تكرارات.' },
+      setup: 'قف والقدمان بعرض الوركين والدمبلان بجانب الفخذين والكفان للأمام، والمرفقان قريبان من الجذع.',
+      steps: ['ثبت المرفقين بجانب الجذع.', 'اثنِ المرفقين وارفع الدمبلين نحو الكتفين.', 'توقف لحظة دون أن يتقدم المرفقان للأمام.', 'أنزل الدمبلين ببطء حتى تمتد الذراعان.'],
+      breath: 'زفير أثناء الرفع، شهيق أثناء الإنزال.',
+      errors: ['تأرجح الجذع أو دفع الوركين', 'تقدم المرفقين للأمام', 'إنزال سريع دون تحكم', 'ثني الرسغين'],
+      stop: ['ألم في المرفق أو مقدمة الكتف', 'ألم في الرسغ'],
+      easier: [], harder: ['PV-CHIN'], subs: ['PH-DOOR', 'PV-FLEXHANG'], src: SRC,
+      desc: 'رسم جانبي: الشخص واقف والدمبلان بجانب الفخذين (متطابقان في الرسم الجانبي)، يثني المرفقين فيرتفع الدمبلان نحو الكتفين والعضد ثابت بجانب الجذع، ثم ينزلان ببطء.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'db', at: 'both' }], keys: [
+        { p: stand([[-82, -86], [-82, -86]]), d: 1200, hold: 200, lab: 'اثنِ وارفع — زفير' },
+        { p: stand([[-80, 72], [-80, 72]]), d: 1700, hold: 300, lab: 'أنزل ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-PUSHDOWN', ar: 'دفع الحبل للأسفل (ثلاثية)', en: 'Cable triceps pushdown', fam: 'triceps-ext', pat: 'push_v', cat: 'upper', role: ['main'], lvl: 1, mode: 'gym',
+      prim: ['triceps'], sec: ['core'], eq: ['cable'], space: 'أمام جهاز كيبل', impact: 'none', pos: 'standing',
+      flags: ['elbow'],
+      dose: DOSE_I(), load: { inc: 2.5, start: 'اختر وزناً تدفعه 15 مرة والمرفقان ثابتان بجانب الجسم ويبقى لديك 2–3 تكرارات.' },
+      setup: 'قف أمام بكرة مرتفعة مع حبل أو مقبض، والقدمان بعرض الوركين، وميل خفيف للأمام، والمرفقان بجانب الجذع مثنيان نحو 90 درجة.',
+      steps: ['ثبت المرفقين بجانب الجذع.', 'ادفع المقبض للأسفل حتى تمتد الذراعان بالكامل.', 'توقف لحظة دون قفل عنيف للمرفق.', 'أرجع المقبض ببطء حتى زاوية 90 درجة تقريباً.'],
+      breath: 'زفير أثناء الدفع، شهيق أثناء الإرجاع.',
+      errors: ['تحرك المرفقين للأمام والخلف', 'الانحناء الكبير بالجذع لدفع الوزن', 'رفع الكتفين نحو الأذنين', 'إرجاع سريع غير متحكم'],
+      stop: ['ألم في المرفق', 'ألم في الرسغ أو الكتف'],
+      easier: [], harder: ['DP-CHAIR'], subs: ['PU-INCL-CLOSE', 'PU-KNEE-CLOSE'], src: SRC,
+      desc: 'رسم جانبي: الشخص واقف أمام بكرة مرتفعة والخط المتقطع هو الكيبل. العضد ثابت بجانب الجذع، يمد المرفقين فيُدفع المقبض من مستوى الصدر السفلي إلى أمام الفخذين ثم يعود ببطء.',
+      anim: { view: 'side', trace: 'wrN', props: [{ k: 'cable', at: 'wrN', to: [168, 14] }], keys: [
+        { p: stand([[-80, 8], [-80, 8]], 86, 112), d: 1100, hold: 200, lab: 'ادفع للأسفل — زفير' },
+        { p: stand([[-78, -72], [-78, -72]], 86, 112), d: 1600, hold: 300, lab: 'أرجع ببطء — شهيق' }
+      ] }
+    },
+    {
+      id: 'GY-DB-FLY', ar: 'تفتيح الصدر بالدمبل على البنش', en: 'Dumbbell chest fly', fam: 'chest-fly', pat: 'push_h', cat: 'upper', role: ['main'], lvl: 2, mode: 'gym',
+      prim: ['chest'], sec: ['delts_front'], eq: ['dumbbell', 'bench'], space: 'بنش مستوٍ ومساحة 1.5 م على جانبيه', impact: 'none', pos: 'supine',
+      flags: ['supine', 'floor', 'shoulder', 'elbow'],
+      dose: DOSE_I(), load: { inc: 1, start: 'استخدم دمبلين أخف كثيراً من دمبل البنش (نحو النصف أو أقل) تكمل بهما 12–15 تكراراً ويبقى لديك 3.' },
+      setup: 'استلقِ على بنش مستوٍ والقدمان على الأرض، والدمبلان فوق الصدر والكفان متقابلتان والمرفقان مثنيان قليلاً.',
+      steps: ['ثبت لوحي الكتف على البنش وأبقِ انثناء المرفقين ثابتاً.', 'افتح الذراعين للجانبين في قوس واسع ببطء حتى تشعر بإطالة مريحة في الصدر.', 'لا تنزل الدمبلين أسفل مستوى الكتفين.', 'اجمع الذراعين في القوس نفسه فوق الصدر.'],
+      breath: 'شهيق أثناء الفتح، زفير أثناء الجمع.',
+      errors: ['إنزال الدمبلين أعمق من مستوى الكتف', 'مد المرفقين بالكامل فيزيد الضغط على المرفق والكتف', 'تحويل الحركة إلى ضغط بثني المرفقين كثيراً', 'وزن ثقيل جداً'],
+      stop: ['ألم في مقدمة الكتف عند الفتح', 'ألم في المرفق أو شد مؤلم في الصدر'],
+      prereq: 'إتقان ضغط البنش بالدمبل 3×10 دون ألم في الكتف.',
+      easier: [], harder: [], subs: ['GY-DB-BENCH', 'PU-WIDE', 'PU-INCL'], src: SRC,
+      desc: 'رسم أمامي من جهة القدمين: الشخص مستلقٍ على بنش ضيق (يظهر جذعه قصيراً لأنه ممتد بعيداً عن الناظر) والقدمان على الأرض على جانبي البنش. تبدأ الذراعان فوق الصدر ثم تنفتحان جانبياً بمرفقين مثنيين قليلاً حتى مستوى الكتفين، ثم تجتمعان.',
+      anim: { view: 'front', trace: 'wrN', props: [{ k: 'bench', x: 107, w: 26, h: 40 }, { k: 'db', at: 'both' }], keys: [
+        { p: { h: [120, 104], t: 90, k: [0.3, 1, 1, 1, 1], a: [{ p: [113, 46], b: -1 }, { p: [127, 46], b: 1 }], l: [{ p: [96, 149], b: -1 }, { p: [144, 149], b: 1 }] }, d: 1700, hold: 300, lab: 'افتح ببطء — شهيق' },
+        { p: { h: [120, 104], t: 90, k: [0.3, 1, 1, 1, 1], a: [{ p: [66, 96], b: 1 }, { p: [174, 96], b: -1 }], l: [{ p: [96, 149], b: -1 }, { p: [144, 149], b: 1 }] }, d: 1400, hold: 200, lab: 'اجمع فوق الصدر — زفير' }
       ] }
     }
   );
@@ -4449,6 +5129,8 @@ button .en,.badge .en{color:inherit}
       { key: 'NHS-STR', title: 'Strength exercises (NHS Live Well)', pub: 'NHS (UK)', date: 'web page', url: 'https://www.nhs.uk/live-well/exercise/strength-and-flexibility-exercises/strength-exercises/', status: 'search', use: 'مرجع عام لوصف تمارين وزن الجسم الأساسية (دون نسخ النص).' },
       { key: 'NIA', title: 'Four Types of Exercise Can Improve Your Health and Physical Ability', pub: 'National Institute on Aging / health.gov', date: 'web page', url: 'https://health.gov/healthypeople/tools-action/browse-evidence-based-resources/exercise-and-physical-activity-four-types-exercise-can-improve-your-health-and-physical-ability', status: 'search', use: 'عدم تدريب المجموعة العضلية نفسها في يومين متتاليين؛ أمثلة التوازن (المشي كعب-أصابع).' },
       { key: 'HPRC', title: 'Physical Fitness Training Series — USMC PFT', pub: 'DoD Human Performance Resources by CHAMP', date: 'web page', url: 'https://hprc-online.org/physical-fitness/training-performance/physical-fitness-training-series-usmc-physical-fitness-test', status: 'search', use: 'سياق فقط.' },
+      { key: 'CDC-WL', title: 'Losing Weight (Healthy Weight, Nutrition, and Physical Activity)', pub: 'Centers for Disease Control and Prevention', date: 'web page', url: 'https://www.cdc.gov/healthy-weight-growth/losing-weight/', status: 'unverified',
+        use: 'معدل إنقاص وزن تدريجي نحو 0.5–1 كجم (1–2 رطل) أسبوعياً — من المعرفة السابقة، لم يُتحقق من الصفحة في هذه الجلسة؛ الرابط قد يكون تغيّر.' },
       { key: 'LOCAL', title: 'Local conservative product rules (this application)', pub: 'Military Calisthenics Coach v5 development', date: '2026-11', url: '', status: 'local',
         use: 'قواعد اختيارية تحفّظية ليست مأخوذة من مصدر: حد 3 تقدمات أسبوعياً، عتبات الألم، الإنجاز ≥100% مع جهد ≤7 للتقدم، استبعاد الانبطاح للحامل بعد 12 أسبوعاً، تحديد المستوى من الاختبار الأساسي.' }
     ]
@@ -4709,7 +5391,7 @@ button .en,.badge .en{color:inherit}
     if (!raw) { mem = emptyDB(); status.known = null; return mem; }
     try {
       var obj = JSON.parse(raw);
-      if (obj && obj.schema === 'MCC-ENC') { lockedEnv = obj; status.encrypted = true; status.locked = true; status.known = obj.updatedAt; status.bytes = raw.length; mem = emptyDB(); return mem; }
+      if (obj && obj.schema === 'MCC-ENC') { lockedEnv = obj; status.encrypted = true; status.locked = true; status.encVersion = obj.v || 1; status.known = obj.updatedAt; status.bytes = raw.length; mem = emptyDB(); return mem; }
       var v = validateDBShape(obj);
       if (!v.ok) throw new Error(v.errors.slice(0, 3).join('؛ '));
       mem = obj; status.bytes = raw.length; status.known = obj.updatedAt; return mem;
@@ -4727,6 +5409,73 @@ button .en,.badge .en{color:inherit}
       status.key = r.key; status.salt = r.salt; status.locked = false; mem = obj; return obj;
     });
   }
+  /* ---------- multi-user accounts (envelope v2) ----------
+   * One random data key (DEK, AES-GCM-256) encrypts the database. For every user the DEK is wrapped with a key derived
+   * from that user's password (PBKDF2-SHA256). Any listed user can open the same file; the owner (admin) adds/removes users.
+   * Limits: this is local file protection, not a server. A removed user can still open copies saved before removal. */
+  function normUser(u) { return String(u || '').trim().toLowerCase(); }
+  function wrapFor(dek, user, pass, role) {
+    var salt = randomValues(16).bytes;
+    return deriveKey(pass, salt, ENC.iter).then(function (kek) {
+      return subtle().exportKey('raw', dek).then(function (raw) { var iv = randomValues(12).bytes; return subtle().encrypt({ name: 'AES-GCM', iv: iv }, kek, raw).then(function (wk) {
+        return { u: normUser(user), role: role, iter: ENC.iter, salt: b64(salt), wiv: b64(iv), wk: b64(new Uint8Array(wk)), created: nowISO() }; }); });
+    });
+  }
+  function unwrapFor(entry, pass) {
+    return deriveKey(pass, unb64(entry.salt), entry.iter).then(function (kek) {
+      return subtle().decrypt({ name: 'AES-GCM', iv: unb64(entry.wiv) }, kek, unb64(entry.wk)).then(function (raw) {
+        return subtle().importKey('raw', raw, { name: 'AES-GCM' }, true, ['encrypt', 'decrypt']); }, function () { throw new Error('اسم المستخدم أو كلمة المرور غير صحيحة'); });
+    });
+  }
+  function createAccounts(db, user, pass) {
+    if (normUser(user).length < 3 || String(pass).length < 8) return Promise.reject(new Error('اسم المستخدم 3 أحرف وكلمة المرور 8 أحرف على الأقل'));
+    return subtle().generateKey({ name: 'AES-GCM', length: 256 }, true, ['encrypt', 'decrypt']).then(function (dek) {
+      return wrapFor(dek, user, pass, 'admin').then(function (entry) {
+        status.key = dek; status.users = [entry]; status.currentUser = { u: entry.u, role: 'admin' }; status.encrypted = true; status.encVersion = 2;
+        try { status.memRestore = restorePoints(); root.localStorage.removeItem(RESTORE_KEY); } catch (e) { /* ignore */ }
+        return saveAsync(db);
+      });
+    });
+  }
+  function login(user, pass) {
+    if (!lockedEnv || lockedEnv.v !== 2) return Promise.reject(new Error('هذه البيانات ليست بنظام الحسابات'));
+    var entry = (lockedEnv.users || []).filter(function (x) { return x.u === normUser(user); })[0];
+    if (!entry) return Promise.reject(new Error('اسم المستخدم أو كلمة المرور غير صحيحة'));
+    return unwrapFor(entry, pass).then(function (dek) {
+      return subtle().decrypt({ name: 'AES-GCM', iv: unb64(lockedEnv.iv) }, dek, unb64(lockedEnv.ct)).then(function (pt) {
+        var obj = JSON.parse(new TextDecoder().decode(pt)), v = validateDBShape(obj);
+        if (!v.ok) throw new Error('البيانات بعد فك التشفير غير صالحة: ' + v.errors[0]);
+        status.key = dek; status.users = lockedEnv.users.slice(); status.currentUser = { u: entry.u, role: entry.role }; status.locked = false; status.encVersion = 2; mem = obj; return obj;
+      });
+    });
+  }
+  function requireAdmin() { if (!status.currentUser || status.currentUser.role !== 'admin') throw new Error('هذه العملية للمالك (admin) فقط'); }
+  function addUser(db, user, pass, role) {
+    try { requireAdmin(); } catch (e) { return Promise.reject(e); }
+    var u = normUser(user);
+    if (u.length < 3 || String(pass).length < 8) return Promise.reject(new Error('اسم المستخدم 3 أحرف وكلمة المرور 8 أحرف على الأقل'));
+    if (status.users.some(function (x) { return x.u === u; })) return Promise.reject(new Error('اسم المستخدم موجود'));
+    return wrapFor(status.key, u, pass, role === 'admin' ? 'admin' : 'coach').then(function (entry) { status.users.push(entry); return saveAsync(db); });
+  }
+  function removeUser(db, user) {
+    try { requireAdmin(); } catch (e) { return Promise.reject(e); }
+    var u = normUser(user);
+    if (u === status.currentUser.u) return Promise.reject(new Error('لا يمكنك حذف حسابك الحالي'));
+    status.users = status.users.filter(function (x) { return x.u !== u; });
+    return saveAsync(db);
+  }
+  function changePassword(db, pass) {
+    if (String(pass).length < 8) return Promise.reject(new Error('8 أحرف على الأقل'));
+    var me = status.currentUser;
+    return wrapFor(status.key, me.u, pass, me.role).then(function (entry) { status.users = status.users.map(function (x) { return x.u === me.u ? entry : x; }); return saveAsync(db); });
+  }
+  /* Full encrypted copy (same envelope as storage) — another device opens it with any listed user's password. */
+  function encryptedCopy() { return flush().then(function () { return root.localStorage.getItem(KEY); }); }
+  function isAccountsCopy(text) { try { var o = JSON.parse(text); return !!(o && o.schema === 'MCC-ENC' && o.v === 2 && Array.isArray(o.users)); } catch (e) { return false; } }
+  function openCopy(text) { var o = JSON.parse(text); if (!(o && o.schema === 'MCC-ENC' && o.v === 2)) throw new Error('ليس ملف نسخة كاملة مشفرة'); lockedEnv = o; status.locked = true; status.encrypted = true; status.encVersion = 2; status.fromFile = true; return true; }
+  function adoptOpenedCopy() { try { root.localStorage.setItem(KEY, JSON.stringify(lockedEnv)); status.known = lockedEnv.updatedAt; status.fromFile = false; return true; } catch (e) { return false; } }
+  function users() { return (status.users || []).map(function (x) { return { u: x.u, role: x.role, created: x.created }; }); }
+
   function enableEncryption(db, pass) {
     var salt = randomValues(16).bytes;
     return deriveKey(pass, salt, ENC.iter).then(function (key) {
@@ -4735,7 +5484,7 @@ button .en,.badge .en{color:inherit}
       return saveAsync(db);
     });
   }
-  function disableEncryption(db) { status.key = null; status.salt = null; status.encrypted = false; return save(db); }
+  function disableEncryption(db) { if (status.encVersion === 2) requireAdmin(); status.key = null; status.salt = null; status.encrypted = false; status.users = null; status.currentUser = null; status.encVersion = null; return save(db); }
   function lockNow() { status.key = null; }
   /* Optimistic concurrency: refuse to overwrite data written by another tab/window since we last read or wrote it. */
   function storedStamp() { try { var raw = root.localStorage.getItem(KEY); if (!raw) return null; var o = JSON.parse(raw); return (o && o.updatedAt) || 'unknown'; } catch (e) { return 'unparseable'; } }
@@ -4753,7 +5502,9 @@ button .en,.badge .en{color:inherit}
   function saveAsync(db) {
     var text = JSON.stringify(db), stamp = db.updatedAt || (db.updatedAt = nowISO());
     status.pending++;
-    chain = chain.then(function () { return encryptWith(status.key, status.salt, ENC.iter, text, { schema: 'MCC-ENC', v: 1, updatedAt: stamp }); }).then(function (env) {
+    chain = chain.then(function () {
+      if (status.encVersion === 2) { var iv = randomValues(12).bytes; return subtle().encrypt({ name: 'AES-GCM', iv: iv }, status.key, new TextEncoder().encode(text)).then(function (ct) { return { schema: 'MCC-ENC', v: 2, users: status.users, iv: b64(iv), ct: b64(new Uint8Array(ct)), updatedAt: stamp }; }); }
+      return encryptWith(status.key, status.salt, ENC.iter, text, { schema: 'MCC-ENC', v: 1, updatedAt: stamp }); }).then(function (env) {
       var s = JSON.stringify(env); root.localStorage.setItem(KEY, s); status.known = stamp; status.lastSaved = stamp; status.bytes = s.length; status.error = null;
     }).catch(function (e) { status.error = 'فشل الحفظ المشفّر (' + e.message + '). صدّر نسخة JSON الآن.'; }).then(function () { status.pending--; if (root.App && root.App.renderStatus) root.App.renderStatus(); });
     return chain;
@@ -4773,7 +5524,7 @@ button .en,.badge .en{color:inherit}
     makeId: makeId, uniqueId: uniqueId, idValid: idValid, normalizeId: normalizeId, isoWeek: isoWeek, emptyDB: emptyDB, fnv: fnv,
     validateDBShape: validateDBShape, parseImport: parseImport, migrateV4: migrateV4, mergeInto: mergeInto, exportEnvelope: exportEnvelope,
     safeFileName: safeFileName, load: load, save: save, status: status, restorePoints: restorePoints, addRestorePoint: addRestorePoint, readV4Local: readV4Local, nowISO: nowISO,
-    unlock: unlock, enableEncryption: enableEncryption, disableEncryption: disableEncryption, lockNow: lockNow, flush: flush, encryptExport: encryptExport, decryptExport: decryptExport, isEncryptedExport: isEncryptedExport, ENC_ITER: ENC.iter };
+    unlock: unlock, enableEncryption: enableEncryption, createAccounts: createAccounts, login: login, addUser: addUser, removeUser: removeUser, changePassword: changePassword, users: users, encryptedCopy: encryptedCopy, isAccountsCopy: isAccountsCopy, openCopy: openCopy, adoptOpenedCopy: adoptOpenedCopy, disableEncryption: disableEncryption, lockNow: lockNow, flush: flush, encryptExport: encryptExport, decryptExport: decryptExport, isEncryptedExport: isEncryptedExport, ENC_ITER: ENC.iter };
 })(typeof window !== 'undefined' ? window : globalThis);
 
 ;
@@ -4990,12 +5741,13 @@ button .en,.badge .en{color:inherit}
     if (bmi && bmi >= 30) flags.impact = 1; /* local conservative rule: protect joints, favour walking and low-impact work */
     var maxLevel = (screening && screening.outcome && screening.outcome.exclusions && screening.outcome.exclusions.maxLevel) || 3;
     var eq = {}; (trainee.equipment || []).forEach(function (e) { eq[e] = 1; });
-    return { flags: flags, maxLevel: maxLevel, eq: eq, levels: (baseline && baseline.result && baseline.result.levels) || {}, avoid: trainee.avoid || [], pathway: screening && screening.outcome && screening.outcome.pathway, bmi: bmi };
+    return { flags: flags, maxLevel: maxLevel, eq: eq, levels: (baseline && baseline.result && baseline.result.levels) || {}, avoid: trainee.avoid || [], pathway: screening && screening.outcome && screening.outcome.pathway, bmi: bmi, mode: trainee.program === 'gym' ? 'gym' : 'bw' };
   }
   /* Is exercise allowed? returns '' if allowed, or the Arabic reason it is excluded. */
   function excludedBy(ex, ctx, opts) {
     opts = opts || {};
     if (ctx.avoid.indexOf(ex.id) >= 0) return 'مستبعد يدوياً من المدرب';
+    if (ex.mode === 'gym' && ctx.mode !== 'gym') return 'تمرين صالة بالأوزان — خارج برنامج وزن الجسم';
     for (var i = 0; i < ex.eq.length; i++) if (!ctx.eq[ex.eq[i]] && !SOFT_EQ[ex.eq[i]]) return 'يتطلب: ' + (EX().EQUIP[ex.eq[i]] || ex.eq[i]);
     for (var j = 0; j < ex.flags.length; j++) if (ctx.flags[ex.flags[j]]) return 'مستبعد للسلامة: ' + (EX().FLAG[ex.flags[j]] || ex.flags[j]);
     if (ex.lvl > ctx.maxLevel) return 'أعلى من الحد المسموح بالفحص (' + ctx.maxLevel + ')';
@@ -5093,6 +5845,8 @@ button .en,.badge .en{color:inherit}
     plan.pathway = sc.outcome.pathway;
     plan.tempFlagsIn = dec && !referResolved ? (dec.tempFlags || []) : [];
     var ctx = safetyContext(t, sc, bl, plan.tempFlagsIn);
+    plan.program = t.program === 'gym' ? 'gym' : 'bw';
+    if (plan.program === 'gym' && root.MCGym) { root.MCGym.build(plan, input, ctx, H); return root.MCGoals ? root.MCGoals.apply(plan, input, ctx, H) : plan; }
     var minutes = Math.max(15, Math.min(90, Number(t.minutes) || 30));
     var avail = (t.days && t.days.length ? t.days : [0, 2, 4]).map(Number);
     var levels = ctx.levels, overall = Math.round(((levels.push || 1) + (levels.squat || 1) + (levels.core || 1)) / 3);
@@ -5199,7 +5953,7 @@ button .en,.badge .en{color:inherit}
     why.push('المشي والنشاط الهوائي هذا الأسبوع ≈ ' + Math.round(walkTotal) + ' دقيقة' + (t.place === 'both' ? ' خارج المنزل' : ' داخل المنزل') + '. الهدف التدريجي 150 دقيقة أسبوعياً من كل الأنشطة. [PAG2018]');
     if (ctx.bmi) why.push('مؤشر كتلة الجسم ≈ ' + ctx.bmi.toFixed(1) + (ctx.bmi >= 30 ? ' (30 أو أكثر): لا قفز، وتركيز على المشي والتمارين منخفضة التأثير لحماية المفاصل (قاعدة محلية تحفظية).' : '.') + ' هو مؤشر تقريبي لا يقيس اللياقة.');
     if (t.weakArm && t.weakArm !== 'none' || t.weakLeg && t.weakLeg !== 'none') why.push('أُضيف تمرين بطرف واحد للجانب الأضعف في أيام التمرين؛ ابدأ دائماً بالجهة الأضعف.');
-    return plan;
+    return root.MCGoals ? root.MCGoals.apply(plan, input, ctx, H) : plan;
   }
   function pickBlock(ctx, role, seed, n, prefer) {
     var pool = allowedList(ctx, function (e) { return e.role.indexOf(role) >= 0; }, { ignoreLevel: role !== 'warmup' ? true : false });
@@ -5335,9 +6089,229 @@ button .en,.badge .en{color:inherit}
     return allowedList(ctx, function (e) { return e.role.indexOf('main') >= 0 && pats.indexOf(e.pat) >= 0; });
   }
 
+  var H = { allowedList: allowedList, excludedBy: excludedBy, pickBlock: pickBlock, addDays: addDays, dow: dow, chooseDays: chooseDays, hash: hash, DOW_AR: DOW_AR, walkMinutesFor: walkMinutesFor, EX: EX };
   root.MCEngine = { RULES: RULES, BASELINE_VERSION: BASELINE_VERSION, TESTS: TESTS, PATTERN_TEST: PATTERN_TEST, evaluateBaseline: evaluateBaseline, testLevel: testLevel,
     safetyContext: safetyContext, excludedBy: excludedBy, doseFor: doseFor, generatePlan: generatePlan, adapt: adapt, reviewQuestions: reviewQuestions,
-    applyOverride: applyOverride, candidatesFor: candidatesFor, quickLevels: quickLevels, WALK_MIN: WALK_MIN, FOCUS: FOCUS, WEAK: WEAK, chooseDays: chooseDays, addDays: addDays, DOW_AR: DOW_AR, DECISION_AR: DECISION_AR, hash: hash };
+    applyOverride: applyOverride, H: H, candidatesFor: candidatesFor, quickLevels: quickLevels, WALK_MIN: WALK_MIN, FOCUS: FOCUS, WEAK: WEAK, chooseDays: chooseDays, addDays: addDays, DOW_AR: DOW_AR, DECISION_AR: DECISION_AR, hash: hash };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+;
+/* ==== src/gym.js ==== */
+/* MCGym — weighted gym program (separate from bodyweight plans). Deterministic double progression:
+ * all working sets reach the top of the rep range without pain/"too hard" → next week +load step (ACSM: 2–10 % when
+ * the target is exceeded); a set below the bottom of the range or "too hard" → −1 step; otherwise same load, +1 rep. */
+(function (root) {
+  'use strict';
+  var GROUPS = {
+    squat: { ar: 'قرفصاء', p: ['squat'] }, hinge: { ar: 'مفصلة الورك', p: ['hinge', 'bridge'] }, lunge: { ar: 'ساق واحدة', p: ['lunge'] },
+    push_h: { ar: 'دفع أفقي', p: ['push_h'] }, push_v: { ar: 'دفع للأعلى', p: ['push_v'] }, pull_h: { ar: 'سحب أفقي', p: ['pull_h'] }, pull_v: { ar: 'سحب علوي', p: ['pull_v'] },
+    core: { ar: 'الجذع', p: ['core_rot', 'core_lat', 'core_ext', 'core_flex'] },
+    shoulder_acc: { ar: 'صحة الكتف', ids: ['GY-FACEPULL', 'GY-DB-LATRAISE'] }, arms: { ar: 'الذراعان', ids: ['GY-DB-CURL', 'GY-PUSHDOWN'] }, legs_acc: { ar: 'تكميلي للساقين', ids: ['GY-LEGCURL', 'GY-LEGEXT', 'GY-DB-CALF'] }
+  };
+  var TEMPLATES = {
+    A: ['squat', 'push_h', 'pull_v', 'hinge', 'core', 'arms', 'shoulder_acc'],
+    B: ['hinge', 'push_v', 'pull_h', 'lunge', 'core', 'legs_acc', 'shoulder_acc'],
+    U: ['push_h', 'pull_h', 'push_v', 'pull_v', 'shoulder_acc', 'arms', 'core'],
+    L: ['squat', 'hinge', 'lunge', 'legs_acc', 'core', 'legs_acc']
+  };
+  function sideAr(x) { return x === 'left' ? 'اليسرى' : 'اليمنى'; }
+
+  /* Previous working load and outcome for an exercise from the most recent sessions. */
+  function lastPerformance(exId, sessions) {
+    var list = (sessions || []).filter(function (s) { return s.status !== 'stopped'; }).slice().sort(function (a, b) { return (a.startedAt || '') < (b.startedAt || '') ? 1 : -1; });
+    for (var i = 0; i < list.length; i++) {
+      var it = (list[i].items || []).filter(function (x) { return x.exId === exId && (x.sets || []).length; })[0];
+      if (it) {
+        var loads = it.sets.map(function (x) { return Number(x.load) || 0; }).filter(function (v) { return v > 0; });
+        return { load: loads.length ? Math.max.apply(null, loads) : null, reps: it.sets.map(function (x) { return Number(x.value) || 0; }), range: it.prescribed && it.prescribed.repRange, rate: it.rate || '', pain: Number(it.pain) || 0, setsPlanned: it.prescribed ? it.prescribed.sets : it.sets.length };
+      }
+    }
+    return null;
+  }
+  function progress(ex, perf, lo, hi) {
+    var inc = ex.load.inc, why;
+    if (!perf || !perf.load) return { load: null, target: hi, why: 'الأسبوع الأول لهذا التمرين: ' + ex.load.start };
+    var allTop = perf.reps.length >= perf.setsPlanned && perf.reps.every(function (r) { return r >= hi; });
+    var below = perf.reps.some(function (r) { return r < lo; });
+    if (perf.pain >= 4) return { load: Math.max(0, perf.load - inc), target: lo, why: 'ألم في المرة الماضية: الوزن أقل بخطوة (' + inc + ' كجم) — إن تكرر الألم استبدل التمرين.' };
+    if (allTop && perf.rate !== 'hard') return { load: perf.load + inc, target: lo, why: 'أكملت ' + hi + ' تكراراً في كل المجموعات: الوزن +' + inc + ' كجم والعدد يبدأ من ' + lo + '. [ACSM-RT]' };
+    if (below || perf.rate === 'hard') return { load: Math.max(0, perf.load - inc), target: lo, why: 'كان الوزن ثقيلاً (أقل من ' + lo + ' أو «صعب جداً»): الوزن أقل بخطوة.' };
+    var best = Math.min.apply(null, perf.reps);
+    return { load: perf.load, target: Math.min(hi, Math.max(lo, best + 1)), why: 'نفس الوزن (' + perf.load + ' كجم) وحاول زيادة تكرار واحد في كل مجموعة.' };
+  }
+
+  function build(plan, input, ctx, H) {
+    var t = input.trainee, EX = H.EX(), why = plan.notes, minutes = Math.max(20, Math.min(90, Number(t.minutes) || 45));
+    var gl = Math.max(1, Math.min(3, Number(t.gymLevel) || 1));
+    ctx.levels = { push: gl, squat: gl, core: gl, pull: gl, aerobic: ctx.levels.aerobic || 1, balance: ctx.levels.balance || 2 };
+    var avail = (t.days && t.days.length ? t.days : [0, 2, 4]).map(Number), n = Math.min(avail.length, gl === 1 ? 3 : 4);
+    var trainDows = H.chooseDays(avail, n), split = n >= 4 ? ['U', 'L'] : ['A', 'B'];
+    var nSlots = minutes <= 30 ? 4 : minutes <= 45 ? 5 : minutes <= 60 ? 6 : 7;
+    var setsBy = { 1: function (d) { return d.sets[0]; }, 2: function (d) { return Math.min(d.sets[1], d.sets[0] + 1); }, 3: function (d) { return d.sets[1]; } };
+    var rirBy = { 1: 3, 2: 2, 3: 2 };
+    why.push('برنامج صالة بالأوزان (منفصل عن تمارين وزن الجسم): ' + n + ' أيام، تقسيم ' + (n >= 4 ? 'علوي/سفلي' : 'جسم كامل A/B') + '، خبرة بالأوزان مستوى ' + gl + '. [ACSM-RT, ACSM-RT26]');
+    why.push('طريقة التقدم: عندما تكمل أعلى عدد تكرارات في كل المجموعات يزيد الوزن خطوة في الأسبوع التالي؛ وإذا كان ثقيلاً ينقص خطوة. اترك ' + rirBy[gl] + ' تكرارات احتياطاً في كل مجموعة (لا تصل للفشل). [ACSM-RT, ACSM-RT26]');
+    if (ctx.bmi) why.push('مؤشر كتلة الجسم ≈ ' + ctx.bmi.toFixed(1) + '. هو مؤشر تقريبي لا يقيس اللياقة.');
+    var used = {}, assign = {};
+    function pick(group, key) {
+      if (assign[key]) return assign[key];
+      var g = GROUPS[group];
+      var cands = H.allowedList(ctx, function (e) { return e.mode === 'gym' && e.role.indexOf('main') >= 0 && (g.ids ? g.ids.indexOf(e.id) >= 0 : g.p.indexOf(e.pat) >= 0); });
+      var prevAct = input.decision && input.decision.items ? Object.keys(input.decision.items).map(function (k) { return input.decision.items[k]; }).filter(function (x) { return x.slot === key && x.action === 'substitute'; })[0] : null;
+      var prev = null; if (input.prevPlan) input.prevPlan.days.forEach(function (d) { (d.main || []).forEach(function (it) { if (it.slot === key) prev = it; }); });
+      var keep = prev && !prevAct && cands.filter(function (c) { return c.id === prev.exId; })[0];
+      var ch = keep || null;
+      if (!ch) {
+        var pool = cands.filter(function (c) { return !used[c.id] && (!prevAct || c.id !== prevAct.exId); });
+        if (!pool.length) return null;
+        var top = Math.max.apply(null, pool.map(function (c) { return c.lvl; }));
+        var best = pool.filter(function (c) { return c.lvl === top; });
+        ch = best[H.hash(t.id + key) % best.length];
+      }
+      used[ch.id] = 1; assign[key] = ch; return ch;
+    }
+    var trainIdx = 0;
+    for (var i = 0; i < 7; i++) {
+      var date = H.addDays(input.weekStart, i), dw = H.dow(date), day = { index: i, date: date, dow: dw, dowAr: H.DOW_AR[dw] };
+      if (trainDows.indexOf(dw) >= 0) {
+        var tp = split[trainIdx % 2]; trainIdx++;
+        day.type = 'train'; day.template = tp; day.place = 'gym';
+        var items = [];
+        TEMPLATES[tp].slice(0, nSlots).forEach(function (grp, k) {
+          var key = tp + k + '-' + grp, ex = pick(grp, key);
+          if (!ex) { why.push('«' + GROUPS[grp].ar + '» في يوم ' + tp + ': لا يوجد تمرين مناسب لمعداتك وقيود السلامة — حُذف.'); return; }
+          var d = ex.dose, isT = d.u === 'time', range = isT ? d.sec : d.reps, lo = range[0], hi = range[1], perf = lastPerformance(ex.id, input.sessions);
+          var pr = isT ? { load: perf && perf.load || null, target: hi, why: 'تمرين بالمدة: ' + hi + ' ثانية بوزن تتحكم به جيداً. ' + (perf && perf.load ? 'نفس وزن المرة الماضية (' + perf.load + ' كجم).' : ex.load.start) } : progress(ex, perf, lo, hi);
+          var it = { slot: key, exId: ex.id, step: 0, u: isT ? 'time' : 'reps', sets: setsBy[gl](d), target: pr.target, repRange: isT ? null : [lo, hi], rest: gl === 1 ? d.rest[0] + 15 : d.rest[1], side: !!d.side, load: pr.load, inc: ex.load.inc, rir: rirBy[gl], gym: 1, why: [pr.why] };
+          var weak = (t.weakArm !== 'none' && t.weakArm && (grp === 'pull_h' || grp === 'push_h' || grp === 'arms') && it.side) ? { limb: 'arm', side: t.weakArm } : (t.weakLeg !== 'none' && t.weakLeg && grp === 'lunge' && it.side) ? { limb: 'leg', side: t.weakLeg } : null;
+          if (weak) { it.weak = weak; it.why.unshift('الجانب الأضعف: ابدأ بالجهة ' + sideAr(weak.side) + ' وأعطها مجموعة إضافية.'); }
+          items.push(it);
+        });
+        day.main = items;
+        day.warmup = H.pickBlock(ctx, 'warmup', t.id + date, 3, ['CA-MARCH', 'MO-CATCAMEL', 'MO-HIPCIRCLE']);
+        day.cooldown = H.pickBlock(ctx, 'cooldown', t.id + date, 4, ['ST-HIPFLEX', 'ST-CHEST']);
+        day.note = 'قبل أول تمرين: مجموعتا إحماء خفيفتان (نحو 40% ثم 70% من وزن العمل). بعد التمرين: إطالة للمرونة.';
+        day.estMinutes = Math.round(items.reduce(function (s, x) { return s + x.sets * ((x.u === 'time' ? x.target : x.target * 4) * (x.side ? 2 : 1) + x.rest); }, 0) / 60) + 14;
+      } else if (avail.indexOf(dw) >= 0) {
+        var outdoor = t.place === 'both' || t.place === 'gym';
+        var wex = EX.byId(outdoor ? 'CA-WALK' : 'CA-MARCH'), wm = H.walkMinutesFor(t, input.prevPlan, input.decision);
+        day.type = 'recovery'; day.place = outdoor ? 'outdoor' : 'home'; day.main = [];
+        day.recovery = wex && !H.excludedBy(wex, ctx, { ignoreLevel: true }) ? [{ exId: wex.id, u: 'time', sets: 1, target: wm * 60, rest: 0, walk: 1, why: ['يوم استشفاء: مشي ' + wm + ' دقيقة بإيقاع مريح لتحسين اللياقة والتعافي. [PAG2018]'] }] : [];
+        day.cooldown = H.pickBlock(ctx, 'cooldown', t.id + date + 'r', 3, []);
+        day.estMinutes = wm + 5;
+      } else { day.type = 'rest'; day.main = []; }
+      plan.days.push(day);
+    }
+    if (!plan.days.some(function (d) { return d.type === 'rest'; })) { var last = plan.days.filter(function (d) { return d.type === 'recovery'; }).pop(); if (last) { last.type = 'rest'; last.recovery = []; last.cooldown = []; } }
+    return plan;
+  }
+  root.MCGym = { build: build, progress: progress, lastPerformance: lastPerformance, GROUPS: GROUPS, TEMPLATES: TEMPLATES };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+;
+/* ==== src/goals.js ==== */
+/* MCGoals — measurable goals (e.g. 60 push-ups / 60 sit-ups in 2 minutes, target body weight), goal training blocks,
+ * fortnightly tests, honest projections, and motivation (ranks, streaks, achievements). Deterministic, DOM-free. */
+(function (root) {
+  'use strict';
+  var KINDS = {
+    pushup: { ar: 'ضغط', en: 'Push-ups', unit: 'reps', exId: 'PU-STD', timed: true },
+    situp: { ar: 'بطن (جلوس كامل)', en: 'Sit-ups', unit: 'reps', exId: 'CR-SITUP', timed: true, alt: 'PL-FA' },
+    pullup: { ar: 'عقلة', en: 'Pull-ups', unit: 'reps', exId: 'PV-PULLUP' },
+    squat: { ar: 'سكوات', en: 'Squats', unit: 'reps', exId: 'SQ-BW', timed: true },
+    plank: { ar: 'بلانك', en: 'Plank', unit: 'sec', exId: 'PL-FA' },
+    walk: { ar: 'مشي/جري متواصل', en: 'Continuous walk/run', unit: 'min', exId: 'CA-WALK' },
+    weight: { ar: 'الوصول إلى وزن', en: 'Reach body weight', unit: 'kg' }
+  };
+  var UNIT_AR = { reps: 'تكرار', sec: 'ثانية', min: 'دقيقة', kg: 'كجم' };
+  /* local, conservative planning assumptions — NOT evidence-based promises */
+  var RATE = { low: 0.04, high: 0.08 }, WL = { low: 0.5, high: 1.0 };
+
+  function best(t, kind) { var l = (t.goalLog || []).filter(function (x) { return x.kind === kind; }); return l.length ? Math.max.apply(null, l.map(function (x) { return Number(x.value) || 0; })) : null; }
+  function latest(t, kind) { var l = (t.goalLog || []).filter(function (x) { return x.kind === kind; }); return l.length ? l[l.length - 1] : null; }
+  function current(t) {
+    var g = t.goalTarget; if (!g) return null;
+    if (g.kind === 'weight') { var w = latest(t, 'weight'); return w ? Number(w.value) : Number(t.weightKg) || null; }
+    return best(t, g.kind);
+  }
+  /* Projection in weeks (range) — an estimate, labelled as such everywhere it is shown. */
+  function project(t) {
+    var g = t.goalTarget, c = current(t); if (!g || c == null) return null;
+    if (g.kind === 'weight') { var diff = c - g.target; if (diff <= 0) return { done: true }; return { lo: Math.ceil(diff / WL.high), hi: Math.ceil(diff / WL.low) }; }
+    if (c >= g.target) return { done: true }; if (c <= 0) return null;
+    var w = function (r) { return Math.ceil(Math.log(g.target / c) / Math.log(1 + r)); };
+    return { lo: w(RATE.high), hi: w(RATE.low) };
+  }
+  function percent(t) {
+    var g = t.goalTarget, c = current(t); if (!g || c == null) return 0;
+    if (g.kind === 'weight') { var start = Number(g.start) || c; if (start <= g.target) return 100; return Math.max(0, Math.min(100, Math.round((start - c) / (start - g.target) * 100))); }
+    return Math.max(0, Math.min(100, Math.round(c / g.target * 100)));
+  }
+  function label(g) { var k = KINDS[g.kind]; return k.ar + ' ' + g.target + ' ' + UNIT_AR[k.unit] + (g.timed ? ' خلال دقيقتين' : ''); }
+  function labelEn(g) { var k = KINDS[g.kind]; return k.en + ' ' + g.target + ' ' + k.unit + (g.timed ? ' in 2 minutes' : ''); }
+
+  /* Add goal training (+ fortnightly test) to a generated plan. */
+  function apply(plan, input, ctx, H) {
+    var t = input.trainee, g = t.goalTarget; if (!g || plan.status === 'blocked') return plan;
+    var K = KINDS[g.kind], EX = H.EX();
+    plan.goal = { kind: g.kind, target: g.target, timed: !!g.timed };
+    if (g.kind === 'weight') {
+      var pj = project(t);
+      plan.notes.push('هدفك: ' + label(g) + '. الطريق: مشي يومي تقريباً + تمارين قوة للحفاظ على العضلات + غذاء متوازن. المعدل الآمن المعتاد نحو 0.5–1 كجم أسبوعياً' + (pj && !pj.done ? '، أي تقريباً ' + pj.lo + '–' + pj.hi + ' أسبوعاً (تقدير وليس وعداً)' : '') + '. [CDC-WL]');
+      return plan;
+    }
+    var ex = EX.byId(K.exId);
+    var why = H.excludedBy(ex, ctx, { ignoreLevel: true });
+    if (why) {
+      plan.goal.blocked = why; var alt = K.alt && EX.byId(K.alt);
+      plan.notes.push('هدف «' + label(g) + '» غير مناسب الآن: ' + why + (alt && !H.excludedBy(alt, ctx, { ignoreLevel: true }) ? '. بديل آمن: ' + alt.ar + '.' : '.'));
+      return plan;
+    }
+    var b = current(t), weekNo = input.weekNo || 0, isTest = weekNo % 2 === 0;
+    var useEx = ex, base = b;
+    if (b == null || b < 3) { var ez = (ex.easier || []).map(function (id) { return EX.byId(id); }).filter(function (e) { return e && !H.excludedBy(e, ctx, { ignoreLevel: true }); })[0]; if (ez && K.unit === 'reps') { useEx = ez; base = 12; } }
+    var unit = K.unit === 'sec' ? 'time' : K.unit === 'min' ? 'time' : 'reps';
+    var tgt = K.unit === 'reps' ? Math.max(3, Math.round((base || 5) * 0.6)) : K.unit === 'sec' ? Math.max(15, Math.round((base || 20) * 0.6)) : Math.max(10, Math.round((base || 10) * 0.8)) * 60;
+    var first = true;
+    plan.days.forEach(function (d) {
+      if (d.type !== 'train') return;
+      if (isTest && first) {
+        d.main.unshift({ slot: 'GOALTEST', exId: ex.id, step: 0, u: unit, sets: 1, target: g.target * (K.unit === 'min' ? 60 : 1), rest: 0, test: 1, goal: 1,
+          why: ['🎯 اختبار الهدف (كل أسبوعين): ' + (g.timed ? 'أكبر عدد بأداء صحيح خلال دقيقتين' : 'أكبر عدد/مدة بأداء صحيح دون توقف') + '. توقف عند انكسار الأداء أو أي ألم. يُسجَّل تلقائياً كأفضل محاولة.'] });
+        first = false;
+      } else if (K.unit !== 'min') {
+        d.main.push({ slot: 'GOAL', exId: useEx.id, step: 0, u: unit, sets: 4, target: tgt, rest: 75, goal: 1,
+          why: ['🎯 تدريب الهدف: 4 مجموعات بنحو 60% من أفضل محاولة (' + (b == null ? 'لم تُختبر بعد' : b) + ')' + (useEx !== ex ? ' بتمرين تمهيدي أسهل حتى تتجاوز 3 تكرارات في الاختبار' : '') + '. قاعدة محلية تحفظية.'] });
+      }
+    });
+    var pj2 = project(t);
+    plan.notes.push('هدفك: ' + label(g) + '. أفضل محاولة: ' + (b == null ? 'لم تُختبر بعد — الاختبار هذا الأسبوع' : b) + (pj2 && !pj2.done ? ' — المدة المتوقعة تقريباً ' + pj2.lo + '–' + pj2.hi + ' أسبوعاً بافتراض تحسن 4–8% أسبوعياً (تقدير محلي وليس وعداً).' : pj2 && pj2.done ? ' — وصلت للهدف! 🎉' : '.'));
+    return plan;
+  }
+
+  /* ---------- motivation ---------- */
+  var RANKS = [[0, 'مستجد', 'Recruit'], [3, 'جندي', 'Private'], [10, 'جندي أول', 'Private First Class'], [20, 'عريف', 'Corporal'], [35, 'رقيب', 'Sergeant'], [55, 'رقيب أول', 'Staff Sergeant'], [80, 'ملازم', 'Lieutenant'], [110, 'نقيب', 'Captain'], [150, 'رائد', 'Major']];
+  function rank(done) { var r = RANKS[0], nx = null; for (var i = 0; i < RANKS.length; i++) { if (done >= RANKS[i][0]) { r = RANKS[i]; nx = RANKS[i + 1] || null; } } return { ar: r[1], en: r[2], at: r[0], next: nx ? { ar: nx[1], en: nx[2], at: nx[0], left: nx[0] - done } : null, level: RANKS.indexOf(r) }; }
+  function weekKey(iso) { var d = new Date(String(iso).slice(0, 10) + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7)); return d.toISOString().slice(0, 10); }
+  /* consecutive weeks (ending this or last week) with at least 2 completed sessions */
+  function streak(sessions, today) {
+    var per = {}; sessions.filter(function (s) { return s.status === 'complete'; }).forEach(function (s) { var k = weekKey(s.endedAt || s.startedAt || s.date); per[k] = (per[k] || 0) + 1; });
+    var k = weekKey(today), n = 0; if (!(per[k] >= 2)) { var d0 = new Date(k + 'T12:00:00Z'); d0.setUTCDate(d0.getUTCDate() - 7); k = d0.toISOString().slice(0, 10); }
+    while (per[k] >= 2) { n++; var d = new Date(k + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() - 7); k = d.toISOString().slice(0, 10); }
+    return n;
+  }
+  function achievements(t, sessions) {
+    var done = sessions.filter(function (s) { return s.status === 'complete'; }).length, out = [];
+    var add = function (ok, ic, ar, en) { out.push({ ok: !!ok, ic: ic, ar: ar, en: en }); };
+    add(done >= 1, '🎖', 'أول تمرين', 'First workout'); add(done >= 10, '🏅', '10 تمارين', '10 workouts'); add(done >= 30, '🏆', '30 تمريناً', '30 workouts');
+    add(streak(sessions, new Date().toISOString()) >= 4, '🔥', '4 أسابيع متتالية', '4-week streak');
+    if (t.goalTarget) { var p = percent(t); add(p >= 50, '⭐', 'نصف الطريق للهدف', 'Halfway to goal'); add(p >= 100, '👑', 'تحقق الهدف', 'Goal reached'); }
+    return out;
+  }
+  var CHEERS = ['أحسنت! الالتزام يصنع الفرق.', 'خطوة أقرب لهدفك. استمر.', 'عمل ممتاز اليوم — اشرب ماء وارتح.', 'الانضباط أقوى من الحماس. أحسنت.', 'تمرين آخر في السجل. فخور بك.'];
+  function cheer(n) { return CHEERS[n % CHEERS.length]; }
+
+  root.MCGoals = { KINDS: KINDS, UNIT_AR: UNIT_AR, apply: apply, project: project, percent: percent, current: current, best: best, label: label, labelEn: labelEn, rank: rank, streak: streak, achievements: achievements, cheer: cheer, RANKS: RANKS };
 })(typeof window !== 'undefined' ? window : globalThis);
 
 ;
@@ -5359,7 +6333,7 @@ button .en,.badge .en{color:inherit}
   App.trainee = function (id) { return App.db.trainees.find(function (t) { return t.id === (id || App.ui.traineeId); }) || null; };
   App.latest = function (coll, tid, pred) { var a = App.db[coll].filter(function (r) { return r.traineeId === tid && (!pred || pred(r)); }); a.sort(function (x, y) { return (x.at || x.createdAt || '') < (y.at || y.createdAt || '') ? -1 : 1; }); return a[a.length - 1] || null; };
   App.plansOf = function (tid) { return App.db.plans.filter(function (p) { return p.traineeId === tid; }).sort(function (a, b) { return a.weekStart < b.weekStart ? -1 : a.weekStart > b.weekStart ? 1 : (a.createdAt < b.createdAt ? -1 : 1); }); };
-  App.audit = function (type, msg, traineeId, ref) { App.db.audit.push({ id: S.uniqueId(App.db, 'audit'), at: S.nowISO(), type: type, msg: msg, traineeId: traineeId || null, ref: ref || null }); };
+  App.audit = function (type, msg, traineeId, ref) { App.db.audit.push({ id: S.uniqueId(App.db, 'audit'), at: S.nowISO(), type: type, msg: msg, traineeId: traineeId || null, ref: ref || null, actor: S.status.currentUser ? S.status.currentUser.u : null }); };
   App.save = function (why) { var ok = S.save(App.db); App.renderStatus(); if (!ok && S.status.mode !== 'memory') App.toast(S.status.error || 'فشل الحفظ'); return ok; };
   App.exName = function (id) { var e = X.byId(id); return e ? e.ar : id; };
   App.statusBadge = function (st) { var m = { cleared: ['b-ok', SC.LABEL.cleared], more_info: ['b-warn', SC.LABEL.more_info], refer: ['b-danger', SC.LABEL.refer] }; var x = m[st] || ['b-info', 'لم يُفحص']; return '<span class="badge ' + x[0] + '">' + (st === 'refer' ? '⛔ ' : st === 'cleared' ? '✔ ' : st === 'more_info' ? '⚠ ' : '○ ') + esc(x[1]) + '</span>'; };
@@ -5388,6 +6362,26 @@ button .en,.badge .en{color:inherit}
     return out;
   };
 
+  /* ---------- motivation widgets ---------- */
+  App.goalBar = function (t) {
+    var G = window.MCGoals, g = t.goalTarget; if (!g) return '';
+    var pc = G.percent(t), c = G.current(t), pj = G.project(t), K = G.KINDS[g.kind];
+    return '<div class="goal"><div class="row"><b class="grow">🎯 ' + esc(G.label(g)) + ' <span class="en" dir="ltr">' + esc(G.labelEn(g)) + '</span></b><span class="pill">' + pc + '%</span></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pc + '"><span style="width:' + pc + '%"></span></div>' +
+      '<div class="small">' + (c == null ? 'لم تُسجّل محاولة بعد — أول اختبار في جدول هذا الأسبوع.' : 'الحالي: <b>' + c + ' ' + G.UNIT_AR[K.unit] + '</b>') + (pj && pj.done ? ' — 👑 تحقق الهدف!' : pj ? ' — المدة المتوقعة ≈ ' + pj.lo + '–' + pj.hi + ' أسبوعاً (تقدير)' : '') + ' <button class="linkbtn" data-act="goalLog" data-id="' + esc(t.id) + '">سجّل محاولة/وزناً</button></div></div>';
+  };
+  App.motivation = function (t) {
+    var G = window.MCGoals, ses = App.db.sessions.filter(function (x) { return x.traineeId === t.id; }), done = ses.filter(function (x) { return x.status === 'complete'; }).length, rk = G.rank(done), st = G.streak(ses, new Date().toISOString());
+    var ach = G.achievements(t, ses).filter(function (a) { return a.ok; });
+    return '<div class="motiv"><span class="rank">🎖 ' + esc(rk.ar) + '</span>' + (st ? '<span class="pill">🔥 ' + st + ' أسابيع متتالية</span>' : '') + '<span class="pill">' + done + ' تمريناً</span>' + ach.map(function (a) { return '<span class="pill" title="' + esc(a.en) + '">' + a.ic + ' ' + esc(a.ar) + '</span>'; }).join('') + (rk.next ? '<span class="small muted"> · ' + rk.next.left + ' للترقية</span>' : '') + '</div>' + App.goalBar(t);
+  };
+  App.acts.goalLog = function (el) {
+    var t = App.trainee(el.dataset.id), g = t.goalTarget, G = window.MCGoals; if (!g) return;
+    var v = prompt('أدخل ' + (g.kind === 'weight' ? 'وزنك الحالي (كجم)' : 'أفضل نتيجة الآن (' + G.UNIT_AR[G.KINDS[g.kind].unit] + ')') + ':'); if (v == null || v === '') return;
+    var n = Number(v); if (!(n > 0 && n < 1000)) return App.toast('رقم غير صالح');
+    t.goalLog = t.goalLog || []; t.goalLog.push({ at: S.nowISO(), kind: g.kind, value: n, manual: true }); if (g.kind === 'weight') t.weightKg = n;
+    App.audit('goal.log', G.label(g) + ': ' + n, t.id); App.save(); App.render(); App.toast('تم التسجيل ✔');
+  };
+
   /* ---------- shell ---------- */
   var NAV = [['dash', '', 'الرئيسية'], ['setup', '', 'الإعداد'], ['plan', '', 'الجدول'], ['session', '', 'التمرين'], ['review', '', 'المراجعة'], ['library', '', 'التمارين'], ['more', '', 'المزيد'], ['trainees', '', 'إدارة الملفات'], ['screen', '', 'الفحص الصحي'], ['history', '', 'السجل'], ['data', '', 'النسخ الاحتياطي'], ['sources', '', 'المصادر والسلامة']];
   var IN_NAV = { dash: 1, plan: 1, session: 1, review: 1, library: 1, more: 1 };
@@ -5413,13 +6407,25 @@ button .en,.badge .en{color:inherit}
     var fn = App.pages[App.ui.page] || App.pages.dash;
     try { v.innerHTML = fn(); } catch (e) { console.error(e); v.innerHTML = '<div class="alert danger"><b>خطأ في عرض الصفحة</b>' + esc(e.message) + '</div>'; }
     if (App.after[App.ui.page]) App.after[App.ui.page]();
-    var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'مدرب اللياقة البدنية v5';
+    var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'عزم · AZM';
   };
   App.after = {};
   function lockScreen() {
-    return '<div class="card" style="max-width:560px;margin:40px auto"><h2>🔒 البيانات مشفّرة</h2><p>أدخل كلمة المرور لفك تشفير بيانات المتدربين المحفوظة في هذا المتصفح. لا يمكن استرجاع كلمة المرور؛ عند نسيانها لا سبيل إلا الاستيراد من نسخة JSON احتياطية.</p>' +
+    var bi = App.bi || function (a) { return esc(a); };
+    if (S.status.encVersion === 2) return '<div class="card" style="max-width:560px;margin:40px auto"><h2>🔒 ' + bi('تسجيل الدخول', 'Sign in') + '</h2><p>' + (S.status.fromFile ? 'نسخة كاملة مفتوحة من ملف. ادخل بحسابك المضاف فيها.' : 'البيانات محمية. ادخل باسم المستخدم وكلمة المرور.') + '</p>' +
+      '<form data-form="login"><label for="loginUser">' + bi('اسم المستخدم', 'Username') + '<input id="loginUser" name="u" autocomplete="username" dir="ltr" required></label><label for="loginPass">' + bi('كلمة المرور', 'Password') + '<input id="loginPass" name="p" type="password" autocomplete="current-password" required></label><div id="unlockErr" role="alert"></div><button type="submit">' + bi('دخول', 'Sign in') + '</button></form>' +
+      '<p class="small muted">نسيت كلمة المرور؟ يستطيع المالك (admin) إضافتك من جديد بكلمة مرور جديدة. لا توجد طريقة لاسترجاع البيانات دون حساب صالح.</p></div>';
+    return '<div class="card" style="max-width:560px;margin:40px auto"><h2>🔒 البيانات مشفّرة</h2><p>أدخل كلمة المرور لفك تشفير البيانات المحفوظة في هذا المتصفح. لا يمكن استرجاع كلمة المرور؛ عند نسيانها لا سبيل إلا الاستيراد من نسخة JSON احتياطية.</p>' +
       '<form data-form="unlock"><label for="unlockPass">كلمة المرور<input id="unlockPass" name="pass" type="password" autocomplete="current-password" required></label><div id="unlockErr" role="alert"></div><button type="submit">فتح</button></form></div>';
   }
+  App.forms.login = function (f) {
+    var fd = new FormData(f), btn = f.querySelector('button'); btn.disabled = true; App.$('#unlockErr').innerHTML = '<p class="small muted">جارٍ التحقق…</p>';
+    S.login(String(fd.get('u') || ''), String(fd.get('p') || '')).then(function (db) {
+      if (S.status.fromFile) S.adoptOpenedCopy();
+      App.db = db; var first = db.trainees.filter(function (t) { return !t.archived; })[0]; App.ui.traineeId = first ? first.id : null;
+      App.audit('auth.login', 'دخول ' + S.status.currentUser.u); App.save(); App.go('dash');
+    }).catch(function (e) { btn.disabled = false; App.$('#unlockErr').innerHTML = '<div class="alert danger">' + esc(e.message) + '</div>'; });
+  };
   App.forms.unlock = function (f) {
     var pass = String(new FormData(f).get('pass') || ''), btn = f.querySelector('button'); btn.disabled = true; App.$('#unlockErr').innerHTML = '<p class="small muted">جارٍ فك التشفير…</p>';
     S.unlock(pass).then(function (db) { App.db = db; var first = db.trainees.filter(function (t) { return !t.archived; })[0]; App.ui.traineeId = first ? first.id : null; App.go('dash'); })
@@ -5576,10 +6582,33 @@ button .en,.badge .en{color:inherit}
   };
   App.acts.expAll = function () { App.exportFile('MCC5_backup_' + App.today() + '.json', S.exportEnvelope(App.db, 'full', []), 'export.full', 'تصدير كامل', null); };
   function encCard() {
-    var st = S.status;
-    if (st.encrypted) return '<div class="card"><h3>🔒 تشفير البيانات المحلية: مفعّل</h3><p class="small">تُحفظ البيانات في المتصفح مشفّرة (AES-GCM 256). نقاط الاستعادة تُحفظ في الذاكرة فقط خلال هذه الجلسة. ملاحظة: بيانات v4 القديمة (إن وُجدت) تبقى غير مشفّرة لأن v4 لا يُعدَّل.</p><div class="row"><button class="sec" data-act="lockNow">قفل الآن</button><button class="danger" data-act="encOff">إلغاء التشفير</button></div></div>';
-    return '<div class="card"><h3>تشفير البيانات المحلية (اختياري)</h3><p class="small">يحمي بيانات المتدربين من القراءة من ملفات أو أشخاص آخرين يستخدمون المتصفح نفسه (في Chrome/Edge تتشارك كل الملفات المحلية مساحة تخزين واحدة). يُطلب إدخال كلمة المرور عند كل فتح.</p><form data-form="encOn" class="grid"><label>كلمة المرور (8 أحرف على الأقل)<input type="password" name="p1" autocomplete="new-password" minlength="8" required></label><label>تأكيدها<input type="password" name="p2" autocomplete="new-password" required></label><label class="grow"><input type="checkbox" name="ack"> أفهم أن نسيان كلمة المرور يعني فقدان البيانات المحلية نهائياً، وأن النسخة المصدّرة هي الحل الوحيد</label><div><button type="submit">تفعيل التشفير</button></div></form></div>';
+    var st = S.status, bi = App.bi || function (a) { return esc(a); };
+    if (st.encrypted && st.encVersion === 2) {
+      var me = st.currentUser || {}, admin = me.role === 'admin';
+      return '<div class="card"><h3>🔒 ' + bi('الحسابات وكلمات المرور', 'Accounts & passwords') + '</h3><p>أنت داخل باسم <b dir="ltr">' + esc(me.u) + '</b> (' + (admin ? 'مالك · admin' : 'مدرب · coach') + '). البيانات في هذا المتصفح مشفّرة (AES-GCM 256).</p>' +
+        '<table><thead><tr><th>المستخدم</th><th>الصلاحية</th><th>أُضيف</th><th></th></tr></thead><tbody>' + S.users().map(function (u) { return '<tr><td dir="ltr">' + esc(u.u) + '</td><td>' + (u.role === 'admin' ? 'مالك' : 'مدرب') + '</td><td>' + App.fmtDate(u.created) + '</td><td>' + (admin && u.u !== me.u ? '<button class="danger" data-act="userDel" data-u="' + esc(u.u) + '">حذف</button>' : '') + '</td></tr>'; }).join('') + '</tbody></table>' +
+        (admin ? '<form data-form="userAdd" class="grid g3"><label>' + bi('اسم مستخدم جديد', 'New username') + '<input name="u" dir="ltr" autocomplete="off" required></label><label>' + bi('كلمة مرور مؤقتة (8+)', 'Temporary password (8+)') + '<input name="p" type="password" autocomplete="new-password" required></label><label>' + bi('الصلاحية', 'Role') + '<select name="role"><option value="coach">مدرب · coach</option><option value="admin">مالك · admin</option></select></label><div><button type="submit">' + bi('إضافة', 'Add') + '</button></div></form><p class="small muted">بعد الإضافة: احفظ «نسخة كاملة مشفرة» وأرسلها للمدرب الآخر؛ يفتحها في التطبيق بحسابه. حذف مستخدم يمنعه من النسخ الجديدة فقط — النسخ القديمة التي لديه تبقى قابلة للفتح بحسابه القديم.</p>' : '') +
+        '<form data-form="passChange" class="row"><label class="grow">' + bi('غيّر كلمة مروري', 'Change my password') + '<input name="p" type="password" autocomplete="new-password" minlength="8" required></label><button type="submit" class="sec">' + bi('حفظ', 'Save') + '</button></form>' +
+        '<div class="row" style="margin-top:8px"><button data-act="copySave">💾 ' + bi('حفظ نسخة كاملة مشفرة', 'Save full encrypted copy') + '</button><button class="sec" data-act="lockNow">' + bi('تسجيل خروج', 'Sign out') + '</button>' + (admin ? '<button class="danger" data-act="encOff">' + bi('إلغاء الحماية', 'Remove protection') + '</button>' : '') + '</div></div>';
+    }
+    if (st.encrypted) return '<div class="card"><h3>🔒 تشفير بكلمة مرور واحدة (نظام قديم)</h3><p class="small">لاستخدام حسابات متعددة: ألغِ الحماية ثم أنشئ حساب المالك.</p><div class="row"><button class="sec" data-act="lockNow">قفل الآن</button><button class="danger" data-act="encOff">إلغاء التشفير</button></div></div>';
+    return '<div class="card"><h3>👥 ' + bi('حسابات المستخدمين (موصى به)', 'User accounts (recommended)') + '</h3><p class="small">أنشئ حسابك كمالك، ثم أضف المدربين الآخرين باسم مستخدم وكلمة مرور. تُشفّر البيانات ولا تُفتح إلا بحساب مضاف. نسيان كل كلمات المرور = فقدان البيانات؛ احتفظ بنسخة.</p>' +
+      '<form data-form="accCreate" class="grid g3"><label>' + bi('اسم المستخدم', 'Username') + '<input name="u" dir="ltr" autocomplete="username" required></label><label>' + bi('كلمة المرور (8+)', 'Password (8+)') + '<input name="p1" type="password" autocomplete="new-password" required></label><label>' + bi('تأكيدها', 'Confirm') + '<input name="p2" type="password" autocomplete="new-password" required></label><label class="grow"><input type="checkbox" name="ack"> أفهم أن نسيان كلمة المرور قد يعني فقدان البيانات</label><div><button type="submit">' + bi('إنشاء حساب المالك', 'Create owner account') + '</button></div></form></div>';
   }
+  App.forms.accCreate = function (f) {
+    var fd = new FormData(f), u = String(fd.get('u') || ''), p1 = String(fd.get('p1') || ''), p2 = String(fd.get('p2') || '');
+    if (p1 !== p2) return App.toast('كلمتا المرور غير متطابقتين'); if (!fd.get('ack')) return App.toast('أكّد الإقرار');
+    S.createAccounts(App.db, u, p1).then(function () { App.audit('auth.create', 'إنشاء حساب المالك ' + S.status.currentUser.u); App.save(); App.toast('تم إنشاء الحساب وتشفير البيانات ✔'); App.render(); }).catch(function (e) { App.toast(e.message); });
+  };
+  App.forms.userAdd = function (f) { var fd = new FormData(f), u = String(fd.get('u') || ''); S.addUser(App.db, u, String(fd.get('p') || ''), String(fd.get('role'))).then(function () { App.audit('auth.adduser', 'إضافة مستخدم ' + u); App.save(); App.toast('أُضيف ' + u + ' — احفظ نسخة كاملة مشفرة وأرسلها له'); App.render(); }).catch(function (e) { App.toast(e.message); }); };
+  App.acts.userDel = function (el) { if (!confirm('حذف المستخدم ' + el.dataset.u + '؟ لن يستطيع فتح النسخ الجديدة.')) return; S.removeUser(App.db, el.dataset.u).then(function () { App.audit('auth.deluser', 'حذف مستخدم ' + el.dataset.u); App.save(); App.render(); }).catch(function (e) { App.toast(e.message); }); };
+  App.forms.passChange = function (f) { S.changePassword(App.db, String(new FormData(f).get('p') || '')).then(function () { App.audit('auth.passwd', 'تغيير كلمة مرور ' + S.status.currentUser.u); App.save(); App.toast('تم تغيير كلمة المرور'); f.reset(); }).catch(function (e) { App.toast(e.message); }); };
+  App.acts.copySave = function () { S.encryptedCopy().then(function (text) { App.download('AZM_نسخة_كاملة_' + App.today() + '.json', text); App.toast('حُفظت النسخة الكاملة المشفرة — تُفتح بأي حساب مضاف'); }); };
+  App.changes.openCopy = function (el) {
+    var f = el.files[0]; if (!f) return; var r = new FileReader();
+    r.onload = function () { var text = String(r.result); if (!S.isAccountsCopy(text)) return App.toast('ليس ملف نسخة كاملة مشفرة من عزم'); if (App.db.trainees.length && !confirm('سيُستبدل ما في هذا المتصفح بالنسخة المفتوحة بعد الدخول. متابعة؟')) return; S.openCopy(text); App.render(); };
+    r.readAsText(f);
+  };
   App.forms.encOn = function (f) {
     var fd = new FormData(f), p1 = String(fd.get('p1') || ''), p2 = String(fd.get('p2') || '');
     if (p1.length < 8) return App.toast('8 أحرف على الأقل'); if (p1 !== p2) return App.toast('كلمتا المرور غير متطابقتين'); if (!fd.get('ack')) return App.toast('أكّد الإقرار');
@@ -5935,6 +6964,9 @@ button .en,.badge .en{color:inherit}
   App.dosageText = function (it) {
     var ex = X.byId(it.exId), amount = it.u === 'reps' ? it.target + ' تكرار' : it.target >= 120 ? Math.round(it.target / 60) + ' دقيقة' : it.target + ' ثانية';
     var t = (!it.walk ? setsAr(it.sets) + ' × ' : '') + amount + (it.side ? ' لكل جهة' : '') + (it.rest ? ' · راحة ' + it.rest + ' ثانية' : '');
+    if (it.repRange) t = setsAr(it.sets) + ' × ' + it.repRange[0] + '–' + it.repRange[1] + ' تكرار (الهدف ' + it.target + ')' + (it.side ? ' لكل جهة' : '') + ' · ' + (it.load ? 'الوزن ' + it.load + ' كجم' : 'اختر وزناً يترك ' + (it.rir || 2) + ' تكرارات احتياطاً') + (it.rest ? ' · راحة ' + it.rest + ' ثانية' : '');
+    if (it.test) t = 'اختبار: أكبر عدد بأداء صحيح (الهدف ' + it.target + ')';
+    if (it.gym && it.u === 'time') t += ' · ' + (it.load ? 'الوزن ' + it.load + ' كجم' : 'وزن تتحكم به جيداً');
     if (it.weak) t += ' · الجهة الأضعف (' + sideAr(it.weak.side) + '): ' + setsAr(it.sets + 1) + '، وابدأ بها';
     if (ex && ex.dose.tempo && it.u === 'reps' && !it.walk && it.sets > 1) t += ' · ببطء وتحكم';
     return t;
@@ -5943,6 +6975,7 @@ button .en,.badge .en{color:inherit}
   function dayHead(d) {
     if (d.type === 'rest') return ['😴', 'راحة', 'Rest day'];
     if (d.type === 'recovery') return d.place === 'outdoor' ? ['🌳', 'مشي خارج المنزل', 'Outdoor walk'] : ['🏠', 'مشي ونشاط خفيف في المنزل', 'Light activity at home'];
+    if (d.place === 'gym') return ['🏋', 'تمارين الصالة', 'Gym workout'];
     return ['🏠', 'تمارين في المنزل', 'Home workout'];
   }
   App.dayHead = dayHead;
@@ -5953,7 +6986,7 @@ button .en,.badge .en{color:inherit}
     var existing = App.db.plans.filter(function (p) { return p.traineeId === t.id && p.weekStart === ws; })[0];
     var pls = App.plansOf(t.id).filter(function (p) { return p.weekStart < ws; }), prev = pls[pls.length - 1] || null;
     var rev = prev ? App.db.reviews.filter(function (r) { return r.planId === prev.id; }).pop() : null;
-    var input = { trainee: t, screening: App.latest('screenings', t.id), baseline: App.latest('baselines', t.id), prevPlan: prev, decision: rev ? Object.assign({ reviewId: rev.id, at: rev.at }, rev.decision) : null, weekStart: ws, planId: existing ? existing.id : S.uniqueId(App.db, 'plans', S.isoWeek(ws)), requireFreshBaseline: true };
+    var input = { trainee: t, sessions: App.db.sessions.filter(function (x) { return x.traineeId === t.id; }), weekNo: App.plansOf(t.id).filter(function (p) { return p.weekStart < ws && p.status !== 'blocked'; }).length, screening: App.latest('screenings', t.id), baseline: App.latest('baselines', t.id), prevPlan: prev, decision: rev ? Object.assign({ reviewId: rev.id, at: rev.at }, rev.decision) : null, weekStart: ws, planId: existing ? existing.id : S.uniqueId(App.db, 'plans', S.isoWeek(ws)), requireFreshBaseline: true };
     var plan = E.generatePlan(input); plan.decision = input.decision;
     if (!existing) { App.db.plans.push(plan); App.audit('plan.create', 'خطة ' + plan.id + ' (' + plan.status + ')', t.id, plan.id); return plan; }
     var hasSessions = App.db.sessions.some(function (s) { return s.planId === existing.id; });
@@ -5982,6 +7015,7 @@ button .en,.badge .en{color:inherit}
       h += reviewed ? '<div class="alert ok"><b>انتهى الأسبوع وتمت مراجعته</b><button data-act="genNext">' + bi('أنشئ جدول الأسبوع التالي', 'Create next week') + '</button></div>'
         : '<div class="alert"><b>قارب الأسبوع على الانتهاء</b>أجب عن أسئلة المراجعة القصيرة ليتعدل الأسبوع القادم حسب أدائك. <button class="sec" data-act="go" data-page="review">' + bi('مراجعة الأسبوع', 'Weekly check') + '</button></div>';
     }
+    h += App.motivation(t);
     h += planView(cur, t);
     h += '<details class="card flat"><summary>' + bi('خيارات إضافية', 'More options') + '</summary>' +
       (pls.length > 1 ? '<label>' + bi('عرض أسبوع سابق', 'Show another week') + '<select id="planPick">' + pls.map(function (p) { return '<option value="' + esc(p.id) + '"' + (p.id === cur.id ? ' selected' : '') + '>' + esc(App.fmtDate(p.weekStart)) + ' – ' + esc(App.fmtDate(p.weekEnd)) + (p.status === 'blocked' ? ' (متوقف)' : '') + '</option>'; }).join('') + '</select></label>' : '') +
@@ -6016,6 +7050,7 @@ button .en,.badge .en{color:inherit}
       if (d.type === 'rest') h += '<p class="muted">راحة تامة أو حركة يومية خفيفة. نم جيداً واشرب الماء.</p>';
       else {
         (d.recovery || []).forEach(function (it) { h += itemRow(p, d, it, -1); });
+        if (d.note) h += '<p class="small muted">' + esc(d.note) + '</p>';
         if (d.warmup && d.warmup.length) h += '<p class="small"><b>' + bi('إحماء 5 دقائق', 'Warm-up 5 min') + ':</b> ' + d.warmup.map(function (it) { return '<button class="linkbtn" data-act="exOpen" data-id="' + esc(it.exId) + '">' + esc(App.exName(it.exId)) + '</button>'; }).join(' · ') + '</p>';
         (d.main || []).forEach(function (it, j) { h += itemRow(p, d, it, j); });
         if (d.cooldown && d.cooldown.length) h += '<p class="small"><b>' + bi('تهدئة وإطالة', 'Cool-down') + ':</b> ' + d.cooldown.map(function (it) { return '<button class="linkbtn" data-act="exOpen" data-id="' + esc(it.exId) + '">' + esc(App.exName(it.exId)) + '</button>'; }).join(' · ') + '</p>';
@@ -6029,7 +7064,7 @@ button .en,.badge .en{color:inherit}
   function itemRow(p, d, it, j) {
     var ex = X.byId(it.exId) || { ar: it.exId, en: '' };
     return '<div class="item"><div class="thumb">' + App.thumb(it.exId) + '</div><div><b>' + esc(ex.ar) + '</b> <span class="en" dir="ltr">' + esc(ex.en) + '</span>' +
-      (it.weak ? ' <span class="pill wk">💪 ' + bi('الجانب الأضعف: ' + sideAr(it.weak.side), 'Weak side') + '</span>' : '') + (it.focus ? ' <span class="pill">🎯 ' + esc(E.FOCUS[it.focus].ar) + '</span>' : '') + (it.override ? ' <span class="pill">معدّل</span>' : '') +
+      (it.weak ? ' <span class="pill wk">💪 ' + bi('الجانب الأضعف: ' + sideAr(it.weak.side), 'Weak side') + '</span>' : '') + (it.focus ? ' <span class="pill">🎯 ' + esc(E.FOCUS[it.focus].ar) + '</span>' : '') + (it.goal ? ' <span class="pill goalp">🎯 ' + (it.test ? 'اختبار الهدف' : 'تدريب الهدف') + '</span>' : '') + (it.override ? ' <span class="pill">معدّل</span>' : '') +
       '<div>' + esc(App.dosageText(it)) + '</div><details class="why"><summary>لماذا؟</summary>' + it.why.map(esc).join('<br>') + '</details></div>' +
       '<div class="act row"><button class="sec" data-act="exOpen" data-id="' + esc(it.exId) + '">' + bi('الشرح', 'How to') + '</button>' + (j >= 0 ? '<button class="ghost" data-act="ovOpen" data-plan="' + esc(p.id) + '" data-day="' + d.index + '" data-item="' + j + '">' + bi('تغيير', 'Change') + '</button>' : '') + '</div></div>';
   }
@@ -6135,7 +7170,7 @@ button .en,.badge .en{color:inherit}
     (d.main || []).forEach(function (it) { flat.push(Object.assign({ block: 'main' }, it)); });
     (d.cooldown || []).forEach(function (it) { flat.push(Object.assign({ block: 'cooldown' }, it)); });
     var s = { id: S.uniqueId(App.db, 'sessions'), traineeId: t.id, planId: p.id, dayIndex: di, date: d.date, kind: d.type === 'recovery' ? 'recovery' : 'train', status: 'partial', early: early, startedAt: S.nowISO(), updatedAt: S.nowISO(), cursor: 0, redFlag: false,
-      items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, weak: it.weak || null, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
+      items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, weak: it.weak || null, gym: it.gym || 0, test: it.test || 0, goal: it.goal || 0, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest, load: it.load == null ? null : it.load, repRange: it.repRange || null, rir: it.rir || null }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
     App.db.sessions.push(s); App.audit('session.start', 'بدء حصة ' + s.id, t.id, s.id); App.save();
     App.ui.run = { id: s.id, idx: 0 }; App.go('session');
   };
@@ -6162,6 +7197,8 @@ button .en,.badge .en{color:inherit}
       '<div class="card flat"><div class="bignum" id="runVal" aria-live="polite">' + (isTime ? fmtS(pr.target) : '0') + '</div>' +
       (isTime ? '<div class="row" style="justify-content:center"><button class="bigbtn" data-act="runTimer">▶ ابدأ المؤقت</button><button class="sec" data-act="runTimerStop">⏸</button></div><label>المدة المنجزة فعلياً (ث)<input type="number" id="runInput" min="0" max="3600" value="' + pr.target + '"></label>'
         : '<div class="row" style="justify-content:center"><button class="bigbtn sec" data-act="runMinus" aria-label="إنقاص">−</button><button class="bigbtn" data-act="runPlus" aria-label="تكرار">+1</button></div><label>التكرارات الصحيحة المنجزة<input type="number" id="runInput" min="0" max="500" value="0"></label>') +
+      (it.gym ? '<label>' + App.bi('الوزن المستخدم (كجم)', 'Weight used (kg)') + '<input type="number" id="runLoad" min="0" max="500" step="0.5" value="' + esc((it.sets.length ? it.sets[it.sets.length - 1].load : pr.load) || '') + '" placeholder="' + (pr.rir ? 'اترك ' + pr.rir + ' تكرارات احتياطاً' : '') + '"></label>' : '') +
+      (it.test ? '<div class="alert warn small"><b>🎯 اختبار الهدف</b>' + (pr.u === 'reps' ? 'سجّل أكبر عدد بأداء صحيح.' : 'سجّل المدة بالثواني.') + '</div>' : '') +
       '<button class="ok" data-act="runSet" style="width:100%">✔ تسجيل المجموعة وبدء الراحة</button></div>' +
       '<div class="card flat"><h4>الراحة</h4><div class="bignum" id="restVal">' + fmtS(pr.rest || 0) + '</div><div class="small" style="text-align:center" id="restLbl">تبدأ تلقائياً بعد تسجيل المجموعة</div><div class="row" style="justify-content:center"><button class="sec" data-act="restSkip">تخطي الراحة</button><label style="margin:0"><input type="checkbox" id="muteRun"' + (App.ui.mute ? ' checked' : '') + '> كتم</label></div>' +
       '<p class="small">المجموعات المسجلة: ' + (it.sets.map(function (x, i) { return (i + 1) + ') ' + x.value + (isTime ? ' ث' : ''); }).join(' · ') || '—') + (it.sets.length ? ' <button class="ghost" data-act="runUndo" style="min-height:0;padding:2px 8px">تراجع عن آخر مجموعة</button>' : '') + '</p></div></div></div>';
@@ -6208,7 +7245,9 @@ button .en,.badge .en{color:inherit}
     var s = sesById(App.ui.run.id), it = s.items[App.ui.run.idx], val = Number(App.$('#runInput').value);
     if (!(val >= 0)) return App.toast('قيمة غير صالحة');
     clearTimers(); if (it.block === 'main') saveMeta();
-    it.sets.push({ value: val, at: S.nowISO() }); s.updatedAt = S.nowISO(); s.cursor = App.ui.run.idx; App.save();
+    var ld = App.$('#runLoad'); var setRec = { value: val, at: S.nowISO() }; if (ld && ld.value !== '') setRec.load = Math.max(0, Math.min(500, Number(ld.value)));
+    it.sets.push(setRec);
+    if (it.test) { var tr = App.trainee(s.traineeId), G = window.MCGoals; if (tr && tr.goalTarget) { tr.goalLog = tr.goalLog || []; var prevBest = G.best(tr, tr.goalTarget.kind); var v = tr.goalTarget.kind === 'walk' ? Math.round(val / 60) : val; tr.goalLog.push({ at: S.nowISO(), kind: tr.goalTarget.kind, value: v, sessionId: s.id }); App.toast((prevBest == null || v > prevBest ? '🏅 رقم قياسي جديد: ' : 'سُجّلت المحاولة: ') + v + ' / ' + tr.goalTarget.target, 6000); } } s.updatedAt = S.nowISO(); s.cursor = App.ui.run.idx; App.save();
     var rest = it.prescribed.rest || 0, y = window.scrollY; App.render(); window.scrollTo(0, y);
     if (it.sets.length >= it.prescribed.sets) { App.toast(it.block === 'main' ? 'اكتملت المجموعات ✔ — اختر «كيف كان؟» ثم «التالي».' : 'تم ✔ — اضغط «التالي».'); }
     if (rest > 0) { var left = rest; App.$('#restLbl').textContent = 'راحة — تنفس بهدوء'; timers.rest = setInterval(function () { if (!App.$('#restVal')) return clearTimers(); left--; App.$('#restVal').textContent = fmtS(left); if (left <= 3 && left > 0) App.beep(740, 80); if (left <= 0) { clearInterval(timers.rest); timers.rest = null; App.$('#restLbl').textContent = 'انتهت الراحة'; App.beep(988, 200, 2); App.vibrate(200); } }, 1000); }
@@ -6246,7 +7285,9 @@ button .en,.badge .en{color:inherit}
     App.audit('session.complete', 'إنهاء ' + s.id + ' جهد ' + a.effort + ' ألم ' + a.pain, s.traineeId, s.id); App.save(); App.render();
   };
   function summary(s) {
-    var h = '<h2>ملخص الحصة ' + esc(s.id) + '</h2>';
+    var tr = App.trainee(s.traineeId), G = window.MCGoals, done = App.db.sessions.filter(function (x) { return x.traineeId === s.traineeId && x.status === 'complete'; }).length, rk = G.rank(done);
+    var h = '<h2>' + App.bi('ملخص التمرين', 'Workout summary') + '</h2>';
+    if (!s.redFlag) h += '<div class="card hero-msg"><div class="rankbig">🎖 ' + esc(rk.ar) + ' <span class="en" dir="ltr">' + esc(rk.en) + '</span></div><p><b>' + esc(G.cheer(done)) + '</b></p><p>' + done + ' تمريناً مكتملاً' + (rk.next ? ' — بقي ' + rk.next.left + ' للترقية إلى «' + esc(rk.next.ar) + '»' : '') + '.</p>' + (tr && tr.goalTarget ? App.goalBar(tr) : '') + '</div>';
     if (s.redFlag) h += '<div class="alert danger"><b>⛔ سُجلت علامة إنذار</b>أوقف النشاط. إذا استمر ألم الصدر أو حدث إغماء اتصل بالطوارئ: <b>' + esc(App.db.settings.emergencyNumber || '—') + '</b>. لن تُصدر خطة تلقائية جديدة قبل فحص جديد وتصريح مختص موثق.</div>';
     else if (s.check && Number(s.check.pain) >= 4) h += '<div class="alert warn"><b>ألم ' + esc(s.check.pain) + '/10</b>ليس ألماً عضلياً عادياً بالضرورة. راقب، وسيُراعى في المراجعة الأسبوعية؛ ألم ≥ 7 يستلزم تقييماً.</div>';
     h += '<div class="card"><table><thead><tr><th>التمرين</th><th>المخطط</th><th>المسجل</th><th>جهد</th><th>تقنية</th><th>ألم</th></tr></thead><tbody>' + s.items.map(function (i) { return '<tr><td>' + esc(App.exName(i.exId)) + '</td><td>' + i.prescribed.sets + '×' + i.prescribed.target + '</td><td>' + (i.sets.map(function (x) { return x.value; }).join('، ') || '—') + '</td><td>' + esc(i.effort) + '</td><td>' + esc(i.technique) + '</td><td>' + esc(i.pain || '') + '</td></tr>'; }).join('') + '</tbody></table>' + (s.load ? '<p class="small">حمل الحصة = الجهد × الدقائق = ' + s.load + ' وحدة [FOSTER2001]</p>' : '') + '</div>';
@@ -6373,7 +7414,9 @@ button .en,.badge .en{color:inherit}
   App.biRadios = radios;
 
   var DAYS = E.DOW_AR.map(function (d, i) { return [i, d, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][i]]; });
-  var GOALS = [['general', 'لياقة عامة', 'General fitness'], ['weight', 'إنقاص الوزن', 'Weight loss'], ['strength', 'قوة', 'Strength'], ['endurance', 'تحمّل', 'Endurance'], ['mobility', 'مرونة وحركة', 'Mobility']];
+  var GOALS = [['weight', 'إنزال الوزن', 'Lose weight'], ['strength', 'قوة وبناء عضلات', 'Strength & muscle'], ['general', 'لياقة عامة', 'General fitness'], ['endurance', 'تحمّل وجري', 'Endurance'], ['mobility', 'مرونة وحركة', 'Mobility'], ['target', 'رقم محدد (مثل 60 ضغطة)', 'A number (e.g. 60 push-ups)']];
+  var GYM_EQ = ['dumbbell', 'barbell', 'rack', 'bench', 'kettlebell', 'cable', 'machine', 'legpress', 'pulldown'].map(function (k) { return [k, X.EQUIP[k], X.EQUIP_EN[k]]; });
+  var KIND_OPTS = function () { var G = window.MCGoals.KINDS; return ['pushup', 'situp', 'pullup', 'squat', 'plank', 'walk'].map(function (k) { return [k, G[k].ar, G[k].en]; }); };
   var EQUIP = [['chair', 'كرسي ثابت', 'Sturdy chair'], ['step', 'درجة أو درج', 'Step / stairs'], ['bar', 'عقلة', 'Pull-up bar'], ['table', 'طاولة متينة', 'Sturdy table'], ['towel', 'منشفة', 'Towel']];
   var FIT = {
     push: [['0', 'لا أستطيع', 'None'], ['1-5', '1–5'], ['6-15', '6–15'], ['16+', 'أكثر من 15', '16+']],
@@ -6390,7 +7433,9 @@ button .en,.badge .en{color:inherit}
     var ans = sc ? JSON.parse(JSON.stringify(sc.answers)) : {};
     return { editId: t.id, forWhom: t.forWhom || 'trainee', name: t.displayName, coachName: t.coachName || '', age: t.age, sex: t.sex === 'male' || t.sex === 'female' ? t.sex : '', heightCm: t.heightCm || '', weightKg: t.weightKg || '',
       goal: t.goal || 'general', days: (t.days || []).map(String), minutes: String(t.minutes || 30), place: t.place || 'home', eq: eq, answers: ans,
-      fit: (bl && bl.quick) || {}, weakArm: t.weakArm || 'none', weakLeg: t.weakLeg || 'none', focus: t.focus || [], consent: !!t.consent };
+      fit: (bl && bl.quick) || {}, weakArm: t.weakArm || 'none', weakLeg: t.weakLeg || 'none', focus: t.focus || [], consent: !!t.consent,
+      program: t.program || 'bw', gymEq: (t.equipment || []).filter(function (e) { return X.EQUIP_EN[e]; }), gymLevel: String(t.gymLevel || ''),
+      goal: t.goalTarget && t.goalTarget.kind !== 'weight' ? 'target' : t.goal || 'general', gKind: t.goalTarget && t.goalTarget.kind !== 'weight' ? t.goalTarget.kind : 'pushup', gTarget: t.goalTarget && t.goalTarget.kind !== 'weight' ? t.goalTarget.target : 60, gTimed: !(t.goalTarget && t.goalTarget.timed === false), gWeight: t.goalTarget && t.goalTarget.kind === 'weight' ? t.goalTarget.target : '' };
   }
   App.acts.setupNew = function (el) { App.ui.wz = { forWhom: el.dataset.for || 'self', days: ['0', '2', '4'], minutes: '30', place: 'both', goal: 'general', answers: {}, fit: {}, eq: ['chair'], weakArm: 'none', weakLeg: 'none', focus: [] }; App.go('setup'); };
   App.acts.setupEdit = function (el) { var t = App.trainee(el.dataset.id); App.ui.traineeId = t.id; App.ui.wz = fromTrainee(t); App.go('setup'); };
@@ -6408,11 +7453,18 @@ button .en,.badge .en{color:inherit}
       '<label>' + bi('الطول (سم)', 'Height (cm)') + '<input name="heightCm" type="number" inputmode="numeric" min="100" max="230" value="' + esc(w.heightCm || '') + '"></label>' +
       '<label>' + bi('الوزن (كجم)', 'Weight (kg)') + '<input name="weightKg" type="number" inputmode="decimal" min="30" max="250" step="0.5" value="' + esc(w.weightKg || '') + '"></label></div>';
     h += q('الجنس', 'Sex', radios('sex', [['male', 'ذكر', 'Male'], ['female', 'أنثى', 'Female']], w.sex), 'يُستخدم فقط لإظهار أسئلة الحمل، ولا يغيّر شدة التمارين.');
+    h += q('نوع البرنامج', 'Program type', radios('program', [['bw', 'وزن الجسم (منزل وخارجه)', 'Bodyweight (home/outdoor)'], ['gym', 'الصالة الرياضية بالأوزان', 'Gym with weights']], w.program || 'bw'), 'برنامج الصالة منفصل تماماً عن تمارين وزن الجسم.');
     h += q('هدفك', 'Your goal', radios('goal', GOALS, w.goal));
+    if (w.goal === 'target') {
+      h += q('ما الرقم الذي تريد الوصول إليه؟', 'Which number do you want to reach?', radios('gKind', KIND_OPTS(), w.gKind || 'pushup') + '<div class="row" style="margin-top:8px"><label>' + bi('الرقم المستهدف', 'Target') + '<input name="gTarget" type="number" min="1" max="500" value="' + esc(w.gTarget || 60) + '" style="max-width:140px"></label>' +
+        (['pushup', 'situp', 'squat'].indexOf(w.gKind || 'pushup') >= 0 ? '<label><input type="checkbox" name="gTimed"' + (w.gTimed !== false ? ' checked' : '') + '> ' + bi('خلال دقيقتين (مثل اختبارات اللياقة العسكرية)', 'within 2 minutes (like military fitness tests)') + '</label>' : '') + '</div>', 'التطبيق يضيف تدريباً خاصاً بالهدف واختباراً كل أسبوعين، ويقدّر المدة المتوقعة.');
+    }
+    if (w.goal === 'weight') h += q('الوزن المستهدف (كجم)', 'Target weight (kg)', '<input name="gWeight" type="number" inputmode="decimal" min="35" max="200" step="0.5" value="' + esc(w.gWeight || '') + '" style="max-width:160px">', 'معدل آمن تقريباً 0.5–1 كجم أسبوعياً.');
     h += q('الأيام المتاحة', 'Available days', checks('days', DAYS, w.days));
     h += q('مدة التمرين', 'Session length', radios('minutes', [['20', '20 دقيقة', '20 min'], ['30', '30 دقيقة', '30 min'], ['45', '45 دقيقة', '45 min'], ['60', '60 دقيقة', '60 min']], w.minutes));
     h += q('أين ستتمرن؟', 'Where will you train?', radios('place', [['home', 'في المنزل فقط', 'Home only'], ['both', 'المنزل + خارج المنزل (مشي، حديقة)', 'Home + outdoors (walks, park)']], w.place));
-    h += q('ما المتوفر لديك؟ (الحائط متوفر دائماً)', 'What do you have? (a wall is assumed)', checks('eq', EQUIP, w.eq));
+    if (w.program === 'gym') h += q('معدات الصالة المتوفرة', 'Gym equipment available', checks('gymEq', GYM_EQ, w.gymEq || GYM_EQ.map(function (x) { return x[0]; })));
+    else h += q('ما المتوفر لديك؟ (الحائط متوفر دائماً)', 'What do you have? (a wall is assumed)', checks('eq', EQUIP, w.eq));
     h += '</fieldset>';
     /* 2) health */
     h += '<fieldset class="card"><legend>' + bi('2) صحتك', 'Your health') + '</legend><p class="small muted lead">' + bi('أسئلة سلامة قصيرة؛ أي «نعم» على علامة خطر يوقف الجدول حتى مراجعة الطبيب.', 'Short safety questions; a “yes” to a warning sign pauses the plan until a doctor review.') + '</p>';
@@ -6430,6 +7482,7 @@ button .en,.badge .en{color:inherit}
     h += q('كم ثانية تثبت في وضع البلانك؟', 'How long can you hold a plank?', radios('f_plank', FIT.plank, f.plank));
     h += q('كم دقيقة تمشي دون توقف؟', 'How long can you walk without stopping?', radios('f_walk', FIT.walk, f.walk));
     if ((w.eq || []).indexOf('bar') >= 0) h += q('كم عقلة تستطيع؟', 'How many pull-ups?', radios('f_pull', FIT.pull, f.pull));
+    if (w.program === 'gym') h += q('خبرتك مع الأوزان', 'Experience with weights', radios('gymLevel', [['1', 'لا خبرة', 'None'], ['2', 'أقل من 6 أشهر', 'Under 6 months'], ['3', 'أكثر من 6 أشهر بانتظام', '6+ months, regular']], w.gymLevel));
     var act = SC.QUESTIONS.filter(function (x) { return x.id === 'active'; })[0];
     h += q(act.text, act.en, radios('h_active', SC.YN.slice(0, 2), w.answers.active));
     h += q('هل إحدى يديك أضعف بوضوح من الأخرى؟', 'Is one arm clearly weaker?', radios('weakArm', FIT.side, w.weakArm));
@@ -6442,8 +7495,10 @@ button .en,.badge .en{color:inherit}
   };
   function readWz(form) {
     var fd = new FormData(form), w = App.ui.wz, g = function (k) { var v = fd.get(k); return v == null ? '' : String(v); };
-    ['forWhom', 'name', 'coachName', 'age', 'sex', 'heightCm', 'weightKg', 'goal', 'minutes', 'place', 'weakArm', 'weakLeg'].forEach(function (k) { if (fd.has(k) || form.querySelector('[name="' + k + '"]')) w[k] = g(k); });
-    w.days = fd.getAll('days').map(String); w.eq = fd.getAll('eq').map(String); w.focus = fd.getAll('focus').map(String).slice(0, 2); w.consent = !!fd.get('consent');
+    ['forWhom', 'name', 'coachName', 'age', 'sex', 'heightCm', 'weightKg', 'goal', 'minutes', 'place', 'weakArm', 'weakLeg', 'program', 'gymLevel', 'gKind', 'gTarget', 'gWeight'].forEach(function (k) { if (fd.has(k) || form.querySelector('[name="' + k + '"]')) w[k] = g(k); });
+    if (form.querySelector('[name=gymEq]')) w.gymEq = fd.getAll('gymEq').map(String);
+    if (form.querySelector('[name=gTimed]')) w.gTimed = !!fd.get('gTimed');
+    w.days = fd.getAll('days').map(String); if (form.querySelector('[name=eq]')) w.eq = fd.getAll('eq').map(String); w.focus = fd.getAll('focus').map(String).slice(0, 2); w.consent = !!fd.get('consent');
     w.fit = w.fit || {}; ['push', 'squat', 'plank', 'walk', 'pull'].forEach(function (k) { if (fd.get('f_' + k)) w.fit[k] = g('f_' + k); });
     SC.QUESTIONS.forEach(function (x) {
       var n = 'h_' + x.id;
@@ -6479,7 +7534,11 @@ button .en,.badge .en{color:inherit}
     if (missH.length) errs.push('أجب عن كل أسئلة الصحة (' + missH.length + ' متبقية) · Answer all health questions');
     if (w.answers.msk === 'yes' && !(w.answers.msk_areas || []).length) errs.push('حدد مكان الإصابة أو الألم · Choose where the pain/injury is');
     ['push', 'squat', 'plank', 'walk'].forEach(function (k) { if (!w.fit[k]) errs.push('أكمل قسم اللياقة · Complete the fitness section'); });
-    if (w.eq.indexOf('bar') >= 0 && !w.fit.pull) errs.push('كم عقلة تستطيع؟ · How many pull-ups?');
+    if (w.program !== 'gym' && w.eq.indexOf('bar') >= 0 && !w.fit.pull) errs.push('كم عقلة تستطيع؟ · How many pull-ups?');
+    if (w.program === 'gym' && !w.gymLevel) errs.push('اختر خبرتك مع الأوزان · Choose your weights experience');
+    if (w.program === 'gym' && !(w.gymEq || []).length) errs.push('اختر معدات الصالة المتوفرة · Choose available gym equipment');
+    if (w.goal === 'target' && !(Number(w.gTarget) > 0)) errs.push('اكتب الرقم المستهدف · Enter your target number');
+    if (w.goal === 'weight' && !(Number(w.gWeight) >= 35 && Number(w.gWeight) < wkg)) errs.push('الوزن المستهدف يجب أن يكون أقل من وزنك الحالي · Target weight must be below current weight');
     if (!w.answers.active) errs.push('هل تتمرن بانتظام؟ · Do you exercise regularly?');
     if (!w.consent) errs.push('وافق على ملاحظة الخصوصية · Accept the privacy note');
     errs = errs.filter(function (e, i) { return errs.indexOf(e) === i; });
@@ -6490,10 +7549,14 @@ button .en,.badge .en{color:inherit}
     else { t.revisions = t.revisions || []; var snap = JSON.parse(JSON.stringify(t)); delete snap.revisions; t.revisions.push({ at: now, snapshot: snap }); t.revisions = t.revisions.slice(-20); }
     var name = String(w.name).trim().slice(0, 80);
     Object.assign(t, { displayName: name, forWhom: w.forWhom === 'trainee' ? 'trainee' : 'self', coachName: w.forWhom === 'trainee' ? String(w.coachName || '').slice(0, 80) : name, age: age, sex: w.sex,
-      heightCm: hcm, weightKg: wkg, bodyMetricsConsent: true, goal: w.goal || 'general', experience: w.answers.active === 'yes' ? 'intermediate' : 'beginner', minutes: Number(w.minutes) || 30,
-      days: w.days.map(Number), place: w.place, equipment: ['wall', 'mat'].concat(w.eq, w.place === 'both' ? ['space'] : [], w.eq.indexOf('step') >= 0 ? ['stairs'] : []),
+      heightCm: hcm, weightKg: wkg, bodyMetricsConsent: true, goal: w.goal === 'target' ? 'general' : w.goal || 'general', experience: w.answers.active === 'yes' ? 'intermediate' : 'beginner', minutes: Number(w.minutes) || 30,
+      days: w.days.map(Number), place: w.place, program: w.program === 'gym' ? 'gym' : 'bw', gymLevel: Number(w.gymLevel) || 1,
+      equipment: ['wall', 'mat'].concat(w.program === 'gym' ? (w.gymEq || []) : w.eq, w.place === 'both' ? ['space'] : [], w.program !== 'gym' && w.eq.indexOf('step') >= 0 ? ['stairs'] : []),
+      goalTarget: w.goal === 'target' ? { kind: w.gKind || 'pushup', target: Number(w.gTarget), timed: ['pushup', 'situp', 'squat'].indexOf(w.gKind || 'pushup') >= 0 ? w.gTimed !== false : false, setAt: now } : w.goal === 'weight' ? { kind: 'weight', target: Number(w.gWeight), start: wkg, setAt: now } : null,
       weakArm: w.weakArm || 'none', weakLeg: w.weakLeg || 'none', focus: w.focus || [], walkRange: w.fit.walk, updatedAt: now });
     if (!t.consent) t.consent = { at: now, text: 'setup-5.1', version: 'CONSENT-5.1' };
+    t.goalLog = t.goalLog || [];
+    if (t.goalTarget && t.goalTarget.kind === 'weight') t.goalLog.push({ at: now, kind: 'weight', value: wkg });
     if (t.forWhom === 'trainee' && t.coachName) App.db.settings.coachName = t.coachName;
     if (isNew) App.db.trainees.push(t);
     /* screening record (keeps every version) */
@@ -6520,12 +7583,12 @@ button .en,.badge .en{color:inherit}
     if (S.status.mode === 'memory' || S.status.error) h += '<div class="alert danger"><b>تحذير الحفظ</b>' + esc(S.status.error) + '</div>';
     if (S.readV4Local() && !db.legacy) h += '<div class="alert warn"><b>وُجدت بيانات من النسخة v4 في هذا المتصفح</b>يمكن نقلها (قراءة فقط دون تعديل v4) من <button class="sec" data-act="go" data-page="data">النسخ الاحتياطي</button></div>';
     h += '<div class="hero"><button class="big" data-act="setupNew" data-for="self">📋 ' + bi('جدول لنفسي', 'Plan for myself') + '</button><button class="big sec" data-act="setupNew" data-for="trainee">👥 ' + bi('جدول لمتدرب', 'Plan for a trainee') + '</button></div>';
-    if (!act.length) return h + '<p class="muted center lead">' + bi('ابدأ بأحد الزرين أعلاه: 3 أقسام قصيرة ثم يظهر الجدول الأسبوعي مباشرة.', 'Start above: 3 short sections, then your weekly plan.') + '</p>';
+    if (!act.length) return h + '<div class="card flat"><label>📂 ' + bi('لديك نسخة كاملة من مدرب آخر؟ افتحها', 'Have a full copy from another coach? Open it') + '<input type="file" id="openCopy" accept=".json,application/json"></label></div><p class="muted center lead">' + bi('ابدأ بأحد الزرين أعلاه: 3 أقسام قصيرة ثم يظهر الجدول الأسبوعي مباشرة.', 'Start above: 3 short sections, then your weekly plan.') + '</p>';
     act.slice().sort(function (a, b) { return (a.forWhom === 'self' ? 0 : 1) - (b.forWhom === 'self' ? 0 : 1); }).forEach(function (t) {
       var sc = App.latest('screenings', t.id), pls = App.plansOf(t.id), pl = pls[pls.length - 1], today = App.today(), di = -1, d = null;
       if (pl && pl.status !== 'blocked' && today >= pl.weekStart && today <= pl.weekEnd) { d = pl.days.filter(function (x) { return x.date === today; })[0]; di = d ? d.index : -1; }
       var todayTxt = !pl ? 'لا يوجد جدول بعد' : pl.status === 'blocked' ? '⛔ الجدول متوقف لسبب صحي' : !d ? 'أسبوع الجدول انتهى — راجع الأسبوع وأنشئ التالي' : d.type === 'rest' ? '😴 اليوم راحة' : d.type === 'recovery' ? (d.place === 'outdoor' ? '🌳 اليوم: مشي خارج المنزل ' : '🏠 اليوم: مشي في المنزل ') + Math.round(d.recovery[0].target / 60) + ' دقيقة' : '🏠 اليوم: تمارين في المنزل (' + d.main.length + ' تمارين)';
-      h += '<div class="card"><div class="row"><h3 class="grow">' + esc(t.displayName) + (t.forWhom === 'self' ? ' <span class="pill">أنا · Me</span>' : '') + '</h3>' + App.statusBadge(sc && sc.outcome.status) + '</div><p>' + esc(todayTxt) + '</p><div class="row">' +
+      h += '<div class="card"><div class="row"><h3 class="grow">' + esc(t.displayName) + (t.forWhom === 'self' ? ' <span class="pill">أنا · Me</span>' : '') + (t.program === 'gym' ? ' <span class="pill">🏋 صالة</span>' : '') + '</h3>' + App.statusBadge(sc && sc.outcome.status) + '</div>' + App.motivation(t) + '<p>' + esc(todayTxt) + '</p><div class="row">' +
         (pl ? '<button data-act="pick" data-id="' + esc(t.id) + '" data-page="plan">🗓 ' + bi('الجدول', 'Plan') + '</button>' : '') +
         (d && d.type !== 'rest' ? '<button class="ok" data-act="startSession" data-plan="' + esc(pl.id) + '" data-day="' + di + '">▶ ' + bi('ابدأ تمرين اليوم', 'Start today') + '</button>' : '') +
         (pl && pl.status !== 'blocked' && !App.db.reviews.some(function (r) { return r.planId === pl.id; }) && today >= E.addDays(pl.weekStart, 5) ? '<button class="sec" data-act="pick" data-id="' + esc(t.id) + '" data-page="review">✅ ' + bi('مراجعة الأسبوع', 'Weekly check') + '</button>' : '') +
@@ -6536,7 +7599,7 @@ button .en,.badge .en{color:inherit}
 
   /* ---------- More ---------- */
   App.pages.more = function () {
-    var items = [['trainees', '👥', 'إدارة الملفات', 'Manage profiles'], ['screen', '🩺', 'الفحص الصحي والتصريح الطبي', 'Health screen & clearance'], ['history', '📈', 'السجل والتقدم', 'History & progress'], ['data', '💾', 'النسخ الاحتياطي والتشفير', 'Backup & encryption'], ['sources', '⚖', 'المصادر والسلامة', 'Sources & safety']];
+    var items = [['trainees', '👥', 'إدارة الملفات', 'Manage profiles'], ['screen', '🩺', 'الفحص الصحي والتصريح الطبي', 'Health screen & clearance'], ['history', '📈', 'السجل والتقدم', 'History & progress'], ['data', '👥', 'الحسابات والنسخ الاحتياطي', 'Accounts & backup'], ['sources', '⚖', 'المصادر والسلامة', 'Sources & safety']];
     return '<h2>' + bi('المزيد', 'More') + '</h2><div class="grid">' + items.map(function (i) { return '<button class="excard" data-act="go" data-page="' + i[0] + '"><h4>' + i[1] + ' ' + bi(i[2], i[3]) + '</h4></button>'; }).join('') + '</div>';
   };
 })();

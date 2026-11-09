@@ -1,31 +1,33 @@
 PASS T1 offline load: no console errors at start, title & version
-PASS T2 register trainee A (male, 3 days, chair) — TR5-Q5ATC-VY6DB
+PASS T2 register trainee A (male, 3 days, chair) — TR5-SHWFV-5J8KQ
 PASS T3 screening A all-no → cleared
 PASS T4 baseline A (no maximal test, capped inputs) → levels — {"push":2,"squat":2,"core":2,"pull":1,"aerobic":2,"balance":2}
-PASS T5 weekly plan A generated with unique week ID, 7 days, explanations — PL5-2026W46-1H0W4-QYYM8
-PASS T6 register trainee B (female, pregnant 24 wk, provider approved) → pregnancy pathway; plan has no supine/prone/impact — PL5-2026W46-BDPXM-CKC2Z
+PASS T5 weekly plan A generated with unique week ID, 7 days, explanations — PL5-2026W46-CVWCA-CZSGR
+PASS T6 register trainee B (female, pregnant 24 wk, provider approved) → pregnancy pathway; plan has no supine/prone/impact — PL5-2026W46-FAR1W-P28VA
 PASS T7 trainee C with chest pain → refer; plan blocked; no override possible
 PASS T8 isolation: A, B, C plans differ and records never cross trainees
 PASS T9 live session A: per-set autosave, rep counter, rest timer, post-session check — 11 items logged
 PASS T10 rest timer counts down in real time — rest 01:10 → 01:08 (partial session saved)
 PASS T11 weekly review A: mandatory safety Qs, adaptive per-exercise Qs, decision saved — decision=maintain, questions=9
-PASS T12 next week plan A uses review, new unique ID, history preserved — PL5-2026W47-8BQNA-TR8WH decision maintain
+PASS T12 next week plan A uses review, new unique ID, history preserved — PL5-2026W47-KHYNV-Z6AQM decision maintain
 PASS T13 painful symptom (8/10) in review of B blocks next plan
 PASS T14 coach override within bounds logged; out-of-range rejected in UI
 PASS T15 plan lookup by ID (typo-tolerant normalisation, local only)
-PASS T16 JSON export (full) produces checksummed file — export_full.json 104KB
-PASS T17 print weekly plan: Arabic RTL A4 PDF via Chromium print engine — 12 A4 pages, 419KB
+PASS T16 JSON export (full) produces checksummed file — export_full.json 108KB
+PASS T17 print weekly plan: Arabic RTL A4 PDF via Chromium print engine — 12 A4 pages, 438KB
 PASS T18 library: per-exercise animation actually moves; dialog; rep counter; interval timer — timer at 00:03
-PASS T19 every exercise in the library renders a distinct original figure — 199 distinct drawings
+PASS T19 every exercise in the library renders a distinct original figure — 231 distinct drawings
 PASS T20 import round-trip into a fresh browser profile restores all records
 PASS T21 malformed / tampered imports rejected without changing data
 PASS T22 HTML injection via names is escaped (no script execution)
 PASS T23 v4 regression/migration: v4 localStorage data detected and migrated read-only — v4 key unchanged after migration
 PASS T24 mobile layout (iPhone-size viewport) renders library and plan without overflow — simulated viewport only (not a real device)
 PASS T26 multi-tab safety: a stale tab cannot overwrite newer data written by another tab — stale write refused; reload shows newer data
-PASS T27 optional encryption: storage ciphertext only, lock screen, wrong password rejected, encrypted export/import — PBKDF2 310000 iterations, AES-GCM-256
-PASS T28 simple setup (for myself): short bilingual form → weekly plan with home/outdoor days, weak-side work, English names, video links, reading copy — 23 questions on the setup page (incl. profile & fitness), 8 health questions
+PASS T27 accounts: owner + second coach, ciphertext-only storage, sign-in screen, wrong password rejected, full encrypted copy opened on another device by coach 2, password-protected export — PBKDF2 310000 iterations, AES-GCM-256
+PASS T28 simple setup (for myself): short bilingual form → weekly plan with home/outdoor days, weak-side work, English names, video links, reading copy — 24 questions on the setup page (incl. profile & fitness), 8 health questions
 PASS T29 simple setup: a red-flag answer pauses the plan and explains why
+PASS T30 gym program: separate weighted plan, log weight per set, next week load rises after hitting top reps — GY-LEGPRESS: 40 kg → 45 kg
+PASS T31 goal 60 push-ups: setup with target, test in week 1, logged test raises best, progress bar + rank shown — best 27/60 (45%), projection {"lo":11,"hi":21} weeks (estimate)
 PASS T25 zero external network requests and zero console errors during the whole run
 
-E2E: 29 passed, 0 failed — Chromium headless via Playwright, file:// URL, network offline
+E2E: 31 passed, 0 failed — Chromium headless via Playwright, file:// URL, network offline

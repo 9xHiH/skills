@@ -15,7 +15,7 @@
   App.trainee = function (id) { return App.db.trainees.find(function (t) { return t.id === (id || App.ui.traineeId); }) || null; };
   App.latest = function (coll, tid, pred) { var a = App.db[coll].filter(function (r) { return r.traineeId === tid && (!pred || pred(r)); }); a.sort(function (x, y) { return (x.at || x.createdAt || '') < (y.at || y.createdAt || '') ? -1 : 1; }); return a[a.length - 1] || null; };
   App.plansOf = function (tid) { return App.db.plans.filter(function (p) { return p.traineeId === tid; }).sort(function (a, b) { return a.weekStart < b.weekStart ? -1 : a.weekStart > b.weekStart ? 1 : (a.createdAt < b.createdAt ? -1 : 1); }); };
-  App.audit = function (type, msg, traineeId, ref) { App.db.audit.push({ id: S.uniqueId(App.db, 'audit'), at: S.nowISO(), type: type, msg: msg, traineeId: traineeId || null, ref: ref || null }); };
+  App.audit = function (type, msg, traineeId, ref) { App.db.audit.push({ id: S.uniqueId(App.db, 'audit'), at: S.nowISO(), type: type, msg: msg, traineeId: traineeId || null, ref: ref || null, actor: S.status.currentUser ? S.status.currentUser.u : null }); };
   App.save = function (why) { var ok = S.save(App.db); App.renderStatus(); if (!ok && S.status.mode !== 'memory') App.toast(S.status.error || 'فشل الحفظ'); return ok; };
   App.exName = function (id) { var e = X.byId(id); return e ? e.ar : id; };
   App.statusBadge = function (st) { var m = { cleared: ['b-ok', SC.LABEL.cleared], more_info: ['b-warn', SC.LABEL.more_info], refer: ['b-danger', SC.LABEL.refer] }; var x = m[st] || ['b-info', 'لم يُفحص']; return '<span class="badge ' + x[0] + '">' + (st === 'refer' ? '⛔ ' : st === 'cleared' ? '✔ ' : st === 'more_info' ? '⚠ ' : '○ ') + esc(x[1]) + '</span>'; };
@@ -44,6 +44,26 @@
     return out;
   };
 
+  /* ---------- motivation widgets ---------- */
+  App.goalBar = function (t) {
+    var G = window.MCGoals, g = t.goalTarget; if (!g) return '';
+    var pc = G.percent(t), c = G.current(t), pj = G.project(t), K = G.KINDS[g.kind];
+    return '<div class="goal"><div class="row"><b class="grow">🎯 ' + esc(G.label(g)) + ' <span class="en" dir="ltr">' + esc(G.labelEn(g)) + '</span></b><span class="pill">' + pc + '%</span></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pc + '"><span style="width:' + pc + '%"></span></div>' +
+      '<div class="small">' + (c == null ? 'لم تُسجّل محاولة بعد — أول اختبار في جدول هذا الأسبوع.' : 'الحالي: <b>' + c + ' ' + G.UNIT_AR[K.unit] + '</b>') + (pj && pj.done ? ' — 👑 تحقق الهدف!' : pj ? ' — المدة المتوقعة ≈ ' + pj.lo + '–' + pj.hi + ' أسبوعاً (تقدير)' : '') + ' <button class="linkbtn" data-act="goalLog" data-id="' + esc(t.id) + '">سجّل محاولة/وزناً</button></div></div>';
+  };
+  App.motivation = function (t) {
+    var G = window.MCGoals, ses = App.db.sessions.filter(function (x) { return x.traineeId === t.id; }), done = ses.filter(function (x) { return x.status === 'complete'; }).length, rk = G.rank(done), st = G.streak(ses, new Date().toISOString());
+    var ach = G.achievements(t, ses).filter(function (a) { return a.ok; });
+    return '<div class="motiv"><span class="rank">🎖 ' + esc(rk.ar) + '</span>' + (st ? '<span class="pill">🔥 ' + st + ' أسابيع متتالية</span>' : '') + '<span class="pill">' + done + ' تمريناً</span>' + ach.map(function (a) { return '<span class="pill" title="' + esc(a.en) + '">' + a.ic + ' ' + esc(a.ar) + '</span>'; }).join('') + (rk.next ? '<span class="small muted"> · ' + rk.next.left + ' للترقية</span>' : '') + '</div>' + App.goalBar(t);
+  };
+  App.acts.goalLog = function (el) {
+    var t = App.trainee(el.dataset.id), g = t.goalTarget, G = window.MCGoals; if (!g) return;
+    var v = prompt('أدخل ' + (g.kind === 'weight' ? 'وزنك الحالي (كجم)' : 'أفضل نتيجة الآن (' + G.UNIT_AR[G.KINDS[g.kind].unit] + ')') + ':'); if (v == null || v === '') return;
+    var n = Number(v); if (!(n > 0 && n < 1000)) return App.toast('رقم غير صالح');
+    t.goalLog = t.goalLog || []; t.goalLog.push({ at: S.nowISO(), kind: g.kind, value: n, manual: true }); if (g.kind === 'weight') t.weightKg = n;
+    App.audit('goal.log', G.label(g) + ': ' + n, t.id); App.save(); App.render(); App.toast('تم التسجيل ✔');
+  };
+
   /* ---------- shell ---------- */
   var NAV = [['dash', '', 'الرئيسية'], ['setup', '', 'الإعداد'], ['plan', '', 'الجدول'], ['session', '', 'التمرين'], ['review', '', 'المراجعة'], ['library', '', 'التمارين'], ['more', '', 'المزيد'], ['trainees', '', 'إدارة الملفات'], ['screen', '', 'الفحص الصحي'], ['history', '', 'السجل'], ['data', '', 'النسخ الاحتياطي'], ['sources', '', 'المصادر والسلامة']];
   var IN_NAV = { dash: 1, plan: 1, session: 1, review: 1, library: 1, more: 1 };
@@ -69,13 +89,25 @@
     var fn = App.pages[App.ui.page] || App.pages.dash;
     try { v.innerHTML = fn(); } catch (e) { console.error(e); v.innerHTML = '<div class="alert danger"><b>خطأ في عرض الصفحة</b>' + esc(e.message) + '</div>'; }
     if (App.after[App.ui.page]) App.after[App.ui.page]();
-    var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'مدرب اللياقة البدنية v5';
+    var t = NAV.filter(function (n) { return n[0] === App.ui.page; })[0]; document.title = (t ? t[2] + ' | ' : '') + 'عزم · AZM';
   };
   App.after = {};
   function lockScreen() {
-    return '<div class="card" style="max-width:560px;margin:40px auto"><h2>🔒 البيانات مشفّرة</h2><p>أدخل كلمة المرور لفك تشفير بيانات المتدربين المحفوظة في هذا المتصفح. لا يمكن استرجاع كلمة المرور؛ عند نسيانها لا سبيل إلا الاستيراد من نسخة JSON احتياطية.</p>' +
+    var bi = App.bi || function (a) { return esc(a); };
+    if (S.status.encVersion === 2) return '<div class="card" style="max-width:560px;margin:40px auto"><h2>🔒 ' + bi('تسجيل الدخول', 'Sign in') + '</h2><p>' + (S.status.fromFile ? 'نسخة كاملة مفتوحة من ملف. ادخل بحسابك المضاف فيها.' : 'البيانات محمية. ادخل باسم المستخدم وكلمة المرور.') + '</p>' +
+      '<form data-form="login"><label for="loginUser">' + bi('اسم المستخدم', 'Username') + '<input id="loginUser" name="u" autocomplete="username" dir="ltr" required></label><label for="loginPass">' + bi('كلمة المرور', 'Password') + '<input id="loginPass" name="p" type="password" autocomplete="current-password" required></label><div id="unlockErr" role="alert"></div><button type="submit">' + bi('دخول', 'Sign in') + '</button></form>' +
+      '<p class="small muted">نسيت كلمة المرور؟ يستطيع المالك (admin) إضافتك من جديد بكلمة مرور جديدة. لا توجد طريقة لاسترجاع البيانات دون حساب صالح.</p></div>';
+    return '<div class="card" style="max-width:560px;margin:40px auto"><h2>🔒 البيانات مشفّرة</h2><p>أدخل كلمة المرور لفك تشفير البيانات المحفوظة في هذا المتصفح. لا يمكن استرجاع كلمة المرور؛ عند نسيانها لا سبيل إلا الاستيراد من نسخة JSON احتياطية.</p>' +
       '<form data-form="unlock"><label for="unlockPass">كلمة المرور<input id="unlockPass" name="pass" type="password" autocomplete="current-password" required></label><div id="unlockErr" role="alert"></div><button type="submit">فتح</button></form></div>';
   }
+  App.forms.login = function (f) {
+    var fd = new FormData(f), btn = f.querySelector('button'); btn.disabled = true; App.$('#unlockErr').innerHTML = '<p class="small muted">جارٍ التحقق…</p>';
+    S.login(String(fd.get('u') || ''), String(fd.get('p') || '')).then(function (db) {
+      if (S.status.fromFile) S.adoptOpenedCopy();
+      App.db = db; var first = db.trainees.filter(function (t) { return !t.archived; })[0]; App.ui.traineeId = first ? first.id : null;
+      App.audit('auth.login', 'دخول ' + S.status.currentUser.u); App.save(); App.go('dash');
+    }).catch(function (e) { btn.disabled = false; App.$('#unlockErr').innerHTML = '<div class="alert danger">' + esc(e.message) + '</div>'; });
+  };
   App.forms.unlock = function (f) {
     var pass = String(new FormData(f).get('pass') || ''), btn = f.querySelector('button'); btn.disabled = true; App.$('#unlockErr').innerHTML = '<p class="small muted">جارٍ فك التشفير…</p>';
     S.unlock(pass).then(function (db) { App.db = db; var first = db.trainees.filter(function (t) { return !t.archived; })[0]; App.ui.traineeId = first ? first.id : null; App.go('dash'); })
@@ -232,10 +264,33 @@
   };
   App.acts.expAll = function () { App.exportFile('MCC5_backup_' + App.today() + '.json', S.exportEnvelope(App.db, 'full', []), 'export.full', 'تصدير كامل', null); };
   function encCard() {
-    var st = S.status;
-    if (st.encrypted) return '<div class="card"><h3>🔒 تشفير البيانات المحلية: مفعّل</h3><p class="small">تُحفظ البيانات في المتصفح مشفّرة (AES-GCM 256). نقاط الاستعادة تُحفظ في الذاكرة فقط خلال هذه الجلسة. ملاحظة: بيانات v4 القديمة (إن وُجدت) تبقى غير مشفّرة لأن v4 لا يُعدَّل.</p><div class="row"><button class="sec" data-act="lockNow">قفل الآن</button><button class="danger" data-act="encOff">إلغاء التشفير</button></div></div>';
-    return '<div class="card"><h3>تشفير البيانات المحلية (اختياري)</h3><p class="small">يحمي بيانات المتدربين من القراءة من ملفات أو أشخاص آخرين يستخدمون المتصفح نفسه (في Chrome/Edge تتشارك كل الملفات المحلية مساحة تخزين واحدة). يُطلب إدخال كلمة المرور عند كل فتح.</p><form data-form="encOn" class="grid"><label>كلمة المرور (8 أحرف على الأقل)<input type="password" name="p1" autocomplete="new-password" minlength="8" required></label><label>تأكيدها<input type="password" name="p2" autocomplete="new-password" required></label><label class="grow"><input type="checkbox" name="ack"> أفهم أن نسيان كلمة المرور يعني فقدان البيانات المحلية نهائياً، وأن النسخة المصدّرة هي الحل الوحيد</label><div><button type="submit">تفعيل التشفير</button></div></form></div>';
+    var st = S.status, bi = App.bi || function (a) { return esc(a); };
+    if (st.encrypted && st.encVersion === 2) {
+      var me = st.currentUser || {}, admin = me.role === 'admin';
+      return '<div class="card"><h3>🔒 ' + bi('الحسابات وكلمات المرور', 'Accounts & passwords') + '</h3><p>أنت داخل باسم <b dir="ltr">' + esc(me.u) + '</b> (' + (admin ? 'مالك · admin' : 'مدرب · coach') + '). البيانات في هذا المتصفح مشفّرة (AES-GCM 256).</p>' +
+        '<table><thead><tr><th>المستخدم</th><th>الصلاحية</th><th>أُضيف</th><th></th></tr></thead><tbody>' + S.users().map(function (u) { return '<tr><td dir="ltr">' + esc(u.u) + '</td><td>' + (u.role === 'admin' ? 'مالك' : 'مدرب') + '</td><td>' + App.fmtDate(u.created) + '</td><td>' + (admin && u.u !== me.u ? '<button class="danger" data-act="userDel" data-u="' + esc(u.u) + '">حذف</button>' : '') + '</td></tr>'; }).join('') + '</tbody></table>' +
+        (admin ? '<form data-form="userAdd" class="grid g3"><label>' + bi('اسم مستخدم جديد', 'New username') + '<input name="u" dir="ltr" autocomplete="off" required></label><label>' + bi('كلمة مرور مؤقتة (8+)', 'Temporary password (8+)') + '<input name="p" type="password" autocomplete="new-password" required></label><label>' + bi('الصلاحية', 'Role') + '<select name="role"><option value="coach">مدرب · coach</option><option value="admin">مالك · admin</option></select></label><div><button type="submit">' + bi('إضافة', 'Add') + '</button></div></form><p class="small muted">بعد الإضافة: احفظ «نسخة كاملة مشفرة» وأرسلها للمدرب الآخر؛ يفتحها في التطبيق بحسابه. حذف مستخدم يمنعه من النسخ الجديدة فقط — النسخ القديمة التي لديه تبقى قابلة للفتح بحسابه القديم.</p>' : '') +
+        '<form data-form="passChange" class="row"><label class="grow">' + bi('غيّر كلمة مروري', 'Change my password') + '<input name="p" type="password" autocomplete="new-password" minlength="8" required></label><button type="submit" class="sec">' + bi('حفظ', 'Save') + '</button></form>' +
+        '<div class="row" style="margin-top:8px"><button data-act="copySave">💾 ' + bi('حفظ نسخة كاملة مشفرة', 'Save full encrypted copy') + '</button><button class="sec" data-act="lockNow">' + bi('تسجيل خروج', 'Sign out') + '</button>' + (admin ? '<button class="danger" data-act="encOff">' + bi('إلغاء الحماية', 'Remove protection') + '</button>' : '') + '</div></div>';
+    }
+    if (st.encrypted) return '<div class="card"><h3>🔒 تشفير بكلمة مرور واحدة (نظام قديم)</h3><p class="small">لاستخدام حسابات متعددة: ألغِ الحماية ثم أنشئ حساب المالك.</p><div class="row"><button class="sec" data-act="lockNow">قفل الآن</button><button class="danger" data-act="encOff">إلغاء التشفير</button></div></div>';
+    return '<div class="card"><h3>👥 ' + bi('حسابات المستخدمين (موصى به)', 'User accounts (recommended)') + '</h3><p class="small">أنشئ حسابك كمالك، ثم أضف المدربين الآخرين باسم مستخدم وكلمة مرور. تُشفّر البيانات ولا تُفتح إلا بحساب مضاف. نسيان كل كلمات المرور = فقدان البيانات؛ احتفظ بنسخة.</p>' +
+      '<form data-form="accCreate" class="grid g3"><label>' + bi('اسم المستخدم', 'Username') + '<input name="u" dir="ltr" autocomplete="username" required></label><label>' + bi('كلمة المرور (8+)', 'Password (8+)') + '<input name="p1" type="password" autocomplete="new-password" required></label><label>' + bi('تأكيدها', 'Confirm') + '<input name="p2" type="password" autocomplete="new-password" required></label><label class="grow"><input type="checkbox" name="ack"> أفهم أن نسيان كلمة المرور قد يعني فقدان البيانات</label><div><button type="submit">' + bi('إنشاء حساب المالك', 'Create owner account') + '</button></div></form></div>';
   }
+  App.forms.accCreate = function (f) {
+    var fd = new FormData(f), u = String(fd.get('u') || ''), p1 = String(fd.get('p1') || ''), p2 = String(fd.get('p2') || '');
+    if (p1 !== p2) return App.toast('كلمتا المرور غير متطابقتين'); if (!fd.get('ack')) return App.toast('أكّد الإقرار');
+    S.createAccounts(App.db, u, p1).then(function () { App.audit('auth.create', 'إنشاء حساب المالك ' + S.status.currentUser.u); App.save(); App.toast('تم إنشاء الحساب وتشفير البيانات ✔'); App.render(); }).catch(function (e) { App.toast(e.message); });
+  };
+  App.forms.userAdd = function (f) { var fd = new FormData(f), u = String(fd.get('u') || ''); S.addUser(App.db, u, String(fd.get('p') || ''), String(fd.get('role'))).then(function () { App.audit('auth.adduser', 'إضافة مستخدم ' + u); App.save(); App.toast('أُضيف ' + u + ' — احفظ نسخة كاملة مشفرة وأرسلها له'); App.render(); }).catch(function (e) { App.toast(e.message); }); };
+  App.acts.userDel = function (el) { if (!confirm('حذف المستخدم ' + el.dataset.u + '؟ لن يستطيع فتح النسخ الجديدة.')) return; S.removeUser(App.db, el.dataset.u).then(function () { App.audit('auth.deluser', 'حذف مستخدم ' + el.dataset.u); App.save(); App.render(); }).catch(function (e) { App.toast(e.message); }); };
+  App.forms.passChange = function (f) { S.changePassword(App.db, String(new FormData(f).get('p') || '')).then(function () { App.audit('auth.passwd', 'تغيير كلمة مرور ' + S.status.currentUser.u); App.save(); App.toast('تم تغيير كلمة المرور'); f.reset(); }).catch(function (e) { App.toast(e.message); }); };
+  App.acts.copySave = function () { S.encryptedCopy().then(function (text) { App.download('AZM_نسخة_كاملة_' + App.today() + '.json', text); App.toast('حُفظت النسخة الكاملة المشفرة — تُفتح بأي حساب مضاف'); }); };
+  App.changes.openCopy = function (el) {
+    var f = el.files[0]; if (!f) return; var r = new FileReader();
+    r.onload = function () { var text = String(r.result); if (!S.isAccountsCopy(text)) return App.toast('ليس ملف نسخة كاملة مشفرة من عزم'); if (App.db.trainees.length && !confirm('سيُستبدل ما في هذا المتصفح بالنسخة المفتوحة بعد الدخول. متابعة؟')) return; S.openCopy(text); App.render(); };
+    r.readAsText(f);
+  };
   App.forms.encOn = function (f) {
     var fd = new FormData(f), p1 = String(fd.get('p1') || ''), p2 = String(fd.get('p2') || '');
     if (p1.length < 8) return App.toast('8 أحرف على الأقل'); if (p1 !== p2) return App.toast('كلمتا المرور غير متطابقتين'); if (!fd.get('ack')) return App.toast('أكّد الإقرار');

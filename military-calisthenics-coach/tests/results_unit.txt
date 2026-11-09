@@ -61,5 +61,14 @@ PASS Walking progression: ≥75% walks done → +5 min next week; otherwise unch
 PASS Data: every exercise referenced by baseline tests exists
 PASS Data: every exercise has original animation passing geometry validation
 PASS Data: exercise IDs unique; Arabic names unique
+PASS Bodyweight plans never contain gym (weighted) exercises
+PASS Gym program: main exercises are gym-only with load fields; warm-up/cool-down keep mobility
+PASS Gym double progression: all sets at top → +inc; below range → −inc; otherwise same load +1 rep
+PASS Gym: next week load comes from logged sessions
+PASS Goal 60 push-ups (2 min): test in week 0 on first strength day, goal training on the others, no test in week 1
+PASS Goal projection is a labelled range; reached goal detected
+PASS Goal sit-ups is blocked (with alternative) when screening excludes it (pregnancy 24 wk)
+PASS Ranks progress with completed sessions
+PASS Accounts: owner creates, wrong password rejected, second coach added and signs in, removed user cannot sign in to new copy
 
-UNIT: 63 passed, 0 failed (199 exercises loaded) — node v22.23.4
+UNIT: 72 passed, 0 failed (231 exercises loaded) — node v22.23.4

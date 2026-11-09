@@ -1,4 +1,6 @@
-# المدرب العسكري للياقة البدنية — Military Calisthenics Coach v5 (development)
+# عزم · AZM — مدربك الشخصي للياقة (bodyweight + gym) — v5 development
+
+> Handing over to another tool or developer? Read `HANDOFF/HANDOFF_MANUS.md` and `HANDOFF/project_manifest.json` first.
 
 Offline, Arabic RTL, single-file coach workstation. A coach can:
 - register many trainees and screen them;

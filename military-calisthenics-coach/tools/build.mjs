@@ -3,7 +3,7 @@ import fs from 'fs'; import path from 'path'; import { fileURLToPath } from 'url
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const r = f => fs.readFileSync(path.join(root, f), 'utf8');
 const data = fs.readdirSync(path.join(root, 'src/data')).filter(f => f.startsWith('ex_')).sort().map(f => 'src/data/' + f);
-const order = ['src/anim.js', 'src/data/_core.js', ...data, 'src/sources.js', 'src/store.js', 'src/screening.js', 'src/engine.js', 'src/ui_core.js', 'src/ui_screen.js', 'src/ui_library.js', 'src/ui_plan.js', 'src/ui_session.js', 'src/ui_setup.js', 'src/main.js'];
+const order = ['src/anim.js', 'src/data/_core.js', ...data, 'src/sources.js', 'src/store.js', 'src/screening.js', 'src/engine.js', 'src/gym.js', 'src/goals.js', 'src/ui_core.js', 'src/ui_screen.js', 'src/ui_library.js', 'src/ui_plan.js', 'src/ui_session.js', 'src/ui_setup.js', 'src/main.js'];
 const js = order.map(f => '/* ==== ' + f + ' ==== */\n' + r(f)).join('\n;\n').replace(/<\/script/gi, '<\\/script');
 const css = r('src/styles.css'), figcss = r('src/fig.css');
 let html = r('src/index.html').replace('/*@@FIGCSS@@*/', () => figcss).replace('/*@@CSS@@*/', () => css).replace('/*@@JS@@*/', () => js);

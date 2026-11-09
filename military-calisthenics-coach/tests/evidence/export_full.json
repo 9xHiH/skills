@@ -3,16 +3,16 @@
   "formatVersion": 1,
   "appVersion": "5.0.0-dev",
   "schemaVersion": 5,
-  "exportedAt": "2026-11-09T12:58:05.837Z",
+  "exportedAt": "2026-11-09T13:12:03.351Z",
   "scope": "full",
   "traineeIds": [],
-  "checksum": "cadd1588",
+  "checksum": "66c17bc6",
   "data": {
     "schema": "MCC",
     "schemaVersion": 5,
     "appVersion": "5.0.0-dev",
-    "createdAt": "2026-11-09T12:57:56.477Z",
-    "updatedAt": "2026-11-09T12:58:05.653Z",
+    "createdAt": "2026-11-09T13:11:53.636Z",
+    "updatedAt": "2026-11-09T13:12:03.153Z",
     "settings": {
       "coachName": "",
       "emergencyNumber": "999",
@@ -20,8 +20,8 @@
     },
     "trainees": [
       {
-        "id": "TR5-Q5ATC-VY6DB",
-        "createdAt": "2026-11-09T12:57:57.070Z",
+        "id": "TR5-SHWFV-5J8KQ",
+        "createdAt": "2026-11-09T13:11:54.237Z",
         "archived": false,
         "avoid": [],
         "revisions": [],
@@ -47,16 +47,16 @@
         "weightKg": null,
         "accessibility": "",
         "notes": "",
-        "updatedAt": "2026-11-09T12:57:57.070Z",
+        "updatedAt": "2026-11-09T13:11:54.237Z",
         "consent": {
-          "at": "2026-11-09T12:57:57.070Z",
+          "at": "2026-11-09T13:11:54.237Z",
           "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
           "version": "CONSENT-5.0"
         }
       },
       {
-        "id": "TR5-796ZQ-Q0ZGD",
-        "createdAt": "2026-11-09T12:57:57.953Z",
+        "id": "TR5-4Y0FV-KQ24V",
+        "createdAt": "2026-11-09T13:11:55.119Z",
         "archived": false,
         "avoid": [],
         "revisions": [],
@@ -80,16 +80,16 @@
         "weightKg": null,
         "accessibility": "",
         "notes": "",
-        "updatedAt": "2026-11-09T12:57:57.953Z",
+        "updatedAt": "2026-11-09T13:11:55.119Z",
         "consent": {
-          "at": "2026-11-09T12:57:57.953Z",
+          "at": "2026-11-09T13:11:55.119Z",
           "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
           "version": "CONSENT-5.0"
         }
       },
       {
-        "id": "TR5-VCG4D-7WC91",
-        "createdAt": "2026-11-09T12:57:58.837Z",
+        "id": "TR5-4V8X9-ER1F6",
+        "createdAt": "2026-11-09T13:11:56.003Z",
         "archived": false,
         "avoid": [],
         "revisions": [],
@@ -112,9 +112,9 @@
         "weightKg": null,
         "accessibility": "",
         "notes": "",
-        "updatedAt": "2026-11-09T12:57:58.837Z",
+        "updatedAt": "2026-11-09T13:11:56.003Z",
         "consent": {
-          "at": "2026-11-09T12:57:58.837Z",
+          "at": "2026-11-09T13:11:56.003Z",
           "text": "أُبلغ المتدرب بأن: البيانات تُحفظ محلياً على هذا الجهاز وهذا المتصفح فقط ولا تُرسل لأي خادم؛ مسح بيانات المتصفح أو التصفح الخاص قد يحذفها؛ النسخ الاحتياطي مسؤولية المدرب؛ الأداة مساعدة تدريبية وليست تشخيصاً أو تصريحاً طبياً ولا تضمن عدم الإصابة؛ يمكن طلب تصدير البيانات أو حذفها في أي وقت.",
           "version": "CONSENT-5.0"
         }
@@ -122,9 +122,9 @@
     ],
     "screenings": [
       {
-        "id": "SC5-PPPNQ-7D7RV",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "at": "2026-11-09T12:57:57.237Z",
+        "id": "SC5-KH96M-2W14R",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "at": "2026-11-09T13:11:54.437Z",
         "version": "SCR-5.1.0",
         "answers": {
           "cv_dx": "no",
@@ -175,9 +175,9 @@
         }
       },
       {
-        "id": "SC5-9WYE5-WH68H",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "at": "2026-11-09T12:57:58.204Z",
+        "id": "SC5-CNKEG-4VY63",
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "at": "2026-11-09T13:11:55.370Z",
         "version": "SCR-5.1.0",
         "answers": {
           "cv_dx": "no",
@@ -246,9 +246,9 @@
         }
       },
       {
-        "id": "SC5-TJ3TV-TG7JH",
-        "traineeId": "TR5-VCG4D-7WC91",
-        "at": "2026-11-09T12:57:59.003Z",
+        "id": "SC5-SWQHB-T0CD1",
+        "traineeId": "TR5-4V8X9-ER1F6",
+        "at": "2026-11-09T13:11:56.169Z",
         "version": "SCR-5.1.0",
         "answers": {
           "cv_dx": "no",
@@ -304,11 +304,11 @@
     ],
     "baselines": [
       {
-        "id": "BL5-SRQ6H-A3PQV",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "at": "2026-11-09T12:57:57.404Z",
+        "id": "BL5-3JBNV-45MN8",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "at": "2026-11-09T13:11:54.620Z",
         "version": "BL-5.0.0",
-        "screeningId": "SC5-PPPNQ-7D7RV",
+        "screeningId": "SC5-KH96M-2W14R",
         "tests": {
           "push": {
             "variant": "PU-KNEE",
@@ -385,11 +385,11 @@
         "notes": []
       },
       {
-        "id": "BL5-1YCRB-Q077S",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "at": "2026-11-09T12:57:58.355Z",
+        "id": "BL5-GCFP5-J41VJ",
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "at": "2026-11-09T13:11:55.520Z",
         "version": "BL-5.0.0",
-        "screeningId": "SC5-9WYE5-WH68H",
+        "screeningId": "SC5-CNKEG-4VY63",
         "tests": {
           "push": {
             "skipped": true
@@ -448,14 +448,14 @@
     ],
     "plans": [
       {
-        "id": "PL5-2026W46-1H0W4-QYYM8",
-        "traineeId": "TR5-Q5ATC-VY6DB",
+        "id": "PL5-2026W46-CVWCA-CZSGR",
+        "traineeId": "TR5-SHWFV-5J8KQ",
         "weekStart": "2026-11-09",
         "weekEnd": "2026-11-15",
-        "createdAt": "2026-11-09T12:57:57.470Z",
+        "createdAt": "2026-11-09T13:11:54.669Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-PPPNQ-7D7RV",
-        "baselineId": "BL5-SRQ6H-A3PQV",
+        "screeningId": "SC5-KH96M-2W14R",
+        "baselineId": "BL5-3JBNV-45MN8",
         "prevPlanId": null,
         "decisionFrom": null,
         "status": "reviewed",
@@ -500,12 +500,12 @@
                 "side": false
               },
               {
-                "exId": "BA-SHIFT",
+                "exId": "MO-SHCIRCLE",
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
+                "target": 8,
                 "rest": 0,
-                "side": true
+                "side": false
               }
             ],
             "cooldown": [
@@ -518,7 +518,7 @@
                 "side": false
               },
               {
-                "exId": "ST-COBRA",
+                "exId": "ST-CHILD",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -526,10 +526,10 @@
                 "side": false
               },
               {
-                "exId": "ST-KNEECHEST",
-                "u": "time",
+                "exId": "MO-SHCIRCLE",
+                "u": "reps",
                 "sets": 1,
-                "target": 20,
+                "target": 8,
                 "rest": 0,
                 "side": false
               }
@@ -537,24 +537,24 @@
             "main": [
               {
                 "slot": "A1",
-                "exId": "SQ-TEMPO",
+                "exId": "SQ-STAGGER",
                 "step": 0,
                 "u": "reps",
-                "sets": 2,
+                "sets": 1,
                 "target": 6,
-                "rest": 75,
-                "side": false,
+                "rest": 70,
+                "side": true,
                 "why": [
                   "اختير لأنه أعلى مستوى مسموح (متوسط) لـ«قرفصاء» ضمن المعدات وقيود السلامة."
                 ]
               },
               {
                 "slot": "A2",
-                "exId": "PU-NEG",
+                "exId": "PU-STD",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 3,
+                "target": 5,
                 "rest": 75,
                 "side": false,
                 "why": [
@@ -576,12 +576,12 @@
               },
               {
                 "slot": "A4",
-                "exId": "CR-HOLLOW-T",
+                "exId": "CR-BENTLEG",
                 "step": 0,
-                "u": "time",
+                "u": "reps",
                 "sets": 2,
-                "target": 10,
-                "rest": 45,
+                "target": 6,
+                "rest": 55,
                 "side": false,
                 "why": [
                   "اختير لأنه أعلى مستوى مسموح (متوسط) لـ«مقاومة تقوس الجذع» ضمن المعدات وقيود السلامة."
@@ -589,11 +589,11 @@
               },
               {
                 "slot": "A5",
-                "exId": "LU-REV",
+                "exId": "LU-FWD",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
+                "target": 5,
                 "rest": 70,
                 "side": true,
                 "why": [
@@ -601,7 +601,7 @@
                 ]
               }
             ],
-            "estMinutes": 21
+            "estMinutes": 20
           },
           {
             "index": 2,
@@ -637,10 +637,10 @@
                 "side": false
               },
               {
-                "exId": "HA-SIDELYING",
+                "exId": "CR-FRONTKICK",
                 "u": "reps",
                 "sets": 1,
-                "target": 8,
+                "target": 5,
                 "rest": 0,
                 "side": true
               }
@@ -655,15 +655,15 @@
                 "side": false
               },
               {
-                "exId": "ST-GROIN",
+                "exId": "ST-SLOVER",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
                 "rest": 0,
-                "side": false
+                "side": true
               },
               {
-                "exId": "ST-CHILD",
+                "exId": "ST-GROIN",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -687,13 +687,13 @@
               },
               {
                 "slot": "B2",
-                "exId": "PU-STAGGER",
+                "exId": "PU-TEMPO",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
                 "target": 4,
                 "rest": 75,
-                "side": true,
+                "side": false,
                 "why": [
                   "اختير لأنه أعلى مستوى مسموح (متوسط) لـ«دفع رأسي/دفع أفقي» ضمن المعدات وقيود السلامة."
                 ]
@@ -713,32 +713,32 @@
               },
               {
                 "slot": "B4",
-                "exId": "CR-FRONTKICK",
+                "exId": "CR-REVCRUNCH",
                 "step": 0,
                 "u": "reps",
-                "sets": 1,
-                "target": 5,
-                "rest": 45,
-                "side": true,
+                "sets": 2,
+                "target": 6,
+                "rest": 55,
+                "side": false,
                 "why": [
                   "اختير لأنه أعلى مستوى مسموح (متوسط) لـ«ثني الجذع/مقاومة الدوران/دوران/مد الظهر» ضمن المعدات وقيود السلامة."
                 ]
               },
               {
                 "slot": "B5",
-                "exId": "LU-CURTSY",
+                "exId": "HA-SIDESTEP",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
-                "rest": 70,
+                "target": 8,
+                "rest": 55,
                 "side": true,
                 "why": [
                   "اختير لأنه أعلى مستوى مسموح (متوسط) لـ«اندفاع/ساق واحدة/إبعاد الورك» ضمن المعدات وقيود السلامة."
                 ]
               }
             ],
-            "estMinutes": 20
+            "estMinutes": 21
           },
           {
             "index": 4,
@@ -782,12 +782,12 @@
                 "side": false
               },
               {
-                "exId": "MO-SHCIRCLE",
-                "u": "reps",
+                "exId": "BA-SLSTAND",
+                "u": "time",
                 "sets": 1,
-                "target": 8,
+                "target": 10,
                 "rest": 0,
-                "side": false
+                "side": true
               }
             ],
             "cooldown": [
@@ -800,43 +800,43 @@
                 "side": false
               },
               {
+                "exId": "ST-SIDE",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
                 "exId": "CA-STEPTOUCH",
                 "u": "time",
                 "sets": 1,
                 "target": 30,
                 "rest": 0,
                 "side": false
-              },
-              {
-                "exId": "ST-CROSSARM",
-                "u": "time",
-                "sets": 1,
-                "target": 20,
-                "rest": 0,
-                "side": true
               }
             ],
             "main": [
               {
                 "slot": "A1",
-                "exId": "SQ-TEMPO",
+                "exId": "SQ-STAGGER",
                 "step": 0,
                 "u": "reps",
-                "sets": 2,
+                "sets": 1,
                 "target": 6,
-                "rest": 75,
-                "side": false,
+                "rest": 70,
+                "side": true,
                 "why": [
                   "اختير لأنه أعلى مستوى مسموح (متوسط) لـ«قرفصاء» ضمن المعدات وقيود السلامة."
                 ]
               },
               {
                 "slot": "A2",
-                "exId": "PU-NEG",
+                "exId": "PU-STD",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 3,
+                "target": 5,
                 "rest": 75,
                 "side": false,
                 "why": [
@@ -858,12 +858,12 @@
               },
               {
                 "slot": "A4",
-                "exId": "CR-HOLLOW-T",
+                "exId": "CR-BENTLEG",
                 "step": 0,
-                "u": "time",
+                "u": "reps",
                 "sets": 2,
-                "target": 10,
-                "rest": 45,
+                "target": 6,
+                "rest": 55,
                 "side": false,
                 "why": [
                   "اختير لأنه أعلى مستوى مسموح (متوسط) لـ«مقاومة تقوس الجذع» ضمن المعدات وقيود السلامة."
@@ -871,11 +871,11 @@
               },
               {
                 "slot": "A5",
-                "exId": "LU-REV",
+                "exId": "LU-FWD",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
+                "target": 5,
                 "rest": 70,
                 "side": true,
                 "why": [
@@ -883,7 +883,7 @@
                 ]
               }
             ],
-            "estMinutes": 21
+            "estMinutes": 20
           }
         ],
         "overrides": [],
@@ -892,17 +892,18 @@
         "coachName": "",
         "traineeName": "سالم التجريبي",
         "tempFlagsIn": [],
+        "program": "bw",
         "decision": null
       },
       {
-        "id": "PL5-2026W46-BDPXM-CKC2Z",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
+        "id": "PL5-2026W46-FAR1W-P28VA",
+        "traineeId": "TR5-4Y0FV-KQ24V",
         "weekStart": "2026-11-09",
         "weekEnd": "2026-11-15",
-        "createdAt": "2026-11-09T12:57:58.419Z",
+        "createdAt": "2026-11-09T13:11:55.586Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-9WYE5-WH68H",
-        "baselineId": "BL5-1YCRB-Q077S",
+        "screeningId": "SC5-CNKEG-4VY63",
+        "baselineId": "BL5-GCFP5-J41VJ",
         "prevPlanId": null,
         "decisionFrom": null,
         "status": "reviewed",
@@ -943,17 +944,17 @@
                 "side": false
               },
               {
-                "exId": "HA-CLAM",
+                "exId": "MO-ARMCIRCLE",
                 "u": "reps",
                 "sets": 1,
                 "target": 10,
                 "rest": 0,
-                "side": true
+                "side": false
               }
             ],
             "cooldown": [
               {
-                "exId": "ST-SIDE",
+                "exId": "ST-NECKSIDE",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -961,18 +962,18 @@
                 "side": true
               },
               {
-                "exId": "MO-9090",
-                "u": "reps",
-                "sets": 1,
-                "target": 6,
-                "rest": 0,
-                "side": false
-              },
-              {
-                "exId": "ST-CHILD",
+                "exId": "ST-HIPFLEX",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "MO-SHCIRCLE",
+                "u": "reps",
+                "sets": 1,
+                "target": 8,
                 "rest": 0,
                 "side": false
               }
@@ -1093,36 +1094,36 @@
                 "side": false
               },
               {
-                "exId": "HA-MEDIAL",
+                "exId": "MO-WRIST",
                 "u": "reps",
                 "sets": 1,
                 "target": 8,
                 "rest": 0,
-                "side": true
+                "side": false
               }
             ],
             "cooldown": [
-              {
-                "exId": "ST-CROSSARM",
-                "u": "time",
-                "sets": 1,
-                "target": 20,
-                "rest": 0,
-                "side": true
-              },
-              {
-                "exId": "ST-HAM",
-                "u": "time",
-                "sets": 1,
-                "target": 20,
-                "rest": 0,
-                "side": true
-              },
               {
                 "exId": "CA-MARCH",
                 "u": "time",
                 "sets": 1,
                 "target": 60,
+                "rest": 0,
+                "side": false
+              },
+              {
+                "exId": "ST-OVERHEAD",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
+              },
+              {
+                "exId": "ST-GROIN",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
                 "rest": 0,
                 "side": false
               }
@@ -1204,36 +1205,36 @@
                 "side": false
               },
               {
-                "exId": "MO-NECK",
+                "exId": "CR-STANDBRACE",
                 "u": "reps",
                 "sets": 1,
-                "target": 4,
+                "target": 6,
                 "rest": 0,
-                "side": false
+                "side": true
               }
             ],
             "cooldown": [
               {
-                "exId": "CA-MARCH",
-                "u": "time",
+                "exId": "MO-CATCAMEL",
+                "u": "reps",
                 "sets": 1,
-                "target": 60,
+                "target": 6,
                 "rest": 0,
                 "side": false
               },
               {
-                "exId": "ST-OVERHEAD",
+                "exId": "ST-GROIN",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
                 "rest": 0,
-                "side": true
+                "side": false
               },
               {
-                "exId": "ST-CHILD",
-                "u": "time",
+                "exId": "MO-9090",
+                "u": "reps",
                 "sets": 1,
-                "target": 20,
+                "target": 6,
                 "rest": 0,
                 "side": false
               }
@@ -1343,19 +1344,20 @@
         "coachName": "",
         "traineeName": "مريم التجريبية",
         "tempFlagsIn": [],
+        "program": "bw",
         "decision": null
       },
       {
-        "id": "PL5-2026W47-8BQNA-TR8WH",
-        "traineeId": "TR5-Q5ATC-VY6DB",
+        "id": "PL5-2026W47-KHYNV-Z6AQM",
+        "traineeId": "TR5-SHWFV-5J8KQ",
         "weekStart": "2026-11-16",
         "weekEnd": "2026-11-22",
-        "createdAt": "2026-11-09T12:58:05.137Z",
+        "createdAt": "2026-11-09T13:12:02.652Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-PPPNQ-7D7RV",
-        "baselineId": "BL5-SRQ6H-A3PQV",
-        "prevPlanId": "PL5-2026W46-1H0W4-QYYM8",
-        "decisionFrom": "RV5-CTVQ3-15YQR",
+        "screeningId": "SC5-KH96M-2W14R",
+        "baselineId": "BL5-3JBNV-45MN8",
+        "prevPlanId": "PL5-2026W46-CVWCA-CZSGR",
+        "decisionFrom": "RV5-M9V98-1KRF0",
         "status": "active",
         "blockers": [],
         "notes": [
@@ -1399,10 +1401,10 @@
                 "side": false
               },
               {
-                "exId": "SC-PRONE-T",
-                "u": "reps",
+                "exId": "BT-DIAPH",
+                "u": "time",
                 "sets": 1,
-                "target": 8,
+                "target": 60,
                 "rest": 0,
                 "side": false
               }
@@ -1417,32 +1419,32 @@
                 "side": false
               },
               {
-                "exId": "ST-SUPTWIST",
+                "exId": "ST-KNEECHEST",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
                 "rest": 0,
-                "side": true
+                "side": false
               },
               {
-                "exId": "ST-HAM",
+                "exId": "ST-CHILD",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
                 "rest": 0,
-                "side": true
+                "side": false
               }
             ],
             "main": [
               {
                 "slot": "A1",
-                "exId": "SQ-TEMPO",
+                "exId": "SQ-STAGGER",
                 "step": 0,
                 "u": "reps",
                 "sets": 3,
                 "target": 6,
-                "rest": 75,
-                "side": false,
+                "rest": 70,
+                "side": true,
                 "why": [
                   "تعديل يدوي من المدرب ضمن الحدود الآمنة: اختبار حدود"
                 ],
@@ -1450,11 +1452,11 @@
               },
               {
                 "slot": "A2",
-                "exId": "PU-NEG",
+                "exId": "PU-STD",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 3,
+                "target": 5,
                 "rest": 75,
                 "side": false,
                 "why": [
@@ -1476,12 +1478,12 @@
               },
               {
                 "slot": "A4",
-                "exId": "CR-HOLLOW-T",
+                "exId": "CR-BENTLEG",
                 "step": 0,
-                "u": "time",
+                "u": "reps",
                 "sets": 2,
-                "target": 10,
-                "rest": 45,
+                "target": 6,
+                "rest": 55,
                 "side": false,
                 "why": [
                   "تثبيت: إنجاز 100%، جهد 6.0"
@@ -1489,11 +1491,11 @@
               },
               {
                 "slot": "A5",
-                "exId": "LU-REV",
+                "exId": "LU-FWD",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
+                "target": 5,
                 "rest": 70,
                 "side": true,
                 "why": [
@@ -1501,7 +1503,7 @@
                 ]
               }
             ],
-            "estMinutes": 21
+            "estMinutes": 20
           },
           {
             "index": 2,
@@ -1537,10 +1539,10 @@
                 "side": false
               },
               {
-                "exId": "CR-BIRDDOG",
+                "exId": "MO-WGS",
                 "u": "reps",
                 "sets": 1,
-                "target": 5,
+                "target": 4,
                 "rest": 0,
                 "side": true
               }
@@ -1555,7 +1557,7 @@
                 "side": false
               },
               {
-                "exId": "ST-CROSSARM",
+                "exId": "ST-GLUTE",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
@@ -1563,12 +1565,12 @@
                 "side": true
               },
               {
-                "exId": "ST-SUPTWIST",
-                "u": "time",
+                "exId": "MO-9090",
+                "u": "reps",
                 "sets": 1,
-                "target": 20,
+                "target": 6,
                 "rest": 0,
-                "side": true
+                "side": false
               }
             ],
             "main": [
@@ -1587,13 +1589,13 @@
               },
               {
                 "slot": "B2",
-                "exId": "PU-STAGGER",
+                "exId": "PU-TEMPO",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
                 "target": 4,
                 "rest": 75,
-                "side": true,
+                "side": false,
                 "why": [
                   "تثبيت: لا توجد بيانات أداء مسجلة"
                 ]
@@ -1613,32 +1615,32 @@
               },
               {
                 "slot": "B4",
-                "exId": "CR-FRONTKICK",
+                "exId": "CR-REVCRUNCH",
                 "step": 0,
                 "u": "reps",
-                "sets": 1,
-                "target": 5,
-                "rest": 45,
-                "side": true,
+                "sets": 2,
+                "target": 6,
+                "rest": 55,
+                "side": false,
                 "why": [
                   "تثبيت: لا توجد بيانات أداء مسجلة"
                 ]
               },
               {
                 "slot": "B5",
-                "exId": "LU-CURTSY",
+                "exId": "HA-SIDESTEP",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
-                "rest": 70,
+                "target": 8,
+                "rest": 55,
                 "side": true,
                 "why": [
                   "تثبيت: لا توجد بيانات أداء مسجلة"
                 ]
               }
             ],
-            "estMinutes": 20
+            "estMinutes": 21
           },
           {
             "index": 4,
@@ -1682,12 +1684,12 @@
                 "side": false
               },
               {
-                "exId": "CA-BUTTKICK",
-                "u": "time",
+                "exId": "HA-CLAM",
+                "u": "reps",
                 "sets": 1,
-                "target": 15,
+                "target": 10,
                 "rest": 0,
-                "side": false
+                "side": true
               }
             ],
             "cooldown": [
@@ -1700,32 +1702,32 @@
                 "side": false
               },
               {
-                "exId": "ST-HAM",
-                "u": "time",
-                "sets": 1,
-                "target": 20,
-                "rest": 0,
-                "side": true
-              },
-              {
                 "exId": "ST-COBRA",
                 "u": "time",
                 "sets": 1,
                 "target": 20,
                 "rest": 0,
                 "side": false
+              },
+              {
+                "exId": "ST-HAM",
+                "u": "time",
+                "sets": 1,
+                "target": 20,
+                "rest": 0,
+                "side": true
               }
             ],
             "main": [
               {
                 "slot": "A1",
-                "exId": "SQ-TEMPO",
+                "exId": "SQ-STAGGER",
                 "step": 0,
                 "u": "reps",
                 "sets": 3,
                 "target": 6,
-                "rest": 75,
-                "side": false,
+                "rest": 70,
+                "side": true,
                 "why": [
                   "تعديل يدوي من المدرب ضمن الحدود الآمنة: اختبار حدود"
                 ],
@@ -1733,11 +1735,11 @@
               },
               {
                 "slot": "A2",
-                "exId": "PU-NEG",
+                "exId": "PU-STD",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 3,
+                "target": 5,
                 "rest": 75,
                 "side": false,
                 "why": [
@@ -1759,12 +1761,12 @@
               },
               {
                 "slot": "A4",
-                "exId": "CR-HOLLOW-T",
+                "exId": "CR-BENTLEG",
                 "step": 0,
-                "u": "time",
+                "u": "reps",
                 "sets": 2,
-                "target": 10,
-                "rest": 45,
+                "target": 6,
+                "rest": 55,
                 "side": false,
                 "why": [
                   "تثبيت: إنجاز 100%، جهد 6.0"
@@ -1772,11 +1774,11 @@
               },
               {
                 "slot": "A5",
-                "exId": "LU-REV",
+                "exId": "LU-FWD",
                 "step": 0,
                 "u": "reps",
                 "sets": 1,
-                "target": 6,
+                "target": 5,
                 "rest": 70,
                 "side": true,
                 "why": [
@@ -1784,21 +1786,21 @@
                 ]
               }
             ],
-            "estMinutes": 21
+            "estMinutes": 20
           }
         ],
         "overrides": [
           {
-            "at": "2026-11-09T12:58:05.653Z",
+            "at": "2026-11-09T13:12:03.153Z",
             "dayIndex": 1,
             "slot": "A1",
             "from": {
-              "exId": "SQ-TEMPO",
-              "sets": 2,
+              "exId": "SQ-STAGGER",
+              "sets": 1,
               "target": 6
             },
             "to": {
-              "exId": "SQ-TEMPO",
+              "exId": "SQ-STAGGER",
               "sets": 3,
               "target": 6
             },
@@ -1807,7 +1809,7 @@
         ],
         "revisions": [
           {
-            "at": "2026-11-09T12:58:05.653Z",
+            "at": "2026-11-09T13:12:03.153Z",
             "reason": "تعديل المدرب: اختبار حدود",
             "ruleVersion": "RULES-5.0.0",
             "days": [
@@ -1845,10 +1847,10 @@
                     "side": false
                   },
                   {
-                    "exId": "SC-PRONE-T",
-                    "u": "reps",
+                    "exId": "BT-DIAPH",
+                    "u": "time",
                     "sets": 1,
-                    "target": 8,
+                    "target": 60,
                     "rest": 0,
                     "side": false
                   }
@@ -1863,43 +1865,43 @@
                     "side": false
                   },
                   {
-                    "exId": "ST-SUPTWIST",
+                    "exId": "ST-KNEECHEST",
                     "u": "time",
                     "sets": 1,
                     "target": 20,
                     "rest": 0,
-                    "side": true
+                    "side": false
                   },
                   {
-                    "exId": "ST-HAM",
+                    "exId": "ST-CHILD",
                     "u": "time",
                     "sets": 1,
                     "target": 20,
                     "rest": 0,
-                    "side": true
+                    "side": false
                   }
                 ],
                 "main": [
                   {
                     "slot": "A1",
-                    "exId": "SQ-TEMPO",
+                    "exId": "SQ-STAGGER",
                     "step": 0,
                     "u": "reps",
-                    "sets": 2,
+                    "sets": 1,
                     "target": 6,
-                    "rest": 75,
-                    "side": false,
+                    "rest": 70,
+                    "side": true,
                     "why": [
                       "تثبيت: إنجاز 100%، جهد 6.0"
                     ]
                   },
                   {
                     "slot": "A2",
-                    "exId": "PU-NEG",
+                    "exId": "PU-STD",
                     "step": 0,
                     "u": "reps",
                     "sets": 1,
-                    "target": 3,
+                    "target": 5,
                     "rest": 75,
                     "side": false,
                     "why": [
@@ -1921,12 +1923,12 @@
                   },
                   {
                     "slot": "A4",
-                    "exId": "CR-HOLLOW-T",
+                    "exId": "CR-BENTLEG",
                     "step": 0,
-                    "u": "time",
+                    "u": "reps",
                     "sets": 2,
-                    "target": 10,
-                    "rest": 45,
+                    "target": 6,
+                    "rest": 55,
                     "side": false,
                     "why": [
                       "تثبيت: إنجاز 100%، جهد 6.0"
@@ -1934,11 +1936,11 @@
                   },
                   {
                     "slot": "A5",
-                    "exId": "LU-REV",
+                    "exId": "LU-FWD",
                     "step": 0,
                     "u": "reps",
                     "sets": 1,
-                    "target": 6,
+                    "target": 5,
                     "rest": 70,
                     "side": true,
                     "why": [
@@ -1946,7 +1948,7 @@
                     ]
                   }
                 ],
-                "estMinutes": 21
+                "estMinutes": 20
               },
               {
                 "index": 2,
@@ -1982,10 +1984,10 @@
                     "side": false
                   },
                   {
-                    "exId": "CR-BIRDDOG",
+                    "exId": "MO-WGS",
                     "u": "reps",
                     "sets": 1,
-                    "target": 5,
+                    "target": 4,
                     "rest": 0,
                     "side": true
                   }
@@ -2000,7 +2002,7 @@
                     "side": false
                   },
                   {
-                    "exId": "ST-CROSSARM",
+                    "exId": "ST-GLUTE",
                     "u": "time",
                     "sets": 1,
                     "target": 20,
@@ -2008,12 +2010,12 @@
                     "side": true
                   },
                   {
-                    "exId": "ST-SUPTWIST",
-                    "u": "time",
+                    "exId": "MO-9090",
+                    "u": "reps",
                     "sets": 1,
-                    "target": 20,
+                    "target": 6,
                     "rest": 0,
-                    "side": true
+                    "side": false
                   }
                 ],
                 "main": [
@@ -2032,13 +2034,13 @@
                   },
                   {
                     "slot": "B2",
-                    "exId": "PU-STAGGER",
+                    "exId": "PU-TEMPO",
                     "step": 0,
                     "u": "reps",
                     "sets": 1,
                     "target": 4,
                     "rest": 75,
-                    "side": true,
+                    "side": false,
                     "why": [
                       "تثبيت: لا توجد بيانات أداء مسجلة"
                     ]
@@ -2058,32 +2060,32 @@
                   },
                   {
                     "slot": "B4",
-                    "exId": "CR-FRONTKICK",
+                    "exId": "CR-REVCRUNCH",
                     "step": 0,
                     "u": "reps",
-                    "sets": 1,
-                    "target": 5,
-                    "rest": 45,
-                    "side": true,
+                    "sets": 2,
+                    "target": 6,
+                    "rest": 55,
+                    "side": false,
                     "why": [
                       "تثبيت: لا توجد بيانات أداء مسجلة"
                     ]
                   },
                   {
                     "slot": "B5",
-                    "exId": "LU-CURTSY",
+                    "exId": "HA-SIDESTEP",
                     "step": 0,
                     "u": "reps",
                     "sets": 1,
-                    "target": 6,
-                    "rest": 70,
+                    "target": 8,
+                    "rest": 55,
                     "side": true,
                     "why": [
                       "تثبيت: لا توجد بيانات أداء مسجلة"
                     ]
                   }
                 ],
-                "estMinutes": 20
+                "estMinutes": 21
               },
               {
                 "index": 4,
@@ -2127,12 +2129,12 @@
                     "side": false
                   },
                   {
-                    "exId": "CA-BUTTKICK",
-                    "u": "time",
+                    "exId": "HA-CLAM",
+                    "u": "reps",
                     "sets": 1,
-                    "target": 15,
+                    "target": 10,
                     "rest": 0,
-                    "side": false
+                    "side": true
                   }
                 ],
                 "cooldown": [
@@ -2145,43 +2147,43 @@
                     "side": false
                   },
                   {
-                    "exId": "ST-HAM",
-                    "u": "time",
-                    "sets": 1,
-                    "target": 20,
-                    "rest": 0,
-                    "side": true
-                  },
-                  {
                     "exId": "ST-COBRA",
                     "u": "time",
                     "sets": 1,
                     "target": 20,
                     "rest": 0,
                     "side": false
+                  },
+                  {
+                    "exId": "ST-HAM",
+                    "u": "time",
+                    "sets": 1,
+                    "target": 20,
+                    "rest": 0,
+                    "side": true
                   }
                 ],
                 "main": [
                   {
                     "slot": "A1",
-                    "exId": "SQ-TEMPO",
+                    "exId": "SQ-STAGGER",
                     "step": 0,
                     "u": "reps",
-                    "sets": 2,
+                    "sets": 1,
                     "target": 6,
-                    "rest": 75,
-                    "side": false,
+                    "rest": 70,
+                    "side": true,
                     "why": [
                       "تثبيت: إنجاز 100%، جهد 6.0"
                     ]
                   },
                   {
                     "slot": "A2",
-                    "exId": "PU-NEG",
+                    "exId": "PU-STD",
                     "step": 0,
                     "u": "reps",
                     "sets": 1,
-                    "target": 3,
+                    "target": 5,
                     "rest": 75,
                     "side": false,
                     "why": [
@@ -2203,12 +2205,12 @@
                   },
                   {
                     "slot": "A4",
-                    "exId": "CR-HOLLOW-T",
+                    "exId": "CR-BENTLEG",
                     "step": 0,
-                    "u": "time",
+                    "u": "reps",
                     "sets": 2,
-                    "target": 10,
-                    "rest": 45,
+                    "target": 6,
+                    "rest": 55,
                     "side": false,
                     "why": [
                       "تثبيت: إنجاز 100%، جهد 6.0"
@@ -2216,11 +2218,11 @@
                   },
                   {
                     "slot": "A5",
-                    "exId": "LU-REV",
+                    "exId": "LU-FWD",
                     "step": 0,
                     "u": "reps",
                     "sets": 1,
-                    "target": 6,
+                    "target": 5,
                     "rest": 70,
                     "side": true,
                     "why": [
@@ -2228,7 +2230,7 @@
                     ]
                   }
                 ],
-                "estMinutes": 21
+                "estMinutes": 20
               }
             ]
           }
@@ -2237,24 +2239,25 @@
         "coachName": "",
         "traineeName": "سالم التجريبي",
         "tempFlagsIn": [],
+        "program": "bw",
         "decision": {
-          "reviewId": "RV5-CTVQ3-15YQR",
-          "at": "2026-11-09T12:58:05.022Z",
+          "reviewId": "RV5-M9V98-1KRF0",
+          "at": "2026-11-09T13:12:02.519Z",
           "overall": "maintain",
           "reasons": [],
           "items": {
-            "A1|SQ-TEMPO": {
+            "A1|SQ-STAGGER": {
               "slot": "A1",
-              "exId": "SQ-TEMPO",
+              "exId": "SQ-STAGGER",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 6.0",
               "completion": 1,
               "effort": 6,
               "sessions": 1
             },
-            "A2|PU-NEG": {
+            "A2|PU-STD": {
               "slot": "A2",
-              "exId": "PU-NEG",
+              "exId": "PU-STD",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 6.0",
               "completion": 1,
@@ -2270,18 +2273,18 @@
               "effort": 6,
               "sessions": 1
             },
-            "A4|CR-HOLLOW-T": {
+            "A4|CR-BENTLEG": {
               "slot": "A4",
-              "exId": "CR-HOLLOW-T",
+              "exId": "CR-BENTLEG",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 6.0",
               "completion": 1,
               "effort": 6,
               "sessions": 1
             },
-            "A5|LU-REV": {
+            "A5|LU-FWD": {
               "slot": "A5",
-              "exId": "LU-REV",
+              "exId": "LU-FWD",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 6.0",
               "completion": 1,
@@ -2297,9 +2300,9 @@
               "effort": null,
               "sessions": 1
             },
-            "B2|PU-STAGGER": {
+            "B2|PU-TEMPO": {
               "slot": "B2",
-              "exId": "PU-STAGGER",
+              "exId": "PU-TEMPO",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
@@ -2315,18 +2318,18 @@
               "effort": null,
               "sessions": 0
             },
-            "B4|CR-FRONTKICK": {
+            "B4|CR-REVCRUNCH": {
               "slot": "B4",
-              "exId": "CR-FRONTKICK",
+              "exId": "CR-REVCRUNCH",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
               "effort": null,
               "sessions": 0
             },
-            "B5|LU-CURTSY": {
+            "B5|HA-SIDESTEP": {
               "slot": "B5",
-              "exId": "LU-CURTSY",
+              "exId": "HA-SIDESTEP",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
@@ -2341,19 +2344,19 @@
           "walk": "same",
           "ruleVersion": "RULES-5.0.0"
         },
-        "updatedAt": "2026-11-09T12:58:05.653Z"
+        "updatedAt": "2026-11-09T13:12:03.153Z"
       },
       {
-        "id": "PL5-2026W47-WFSGE-JYBAD",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
+        "id": "PL5-2026W47-4APKA-FKB6R",
+        "traineeId": "TR5-4Y0FV-KQ24V",
         "weekStart": "2026-11-16",
         "weekEnd": "2026-11-22",
-        "createdAt": "2026-11-09T12:58:05.470Z",
+        "createdAt": "2026-11-09T13:12:02.968Z",
         "ruleVersion": "RULES-5.0.0",
-        "screeningId": "SC5-9WYE5-WH68H",
-        "baselineId": "BL5-1YCRB-Q077S",
-        "prevPlanId": "PL5-2026W46-BDPXM-CKC2Z",
-        "decisionFrom": "RV5-3DT8T-MXYP3",
+        "screeningId": "SC5-CNKEG-4VY63",
+        "baselineId": "BL5-GCFP5-J41VJ",
+        "prevPlanId": "PL5-2026W46-FAR1W-P28VA",
+        "decisionFrom": "RV5-70C55-4QWS7",
         "status": "blocked",
         "blockers": [
           "مراجعة الأسبوع السابق انتهت بإحالة: ألم شديد (8/10): ليس ألماً عضلياً عادياً — إيقاف وتقييم مختص. — يلزم فحص جديد بعد المراجعة مع تصريح مختص موثق."
@@ -2366,8 +2369,8 @@
         "coachName": "",
         "traineeName": "مريم التجريبية",
         "decision": {
-          "reviewId": "RV5-3DT8T-MXYP3",
-          "at": "2026-11-09T12:58:05.352Z",
+          "reviewId": "RV5-70C55-4QWS7",
+          "at": "2026-11-09T13:12:02.852Z",
           "overall": "refer",
           "reasons": [
             {
@@ -2490,16 +2493,16 @@
     ],
     "sessions": [
       {
-        "id": "SS5-K3BBJ-D2JF9",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "planId": "PL5-2026W46-1H0W4-QYYM8",
+        "id": "SS5-0QKCC-VZSNN",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "planId": "PL5-2026W46-CVWCA-CZSGR",
         "dayIndex": 1,
         "date": "2026-11-10",
         "kind": "train",
         "status": "complete",
         "early": true,
-        "startedAt": "2026-11-09T12:57:59.159Z",
-        "updatedAt": "2026-11-09T12:58:02.086Z",
+        "startedAt": "2026-11-09T13:11:56.307Z",
+        "updatedAt": "2026-11-09T13:11:59.651Z",
         "cursor": 11,
         "redFlag": false,
         "items": [
@@ -2508,17 +2511,23 @@
             "slot": null,
             "exId": "CA-MARCH",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 60,
               "u": "time",
               "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
                 "value": 60,
-                "at": "2026-11-09T12:57:59.237Z"
+                "at": "2026-11-09T13:11:56.371Z"
               }
             ],
             "effort": "",
@@ -2531,17 +2540,23 @@
             "slot": null,
             "exId": "CA-STEPJACK",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 20,
               "u": "time",
               "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
                 "value": 20,
-                "at": "2026-11-09T12:57:59.371Z"
+                "at": "2026-11-09T13:11:56.502Z"
               }
             ],
             "effort": "",
@@ -2552,19 +2567,25 @@
           {
             "block": "warmup",
             "slot": null,
-            "exId": "BA-SHIFT",
+            "exId": "MO-SHCIRCLE",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
-              "target": 6,
+              "target": 8,
               "u": "reps",
-              "side": true,
-              "rest": 0
+              "side": false,
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
-                "value": 6,
-                "at": "2026-11-09T12:57:59.752Z"
+                "value": 8,
+                "at": "2026-11-09T13:11:56.935Z"
               }
             ],
             "effort": "",
@@ -2575,23 +2596,25 @@
           {
             "block": "main",
             "slot": "A1",
-            "exId": "SQ-TEMPO",
+            "exId": "SQ-STAGGER",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
-              "sets": 2,
+              "sets": 1,
               "target": 6,
               "u": "reps",
-              "side": false,
-              "rest": 75
+              "side": true,
+              "rest": 70,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
                 "value": 6,
-                "at": "2026-11-09T12:58:00.069Z"
-              },
-              {
-                "value": 6,
-                "at": "2026-11-09T12:58:00.352Z"
+                "at": "2026-11-09T13:11:57.252Z"
               }
             ],
             "effort": 6,
@@ -2603,19 +2626,25 @@
           {
             "block": "main",
             "slot": "A2",
-            "exId": "PU-NEG",
+            "exId": "PU-STD",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
-              "target": 3,
+              "target": 5,
               "u": "reps",
               "side": false,
-              "rest": 75
+              "rest": 75,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
-                "value": 3,
-                "at": "2026-11-09T12:58:00.637Z"
+                "value": 5,
+                "at": "2026-11-09T13:11:57.602Z"
               }
             ],
             "effort": 6,
@@ -2629,17 +2658,23 @@
             "slot": "A3",
             "exId": "PH-PRONE-ROW",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 5,
               "u": "reps",
               "side": false,
-              "rest": 45
+              "rest": 45,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
                 "value": 5,
-                "at": "2026-11-09T12:58:00.986Z"
+                "at": "2026-11-09T13:11:57.953Z"
               }
             ],
             "effort": 6,
@@ -2651,23 +2686,29 @@
           {
             "block": "main",
             "slot": "A4",
-            "exId": "CR-HOLLOW-T",
+            "exId": "CR-BENTLEG",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 2,
-              "target": 10,
-              "u": "time",
+              "target": 6,
+              "u": "reps",
               "side": false,
-              "rest": 45
+              "rest": 55,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
-                "value": 10,
-                "at": "2026-11-09T12:58:01.170Z"
+                "value": 6,
+                "at": "2026-11-09T13:11:58.336Z"
               },
               {
-                "value": 10,
-                "at": "2026-11-09T12:58:01.254Z"
+                "value": 6,
+                "at": "2026-11-09T13:11:58.619Z"
               }
             ],
             "effort": 6,
@@ -2679,19 +2720,25 @@
           {
             "block": "main",
             "slot": "A5",
-            "exId": "LU-REV",
+            "exId": "LU-FWD",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
-              "target": 6,
+              "target": 5,
               "u": "reps",
               "side": true,
-              "rest": 70
+              "rest": 70,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
-                "value": 6,
-                "at": "2026-11-09T12:58:01.620Z"
+                "value": 5,
+                "at": "2026-11-09T13:11:58.953Z"
               }
             ],
             "effort": 6,
@@ -2705,17 +2752,23 @@
             "slot": null,
             "exId": "BT-DIAPH",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 60,
               "u": "time",
               "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
                 "value": 60,
-                "at": "2026-11-09T12:58:01.806Z"
+                "at": "2026-11-09T13:11:59.118Z"
               }
             ],
             "effort": "",
@@ -2726,19 +2779,25 @@
           {
             "block": "cooldown",
             "slot": null,
-            "exId": "ST-COBRA",
+            "exId": "ST-CHILD",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 20,
               "u": "time",
               "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
                 "value": 20,
-                "at": "2026-11-09T12:58:01.953Z"
+                "at": "2026-11-09T13:11:59.235Z"
               }
             ],
             "effort": "",
@@ -2749,19 +2808,25 @@
           {
             "block": "cooldown",
             "slot": null,
-            "exId": "ST-KNEECHEST",
+            "exId": "MO-SHCIRCLE",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
-              "target": 20,
-              "u": "time",
+              "target": 8,
+              "u": "reps",
               "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
-                "value": 20,
-                "at": "2026-11-09T12:58:02.086Z"
+                "value": 8,
+                "at": "2026-11-09T13:11:59.651Z"
               }
             ],
             "effort": "",
@@ -2775,21 +2840,21 @@
           "pain": 0,
           "symptoms": "no"
         },
-        "endedAt": "2026-11-09T12:58:02.254Z",
+        "endedAt": "2026-11-09T13:11:59.784Z",
         "minutes": 1,
         "load": 5
       },
       {
-        "id": "SS5-QH6XQ-T2X5Z",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "planId": "PL5-2026W46-1H0W4-QYYM8",
+        "id": "SS5-7G9TH-BNCXK",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "planId": "PL5-2026W46-CVWCA-CZSGR",
         "dayIndex": 3,
         "date": "2026-11-12",
         "kind": "train",
         "status": "partial",
         "early": true,
-        "startedAt": "2026-11-09T12:58:02.338Z",
-        "updatedAt": "2026-11-09T12:58:02.536Z",
+        "startedAt": "2026-11-09T13:11:59.854Z",
+        "updatedAt": "2026-11-09T13:12:00.019Z",
         "cursor": 3,
         "redFlag": false,
         "items": [
@@ -2798,12 +2863,18 @@
             "slot": null,
             "exId": "CA-MARCH",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 60,
               "u": "time",
               "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -2816,12 +2887,18 @@
             "slot": null,
             "exId": "CA-STEPJACK",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 20,
               "u": "time",
               "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -2832,14 +2909,20 @@
           {
             "block": "warmup",
             "slot": null,
-            "exId": "HA-SIDELYING",
+            "exId": "CR-FRONTKICK",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
-              "target": 8,
+              "target": 5,
               "u": "reps",
               "side": true,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -2852,17 +2935,23 @@
             "slot": "B1",
             "exId": "BR-ELEV",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 8,
               "u": "reps",
               "side": false,
-              "rest": 70
+              "rest": 70,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [
               {
                 "value": 8,
-                "at": "2026-11-09T12:58:02.536Z"
+                "at": "2026-11-09T13:12:00.019Z"
               }
             ],
             "effort": "",
@@ -2873,14 +2962,20 @@
           {
             "block": "main",
             "slot": "B2",
-            "exId": "PU-STAGGER",
+            "exId": "PU-TEMPO",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 4,
               "u": "reps",
-              "side": true,
-              "rest": 75
+              "side": false,
+              "rest": 75,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -2893,12 +2988,18 @@
             "slot": "B3",
             "exId": "BE-SWIMMER",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 2,
               "target": 15,
               "u": "time",
               "side": false,
-              "rest": 45
+              "rest": 45,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -2909,14 +3010,20 @@
           {
             "block": "main",
             "slot": "B4",
-            "exId": "CR-FRONTKICK",
+            "exId": "CR-REVCRUNCH",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
-              "sets": 1,
-              "target": 5,
+              "sets": 2,
+              "target": 6,
               "u": "reps",
-              "side": true,
-              "rest": 45
+              "side": false,
+              "rest": 55,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -2927,14 +3034,20 @@
           {
             "block": "main",
             "slot": "B5",
-            "exId": "LU-CURTSY",
+            "exId": "HA-SIDESTEP",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
-              "target": 6,
+              "target": 8,
               "u": "reps",
               "side": true,
-              "rest": 70
+              "rest": 55,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -2947,12 +3060,42 @@
             "slot": null,
             "exId": "BT-DIAPH",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 60,
               "u": "time",
               "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
+            },
+            "sets": [],
+            "effort": "",
+            "technique": "",
+            "pain": 0,
+            "painArea": ""
+          },
+          {
+            "block": "cooldown",
+            "slot": null,
+            "exId": "ST-SLOVER",
+            "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
+            "prescribed": {
+              "sets": 1,
+              "target": 20,
+              "u": "time",
+              "side": true,
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -2965,30 +3108,18 @@
             "slot": null,
             "exId": "ST-GROIN",
             "weak": null,
+            "gym": 0,
+            "test": 0,
+            "goal": 0,
             "prescribed": {
               "sets": 1,
               "target": 20,
               "u": "time",
               "side": false,
-              "rest": 0
-            },
-            "sets": [],
-            "effort": "",
-            "technique": "",
-            "pain": 0,
-            "painArea": ""
-          },
-          {
-            "block": "cooldown",
-            "slot": null,
-            "exId": "ST-CHILD",
-            "weak": null,
-            "prescribed": {
-              "sets": 1,
-              "target": 20,
-              "u": "time",
-              "side": false,
-              "rest": 0
+              "rest": 0,
+              "load": null,
+              "repRange": null,
+              "rir": null
             },
             "sets": [],
             "effort": "",
@@ -3001,10 +3132,10 @@
     ],
     "reviews": [
       {
-        "id": "RV5-CTVQ3-15YQR",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "planId": "PL5-2026W46-1H0W4-QYYM8",
-        "at": "2026-11-09T12:58:05.022Z",
+        "id": "RV5-M9V98-1KRF0",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "planId": "PL5-2026W46-CVWCA-CZSGR",
+        "at": "2026-11-09T13:12:02.519Z",
         "version": "RULES-5.0.0",
         "questions": [
           {
@@ -3059,18 +3190,18 @@
           "overall": "maintain",
           "reasons": [],
           "items": {
-            "A1|SQ-TEMPO": {
+            "A1|SQ-STAGGER": {
               "slot": "A1",
-              "exId": "SQ-TEMPO",
+              "exId": "SQ-STAGGER",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 6.0",
               "completion": 1,
               "effort": 6,
               "sessions": 1
             },
-            "A2|PU-NEG": {
+            "A2|PU-STD": {
               "slot": "A2",
-              "exId": "PU-NEG",
+              "exId": "PU-STD",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 6.0",
               "completion": 1,
@@ -3086,18 +3217,18 @@
               "effort": 6,
               "sessions": 1
             },
-            "A4|CR-HOLLOW-T": {
+            "A4|CR-BENTLEG": {
               "slot": "A4",
-              "exId": "CR-HOLLOW-T",
+              "exId": "CR-BENTLEG",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 6.0",
               "completion": 1,
               "effort": 6,
               "sessions": 1
             },
-            "A5|LU-REV": {
+            "A5|LU-FWD": {
               "slot": "A5",
-              "exId": "LU-REV",
+              "exId": "LU-FWD",
               "action": "maintain",
               "why": "إنجاز 100%، جهد 6.0",
               "completion": 1,
@@ -3113,9 +3244,9 @@
               "effort": null,
               "sessions": 1
             },
-            "B2|PU-STAGGER": {
+            "B2|PU-TEMPO": {
               "slot": "B2",
-              "exId": "PU-STAGGER",
+              "exId": "PU-TEMPO",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
@@ -3131,18 +3262,18 @@
               "effort": null,
               "sessions": 0
             },
-            "B4|CR-FRONTKICK": {
+            "B4|CR-REVCRUNCH": {
               "slot": "B4",
-              "exId": "CR-FRONTKICK",
+              "exId": "CR-REVCRUNCH",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
               "effort": null,
               "sessions": 0
             },
-            "B5|LU-CURTSY": {
+            "B5|HA-SIDESTEP": {
               "slot": "B5",
-              "exId": "LU-CURTSY",
+              "exId": "HA-SIDESTEP",
               "action": "maintain",
               "why": "لا توجد بيانات أداء مسجلة",
               "completion": null,
@@ -3156,14 +3287,14 @@
           "planned": 3,
           "walk": "same",
           "ruleVersion": "RULES-5.0.0",
-          "at": "2026-11-09T12:58:05.022Z"
+          "at": "2026-11-09T13:12:02.519Z"
         }
       },
       {
-        "id": "RV5-3DT8T-MXYP3",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "planId": "PL5-2026W46-BDPXM-CKC2Z",
-        "at": "2026-11-09T12:58:05.352Z",
+        "id": "RV5-70C55-4QWS7",
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "planId": "PL5-2026W46-FAR1W-P28VA",
+        "at": "2026-11-09T13:12:02.852Z",
         "version": "RULES-5.0.0",
         "questions": [
           {
@@ -3340,154 +3471,172 @@
           "planned": 3,
           "walk": "down",
           "ruleVersion": "RULES-5.0.0",
-          "at": "2026-11-09T12:58:05.352Z"
+          "at": "2026-11-09T13:12:02.852Z"
         }
       }
     ],
     "audit": [
       {
-        "id": "AU5-VY4XA-HFQB6",
-        "at": "2026-11-09T12:57:57.070Z",
+        "id": "AU5-CVKGB-KARS7",
+        "at": "2026-11-09T13:11:54.237Z",
         "type": "trainee.create",
         "msg": "إنشاء سالم التجريبي",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": null
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": null,
+        "actor": null
       },
       {
-        "id": "AU5-M67MP-RDP0W",
-        "at": "2026-11-09T12:57:57.238Z",
+        "id": "AU5-P5YQ3-H9YVT",
+        "at": "2026-11-09T13:11:54.438Z",
         "type": "screening",
-        "msg": "فحص SC5-PPPNQ-7D7RV ⇒ cleared",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "SC5-PPPNQ-7D7RV"
+        "msg": "فحص SC5-KH96M-2W14R ⇒ cleared",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "SC5-KH96M-2W14R",
+        "actor": null
       },
       {
-        "id": "AU5-P26BT-MG4YF",
-        "at": "2026-11-09T12:57:57.404Z",
+        "id": "AU5-1X8C2-02BP7",
+        "at": "2026-11-09T13:11:54.621Z",
         "type": "baseline",
-        "msg": "تقييم أساسي BL5-SRQ6H-A3PQV ⇒ {\"push\":2,\"squat\":2,\"core\":2,\"pull\":1,\"aerobic\":2,\"balance\":2}",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "BL5-SRQ6H-A3PQV"
+        "msg": "تقييم أساسي BL5-3JBNV-45MN8 ⇒ {\"push\":2,\"squat\":2,\"core\":2,\"pull\":1,\"aerobic\":2,\"balance\":2}",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "BL5-3JBNV-45MN8",
+        "actor": null
       },
       {
-        "id": "AU5-ETX6N-0T7TD",
-        "at": "2026-11-09T12:57:57.472Z",
+        "id": "AU5-CZT2J-P7K0X",
+        "at": "2026-11-09T13:11:54.671Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W46-1H0W4-QYYM8 (active)",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "PL5-2026W46-1H0W4-QYYM8"
+        "msg": "خطة PL5-2026W46-CVWCA-CZSGR (active)",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "PL5-2026W46-CVWCA-CZSGR",
+        "actor": null
       },
       {
-        "id": "AU5-X5REP-AK0KA",
-        "at": "2026-11-09T12:57:57.953Z",
+        "id": "AU5-P15EB-EAHF1",
+        "at": "2026-11-09T13:11:55.119Z",
         "type": "trainee.create",
         "msg": "إنشاء مريم التجريبية",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "ref": null
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "ref": null,
+        "actor": null
       },
       {
-        "id": "AU5-81YD5-6BG08",
-        "at": "2026-11-09T12:57:58.204Z",
+        "id": "AU5-8J95M-HMW23",
+        "at": "2026-11-09T13:11:55.370Z",
         "type": "screening",
-        "msg": "فحص SC5-9WYE5-WH68H ⇒ cleared",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "ref": "SC5-9WYE5-WH68H"
+        "msg": "فحص SC5-CNKEG-4VY63 ⇒ cleared",
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "ref": "SC5-CNKEG-4VY63",
+        "actor": null
       },
       {
-        "id": "AU5-KH079-SMG61",
-        "at": "2026-11-09T12:57:58.355Z",
+        "id": "AU5-DX2N5-QWFWE",
+        "at": "2026-11-09T13:11:55.520Z",
         "type": "baseline",
-        "msg": "تقييم أساسي BL5-1YCRB-Q077S ⇒ {\"push\":1,\"squat\":1,\"core\":1,\"pull\":1,\"aerobic\":1,\"balance\":1}",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "ref": "BL5-1YCRB-Q077S"
+        "msg": "تقييم أساسي BL5-GCFP5-J41VJ ⇒ {\"push\":1,\"squat\":1,\"core\":1,\"pull\":1,\"aerobic\":1,\"balance\":1}",
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "ref": "BL5-GCFP5-J41VJ",
+        "actor": null
       },
       {
-        "id": "AU5-RRJGC-B1T8M",
-        "at": "2026-11-09T12:57:58.420Z",
+        "id": "AU5-STV3G-QV1AY",
+        "at": "2026-11-09T13:11:55.586Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W46-BDPXM-CKC2Z (active)",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "ref": "PL5-2026W46-BDPXM-CKC2Z"
+        "msg": "خطة PL5-2026W46-FAR1W-P28VA (active)",
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "ref": "PL5-2026W46-FAR1W-P28VA",
+        "actor": null
       },
       {
-        "id": "AU5-86STE-76YS5",
-        "at": "2026-11-09T12:57:58.837Z",
+        "id": "AU5-9312Z-F97XA",
+        "at": "2026-11-09T13:11:56.003Z",
         "type": "trainee.create",
         "msg": "إنشاء خالد التجريبي",
-        "traineeId": "TR5-VCG4D-7WC91",
-        "ref": null
+        "traineeId": "TR5-4V8X9-ER1F6",
+        "ref": null,
+        "actor": null
       },
       {
-        "id": "AU5-7H3C6-FBE8H",
-        "at": "2026-11-09T12:57:59.003Z",
+        "id": "AU5-FNSZ6-8SY6B",
+        "at": "2026-11-09T13:11:56.170Z",
         "type": "screening",
-        "msg": "فحص SC5-TJ3TV-TG7JH ⇒ refer",
-        "traineeId": "TR5-VCG4D-7WC91",
-        "ref": "SC5-TJ3TV-TG7JH"
+        "msg": "فحص SC5-SWQHB-T0CD1 ⇒ refer",
+        "traineeId": "TR5-4V8X9-ER1F6",
+        "ref": "SC5-SWQHB-T0CD1",
+        "actor": null
       },
       {
-        "id": "AU5-05TJK-3ABYY",
-        "at": "2026-11-09T12:57:59.160Z",
+        "id": "AU5-Z952W-SNPZG",
+        "at": "2026-11-09T13:11:56.307Z",
         "type": "session.start",
-        "msg": "بدء حصة SS5-K3BBJ-D2JF9",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "SS5-K3BBJ-D2JF9"
+        "msg": "بدء حصة SS5-0QKCC-VZSNN",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "SS5-0QKCC-VZSNN",
+        "actor": null
       },
       {
-        "id": "AU5-1CNPV-SWC2P",
-        "at": "2026-11-09T12:58:02.254Z",
+        "id": "AU5-DSTAM-AF3Y2",
+        "at": "2026-11-09T13:11:59.784Z",
         "type": "session.complete",
-        "msg": "إنهاء SS5-K3BBJ-D2JF9 جهد 5 ألم 0",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "SS5-K3BBJ-D2JF9"
+        "msg": "إنهاء SS5-0QKCC-VZSNN جهد 5 ألم 0",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "SS5-0QKCC-VZSNN",
+        "actor": null
       },
       {
-        "id": "AU5-G93ZX-G80MY",
-        "at": "2026-11-09T12:58:02.338Z",
+        "id": "AU5-MDK3Z-PC5ZR",
+        "at": "2026-11-09T13:11:59.854Z",
         "type": "session.start",
-        "msg": "بدء حصة SS5-QH6XQ-T2X5Z",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "SS5-QH6XQ-T2X5Z"
+        "msg": "بدء حصة SS5-7G9TH-BNCXK",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "SS5-7G9TH-BNCXK",
+        "actor": null
       },
       {
-        "id": "AU5-4D4PM-RS9YB",
-        "at": "2026-11-09T12:58:05.022Z",
+        "id": "AU5-YSPH4-P96BW",
+        "at": "2026-11-09T13:12:02.519Z",
         "type": "review",
-        "msg": "مراجعة PL5-2026W46-1H0W4-QYYM8 ⇒ maintain",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "RV5-CTVQ3-15YQR"
+        "msg": "مراجعة PL5-2026W46-CVWCA-CZSGR ⇒ maintain",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "RV5-M9V98-1KRF0",
+        "actor": null
       },
       {
-        "id": "AU5-NRN8K-XH1R6",
-        "at": "2026-11-09T12:58:05.139Z",
+        "id": "AU5-G737V-RMMYC",
+        "at": "2026-11-09T13:12:02.653Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W47-8BQNA-TR8WH (active)",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "PL5-2026W47-8BQNA-TR8WH"
+        "msg": "خطة PL5-2026W47-KHYNV-Z6AQM (active)",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "PL5-2026W47-KHYNV-Z6AQM",
+        "actor": null
       },
       {
-        "id": "AU5-0J257-QVFJ5",
-        "at": "2026-11-09T12:58:05.352Z",
+        "id": "AU5-5QQSM-7575Y",
+        "at": "2026-11-09T13:12:02.852Z",
         "type": "review",
-        "msg": "مراجعة PL5-2026W46-BDPXM-CKC2Z ⇒ refer",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "ref": "RV5-3DT8T-MXYP3"
+        "msg": "مراجعة PL5-2026W46-FAR1W-P28VA ⇒ refer",
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "ref": "RV5-70C55-4QWS7",
+        "actor": null
       },
       {
-        "id": "AU5-0N6KH-0PG3E",
-        "at": "2026-11-09T12:58:05.470Z",
+        "id": "AU5-P5HXH-KFYHS",
+        "at": "2026-11-09T13:12:02.968Z",
         "type": "plan.create",
-        "msg": "خطة PL5-2026W47-WFSGE-JYBAD (blocked)",
-        "traineeId": "TR5-796ZQ-Q0ZGD",
-        "ref": "PL5-2026W47-WFSGE-JYBAD"
+        "msg": "خطة PL5-2026W47-4APKA-FKB6R (blocked)",
+        "traineeId": "TR5-4Y0FV-KQ24V",
+        "ref": "PL5-2026W47-4APKA-FKB6R",
+        "actor": null
       },
       {
-        "id": "AU5-WJP4H-TH592",
-        "at": "2026-11-09T12:58:05.653Z",
+        "id": "AU5-1VG69-K01TF",
+        "at": "2026-11-09T13:12:03.153Z",
         "type": "plan.override",
-        "msg": "PL5-2026W47-8BQNA-TR8WH: اختبار حدود",
-        "traineeId": "TR5-Q5ATC-VY6DB",
-        "ref": "PL5-2026W47-8BQNA-TR8WH"
+        "msg": "PL5-2026W47-KHYNV-Z6AQM: اختبار حدود",
+        "traineeId": "TR5-SHWFV-5J8KQ",
+        "ref": "PL5-2026W47-KHYNV-Z6AQM",
+        "actor": null
       }
     ],
     "legacy": null

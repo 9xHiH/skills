@@ -23,9 +23,9 @@ Evidence in `tests/evidence/`:
 ## Results (final run)
 | Suite | Result |
 |---|---|
-| Exercise data + animation geometry (`check.mjs`) | 199 records, **0 errors**, 6 warnings (intentional: planks and mountain climbers marked prone-position without the "lying prone" flag, because the weight is on the hands) |
-| Unit (`unit.mjs`, DOM-free modules) | **63 passed, 0 failed** (incl. weak side, focus areas, home/outdoor walking, walking progression, BMI, bilingual questions) |
-| End-to-end (`e2e.cjs`, real UI in Chromium) | **29 passed, 0 failed** (T27 encryption; T28 simple bilingual setup → plan, reading copy, PDF; T29 red flag in simple setup) |
+| Exercise data + animation geometry (`check.mjs`) | 231 records (199 bodyweight + 32 gym), **0 errors**, 6 warnings (intentional: planks and mountain climbers marked prone-position without the "lying prone" flag, because the weight is on the hands) |
+| Unit (`unit.mjs`, DOM-free modules) | **72 passed, 0 failed** (incl. gym separation and load progression, goal tests and projections, ranks, multi-user accounts with real Web Crypto) (incl. weak side, focus areas, home/outdoor walking, walking progression, BMI, bilingual questions) |
+| End-to-end (`e2e.cjs`, real UI in Chromium) | **31 passed, 0 failed** (T27 multi-user accounts + full encrypted copy opened by a second coach on another profile; T30 gym weights; T31 goal 60 push-ups; T28 simple bilingual setup → plan, reading copy, PDF; T29 red flag in simple setup) |
 | Accessibility (`a11y.cjs`, axe-core 4.10.2, WCAG 2.0/2.1 A+AA rules) | **0 violations** on 12 pages × dark/light + exercise dialog (`tests/results_a11y.txt`). axe covers only part of WCAG; no screen-reader test. |
 
 Defects that earlier test runs caught and that were fixed before this run:
@@ -68,7 +68,13 @@ Defects that earlier test runs caught and that were fixed before this run:
 0. **Spec deviation by user request (round 3).** Question counts are below the spec's budgets: 8 general health questions (+4 conditional), a 4-question post-workout check and a 6-question weekly base. The baseline is now self-reported ranges by default (the detailed sub-maximal test remains under More).
    - New local, unvalidated rules: BMI ≥ 30 → no jumping; weak side +1 set; walking +5 min/week. They are labelled LOCAL in the app.
    - YouTube search links are external and their results are not reviewed.
-1. **Exercise count: 199 of the 200 target.**
+0b. **Round 4 limits.**
+   - Goal timelines are estimates, not promises.
+   - The gym progression rule is a standard double-progression method, not individually validated.
+   - Accounts protect the file locally; removing a user cannot revoke copies saved before removal.
+   - Gym drawings are schematic in places: `GY-BB-OHP` is clipped, and the leg-press machine is simplified.
+   - No nutrition guidance is given for weight loss.
+1. **Exercise count: 199 of the 200 bodyweight target (plus 32 gym).**
    - 200 IDs were planned. Three were drawn twice, the second time with the new foreshortening support, and were still removed in final review because the drawings would mislead:
      - `PU-ARCHER` looked like a headstand;
      - `HA-FIRE` looked like a standing leg lift;

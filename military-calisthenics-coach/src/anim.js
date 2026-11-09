@@ -144,6 +144,11 @@
           el('line', { x1: cx - 12, y1: gy + 17, x2: cx + 12, y2: gy + 17, 'class': 'mc-inset-sh' }, g);
           [-1, 1].forEach(function (sgn) { var hx = cx + sgn * 12 * pr.r; el('rect', { x: hx - 3, y: gy + 18, width: 6, height: 9, rx: 2, 'class': 'mc-inset-hand' }, g); el('line', { x1: cx + sgn * 12, y1: gy + 17, x2: hx, y2: gy + 22, 'class': 'mc-inset-sh' }, g); });
           break;
+        case 'bench': /* flat or inclined bench pad on legs; incline: {deg} */
+          el('rect', { x: pr.x, y: FLOOR - pr.h, width: pr.w, height: 6, rx: 2, 'class': 'mc-prop-fill', transform: pr.deg ? 'rotate(' + (-pr.deg) + ' ' + (pr.x + pr.w) + ' ' + (FLOOR - pr.h) + ')' : '' }, g);
+          el('line', { x1: pr.x + 6, y1: FLOOR - pr.h + 6, x2: pr.x + 6, y2: FLOOR, 'class': 'mc-prop' }, g);
+          el('line', { x1: pr.x + pr.w - 6, y1: FLOOR - pr.h + 6, x2: pr.x + pr.w - 6, y2: FLOOR, 'class': 'mc-prop' }, g); break;
+        case 'rack': el('line', { x1: pr.x, y1: pr.y || 40, x2: pr.x, y2: FLOOR, 'class': 'mc-prop' }, g); el('line', { x1: pr.x - 6, y1: pr.hook || 60, x2: pr.x + 6, y2: pr.hook || 60, 'class': 'mc-prop' }, g); break;
         case 'mat': el('rect', { x: pr.x1, y: FLOOR - 2, width: pr.x2 - pr.x1, height: 3, rx: 1, 'class': 'mc-mat' }, g); break;
         case 'step': el('rect', { x: pr.x, y: FLOOR - pr.h, width: pr.w, height: pr.h, rx: 1, 'class': 'mc-prop-fill' }, g); break;
         default: break;
@@ -172,6 +177,19 @@
     };
     var near = el('g', { 'class': 'mc-near' }, g);
     this.p.lN = el('polyline', {}, near); this.p.fN = el('line', {}, near); this.p.aN = el('polyline', {}, near);
+    /* gym equipment attached to joints: dumbbell 'db', kettlebell 'kb', barbell end-on 'bb', barbell seen from the front 'bbline', cable 'cable' */
+    this.att = (spec.props || []).filter(function (q) { return q.at; }).map(function (q) {
+      var gg = el('g', { 'class': 'mc-load' }, svg), o = { q: q, g: gg, e: [] };
+      var ats = q.at === 'both' ? ['wrN', 'wrF'] : [q.at];
+      if (q.k === 'cable') { o.e.push(el('line', { 'class': 'mc-cable' }, gg)); el('circle', { cx: q.to[0], cy: q.to[1], r: 4, 'class': 'mc-prop-fill' }, gg); el('rect', { x: q.to[0] - 5, y: q.to[1], width: 10, height: 150 - q.to[1], 'class': 'mc-stack' }, gg); }
+      else if (q.k === 'bbline') { o.e.push(el('line', { 'class': 'mc-bar' }, gg)); o.e.push(el('rect', { width: 5, height: 22, rx: 1.5, 'class': 'mc-plate' }, gg)); o.e.push(el('rect', { width: 5, height: 22, rx: 1.5, 'class': 'mc-plate' }, gg)); }
+      else ats.forEach(function () {
+        if (q.k === 'bb') o.e.push(el('circle', { r: q.r || 10, 'class': 'mc-plate' }, gg));
+        else if (q.k === 'kb') o.e.push(el('circle', { r: 6, 'class': 'mc-plate' }, gg));
+        else o.e.push(el('rect', { width: 12, height: 6, rx: 2, 'class': 'mc-plate' }, gg));
+      });
+      o.ats = ats; return o;
+    });
     this.svg = svg; container.appendChild(svg);
     if (opts.ghost !== false) this.drawGhost(opts.traceJoint);
     this.render();
@@ -201,6 +219,16 @@
     var hb = add(s.neck, dir(this.spec.keys[0].p.t), 0);
     p.neck.setAttribute('x1', hb[0]); p.neck.setAttribute('y1', hb[1]); p.neck.setAttribute('x2', s.head[0]); p.neck.setAttribute('y2', s.head[1]);
     p.head.setAttribute('cx', s.head[0]); p.head.setAttribute('cy', s.head[1]);
+    this.att.forEach(function (o) {
+      var q = o.q, off = q.off || [0, 0];
+      if (q.k === 'cable') { var w = s[q.at]; o.e[0].setAttribute('x1', w[0]); o.e[0].setAttribute('y1', w[1]); o.e[0].setAttribute('x2', q.to[0]); o.e[0].setAttribute('y2', q.to[1]); return; }
+      if (q.k === 'bbline') { var a = s.wrN, c = s.wrF, ext = q.ext || 22, dx = c[0] - a[0], dy = c[1] - a[1], ln = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / ln, uy = dy / ln;
+        var p1 = [a[0] - ux * ext, a[1] - uy * ext], p2 = [c[0] + ux * ext, c[1] + uy * ext];
+        o.e[0].setAttribute('x1', p1[0]); o.e[0].setAttribute('y1', p1[1]); o.e[0].setAttribute('x2', p2[0]); o.e[0].setAttribute('y2', p2[1]);
+        [[o.e[1], p1, 1], [o.e[2], p2, -1]].forEach(function (z) { z[0].setAttribute('x', z[1][0] + ux * 4 * z[2] - 2.5); z[0].setAttribute('y', z[1][1] - 11); }); return; }
+      o.ats.forEach(function (j, i) { var pt = s[j] || s.wrN, e = o.e[i], x = pt[0] + off[0], y = pt[1] + off[1];
+        if (q.k === 'bb' || q.k === 'kb') { e.setAttribute('cx', x); e.setAttribute('cy', y + (q.k === 'kb' ? 6 : 0)); } else { e.setAttribute('x', x - 6); e.setAttribute('y', y - 3); } });
+    });
     if (this.onLabel && r.idx !== this._idx) { this._idx = r.idx; this.onLabel(r.label, r.idx); }
   };
   Figure.prototype.tick = function (dt) { if (this.playing) { this.t += dt * this.speed; this.render(); } };

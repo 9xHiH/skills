@@ -17,7 +17,9 @@
   App.biRadios = radios;
 
   var DAYS = E.DOW_AR.map(function (d, i) { return [i, d, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][i]]; });
-  var GOALS = [['general', 'لياقة عامة', 'General fitness'], ['weight', 'إنقاص الوزن', 'Weight loss'], ['strength', 'قوة', 'Strength'], ['endurance', 'تحمّل', 'Endurance'], ['mobility', 'مرونة وحركة', 'Mobility']];
+  var GOALS = [['weight', 'إنزال الوزن', 'Lose weight'], ['strength', 'قوة وبناء عضلات', 'Strength & muscle'], ['general', 'لياقة عامة', 'General fitness'], ['endurance', 'تحمّل وجري', 'Endurance'], ['mobility', 'مرونة وحركة', 'Mobility'], ['target', 'رقم محدد (مثل 60 ضغطة)', 'A number (e.g. 60 push-ups)']];
+  var GYM_EQ = ['dumbbell', 'barbell', 'rack', 'bench', 'kettlebell', 'cable', 'machine', 'legpress', 'pulldown'].map(function (k) { return [k, X.EQUIP[k], X.EQUIP_EN[k]]; });
+  var KIND_OPTS = function () { var G = window.MCGoals.KINDS; return ['pushup', 'situp', 'pullup', 'squat', 'plank', 'walk'].map(function (k) { return [k, G[k].ar, G[k].en]; }); };
   var EQUIP = [['chair', 'كرسي ثابت', 'Sturdy chair'], ['step', 'درجة أو درج', 'Step / stairs'], ['bar', 'عقلة', 'Pull-up bar'], ['table', 'طاولة متينة', 'Sturdy table'], ['towel', 'منشفة', 'Towel']];
   var FIT = {
     push: [['0', 'لا أستطيع', 'None'], ['1-5', '1–5'], ['6-15', '6–15'], ['16+', 'أكثر من 15', '16+']],
@@ -34,7 +36,9 @@
     var ans = sc ? JSON.parse(JSON.stringify(sc.answers)) : {};
     return { editId: t.id, forWhom: t.forWhom || 'trainee', name: t.displayName, coachName: t.coachName || '', age: t.age, sex: t.sex === 'male' || t.sex === 'female' ? t.sex : '', heightCm: t.heightCm || '', weightKg: t.weightKg || '',
       goal: t.goal || 'general', days: (t.days || []).map(String), minutes: String(t.minutes || 30), place: t.place || 'home', eq: eq, answers: ans,
-      fit: (bl && bl.quick) || {}, weakArm: t.weakArm || 'none', weakLeg: t.weakLeg || 'none', focus: t.focus || [], consent: !!t.consent };
+      fit: (bl && bl.quick) || {}, weakArm: t.weakArm || 'none', weakLeg: t.weakLeg || 'none', focus: t.focus || [], consent: !!t.consent,
+      program: t.program || 'bw', gymEq: (t.equipment || []).filter(function (e) { return X.EQUIP_EN[e]; }), gymLevel: String(t.gymLevel || ''),
+      goal: t.goalTarget && t.goalTarget.kind !== 'weight' ? 'target' : t.goal || 'general', gKind: t.goalTarget && t.goalTarget.kind !== 'weight' ? t.goalTarget.kind : 'pushup', gTarget: t.goalTarget && t.goalTarget.kind !== 'weight' ? t.goalTarget.target : 60, gTimed: !(t.goalTarget && t.goalTarget.timed === false), gWeight: t.goalTarget && t.goalTarget.kind === 'weight' ? t.goalTarget.target : '' };
   }
   App.acts.setupNew = function (el) { App.ui.wz = { forWhom: el.dataset.for || 'self', days: ['0', '2', '4'], minutes: '30', place: 'both', goal: 'general', answers: {}, fit: {}, eq: ['chair'], weakArm: 'none', weakLeg: 'none', focus: [] }; App.go('setup'); };
   App.acts.setupEdit = function (el) { var t = App.trainee(el.dataset.id); App.ui.traineeId = t.id; App.ui.wz = fromTrainee(t); App.go('setup'); };
@@ -52,11 +56,18 @@
       '<label>' + bi('الطول (سم)', 'Height (cm)') + '<input name="heightCm" type="number" inputmode="numeric" min="100" max="230" value="' + esc(w.heightCm || '') + '"></label>' +
       '<label>' + bi('الوزن (كجم)', 'Weight (kg)') + '<input name="weightKg" type="number" inputmode="decimal" min="30" max="250" step="0.5" value="' + esc(w.weightKg || '') + '"></label></div>';
     h += q('الجنس', 'Sex', radios('sex', [['male', 'ذكر', 'Male'], ['female', 'أنثى', 'Female']], w.sex), 'يُستخدم فقط لإظهار أسئلة الحمل، ولا يغيّر شدة التمارين.');
+    h += q('نوع البرنامج', 'Program type', radios('program', [['bw', 'وزن الجسم (منزل وخارجه)', 'Bodyweight (home/outdoor)'], ['gym', 'الصالة الرياضية بالأوزان', 'Gym with weights']], w.program || 'bw'), 'برنامج الصالة منفصل تماماً عن تمارين وزن الجسم.');
     h += q('هدفك', 'Your goal', radios('goal', GOALS, w.goal));
+    if (w.goal === 'target') {
+      h += q('ما الرقم الذي تريد الوصول إليه؟', 'Which number do you want to reach?', radios('gKind', KIND_OPTS(), w.gKind || 'pushup') + '<div class="row" style="margin-top:8px"><label>' + bi('الرقم المستهدف', 'Target') + '<input name="gTarget" type="number" min="1" max="500" value="' + esc(w.gTarget || 60) + '" style="max-width:140px"></label>' +
+        (['pushup', 'situp', 'squat'].indexOf(w.gKind || 'pushup') >= 0 ? '<label><input type="checkbox" name="gTimed"' + (w.gTimed !== false ? ' checked' : '') + '> ' + bi('خلال دقيقتين (مثل اختبارات اللياقة العسكرية)', 'within 2 minutes (like military fitness tests)') + '</label>' : '') + '</div>', 'التطبيق يضيف تدريباً خاصاً بالهدف واختباراً كل أسبوعين، ويقدّر المدة المتوقعة.');
+    }
+    if (w.goal === 'weight') h += q('الوزن المستهدف (كجم)', 'Target weight (kg)', '<input name="gWeight" type="number" inputmode="decimal" min="35" max="200" step="0.5" value="' + esc(w.gWeight || '') + '" style="max-width:160px">', 'معدل آمن تقريباً 0.5–1 كجم أسبوعياً.');
     h += q('الأيام المتاحة', 'Available days', checks('days', DAYS, w.days));
     h += q('مدة التمرين', 'Session length', radios('minutes', [['20', '20 دقيقة', '20 min'], ['30', '30 دقيقة', '30 min'], ['45', '45 دقيقة', '45 min'], ['60', '60 دقيقة', '60 min']], w.minutes));
     h += q('أين ستتمرن؟', 'Where will you train?', radios('place', [['home', 'في المنزل فقط', 'Home only'], ['both', 'المنزل + خارج المنزل (مشي، حديقة)', 'Home + outdoors (walks, park)']], w.place));
-    h += q('ما المتوفر لديك؟ (الحائط متوفر دائماً)', 'What do you have? (a wall is assumed)', checks('eq', EQUIP, w.eq));
+    if (w.program === 'gym') h += q('معدات الصالة المتوفرة', 'Gym equipment available', checks('gymEq', GYM_EQ, w.gymEq || GYM_EQ.map(function (x) { return x[0]; })));
+    else h += q('ما المتوفر لديك؟ (الحائط متوفر دائماً)', 'What do you have? (a wall is assumed)', checks('eq', EQUIP, w.eq));
     h += '</fieldset>';
     /* 2) health */
     h += '<fieldset class="card"><legend>' + bi('2) صحتك', 'Your health') + '</legend><p class="small muted lead">' + bi('أسئلة سلامة قصيرة؛ أي «نعم» على علامة خطر يوقف الجدول حتى مراجعة الطبيب.', 'Short safety questions; a “yes” to a warning sign pauses the plan until a doctor review.') + '</p>';
@@ -74,6 +85,7 @@
     h += q('كم ثانية تثبت في وضع البلانك؟', 'How long can you hold a plank?', radios('f_plank', FIT.plank, f.plank));
     h += q('كم دقيقة تمشي دون توقف؟', 'How long can you walk without stopping?', radios('f_walk', FIT.walk, f.walk));
     if ((w.eq || []).indexOf('bar') >= 0) h += q('كم عقلة تستطيع؟', 'How many pull-ups?', radios('f_pull', FIT.pull, f.pull));
+    if (w.program === 'gym') h += q('خبرتك مع الأوزان', 'Experience with weights', radios('gymLevel', [['1', 'لا خبرة', 'None'], ['2', 'أقل من 6 أشهر', 'Under 6 months'], ['3', 'أكثر من 6 أشهر بانتظام', '6+ months, regular']], w.gymLevel));
     var act = SC.QUESTIONS.filter(function (x) { return x.id === 'active'; })[0];
     h += q(act.text, act.en, radios('h_active', SC.YN.slice(0, 2), w.answers.active));
     h += q('هل إحدى يديك أضعف بوضوح من الأخرى؟', 'Is one arm clearly weaker?', radios('weakArm', FIT.side, w.weakArm));
@@ -86,8 +98,10 @@
   };
   function readWz(form) {
     var fd = new FormData(form), w = App.ui.wz, g = function (k) { var v = fd.get(k); return v == null ? '' : String(v); };
-    ['forWhom', 'name', 'coachName', 'age', 'sex', 'heightCm', 'weightKg', 'goal', 'minutes', 'place', 'weakArm', 'weakLeg'].forEach(function (k) { if (fd.has(k) || form.querySelector('[name="' + k + '"]')) w[k] = g(k); });
-    w.days = fd.getAll('days').map(String); w.eq = fd.getAll('eq').map(String); w.focus = fd.getAll('focus').map(String).slice(0, 2); w.consent = !!fd.get('consent');
+    ['forWhom', 'name', 'coachName', 'age', 'sex', 'heightCm', 'weightKg', 'goal', 'minutes', 'place', 'weakArm', 'weakLeg', 'program', 'gymLevel', 'gKind', 'gTarget', 'gWeight'].forEach(function (k) { if (fd.has(k) || form.querySelector('[name="' + k + '"]')) w[k] = g(k); });
+    if (form.querySelector('[name=gymEq]')) w.gymEq = fd.getAll('gymEq').map(String);
+    if (form.querySelector('[name=gTimed]')) w.gTimed = !!fd.get('gTimed');
+    w.days = fd.getAll('days').map(String); if (form.querySelector('[name=eq]')) w.eq = fd.getAll('eq').map(String); w.focus = fd.getAll('focus').map(String).slice(0, 2); w.consent = !!fd.get('consent');
     w.fit = w.fit || {}; ['push', 'squat', 'plank', 'walk', 'pull'].forEach(function (k) { if (fd.get('f_' + k)) w.fit[k] = g('f_' + k); });
     SC.QUESTIONS.forEach(function (x) {
       var n = 'h_' + x.id;
@@ -123,7 +137,11 @@
     if (missH.length) errs.push('أجب عن كل أسئلة الصحة (' + missH.length + ' متبقية) · Answer all health questions');
     if (w.answers.msk === 'yes' && !(w.answers.msk_areas || []).length) errs.push('حدد مكان الإصابة أو الألم · Choose where the pain/injury is');
     ['push', 'squat', 'plank', 'walk'].forEach(function (k) { if (!w.fit[k]) errs.push('أكمل قسم اللياقة · Complete the fitness section'); });
-    if (w.eq.indexOf('bar') >= 0 && !w.fit.pull) errs.push('كم عقلة تستطيع؟ · How many pull-ups?');
+    if (w.program !== 'gym' && w.eq.indexOf('bar') >= 0 && !w.fit.pull) errs.push('كم عقلة تستطيع؟ · How many pull-ups?');
+    if (w.program === 'gym' && !w.gymLevel) errs.push('اختر خبرتك مع الأوزان · Choose your weights experience');
+    if (w.program === 'gym' && !(w.gymEq || []).length) errs.push('اختر معدات الصالة المتوفرة · Choose available gym equipment');
+    if (w.goal === 'target' && !(Number(w.gTarget) > 0)) errs.push('اكتب الرقم المستهدف · Enter your target number');
+    if (w.goal === 'weight' && !(Number(w.gWeight) >= 35 && Number(w.gWeight) < wkg)) errs.push('الوزن المستهدف يجب أن يكون أقل من وزنك الحالي · Target weight must be below current weight');
     if (!w.answers.active) errs.push('هل تتمرن بانتظام؟ · Do you exercise regularly?');
     if (!w.consent) errs.push('وافق على ملاحظة الخصوصية · Accept the privacy note');
     errs = errs.filter(function (e, i) { return errs.indexOf(e) === i; });
@@ -134,10 +152,14 @@
     else { t.revisions = t.revisions || []; var snap = JSON.parse(JSON.stringify(t)); delete snap.revisions; t.revisions.push({ at: now, snapshot: snap }); t.revisions = t.revisions.slice(-20); }
     var name = String(w.name).trim().slice(0, 80);
     Object.assign(t, { displayName: name, forWhom: w.forWhom === 'trainee' ? 'trainee' : 'self', coachName: w.forWhom === 'trainee' ? String(w.coachName || '').slice(0, 80) : name, age: age, sex: w.sex,
-      heightCm: hcm, weightKg: wkg, bodyMetricsConsent: true, goal: w.goal || 'general', experience: w.answers.active === 'yes' ? 'intermediate' : 'beginner', minutes: Number(w.minutes) || 30,
-      days: w.days.map(Number), place: w.place, equipment: ['wall', 'mat'].concat(w.eq, w.place === 'both' ? ['space'] : [], w.eq.indexOf('step') >= 0 ? ['stairs'] : []),
+      heightCm: hcm, weightKg: wkg, bodyMetricsConsent: true, goal: w.goal === 'target' ? 'general' : w.goal || 'general', experience: w.answers.active === 'yes' ? 'intermediate' : 'beginner', minutes: Number(w.minutes) || 30,
+      days: w.days.map(Number), place: w.place, program: w.program === 'gym' ? 'gym' : 'bw', gymLevel: Number(w.gymLevel) || 1,
+      equipment: ['wall', 'mat'].concat(w.program === 'gym' ? (w.gymEq || []) : w.eq, w.place === 'both' ? ['space'] : [], w.program !== 'gym' && w.eq.indexOf('step') >= 0 ? ['stairs'] : []),
+      goalTarget: w.goal === 'target' ? { kind: w.gKind || 'pushup', target: Number(w.gTarget), timed: ['pushup', 'situp', 'squat'].indexOf(w.gKind || 'pushup') >= 0 ? w.gTimed !== false : false, setAt: now } : w.goal === 'weight' ? { kind: 'weight', target: Number(w.gWeight), start: wkg, setAt: now } : null,
       weakArm: w.weakArm || 'none', weakLeg: w.weakLeg || 'none', focus: w.focus || [], walkRange: w.fit.walk, updatedAt: now });
     if (!t.consent) t.consent = { at: now, text: 'setup-5.1', version: 'CONSENT-5.1' };
+    t.goalLog = t.goalLog || [];
+    if (t.goalTarget && t.goalTarget.kind === 'weight') t.goalLog.push({ at: now, kind: 'weight', value: wkg });
     if (t.forWhom === 'trainee' && t.coachName) App.db.settings.coachName = t.coachName;
     if (isNew) App.db.trainees.push(t);
     /* screening record (keeps every version) */
@@ -164,12 +186,12 @@
     if (S.status.mode === 'memory' || S.status.error) h += '<div class="alert danger"><b>تحذير الحفظ</b>' + esc(S.status.error) + '</div>';
     if (S.readV4Local() && !db.legacy) h += '<div class="alert warn"><b>وُجدت بيانات من النسخة v4 في هذا المتصفح</b>يمكن نقلها (قراءة فقط دون تعديل v4) من <button class="sec" data-act="go" data-page="data">النسخ الاحتياطي</button></div>';
     h += '<div class="hero"><button class="big" data-act="setupNew" data-for="self">📋 ' + bi('جدول لنفسي', 'Plan for myself') + '</button><button class="big sec" data-act="setupNew" data-for="trainee">👥 ' + bi('جدول لمتدرب', 'Plan for a trainee') + '</button></div>';
-    if (!act.length) return h + '<p class="muted center lead">' + bi('ابدأ بأحد الزرين أعلاه: 3 أقسام قصيرة ثم يظهر الجدول الأسبوعي مباشرة.', 'Start above: 3 short sections, then your weekly plan.') + '</p>';
+    if (!act.length) return h + '<div class="card flat"><label>📂 ' + bi('لديك نسخة كاملة من مدرب آخر؟ افتحها', 'Have a full copy from another coach? Open it') + '<input type="file" id="openCopy" accept=".json,application/json"></label></div><p class="muted center lead">' + bi('ابدأ بأحد الزرين أعلاه: 3 أقسام قصيرة ثم يظهر الجدول الأسبوعي مباشرة.', 'Start above: 3 short sections, then your weekly plan.') + '</p>';
     act.slice().sort(function (a, b) { return (a.forWhom === 'self' ? 0 : 1) - (b.forWhom === 'self' ? 0 : 1); }).forEach(function (t) {
       var sc = App.latest('screenings', t.id), pls = App.plansOf(t.id), pl = pls[pls.length - 1], today = App.today(), di = -1, d = null;
       if (pl && pl.status !== 'blocked' && today >= pl.weekStart && today <= pl.weekEnd) { d = pl.days.filter(function (x) { return x.date === today; })[0]; di = d ? d.index : -1; }
       var todayTxt = !pl ? 'لا يوجد جدول بعد' : pl.status === 'blocked' ? '⛔ الجدول متوقف لسبب صحي' : !d ? 'أسبوع الجدول انتهى — راجع الأسبوع وأنشئ التالي' : d.type === 'rest' ? '😴 اليوم راحة' : d.type === 'recovery' ? (d.place === 'outdoor' ? '🌳 اليوم: مشي خارج المنزل ' : '🏠 اليوم: مشي في المنزل ') + Math.round(d.recovery[0].target / 60) + ' دقيقة' : '🏠 اليوم: تمارين في المنزل (' + d.main.length + ' تمارين)';
-      h += '<div class="card"><div class="row"><h3 class="grow">' + esc(t.displayName) + (t.forWhom === 'self' ? ' <span class="pill">أنا · Me</span>' : '') + '</h3>' + App.statusBadge(sc && sc.outcome.status) + '</div><p>' + esc(todayTxt) + '</p><div class="row">' +
+      h += '<div class="card"><div class="row"><h3 class="grow">' + esc(t.displayName) + (t.forWhom === 'self' ? ' <span class="pill">أنا · Me</span>' : '') + (t.program === 'gym' ? ' <span class="pill">🏋 صالة</span>' : '') + '</h3>' + App.statusBadge(sc && sc.outcome.status) + '</div>' + App.motivation(t) + '<p>' + esc(todayTxt) + '</p><div class="row">' +
         (pl ? '<button data-act="pick" data-id="' + esc(t.id) + '" data-page="plan">🗓 ' + bi('الجدول', 'Plan') + '</button>' : '') +
         (d && d.type !== 'rest' ? '<button class="ok" data-act="startSession" data-plan="' + esc(pl.id) + '" data-day="' + di + '">▶ ' + bi('ابدأ تمرين اليوم', 'Start today') + '</button>' : '') +
         (pl && pl.status !== 'blocked' && !App.db.reviews.some(function (r) { return r.planId === pl.id; }) && today >= E.addDays(pl.weekStart, 5) ? '<button class="sec" data-act="pick" data-id="' + esc(t.id) + '" data-page="review">✅ ' + bi('مراجعة الأسبوع', 'Weekly check') + '</button>' : '') +
@@ -180,7 +202,7 @@
 
   /* ---------- More ---------- */
   App.pages.more = function () {
-    var items = [['trainees', '👥', 'إدارة الملفات', 'Manage profiles'], ['screen', '🩺', 'الفحص الصحي والتصريح الطبي', 'Health screen & clearance'], ['history', '📈', 'السجل والتقدم', 'History & progress'], ['data', '💾', 'النسخ الاحتياطي والتشفير', 'Backup & encryption'], ['sources', '⚖', 'المصادر والسلامة', 'Sources & safety']];
+    var items = [['trainees', '👥', 'إدارة الملفات', 'Manage profiles'], ['screen', '🩺', 'الفحص الصحي والتصريح الطبي', 'Health screen & clearance'], ['history', '📈', 'السجل والتقدم', 'History & progress'], ['data', '👥', 'الحسابات والنسخ الاحتياطي', 'Accounts & backup'], ['sources', '⚖', 'المصادر والسلامة', 'Sources & safety']];
     return '<h2>' + bi('المزيد', 'More') + '</h2><div class="grid">' + items.map(function (i) { return '<button class="excard" data-act="go" data-page="' + i[0] + '"><h4>' + i[1] + ' ' + bi(i[2], i[3]) + '</h4></button>'; }).join('') + '</div>';
   };
 })();

@@ -81,12 +81,13 @@
     if (bmi && bmi >= 30) flags.impact = 1; /* local conservative rule: protect joints, favour walking and low-impact work */
     var maxLevel = (screening && screening.outcome && screening.outcome.exclusions && screening.outcome.exclusions.maxLevel) || 3;
     var eq = {}; (trainee.equipment || []).forEach(function (e) { eq[e] = 1; });
-    return { flags: flags, maxLevel: maxLevel, eq: eq, levels: (baseline && baseline.result && baseline.result.levels) || {}, avoid: trainee.avoid || [], pathway: screening && screening.outcome && screening.outcome.pathway, bmi: bmi };
+    return { flags: flags, maxLevel: maxLevel, eq: eq, levels: (baseline && baseline.result && baseline.result.levels) || {}, avoid: trainee.avoid || [], pathway: screening && screening.outcome && screening.outcome.pathway, bmi: bmi, mode: trainee.program === 'gym' ? 'gym' : 'bw' };
   }
   /* Is exercise allowed? returns '' if allowed, or the Arabic reason it is excluded. */
   function excludedBy(ex, ctx, opts) {
     opts = opts || {};
     if (ctx.avoid.indexOf(ex.id) >= 0) return 'مستبعد يدوياً من المدرب';
+    if (ex.mode === 'gym' && ctx.mode !== 'gym') return 'تمرين صالة بالأوزان — خارج برنامج وزن الجسم';
     for (var i = 0; i < ex.eq.length; i++) if (!ctx.eq[ex.eq[i]] && !SOFT_EQ[ex.eq[i]]) return 'يتطلب: ' + (EX().EQUIP[ex.eq[i]] || ex.eq[i]);
     for (var j = 0; j < ex.flags.length; j++) if (ctx.flags[ex.flags[j]]) return 'مستبعد للسلامة: ' + (EX().FLAG[ex.flags[j]] || ex.flags[j]);
     if (ex.lvl > ctx.maxLevel) return 'أعلى من الحد المسموح بالفحص (' + ctx.maxLevel + ')';
@@ -184,6 +185,8 @@
     plan.pathway = sc.outcome.pathway;
     plan.tempFlagsIn = dec && !referResolved ? (dec.tempFlags || []) : [];
     var ctx = safetyContext(t, sc, bl, plan.tempFlagsIn);
+    plan.program = t.program === 'gym' ? 'gym' : 'bw';
+    if (plan.program === 'gym' && root.MCGym) { root.MCGym.build(plan, input, ctx, H); return root.MCGoals ? root.MCGoals.apply(plan, input, ctx, H) : plan; }
     var minutes = Math.max(15, Math.min(90, Number(t.minutes) || 30));
     var avail = (t.days && t.days.length ? t.days : [0, 2, 4]).map(Number);
     var levels = ctx.levels, overall = Math.round(((levels.push || 1) + (levels.squat || 1) + (levels.core || 1)) / 3);
@@ -290,7 +293,7 @@
     why.push('المشي والنشاط الهوائي هذا الأسبوع ≈ ' + Math.round(walkTotal) + ' دقيقة' + (t.place === 'both' ? ' خارج المنزل' : ' داخل المنزل') + '. الهدف التدريجي 150 دقيقة أسبوعياً من كل الأنشطة. [PAG2018]');
     if (ctx.bmi) why.push('مؤشر كتلة الجسم ≈ ' + ctx.bmi.toFixed(1) + (ctx.bmi >= 30 ? ' (30 أو أكثر): لا قفز، وتركيز على المشي والتمارين منخفضة التأثير لحماية المفاصل (قاعدة محلية تحفظية).' : '.') + ' هو مؤشر تقريبي لا يقيس اللياقة.');
     if (t.weakArm && t.weakArm !== 'none' || t.weakLeg && t.weakLeg !== 'none') why.push('أُضيف تمرين بطرف واحد للجانب الأضعف في أيام التمرين؛ ابدأ دائماً بالجهة الأضعف.');
-    return plan;
+    return root.MCGoals ? root.MCGoals.apply(plan, input, ctx, H) : plan;
   }
   function pickBlock(ctx, role, seed, n, prefer) {
     var pool = allowedList(ctx, function (e) { return e.role.indexOf(role) >= 0; }, { ignoreLevel: role !== 'warmup' ? true : false });
@@ -426,7 +429,8 @@
     return allowedList(ctx, function (e) { return e.role.indexOf('main') >= 0 && pats.indexOf(e.pat) >= 0; });
   }
 
+  var H = { allowedList: allowedList, excludedBy: excludedBy, pickBlock: pickBlock, addDays: addDays, dow: dow, chooseDays: chooseDays, hash: hash, DOW_AR: DOW_AR, walkMinutesFor: walkMinutesFor, EX: EX };
   root.MCEngine = { RULES: RULES, BASELINE_VERSION: BASELINE_VERSION, TESTS: TESTS, PATTERN_TEST: PATTERN_TEST, evaluateBaseline: evaluateBaseline, testLevel: testLevel,
     safetyContext: safetyContext, excludedBy: excludedBy, doseFor: doseFor, generatePlan: generatePlan, adapt: adapt, reviewQuestions: reviewQuestions,
-    applyOverride: applyOverride, candidatesFor: candidatesFor, quickLevels: quickLevels, WALK_MIN: WALK_MIN, FOCUS: FOCUS, WEAK: WEAK, chooseDays: chooseDays, addDays: addDays, DOW_AR: DOW_AR, DECISION_AR: DECISION_AR, hash: hash };
+    applyOverride: applyOverride, H: H, candidatesFor: candidatesFor, quickLevels: quickLevels, WALK_MIN: WALK_MIN, FOCUS: FOCUS, WEAK: WEAK, chooseDays: chooseDays, addDays: addDays, DOW_AR: DOW_AR, DECISION_AR: DECISION_AR, hash: hash };
 })(typeof window !== 'undefined' ? window : globalThis);

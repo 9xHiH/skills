@@ -20,7 +20,7 @@
     (d.main || []).forEach(function (it) { flat.push(Object.assign({ block: 'main' }, it)); });
     (d.cooldown || []).forEach(function (it) { flat.push(Object.assign({ block: 'cooldown' }, it)); });
     var s = { id: S.uniqueId(App.db, 'sessions'), traineeId: t.id, planId: p.id, dayIndex: di, date: d.date, kind: d.type === 'recovery' ? 'recovery' : 'train', status: 'partial', early: early, startedAt: S.nowISO(), updatedAt: S.nowISO(), cursor: 0, redFlag: false,
-      items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, weak: it.weak || null, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
+      items: flat.map(function (it) { return { block: it.block, slot: it.slot || null, exId: it.exId, weak: it.weak || null, gym: it.gym || 0, test: it.test || 0, goal: it.goal || 0, prescribed: { sets: it.sets, target: it.target, u: it.u, side: !!it.side, rest: it.rest, load: it.load == null ? null : it.load, repRange: it.repRange || null, rir: it.rir || null }, sets: [], effort: '', technique: '', pain: 0, painArea: '' }; }) };
     App.db.sessions.push(s); App.audit('session.start', 'بدء حصة ' + s.id, t.id, s.id); App.save();
     App.ui.run = { id: s.id, idx: 0 }; App.go('session');
   };
@@ -47,6 +47,8 @@
       '<div class="card flat"><div class="bignum" id="runVal" aria-live="polite">' + (isTime ? fmtS(pr.target) : '0') + '</div>' +
       (isTime ? '<div class="row" style="justify-content:center"><button class="bigbtn" data-act="runTimer">▶ ابدأ المؤقت</button><button class="sec" data-act="runTimerStop">⏸</button></div><label>المدة المنجزة فعلياً (ث)<input type="number" id="runInput" min="0" max="3600" value="' + pr.target + '"></label>'
         : '<div class="row" style="justify-content:center"><button class="bigbtn sec" data-act="runMinus" aria-label="إنقاص">−</button><button class="bigbtn" data-act="runPlus" aria-label="تكرار">+1</button></div><label>التكرارات الصحيحة المنجزة<input type="number" id="runInput" min="0" max="500" value="0"></label>') +
+      (it.gym ? '<label>' + App.bi('الوزن المستخدم (كجم)', 'Weight used (kg)') + '<input type="number" id="runLoad" min="0" max="500" step="0.5" value="' + esc((it.sets.length ? it.sets[it.sets.length - 1].load : pr.load) || '') + '" placeholder="' + (pr.rir ? 'اترك ' + pr.rir + ' تكرارات احتياطاً' : '') + '"></label>' : '') +
+      (it.test ? '<div class="alert warn small"><b>🎯 اختبار الهدف</b>' + (pr.u === 'reps' ? 'سجّل أكبر عدد بأداء صحيح.' : 'سجّل المدة بالثواني.') + '</div>' : '') +
       '<button class="ok" data-act="runSet" style="width:100%">✔ تسجيل المجموعة وبدء الراحة</button></div>' +
       '<div class="card flat"><h4>الراحة</h4><div class="bignum" id="restVal">' + fmtS(pr.rest || 0) + '</div><div class="small" style="text-align:center" id="restLbl">تبدأ تلقائياً بعد تسجيل المجموعة</div><div class="row" style="justify-content:center"><button class="sec" data-act="restSkip">تخطي الراحة</button><label style="margin:0"><input type="checkbox" id="muteRun"' + (App.ui.mute ? ' checked' : '') + '> كتم</label></div>' +
       '<p class="small">المجموعات المسجلة: ' + (it.sets.map(function (x, i) { return (i + 1) + ') ' + x.value + (isTime ? ' ث' : ''); }).join(' · ') || '—') + (it.sets.length ? ' <button class="ghost" data-act="runUndo" style="min-height:0;padding:2px 8px">تراجع عن آخر مجموعة</button>' : '') + '</p></div></div></div>';
@@ -93,7 +95,9 @@
     var s = sesById(App.ui.run.id), it = s.items[App.ui.run.idx], val = Number(App.$('#runInput').value);
     if (!(val >= 0)) return App.toast('قيمة غير صالحة');
     clearTimers(); if (it.block === 'main') saveMeta();
-    it.sets.push({ value: val, at: S.nowISO() }); s.updatedAt = S.nowISO(); s.cursor = App.ui.run.idx; App.save();
+    var ld = App.$('#runLoad'); var setRec = { value: val, at: S.nowISO() }; if (ld && ld.value !== '') setRec.load = Math.max(0, Math.min(500, Number(ld.value)));
+    it.sets.push(setRec);
+    if (it.test) { var tr = App.trainee(s.traineeId), G = window.MCGoals; if (tr && tr.goalTarget) { tr.goalLog = tr.goalLog || []; var prevBest = G.best(tr, tr.goalTarget.kind); var v = tr.goalTarget.kind === 'walk' ? Math.round(val / 60) : val; tr.goalLog.push({ at: S.nowISO(), kind: tr.goalTarget.kind, value: v, sessionId: s.id }); App.toast((prevBest == null || v > prevBest ? '🏅 رقم قياسي جديد: ' : 'سُجّلت المحاولة: ') + v + ' / ' + tr.goalTarget.target, 6000); } } s.updatedAt = S.nowISO(); s.cursor = App.ui.run.idx; App.save();
     var rest = it.prescribed.rest || 0, y = window.scrollY; App.render(); window.scrollTo(0, y);
     if (it.sets.length >= it.prescribed.sets) { App.toast(it.block === 'main' ? 'اكتملت المجموعات ✔ — اختر «كيف كان؟» ثم «التالي».' : 'تم ✔ — اضغط «التالي».'); }
     if (rest > 0) { var left = rest; App.$('#restLbl').textContent = 'راحة — تنفس بهدوء'; timers.rest = setInterval(function () { if (!App.$('#restVal')) return clearTimers(); left--; App.$('#restVal').textContent = fmtS(left); if (left <= 3 && left > 0) App.beep(740, 80); if (left <= 0) { clearInterval(timers.rest); timers.rest = null; App.$('#restLbl').textContent = 'انتهت الراحة'; App.beep(988, 200, 2); App.vibrate(200); } }, 1000); }
@@ -131,7 +135,9 @@
     App.audit('session.complete', 'إنهاء ' + s.id + ' جهد ' + a.effort + ' ألم ' + a.pain, s.traineeId, s.id); App.save(); App.render();
   };
   function summary(s) {
-    var h = '<h2>ملخص الحصة ' + esc(s.id) + '</h2>';
+    var tr = App.trainee(s.traineeId), G = window.MCGoals, done = App.db.sessions.filter(function (x) { return x.traineeId === s.traineeId && x.status === 'complete'; }).length, rk = G.rank(done);
+    var h = '<h2>' + App.bi('ملخص التمرين', 'Workout summary') + '</h2>';
+    if (!s.redFlag) h += '<div class="card hero-msg"><div class="rankbig">🎖 ' + esc(rk.ar) + ' <span class="en" dir="ltr">' + esc(rk.en) + '</span></div><p><b>' + esc(G.cheer(done)) + '</b></p><p>' + done + ' تمريناً مكتملاً' + (rk.next ? ' — بقي ' + rk.next.left + ' للترقية إلى «' + esc(rk.next.ar) + '»' : '') + '.</p>' + (tr && tr.goalTarget ? App.goalBar(tr) : '') + '</div>';
     if (s.redFlag) h += '<div class="alert danger"><b>⛔ سُجلت علامة إنذار</b>أوقف النشاط. إذا استمر ألم الصدر أو حدث إغماء اتصل بالطوارئ: <b>' + esc(App.db.settings.emergencyNumber || '—') + '</b>. لن تُصدر خطة تلقائية جديدة قبل فحص جديد وتصريح مختص موثق.</div>';
     else if (s.check && Number(s.check.pain) >= 4) h += '<div class="alert warn"><b>ألم ' + esc(s.check.pain) + '/10</b>ليس ألماً عضلياً عادياً بالضرورة. راقب، وسيُراعى في المراجعة الأسبوعية؛ ألم ≥ 7 يستلزم تقييماً.</div>';
     h += '<div class="card"><table><thead><tr><th>التمرين</th><th>المخطط</th><th>المسجل</th><th>جهد</th><th>تقنية</th><th>ألم</th></tr></thead><tbody>' + s.items.map(function (i) { return '<tr><td>' + esc(App.exName(i.exId)) + '</td><td>' + i.prescribed.sets + '×' + i.prescribed.target + '</td><td>' + (i.sets.map(function (x) { return x.value; }).join('، ') || '—') + '</td><td>' + esc(i.effort) + '</td><td>' + esc(i.technique) + '</td><td>' + esc(i.pain || '') + '</td></tr>'; }).join('') + '</tbody></table>' + (s.load ? '<p class="small">حمل الحصة = الجهد × الدقائق = ' + s.load + ' وحدة [FOSTER2001]</p>' : '') + '</div>';

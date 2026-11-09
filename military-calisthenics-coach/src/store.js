@@ -250,7 +250,7 @@
     if (!raw) { mem = emptyDB(); status.known = null; return mem; }
     try {
       var obj = JSON.parse(raw);
-      if (obj && obj.schema === 'MCC-ENC') { lockedEnv = obj; status.encrypted = true; status.locked = true; status.known = obj.updatedAt; status.bytes = raw.length; mem = emptyDB(); return mem; }
+      if (obj && obj.schema === 'MCC-ENC') { lockedEnv = obj; status.encrypted = true; status.locked = true; status.encVersion = obj.v || 1; status.known = obj.updatedAt; status.bytes = raw.length; mem = emptyDB(); return mem; }
       var v = validateDBShape(obj);
       if (!v.ok) throw new Error(v.errors.slice(0, 3).join('؛ '));
       mem = obj; status.bytes = raw.length; status.known = obj.updatedAt; return mem;
@@ -268,6 +268,73 @@
       status.key = r.key; status.salt = r.salt; status.locked = false; mem = obj; return obj;
     });
   }
+  /* ---------- multi-user accounts (envelope v2) ----------
+   * One random data key (DEK, AES-GCM-256) encrypts the database. For every user the DEK is wrapped with a key derived
+   * from that user's password (PBKDF2-SHA256). Any listed user can open the same file; the owner (admin) adds/removes users.
+   * Limits: this is local file protection, not a server. A removed user can still open copies saved before removal. */
+  function normUser(u) { return String(u || '').trim().toLowerCase(); }
+  function wrapFor(dek, user, pass, role) {
+    var salt = randomValues(16).bytes;
+    return deriveKey(pass, salt, ENC.iter).then(function (kek) {
+      return subtle().exportKey('raw', dek).then(function (raw) { var iv = randomValues(12).bytes; return subtle().encrypt({ name: 'AES-GCM', iv: iv }, kek, raw).then(function (wk) {
+        return { u: normUser(user), role: role, iter: ENC.iter, salt: b64(salt), wiv: b64(iv), wk: b64(new Uint8Array(wk)), created: nowISO() }; }); });
+    });
+  }
+  function unwrapFor(entry, pass) {
+    return deriveKey(pass, unb64(entry.salt), entry.iter).then(function (kek) {
+      return subtle().decrypt({ name: 'AES-GCM', iv: unb64(entry.wiv) }, kek, unb64(entry.wk)).then(function (raw) {
+        return subtle().importKey('raw', raw, { name: 'AES-GCM' }, true, ['encrypt', 'decrypt']); }, function () { throw new Error('اسم المستخدم أو كلمة المرور غير صحيحة'); });
+    });
+  }
+  function createAccounts(db, user, pass) {
+    if (normUser(user).length < 3 || String(pass).length < 8) return Promise.reject(new Error('اسم المستخدم 3 أحرف وكلمة المرور 8 أحرف على الأقل'));
+    return subtle().generateKey({ name: 'AES-GCM', length: 256 }, true, ['encrypt', 'decrypt']).then(function (dek) {
+      return wrapFor(dek, user, pass, 'admin').then(function (entry) {
+        status.key = dek; status.users = [entry]; status.currentUser = { u: entry.u, role: 'admin' }; status.encrypted = true; status.encVersion = 2;
+        try { status.memRestore = restorePoints(); root.localStorage.removeItem(RESTORE_KEY); } catch (e) { /* ignore */ }
+        return saveAsync(db);
+      });
+    });
+  }
+  function login(user, pass) {
+    if (!lockedEnv || lockedEnv.v !== 2) return Promise.reject(new Error('هذه البيانات ليست بنظام الحسابات'));
+    var entry = (lockedEnv.users || []).filter(function (x) { return x.u === normUser(user); })[0];
+    if (!entry) return Promise.reject(new Error('اسم المستخدم أو كلمة المرور غير صحيحة'));
+    return unwrapFor(entry, pass).then(function (dek) {
+      return subtle().decrypt({ name: 'AES-GCM', iv: unb64(lockedEnv.iv) }, dek, unb64(lockedEnv.ct)).then(function (pt) {
+        var obj = JSON.parse(new TextDecoder().decode(pt)), v = validateDBShape(obj);
+        if (!v.ok) throw new Error('البيانات بعد فك التشفير غير صالحة: ' + v.errors[0]);
+        status.key = dek; status.users = lockedEnv.users.slice(); status.currentUser = { u: entry.u, role: entry.role }; status.locked = false; status.encVersion = 2; mem = obj; return obj;
+      });
+    });
+  }
+  function requireAdmin() { if (!status.currentUser || status.currentUser.role !== 'admin') throw new Error('هذه العملية للمالك (admin) فقط'); }
+  function addUser(db, user, pass, role) {
+    try { requireAdmin(); } catch (e) { return Promise.reject(e); }
+    var u = normUser(user);
+    if (u.length < 3 || String(pass).length < 8) return Promise.reject(new Error('اسم المستخدم 3 أحرف وكلمة المرور 8 أحرف على الأقل'));
+    if (status.users.some(function (x) { return x.u === u; })) return Promise.reject(new Error('اسم المستخدم موجود'));
+    return wrapFor(status.key, u, pass, role === 'admin' ? 'admin' : 'coach').then(function (entry) { status.users.push(entry); return saveAsync(db); });
+  }
+  function removeUser(db, user) {
+    try { requireAdmin(); } catch (e) { return Promise.reject(e); }
+    var u = normUser(user);
+    if (u === status.currentUser.u) return Promise.reject(new Error('لا يمكنك حذف حسابك الحالي'));
+    status.users = status.users.filter(function (x) { return x.u !== u; });
+    return saveAsync(db);
+  }
+  function changePassword(db, pass) {
+    if (String(pass).length < 8) return Promise.reject(new Error('8 أحرف على الأقل'));
+    var me = status.currentUser;
+    return wrapFor(status.key, me.u, pass, me.role).then(function (entry) { status.users = status.users.map(function (x) { return x.u === me.u ? entry : x; }); return saveAsync(db); });
+  }
+  /* Full encrypted copy (same envelope as storage) — another device opens it with any listed user's password. */
+  function encryptedCopy() { return flush().then(function () { return root.localStorage.getItem(KEY); }); }
+  function isAccountsCopy(text) { try { var o = JSON.parse(text); return !!(o && o.schema === 'MCC-ENC' && o.v === 2 && Array.isArray(o.users)); } catch (e) { return false; } }
+  function openCopy(text) { var o = JSON.parse(text); if (!(o && o.schema === 'MCC-ENC' && o.v === 2)) throw new Error('ليس ملف نسخة كاملة مشفرة'); lockedEnv = o; status.locked = true; status.encrypted = true; status.encVersion = 2; status.fromFile = true; return true; }
+  function adoptOpenedCopy() { try { root.localStorage.setItem(KEY, JSON.stringify(lockedEnv)); status.known = lockedEnv.updatedAt; status.fromFile = false; return true; } catch (e) { return false; } }
+  function users() { return (status.users || []).map(function (x) { return { u: x.u, role: x.role, created: x.created }; }); }
+
   function enableEncryption(db, pass) {
     var salt = randomValues(16).bytes;
     return deriveKey(pass, salt, ENC.iter).then(function (key) {
@@ -276,7 +343,7 @@
       return saveAsync(db);
     });
   }
-  function disableEncryption(db) { status.key = null; status.salt = null; status.encrypted = false; return save(db); }
+  function disableEncryption(db) { if (status.encVersion === 2) requireAdmin(); status.key = null; status.salt = null; status.encrypted = false; status.users = null; status.currentUser = null; status.encVersion = null; return save(db); }
   function lockNow() { status.key = null; }
   /* Optimistic concurrency: refuse to overwrite data written by another tab/window since we last read or wrote it. */
   function storedStamp() { try { var raw = root.localStorage.getItem(KEY); if (!raw) return null; var o = JSON.parse(raw); return (o && o.updatedAt) || 'unknown'; } catch (e) { return 'unparseable'; } }
@@ -294,7 +361,9 @@
   function saveAsync(db) {
     var text = JSON.stringify(db), stamp = db.updatedAt || (db.updatedAt = nowISO());
     status.pending++;
-    chain = chain.then(function () { return encryptWith(status.key, status.salt, ENC.iter, text, { schema: 'MCC-ENC', v: 1, updatedAt: stamp }); }).then(function (env) {
+    chain = chain.then(function () {
+      if (status.encVersion === 2) { var iv = randomValues(12).bytes; return subtle().encrypt({ name: 'AES-GCM', iv: iv }, status.key, new TextEncoder().encode(text)).then(function (ct) { return { schema: 'MCC-ENC', v: 2, users: status.users, iv: b64(iv), ct: b64(new Uint8Array(ct)), updatedAt: stamp }; }); }
+      return encryptWith(status.key, status.salt, ENC.iter, text, { schema: 'MCC-ENC', v: 1, updatedAt: stamp }); }).then(function (env) {
       var s = JSON.stringify(env); root.localStorage.setItem(KEY, s); status.known = stamp; status.lastSaved = stamp; status.bytes = s.length; status.error = null;
     }).catch(function (e) { status.error = 'فشل الحفظ المشفّر (' + e.message + '). صدّر نسخة JSON الآن.'; }).then(function () { status.pending--; if (root.App && root.App.renderStatus) root.App.renderStatus(); });
     return chain;
@@ -314,5 +383,5 @@
     makeId: makeId, uniqueId: uniqueId, idValid: idValid, normalizeId: normalizeId, isoWeek: isoWeek, emptyDB: emptyDB, fnv: fnv,
     validateDBShape: validateDBShape, parseImport: parseImport, migrateV4: migrateV4, mergeInto: mergeInto, exportEnvelope: exportEnvelope,
     safeFileName: safeFileName, load: load, save: save, status: status, restorePoints: restorePoints, addRestorePoint: addRestorePoint, readV4Local: readV4Local, nowISO: nowISO,
-    unlock: unlock, enableEncryption: enableEncryption, disableEncryption: disableEncryption, lockNow: lockNow, flush: flush, encryptExport: encryptExport, decryptExport: decryptExport, isEncryptedExport: isEncryptedExport, ENC_ITER: ENC.iter };
+    unlock: unlock, enableEncryption: enableEncryption, createAccounts: createAccounts, login: login, addUser: addUser, removeUser: removeUser, changePassword: changePassword, users: users, encryptedCopy: encryptedCopy, isAccountsCopy: isAccountsCopy, openCopy: openCopy, adoptOpenedCopy: adoptOpenedCopy, disableEncryption: disableEncryption, lockNow: lockNow, flush: flush, encryptExport: encryptExport, decryptExport: decryptExport, isEncryptedExport: isEncryptedExport, ENC_ITER: ENC.iter };
 })(typeof window !== 'undefined' ? window : globalThis);

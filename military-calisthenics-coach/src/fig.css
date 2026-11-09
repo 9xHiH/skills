@@ -19,3 +19,7 @@
 .mc-inset-body{fill:var(--fig-ghost,#7fa3c0);fill-opacity:.55}
 .mc-inset-sh{stroke:var(--fig-ghost,#7fa3c0);stroke-width:2}
 .mc-inset-hand{fill:var(--fig,#ffd166)}
+.mc-plate{fill:var(--fig-load,#9a9a92);stroke:var(--fig-bg,#0f2232);stroke-width:1.2}
+.mc-bar{stroke:var(--fig-load,#9a9a92);stroke-width:3.5;stroke-linecap:round}
+.mc-cable{stroke:var(--fig-load,#9a9a92);stroke-width:1.5;stroke-dasharray:3 2}
+.mc-stack{fill:var(--fig-prop-fill,#3a5166);stroke:var(--fig-prop,#8aa0b4);stroke-width:1}

@@ -55,3 +55,8 @@ Validation (`node tools/check.mjs ex_yourfile` must print ERRORS 0): IK reach er
 - Do not claim a source shows something it does not. Technique text must be standard, conservative coaching guidance.
 - Do not pad: if you cannot produce an animation that is recognisably correct for an assigned ID, leave that exercise OUT and report it.
 - No copyrighted text copied from any website.
+
+## Gym (weighted) exercises — `mode:'gym'`
+- Add `mode:'gym'` (keeps them out of bodyweight plans), `eq` from the gym keys (`dumbbell, barbell, rack, bench, kettlebell, cable, machine, legpress, pulldown`), `load:{inc: 2.5 (upper) | 5 (lower) kg per progression step, start:'Arabic tip: how to choose the first weight, e.g. وزن تستطيع رفعه 12 مرة ويبقى لديك 2–3 تكرارات'}` and `dose.rir:[1,3]` (reps in reserve target). Typical dose: sets [2,4], reps [6,12] (compound) or [10,15] (isolation), rest [60,180].
+- Animated equipment (props with `at` follow a joint every frame): `{k:'db', at:'wrN'|'wrF'|'both', off?:[dx,dy]}` dumbbell; `{k:'kb', at:'wrN'}` kettlebell; `{k:'bb', at:'sh'|'wrN'|'hip', r?:10, off?}` barbell seen end-on (side view: a plate circle); `{k:'bbline'}` barbell seen from the front between both wrists (front view); `{k:'cable', at:'wrN', to:[x,y]}` cable from hand to pulley with weight stack; static props `{k:'bench', x, w, h, deg?}`, `{k:'rack', x, hook}`, `{k:'chair', ...}` for machine seats.
+- Safety text must mention: controlled tempo, no breath-holding, a spotter/safety pins for barbell bench and squat, stop on sharp pain. Flag honestly (`lowback`, `shoulder`, `overhead`, `knee`, `iap` for heavy bracing lifts, `grip`).
